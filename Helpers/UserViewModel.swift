@@ -17,6 +17,7 @@ class UserViewModel : ObservableObject {
     
     private var db = Firestore.firestore()
     
+    // MARK: uploading photo with selected image
     func uploadPhoto(selectedImage: UIImage?) {
         guard selectedImage != nil else {
             return
@@ -40,6 +41,7 @@ class UserViewModel : ObservableObject {
         }
     }
 
+    // MARK: add user with image path
     func addUser(imagePath: String) {
         var ref: DocumentReference?
         let token = UUID().uuidString
@@ -58,6 +60,7 @@ class UserViewModel : ObservableObject {
         }
     }
     
+    // MARK: fetch users by their token string
     func fetchUsers(token: String) {
         db.collection(Settings.usersCollection).whereField("token", isEqualTo: token).getDocuments(completion: {querySnapShot, error in
             if let err = error {
