@@ -6,3 +6,10 @@
 //
 
 import Foundation
+struct Users : Identifiable, Codable {
+    var id : String = UUID().uuidString
+    var token : String
+    var email : String
+    var userName : String
+    var profilePic : String
+}

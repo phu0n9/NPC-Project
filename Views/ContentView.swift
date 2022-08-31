@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var podcastViewModel: PodcastViewModel = PodcastViewModel()
+    
     var body: some View {
         Text("Hello, world!")
             .padding()
+            .onAppear {
+                DispatchQueue.main.async {
+                    self.podcastViewModel.fetchPodcasts(categories: ["Tech News", "Technology"])
+//                    self.podcastViewModel.fetchCategories()
+                    
+                }
+            }
     }
 }
 

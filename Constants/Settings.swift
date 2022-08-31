@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct Settings {
+    static let podcastsCollection = "podcasts"
+    static let categoriesCollection = "categories"
+}

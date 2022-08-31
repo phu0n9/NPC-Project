@@ -3,8 +3,8 @@
 //  NPC
 //
 //  Created by Sang Yeob Han  on 31/08/2022.
-//icons8.com/icons/set/xcode
-//www.flaticon.com/search?word=chat
+// icons8.com/icons/set/xcode
+// www.flaticon.com/search?word=chat
 
 import SwiftUI
 
@@ -13,10 +13,9 @@ let range = NSMakeRange(0, text.length)
 
 struct TopNavBar: View {
 
-
     var body: some View {
-        VStack(spacing:0.0){
-           HStack{
+        VStack(spacing:0.0) {
+           HStack {
             
             Text("Trending")
                 .font(.headline)
@@ -24,7 +23,7 @@ struct TopNavBar: View {
             
             Spacer()
             
-            HStack(spacing:20.0){
+            HStack(spacing:20.0) {
                 Image("search-icon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -35,8 +34,8 @@ struct TopNavBar: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
-            .padding(.horizontal,15)
-            .padding(.vertical,3)
+            .padding(.horizontal, 15)
+            .padding(.vertical, 3)
                
             Spacer()
     }

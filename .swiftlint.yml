@@ -19,6 +19,7 @@ disabled_rules:
     - colon
     - mark
     - type_name
+    - legacy_constructor
 
 # todo warnings
 todo: warning
