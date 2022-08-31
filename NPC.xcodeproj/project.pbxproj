@@ -19,6 +19,9 @@
 		4E6D456228BF28EF005B7DF0 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4E6D456128BF28EF005B7DF0 /* FirebaseFirestoreSwift */; };
 		4E6D456428BF28EF005B7DF0 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 4E6D456328BF28EF005B7DF0 /* FirebaseMessaging */; };
 		4E6D456628BF28EF005B7DF0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4E6D456528BF28EF005B7DF0 /* FirebaseStorage */; };
+		4E6D456828BF2D3E005B7DF0 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D456728BF2D3E005B7DF0 /* UserViewModel.swift */; };
+		4E6D456A28BF4973005B7DF0 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D456928BF4973005B7DF0 /* SignUpView.swift */; };
+		4E6D456C28BF4F8E005B7DF0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D456B28BF4F8E005B7DF0 /* ImagePicker.swift */; };
 		4EEF6B6D28BD273B00610B54 /* NPCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEF6B6C28BD273B00610B54 /* NPCApp.swift */; };
 		4EEF6B7128BD273C00610B54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF6B7028BD273C00610B54 /* Assets.xcassets */; };
 		4EEF6B7428BD273C00610B54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF6B7328BD273C00610B54 /* Preview Assets.xcassets */; };
@@ -34,6 +37,9 @@
 		4E6D455428BF2838005B7DF0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		4E6D455628BF2842005B7DF0 /* PodcastViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastViewModel.swift; sourceTree = "<group>"; };
 		4E6D455828BF285D005B7DF0 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4E6D456728BF2D3E005B7DF0 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		4E6D456928BF4973005B7DF0 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		4E6D456B28BF4F8E005B7DF0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4EEF6B6928BD273B00610B54 /* NPC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NPC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEF6B6C28BD273B00610B54 /* NPCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPCApp.swift; sourceTree = "<group>"; };
 		4EEF6B7028BD273C00610B54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -116,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				BBCF9EFB28BF148D006BCA16 /* TopNavBar.swift */,
+				4E6D456B28BF4F8E005B7DF0 /* ImagePicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -124,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				4E6D455628BF2842005B7DF0 /* PodcastViewModel.swift */,
+				4E6D456728BF2D3E005B7DF0 /* UserViewModel.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -140,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				4E6D455828BF285D005B7DF0 /* ContentView.swift */,
+				4E6D456928BF4973005B7DF0 /* SignUpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -266,10 +275,13 @@
 				4E6D455228BF282E005B7DF0 /* Categories.swift in Sources */,
 				4E6D455328BF282E005B7DF0 /* Podcasts.swift in Sources */,
 				4EEF6B6D28BD273B00610B54 /* NPCApp.swift in Sources */,
+				4E6D456828BF2D3E005B7DF0 /* UserViewModel.swift in Sources */,
 				BBCF9EFC28BF148D006BCA16 /* TopNavBar.swift in Sources */,
+				4E6D456A28BF4973005B7DF0 /* SignUpView.swift in Sources */,
 				4E6D455728BF2842005B7DF0 /* PodcastViewModel.swift in Sources */,
 				4E6D455928BF285D005B7DF0 /* ContentView.swift in Sources */,
 				4E6D455528BF2838005B7DF0 /* Settings.swift in Sources */,
+				4E6D456C28BF4F8E005B7DF0 /* ImagePicker.swift in Sources */,
 				4E6D455128BF282E005B7DF0 /* Users.swift in Sources */,
 				4EEF6B9828BD2F8B00610B54 /* SoundControl.swift in Sources */,
 			);
