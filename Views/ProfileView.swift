@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignUpView: View {
+struct ProfileView: View {
     @StateObject var userViewModel : UserViewModel = UserViewModel()
     @State var isPickerShowing = false
     @State var selectedImage: UIImage?
@@ -52,6 +52,6 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        ProfileView()
     }
 }

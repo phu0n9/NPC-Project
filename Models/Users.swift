@@ -8,8 +8,10 @@
 import Foundation
 struct Users : Identifiable, Codable {
     var id : String = UUID().uuidString
-    var token : String
+    var uuid: String
+    var token : String = UserSettings().token == "" ? UUID().uuidString : UserSettings().token
     var email : String
     var userName : String
     var profilePic : String
+    var favoriteTopics : [String]
 }

@@ -8,7 +8,12 @@
 import Foundation
 
 struct Settings {
+    // MARK: Firebase Collections
     static let podcastsCollection = "podcasts"
     static let categoriesCollection = "categories"
     static let usersCollection = "users"
+    
+    // MARK: User Defaults
+    static let userToken = "token"
+    static let uuid = "uuid"
 }
