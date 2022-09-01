@@ -12,6 +12,8 @@ struct LoginView: View {
     @State var isLoginMode = false
     @State var email = ""
     @State var password = ""
+    @StateObject var userViewModel : UserViewModel = UserViewModel()
+    @State var loginStatusMessage = ""
 
     var body: some View {
         NavigationView {
@@ -59,7 +61,6 @@ struct LoginView: View {
                     }
                 }
                 .padding()
-
             }
             .navigationTitle(isLoginMode ? "Log In" : "Create Account")
             .background(Color(.init(white: 0, alpha: 0.05))
@@ -86,10 +87,9 @@ struct LoginView: View {
                 print("Successfully logged in as user: \(result?.user.uid ?? "")")
 
                 self.loginStatusMessage = "Successfully logged in as user: \(result?.user.uid ?? "")"
+                self.userViewModel.userLogin()
             }
         }
-
-        @State var loginStatusMessage = ""
 
         private func createNewAccount() {
             FirebaseManager.shared.auth.createUser(withEmail: email, password: password) { result, err in
@@ -100,8 +100,11 @@ struct LoginView: View {
                 }
 
                 print("Successfully created user: \(result?.user.uid ?? "")")
-
+                
                 self.loginStatusMessage = "Successfully created user: \(result?.user.uid ?? "")"
+                self.userViewModel.user = Users(uuid: result?.user.uid ?? "", email: self.email, userName: "", profilePic: "", favoriteTopics: ["Technology", "Art", "Love"])
+                self.userViewModel.addUser()
+                self.userViewModel.userSettings.uuid = result?.user.uid ?? ""
             }
         }
 }

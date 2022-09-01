@@ -9,11 +9,9 @@ import SwiftUI
 import FirebaseCore
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    let auth: Auth
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
-        self.auth = Auth.auth()
         return true
     }
 }
@@ -25,7 +23,7 @@ struct NPCApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SignUpView()
+            LoginView()
         }
     }
 }

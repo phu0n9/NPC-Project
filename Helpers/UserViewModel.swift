@@ -12,8 +12,10 @@ import UIKit
 
 class UserViewModel : ObservableObject {
     @Published var users = [Users]()
-    @Published var user = Users(token: "", email: "", userName: "", profilePic: "")
+    @Published var user = Users(uuid: "", email: "", userName: "", profilePic: "", favoriteTopics: [])
     @Published var image: UIImage = UIImage()
+    @Published var userSettings = UserSettings()
+    @Published var isValid = false
     
     private var db = Firestore.firestore()
     
@@ -36,33 +38,66 @@ class UserViewModel : ObservableObject {
         _ = fileRef.putData(imageData!, metadata: nil) { metadata, error in
             
             if error == nil && metadata != nil {
-                self.addUser(imagePath: path)
+                self.updateProfilePicture(imagePath: path)
             }
         }
     }
 
-    // MARK: add user with image path
-    func addUser(imagePath: String) {
+    // MARK: update user profile picture
+    func updateProfilePicture(imagePath: String) {
+        db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: self.userSettings.uuid).getDocuments(completion: { (querySnapShot, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            }
+            
+            guard let documents = querySnapShot?.documents else {
+                print("No data")
+                return
+            }
+            documents[0].reference.updateData(["profilePic": imagePath])
+        })
+    }
+    
+    // MARK: add user
+    func addUser() {
         var ref: DocumentReference?
         let token = UUID().uuidString
         ref = db.collection(Settings.usersCollection).addDocument(data: [
-            "userName": "Phuong",
-            "email": "hello@gmail.com",
-            "profilePic": imagePath,
+            "uuid": self.user.uuid,
+            "userName": self.user.userName,
+            "email": self.user.email,
+            "profilePic": "",
             "token": token
         ]) { error in
             if let err = error {
                 print("Error adding document: \(err)")
             } else {
                 print("Document added with ID: \(ref!.documentID)")
-                self.fetchUsers(token: token)
+                self.userSettings.token = token
             }
         }
     }
     
-    // MARK: fetch users by their token string
-    func fetchUsers(token: String) {
-        db.collection(Settings.usersCollection).whereField("token", isEqualTo: token).getDocuments(completion: {querySnapShot, error in
+    // MARK: user log in
+    func userLogin() {
+        db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: self.userSettings.uuid).getDocuments(completion: { (querySnapShot, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            }
+            
+            guard let documents = querySnapShot?.documents else {
+                print("No data")
+                return
+            }
+            let token = UUID().uuidString
+            documents[0].reference.updateData(["token": token])
+            self.userSettings.token = token
+        })
+    }
+    
+    // MARK: fetch users by their uuid
+    func fetchUsers(uuid: String) {
+        db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: uuid).getDocuments(completion: {querySnapShot, error in
             if let err = error {
                 print("Error getting documents: \(err)")
             }
@@ -74,10 +109,11 @@ class UserViewModel : ObservableObject {
             let email = documents[0].get("email") as! String
             let userName = documents[0].get("userName") as! String
             let profilePic = documents[0].get("profilePic") as! String
-            self.user = Users(token: token, email: email, userName: userName, profilePic: profilePic)
+            let uuid = documents[0].get("uuid") as! String
+            let favoriteTopics = documents[0].get("favoriteTopics") as! [String]
+            self.user = Users(uuid: uuid, email: email, userName: userName, profilePic: profilePic, favoriteTopics: favoriteTopics)
             
             let storageRef = Storage.storage().reference()
-            
             let fileRef = storageRef.child(profilePic)
             
             fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
@@ -90,6 +126,22 @@ class UserViewModel : ObservableObject {
                 }
             }
             
+        })
+    }
+    
+    // MARK: check current user token
+    func checkUserValidation() {
+        db.collection(Settings.usersCollection).whereField("token", isEqualTo: self.userSettings.token).getDocuments(completion: { (querySnapShot, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            }
+            guard let documents = querySnapShot?.documents else {
+                print("No data")
+                self.isValid = false
+                return
+            }
+            
+            self.isValid = true
         })
     }
 }

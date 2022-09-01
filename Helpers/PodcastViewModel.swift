@@ -38,14 +38,7 @@ class PodcastViewModel: ObservableObject {
                 let episodes = queryDocumentSnapshot.get("episodes") as! [[String: Any]]
                 
                 let episodeObj = episodes.map {(value) -> Episodes in
-                    let audio = value["audio"] as! String
-                    let audio_length = value["audio_length"] as! Int
-                    let episode_description = value["description"] as! String
-                    let episode_uuid = value["episode_uuid"] as! String
-                    let podcast_uuid = value["podcast_uuid"] as! String
-                    let pub_date = value["pub_date"] as! String
-                    let episode_title = value["title"] as! String
-                    return Episodes(audio: audio, audio_length: audio_length, description: episode_description, episode_uuid: episode_uuid, podcast_uuid: podcast_uuid, pub_date: pub_date, title: episode_title)
+                    return Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String)
                 }
                 
                 return Podcasts(uuid: uuid, author: author, description: description, image: image, itunes_id: itunes_id, language: language, title: title, website: website, categories: categories, episodes: episodeObj)
