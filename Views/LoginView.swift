@@ -68,10 +68,40 @@ struct LoginView: View {
     }
 
     private func handleAction() {
-        if isLoginMode {
-            print("Should log into Firebase with existing credentials")
-        } else {
-            print("Register a new account inside of Firebase Auth and then store image in Storage....")
+            if isLoginMode {
+                loginUser()
+            } else {
+                createNewAccount()
+            }
         }
-    }
+
+        private func loginUser() {
+            FirebaseManager.shared.auth.signIn(withEmail: email, password: password) { result, err in
+                if let err = err {
+                    print("Failed to login user:", err)
+                    self.loginStatusMessage = "Failed to login user: \(err)"
+                    return
+                }
+
+                print("Successfully logged in as user: \(result?.user.uid ?? "")")
+
+                self.loginStatusMessage = "Successfully logged in as user: \(result?.user.uid ?? "")"
+            }
+        }
+
+        @State var loginStatusMessage = ""
+
+        private func createNewAccount() {
+            FirebaseManager.shared.auth.createUser(withEmail: email, password: password) { result, err in
+                if let err = err {
+                    print("Failed to create user:", err)
+                    self.loginStatusMessage = "Failed to create user: \(err)"
+                    return
+                }
+
+                print("Successfully created user: \(result?.user.uid ?? "")")
+
+                self.loginStatusMessage = "Successfully created user: \(result?.user.uid ?? "")"
+            }
+        }
 }
