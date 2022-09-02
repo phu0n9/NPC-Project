@@ -27,6 +27,10 @@
 		4EEF6B7428BD273C00610B54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF6B7328BD273C00610B54 /* Preview Assets.xcassets */; };
 		4EEF6B8C28BD2BE000610B54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF6B8B28BD2BE000610B54 /* GoogleService-Info.plist */; };
 		4EEF6B9828BD2F8B00610B54 /* SoundControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEF6B9728BD2F8B00610B54 /* SoundControl.swift */; };
+		A457B43A28C1F2BC007AE794 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B43928C1F2BC007AE794 /* LoginView.swift */; };
+		A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B43B28C1F44E007AE794 /* FieldComponent.swift */; };
+		A457B44228C2019F007AE794 /* TransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B44128C2019F007AE794 /* TransitionView.swift */; };
+		A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */; };
 		A497D80528C1A84900D8A5CA /* TrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80428C1A84900D8A5CA /* TrendingView.swift */; };
 		A497D80728C1C08100D8A5CA /* CastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80628C1C08100D8A5CA /* CastingView.swift */; };
 		A497D80928C1C0A200D8A5CA /* UploadCastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80828C1C0A200D8A5CA /* UploadCastingView.swift */; };
@@ -53,6 +57,10 @@
 		4EEF6B7328BD273C00610B54 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4EEF6B8B28BD2BE000610B54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4EEF6B9728BD2F8B00610B54 /* SoundControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundControl.swift; sourceTree = "<group>"; };
+		A457B43928C1F2BC007AE794 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		A457B43B28C1F44E007AE794 /* FieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldComponent.swift; sourceTree = "<group>"; };
+		A457B44128C2019F007AE794 /* TransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionView.swift; sourceTree = "<group>"; };
+		A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		A497D80428C1A84900D8A5CA /* TrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingView.swift; sourceTree = "<group>"; };
 		A497D80628C1C08100D8A5CA /* CastingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastingView.swift; sourceTree = "<group>"; };
 		A497D80828C1C0A200D8A5CA /* UploadCastingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadCastingView.swift; sourceTree = "<group>"; };
@@ -139,6 +147,8 @@
 				4E6D456B28BF4F8E005B7DF0 /* ImagePicker.swift */,
 				A4AFBB8F28C1128200B87BC9 /* BottomNavBar.swift */,
 				A497D80E28C1C1F800D8A5CA /* EpisodeComponent.swift */,
+				A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */,
+				A457B43B28C1F44E007AE794 /* FieldComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -170,6 +180,8 @@
 				A497D80828C1C0A200D8A5CA /* UploadCastingView.swift */,
 				A497D80A28C1C0C300D8A5CA /* ActivityView.swift */,
 				A497D80C28C1C0DF00D8A5CA /* ProfileView.swift */,
+				A457B43928C1F2BC007AE794 /* LoginView.swift */,
+				A457B44128C2019F007AE794 /* TransitionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -303,10 +315,14 @@
 				BBCF9EFC28BF148D006BCA16 /* TopNavBar.swift in Sources */,
 				4E6D456A28BF4973005B7DF0 /* SignUpView.swift in Sources */,
 				A497D80528C1A84900D8A5CA /* TrendingView.swift in Sources */,
+				A457B44228C2019F007AE794 /* TransitionView.swift in Sources */,
 				A497D80B28C1C0C300D8A5CA /* ActivityView.swift in Sources */,
+				A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */,
+				A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */,
 				A497D80D28C1C0DF00D8A5CA /* ProfileView.swift in Sources */,
 				4E6D455728BF2842005B7DF0 /* PodcastViewModel.swift in Sources */,
 				4E6D455928BF285D005B7DF0 /* ContentView.swift in Sources */,
+				A457B43A28C1F2BC007AE794 /* LoginView.swift in Sources */,
 				A497D80928C1C0A200D8A5CA /* UploadCastingView.swift in Sources */,
 				4E6D455528BF2838005B7DF0 /* Settings.swift in Sources */,
 				4E6D456C28BF4F8E005B7DF0 /* ImagePicker.swift in Sources */,

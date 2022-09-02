@@ -2,14 +2,21 @@
 //  ButtonComponent.swift
 //  NPC
 //
-//  Created by Le Nguyen on 02/09/2022.
+//  Created by Nguyen Anh Minh on 02/09/2022.
 //
 
 import SwiftUI
 
 struct ButtonComponent: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Capsule()
+                /* #ff7d52 */
+                .foregroundColor(Color(red: 1, green: 0.4902, blue: 0.3216))
+                .frame(width: 380, height: 50)
+                .padding(0)
+                .overlay(Text("Button Overlay Text"))
+        }
     }
 }
 
