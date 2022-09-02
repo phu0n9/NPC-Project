@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Users : Identifiable, Codable {
+struct Users : Identifiable {
     var id : String = UUID().uuidString
     var uuid: String
     var token : String = UserSettings().token == "" ? UUID().uuidString : UserSettings().token
@@ -14,4 +14,5 @@ struct Users : Identifiable, Codable {
     var userName : String
     var profilePic : String
     var favoriteTopics : [String]
+    var uploadedList : [Uploads]
 }

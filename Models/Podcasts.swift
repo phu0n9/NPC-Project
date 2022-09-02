@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Podcasts {
+struct Podcasts: Identifiable {
     var id: String = UUID().uuidString
     var uuid: String
     var author: String
