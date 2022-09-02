@@ -1,0 +1,23 @@
+{
+  "configurations" : [
+    {
+      "id" : "2F26EF7F-94D0-467F-A911-95F34F3FFB3B",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:NPC.xcodeproj",
+      "identifier" : "4EEF6B6828BD273B00610B54",
+      "name" : "NPC"
+    }
+  },
+  "testTargets" : [
+
+  ],
+  "version" : 1
+}
