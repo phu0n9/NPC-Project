@@ -35,11 +35,7 @@ struct UploadView : View {
 //                        // printing only file name...
 //                        Text(value.relativeString)
 //                    }
-                    
-                    Button(action: {
-                        self.uploadControl.recordAudio()
-                    }) {
-                        
+                    Button(action: {self.uploadControl.recordAudio()}) {
                         ZStack {
                             Circle()
                                 .fill(Color.red)
