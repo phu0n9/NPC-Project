@@ -12,8 +12,10 @@ import UIKit
 
 class UserViewModel : ObservableObject {
     @Published var users = [Users]()
-    @Published var user = Users(token: "", email: "", userName: "", profilePic: "")
+    @Published var user = Users(uuid: "", email: "", userName: "", profilePic: "", favoriteTopics: [], uploadedList: [])
     @Published var image: UIImage = UIImage()
+    @Published var userSettings = UserSettings()
+    @Published var isValid = false
     
     private var db = Firestore.firestore()
     
@@ -36,33 +38,95 @@ class UserViewModel : ObservableObject {
         _ = fileRef.putData(imageData!, metadata: nil) { metadata, error in
             
             if error == nil && metadata != nil {
-                self.addUser(imagePath: path)
+                self.updateProfilePicture(imagePath: path)
             }
         }
     }
 
-    // MARK: add user with image path
-    func addUser(imagePath: String) {
+    // MARK: update user profile picture
+    func updateProfilePicture(imagePath: String) {
+        db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: self.userSettings.uuid).getDocuments(completion: { (querySnapShot, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            }
+            
+            guard let documents = querySnapShot?.documents else {
+                print("No data")
+                return
+            }
+            documents[0].reference.updateData(["profilePic": imagePath])
+        })
+    }
+    
+    // MARK: User upload cast
+    func addUploadCast(upload: Uploads) {
+        db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: self.userSettings.uuid).getDocuments(completion: { (querySnapShot, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            }
+            
+            guard let documents = querySnapShot?.documents else {
+                print("No data")
+                return
+            }
+            let uploadedList = documents[0].get("uploadedList") as? [[String : Any]]
+            if var uploads = uploadedList {
+                let uploadObj = ["uuid": upload.uuid, "title": upload.title, "description": upload.description, "audioPath": upload.audioPath, "author": upload.author, "pub_date": upload.pub_date, "image": upload.image, "language": upload.language]
+                if uploads.isEmpty {
+                    documents[0].reference.updateData(["uploadedList": [uploadObj]])
+                } else {
+                    uploads.append(uploadObj)
+                    documents[0].reference.updateData(["uploadedList": uploads])
+                }
+            }
+            
+        })
+    }
+    
+    // MARK: add user
+    func addUser() {
         var ref: DocumentReference?
         let token = UUID().uuidString
         ref = db.collection(Settings.usersCollection).addDocument(data: [
-            "userName": "Phuong",
-            "email": "hello@gmail.com",
-            "profilePic": imagePath,
+            "uuid": self.user.uuid,
+            "userName": self.user.userName,
+            "email": self.user.email,
+            "profilePic": "",
+            "categoryList": self.user.favoriteTopics,
+            "uploadedList" : self.user.uploadedList,
             "token": token
         ]) { error in
             if let err = error {
                 print("Error adding document: \(err)")
             } else {
                 print("Document added with ID: \(ref!.documentID)")
-                self.fetchUsers(token: token)
+                self.userSettings.token = token
+                self.userSettings.username = self.user.userName
             }
         }
     }
     
-    // MARK: fetch users by their token string
-    func fetchUsers(token: String) {
-        db.collection(Settings.usersCollection).whereField("token", isEqualTo: token).getDocuments(completion: {querySnapShot, error in
+    // MARK: user log in
+    func userLogin() {
+        db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: self.userSettings.uuid).getDocuments(completion: { (querySnapShot, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            }
+            
+            guard let documents = querySnapShot?.documents else {
+                print("No data")
+                return
+            }
+            let token = UUID().uuidString
+            documents[0].reference.updateData(["token": token])
+            self.userSettings.token = token
+            self.userSettings.username = documents[0].get("userName") as! String
+        })
+    }
+    
+    // MARK: fetch users by their uuid
+    func fetchUsers(uuid: String) {
+        db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: uuid).getDocuments(completion: {querySnapShot, error in
             if let err = error {
                 print("Error getting documents: \(err)")
             }
@@ -74,10 +138,20 @@ class UserViewModel : ObservableObject {
             let email = documents[0].get("email") as! String
             let userName = documents[0].get("userName") as! String
             let profilePic = documents[0].get("profilePic") as! String
-            self.user = Users(token: token, email: email, userName: userName, profilePic: profilePic)
+            let uuid = documents[0].get("uuid") as! String
+            let favoriteTopics = documents[0].get("categoryList") as! [String]
+            let uploadedList = documents[0].get("uploadedList") as? [[String: Any]]
+            var uploadObj = [Uploads]()
+            
+            if let uploads = uploadedList {
+                uploadObj = uploads.map {(value) -> Uploads in
+                    return Uploads(uuid: value["uuid"] as! String, title: value["title"] as! String, description: value["description"] as! String, audioPath: value["audioPath"] as! String, author: value["author"] as! String, pub_date: value["pub_date"] as! String, image: value["image"] as! String, language: value["language"] as! String, userID: uuid)
+                }
+            }
+            
+            self.user = Users(uuid: uuid, email: email, userName: userName, profilePic: profilePic, favoriteTopics: favoriteTopics, uploadedList: uploadObj)
             
             let storageRef = Storage.storage().reference()
-            
             let fileRef = storageRef.child(profilePic)
             
             fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
@@ -90,6 +164,47 @@ class UserViewModel : ObservableObject {
                 }
             }
             
+        })
+    }
+    
+    // MARK: initialize list of podcasts
+    func getList(podcasts: [[String : Any]]) -> [Podcasts] {
+        return podcasts.map {(queryDocumentSnapshot) -> Podcasts in
+            let author = queryDocumentSnapshot["author"] as! String
+            let categories = queryDocumentSnapshot["categories"] as! [String]
+            let description = queryDocumentSnapshot["description"] as! String
+            let image = queryDocumentSnapshot["image"] as! String
+            let itunes_id = queryDocumentSnapshot["itunes_id"] as! Int32
+            let language = queryDocumentSnapshot["language"] as! String
+            let title = queryDocumentSnapshot["title"] as! String
+            let uuid = queryDocumentSnapshot["uuid"] as! String
+            let website = queryDocumentSnapshot["website"] as! String
+            let episodeList = queryDocumentSnapshot["episodes"] as? [[String: Any]]
+            
+            var episodeObj = [Episodes]()
+            if let episodes = episodeList {
+                episodeObj = episodes.map {(value) -> Episodes in
+                    return Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String)
+                }
+            }
+            
+            return Podcasts(uuid: uuid, author: author, description: description, image: image, itunes_id: itunes_id, language: language, title: title, website: website, categories: categories, episodes: episodeObj)
+        }
+    }
+    
+    // MARK: check current user token
+    func checkUserValidation() {
+        db.collection(Settings.usersCollection).whereField("token", isEqualTo: self.userSettings.token).getDocuments(completion: { (querySnapShot, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            }
+            guard (querySnapShot?.documents) != nil else {
+                print("No data")
+                self.isValid = false
+                return
+            }
+            
+            self.isValid = true
         })
     }
 }
