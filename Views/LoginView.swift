@@ -16,6 +16,7 @@ struct LoginView: View {
     @State var loginStatusMessage = ""
     @State var alert = false
     @State var loginSuccess = false
+    @State private var isSecured: Bool = true
     
     var body: some View {
         NavigationView {
@@ -28,28 +29,69 @@ struct LoginView: View {
                         Text("Create Account")
                             .tag(false)
                     }.pickerStyle(SegmentedPickerStyle())
-                    
-                    if !isLoginMode {
+                    if isLoginMode {
                         Button {
                             
                         } label: {
-                            Image(systemName: "person.fill")
+                            Image("transition")
                                 .font(.system(size: 64))
                                 .padding()
                         }
                     }
                     
-                    Group {
-                        TextField("Email", text: $email)
-                            .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
-                        SecureField("Password", text: $password)
+                    if !isLoginMode {
+                        Button {
+                            
+                        } label: {
+                            Image("transition")
+                                .font(.system(size: 64))
+                                .padding()
+                        }
                     }
+                    
+
+                        Capsule()
+                            /* #f5f5f5 */
+                            .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
+                            .frame(width: 380, height: 50)
+                            .padding(0)
+                            .overlay(
+                                HStack {
+                                    Image(systemName: "envelope")
+                                        .resizable()
+                                        .frame(width: 36, height: 24, alignment: .trailing)
+                                        .offset(x: 20, y: 0)
+                                    TextField("Email", text: $email)
+                                        .keyboardType(.emailAddress)
+                                        .offset(x: 40, y: 0)
+                                }
+                                    
+                            )
+                            .padding()
+                        
+                            .autocapitalization(.none)
+                    Capsule()
+                        /* #f5f5f5 */
+                        .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
+                        .frame(width: 380, height: 50)
+                        .padding(0)
+                        .overlay(
+                            HStack {
+                                Image(systemName: "lock")
+                                    .resizable()
+                                    .frame(width: 20, height: 30, alignment: .trailing)
+                                    .offset(x: 25, y: 0)
+                                // TODO: ADD "eye.slash.fill" : "eye.fill" when show/ hide password
+                                SecureField("Password", text: $password)
+                                    .offset(x: 60, y: 0)
+                            }
+                        )
                     .padding(12)
                     .background(Color.white)
                     
                     Button {
                         handleAction()
+                        // TODO: Navigate to preference page after click create Account button
                     } label: {
                         HStack {
                             Spacer()
@@ -58,11 +100,10 @@ struct LoginView: View {
                                 .padding(.vertical, 10)
                                 .font(.system(size: 14, weight: .semibold))
                             Spacer()
-                        }.background(Color.blue)
-                        
+                        }.background(Color(red: 1, green: 0.4902, blue: 0.3216))
                     }
-                    
-                    .padding()
+                    .padding(0)
+                    .frame(width: 380, height: 50)
                 }
             }
             
@@ -70,7 +111,7 @@ struct LoginView: View {
                 Alert(title: Text("Error"), message: Text(self.loginStatusMessage))
             })
             .navigationTitle(isLoginMode ? "Log In" : "Create Account")
-            .background(Color(.init(white: 0, alpha: 0.05))
+            .background(Color(.init(white: 0, alpha: 0.005))
                 .ignoresSafeArea())
         }
     }
@@ -117,5 +158,12 @@ struct LoginView: View {
             self.userViewModel.userSettings.uuid = result?.user.uid ?? ""
             self.loginSuccess = true
         }
+    }
+}
+
+
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginView()
     }
 }
