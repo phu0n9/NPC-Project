@@ -15,7 +15,8 @@ struct WelcomeView: View {
     
     var body: some View {
         NavigationView {
-            NavigationLink(destination: chooseDestination(), isActive: $isChanged) {
+            VStack {
+                NavigationLink("", destination: chooseDestination(), isActive: $isChanged)
                 Text("Welcome")
             }
         }
@@ -29,6 +30,7 @@ struct WelcomeView: View {
             group.wait()
             if self.userViewModel.userSettings.token != "" || self.userViewModel.isValid {
                 self.state = 1
+                self.isChanged = true
             }
         }
     }
@@ -37,7 +39,7 @@ struct WelcomeView: View {
     func chooseDestination() -> some View {
         switch state {
         case 0: LoginView()
-        case 1: UploadView()
+        case 1: BottomNavBar()
         default: EmptyView()
         }
     }

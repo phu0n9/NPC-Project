@@ -19,50 +19,49 @@ struct LoginView: View {
     
     var body: some View {
         NavigationView {
-            NavigationLink(destination: UploadView(), isActive: self.$loginSuccess) {
-                ScrollView {
+            ScrollView {
+                NavigationLink("", destination: UploadView(), isActive: self.$loginSuccess)
+                VStack(spacing: 16) {
+                    Picker(selection: $isLoginMode, label: Text("Picker here")) {
+                        Text("Login")
+                            .tag(true)
+                        Text("Create Account")
+                            .tag(false)
+                    }.pickerStyle(SegmentedPickerStyle())
                     
-                    VStack(spacing: 16) {
-                        Picker(selection: $isLoginMode, label: Text("Picker here")) {
-                            Text("Login")
-                                .tag(true)
-                            Text("Create Account")
-                                .tag(false)
-                        }.pickerStyle(SegmentedPickerStyle())
-                        
-                        if !isLoginMode {
-                            Button {
-                                
-                            } label: {
-                                Image(systemName: "person.fill")
-                                    .font(.system(size: 64))
-                                    .padding()
-                            }
-                        }
-                        
-                        Group {
-                            TextField("Email", text: $email)
-                                .keyboardType(.emailAddress)
-                                .autocapitalization(.none)
-                            SecureField("Password", text: $password)
-                        }
-                        .padding(12)
-                        .background(Color.white)
-                        
+                    if !isLoginMode {
                         Button {
-                            handleAction()
-                        } label: {
-                            HStack {
-                                Spacer()
-                                Text(isLoginMode ? "Log In" : "Create Account")
-                                    .foregroundColor(.white)
-                                    .padding(.vertical, 10)
-                                    .font(.system(size: 14, weight: .semibold))
-                                Spacer()
-                            }.background(Color.blue)
                             
+                        } label: {
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 64))
+                                .padding()
                         }
                     }
+                    
+                    Group {
+                        TextField("Email", text: $email)
+                            .keyboardType(.emailAddress)
+                            .autocapitalization(.none)
+                        SecureField("Password", text: $password)
+                    }
+                    .padding(12)
+                    .background(Color.white)
+                    
+                    Button {
+                        handleAction()
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text(isLoginMode ? "Log In" : "Create Account")
+                                .foregroundColor(.white)
+                                .padding(.vertical, 10)
+                                .font(.system(size: 14, weight: .semibold))
+                            Spacer()
+                        }.background(Color.blue)
+                        
+                    }
+                    
                     .padding()
                 }
             }

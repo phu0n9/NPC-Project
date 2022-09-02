@@ -9,14 +9,14 @@ import SwiftUI
 
 struct FieldComponent: View {
     var body: some View {
-        VStack{
+        VStack {
             Capsule()
                 /* #f5f5f5 */
                 .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
                 .frame(width: 380, height: 50)
                 .padding(0)
                 .overlay(
-                    HStack{
+                    HStack {
                         Image(systemName: "envelope")
                             .resizable()
                             .frame(width: 36, height: 24, alignment: .trailing)
@@ -34,7 +34,7 @@ struct FieldComponent: View {
                 .frame(width: 380, height: 50)
                 .padding(0)
                 .overlay(
-                    HStack{
+                    HStack {
                         Image(systemName: "lock")
                             .resizable()
                             .frame(width: 20, height: 30, alignment: .trailing)

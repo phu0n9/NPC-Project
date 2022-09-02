@@ -20,65 +20,64 @@ struct BottomNavBar: View {
     ]
     
     var body: some View {
+        
         VStack {
-            //contents
+            // MARK: contents
             ZStack {
                 switch selectedIndex {
-                    case 0:
-                        NavigationView{
-                            VStack{
-                                TrendingView()
-                            }
-                            .navigationTitle("Trending")
+                case 0:
+                    NavigationView {
+                        VStack {
+                            TrendingView()
                         }
-                    case 1:
-                        NavigationView{
-                            VStack{
-                                CastingView()
-                            }
-                            .navigationTitle("Casting")
-                        }
-                    case 2:
-                        NavigationView{
-                            VStack{
-                                UploadCastingView()
-                            }
-                            .navigationTitle("Upload Cast")
-                        }
-                    case 3:
-                        NavigationView{
-                            VStack{
-                                ActivityView()
-                            }
-                            .navigationTitle("Activity")
-                        }
-                    case 4:
-                        NavigationView{
-                            VStack{
-                                ProfileView()
-                            }
-                            .navigationTitle("Profile ")
-                        }
-                    default:
-                        NavigationView{
-                            VStack{
-                                Text("Trending")
-                            }
-                            .navigationTitle("Trending")
-                        }
+                        .navigationTitle("Trending")
                     }
+                case 1:
+                    NavigationView {
+                        VStack {
+                            CastingView()
+                        }
+                        .navigationTitle("Casting")
+                    }
+                case 2:
+                    NavigationView {
+                        VStack {
+                            UploadView()
+                        }
+                        .navigationTitle("Upload Cast")
+                    }
+                case 3:
+                    NavigationView {
+                        VStack {
+                            ActivityView()
+                        }
+                        .navigationTitle("Activity")
+                    }
+                case 4:
+                    NavigationView {
+                        VStack {
+                            ProfileView()
+                        }
+                        .navigationTitle("Profile ")
+                    }
+                default:
+                    NavigationView {
+                        VStack {
+                            Text("Trending")
+                        }
+                        .navigationTitle("Trending")
+                    }
+                }
             }
-        
-    
             
             Divider()
             HStack {
-                ForEach(0..<5, id: \.self){ number in
+                ForEach(0..<5, id: \.self) { number in
                     Spacer()
-                    Button(action:{
+                    Button(action: {
                         self.selectedIndex = number
                     }, label: {
-                        if number == 2{
+                        if number == 2 {
                             Image(icons[number])
                                 .font(.system(size:40,
                                               weight: .regular,
@@ -87,15 +86,14 @@ struct BottomNavBar: View {
                                 .frame(width: 45, height: 45)
                                 .background(Color.orange)
                                 .cornerRadius(30)
-                        }
-                        else{
+                        } else {
                             Image(icons[number])
                                 .font(.system(size:25,
                                               weight: .regular,
                                               design: .default))
                                 .foregroundColor(selectedIndex == number ? .black : Color(UIColor.lightGray))
-                            }
-                        })
+                        }
+                    })
                     Spacer()
                 }
             }
@@ -108,4 +106,3 @@ struct BottomNavBar_Previews: PreviewProvider {
         BottomNavBar()
     }
 }
-

@@ -139,7 +139,7 @@ class UserViewModel : ObservableObject {
             let userName = documents[0].get("userName") as! String
             let profilePic = documents[0].get("profilePic") as! String
             let uuid = documents[0].get("uuid") as! String
-            let favoriteTopics = documents[0].get("categoryList") as! [String]
+            let favoriteTopics = documents[0].get("favoriteList") as! [String]
             let uploadedList = documents[0].get("uploadedList") as? [[String: Any]]
             var uploadObj = [Uploads]()
             

@@ -24,12 +24,12 @@ struct TransitionView: View {
     }
     
     var body: some View {
-        VStack{
+        VStack {
             Image("transition")
                 .resizable()
                 .frame(width: 121, height: 171, alignment: .center)
                 .padding()
-            HStack{
+            HStack {
                 Text("Processing ").font(Font.system(size:30, design: .serif))
                 .multilineTextAlignment(.center)
                 .padding()

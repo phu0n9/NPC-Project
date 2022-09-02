@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var podcastViewModel: PodcastViewModel = PodcastViewModel()
+    @ObservedObject var userViewModel = UserViewModel()
+    @ObservedObject var userSettings = UserSettings()
     
     var body: some View {
         Text("Hello, world!")
             .padding()
             .onAppear {
                 DispatchQueue.main.async {
-                    self.podcastViewModel.fetchPodcasts(categories: ["Tech News", "Technology"])
-//                    self.podcastViewModel.fetchCategories()
-                    
+                    self.userViewModel.fetchUsers(uuid: self.userSettings.uuid)
+                    print(self.userViewModel.user)
                 }
             }
     }

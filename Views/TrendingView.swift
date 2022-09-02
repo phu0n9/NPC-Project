@@ -10,9 +10,8 @@ import SwiftUI
 struct TrendingView: View {
     var body: some View {
 
-        ZStack{
+        ZStack {
             Text("This is from trendingview()")
-            
             
         }
     }

@@ -17,16 +17,15 @@ struct EpisodeComponent: View {
 //            }
 //        }
         
-        VStack{
-            
-            //podcast cover img, info
-            HStack(alignment: .top, spacing: 12){
+        VStack {
+            // podcast cover img, info
+            HStack(alignment: .top, spacing: 12) {
                 Circle()
                     .frame(width: 56, height: 56)
                     .foregroundColor(Color.orange)
                     .padding(0)
                 
-                VStack{
+                VStack {
                     Text("Episode Ttitle here")
                         .font(.subheadline).bold()
                     Text("uploaded date here")

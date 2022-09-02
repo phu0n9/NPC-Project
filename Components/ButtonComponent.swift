@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ButtonComponent: View {
     var body: some View {
-        VStack{
+        VStack {
             Capsule()
                 /* #ff7d52 */
                 .foregroundColor(Color(red: 1, green: 0.4902, blue: 0.3216))
