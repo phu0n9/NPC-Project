@@ -36,9 +36,9 @@ struct WelcomeView: View {
     @ViewBuilder
     func chooseDestination() -> some View {
         switch state {
-            case 0: LoginView()
-            case 1: ContentView()
-            default: EmptyView()
+        case 0: LoginView()
+        case 1: UploadView()
+        default: EmptyView()
         }
     }
 }
