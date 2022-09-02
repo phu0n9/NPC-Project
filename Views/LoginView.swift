@@ -31,7 +31,6 @@ struct LoginView: View {
                     }.pickerStyle(SegmentedPickerStyle())
                     if isLoginMode {
                         Button {
-                            
                         } label: {
                             Image("transition")
                                 .font(.system(size: 64))
@@ -41,7 +40,6 @@ struct LoginView: View {
                     
                     if !isLoginMode {
                         Button {
-                            
                         } label: {
                             Image("transition")
                                 .font(.system(size: 64))
@@ -49,29 +47,28 @@ struct LoginView: View {
                         }
                     }
                     
-
-                        Capsule()
-                            /* #f5f5f5 */
-                            .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
-                            .frame(width: 380, height: 50)
-                            .padding(0)
-                            .overlay(
-                                HStack {
-                                    Image(systemName: "envelope")
-                                        .resizable()
-                                        .frame(width: 36, height: 24, alignment: .trailing)
-                                        .offset(x: 20, y: 0)
-                                    TextField("Email", text: $email)
-                                        .keyboardType(.emailAddress)
-                                        .offset(x: 40, y: 0)
-                                }
-                                    
-                            )
-                            .padding()
-                        
-                            .autocapitalization(.none)
                     Capsule()
-                        /* #f5f5f5 */
+                    /* #f5f5f5 */
+                        .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
+                        .frame(width: 380, height: 50)
+                        .padding(0)
+                        .overlay(
+                            HStack {
+                                Image(systemName: "envelope")
+                                    .resizable()
+                                    .frame(width: 36, height: 24, alignment: .trailing)
+                                    .offset(x: 20, y: 0)
+                                TextField("Email", text: $email)
+                                    .keyboardType(.emailAddress)
+                                    .offset(x: 40, y: 0)
+                            }
+                            
+                        )
+                        .padding()
+                    
+                        .autocapitalization(.none)
+                    Capsule()
+                    /* #f5f5f5 */
                         .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
                         .frame(width: 380, height: 50)
                         .padding(0)
@@ -86,12 +83,16 @@ struct LoginView: View {
                                     .offset(x: 60, y: 0)
                             }
                         )
-                    .padding(12)
-                    .background(Color.white)
+                        .padding(12)
+                        .background(Color.white)
                     
                     Button {
                         handleAction()
                         // TODO: Navigate to preference page after click create Account button
+                        if let errorMessage = self.validView() {
+                            print(errorMessage)
+                            return
+                        }
                     } label: {
                         HStack {
                             Spacer()
@@ -159,8 +160,26 @@ struct LoginView: View {
             self.loginSuccess = true
         }
     }
+    
+    // MARK: Email validation
+    private func validView() -> String? {
+        if email.isEmpty {
+            return "Email cannot be empty"
+        }
+        
+        if !self.isValidEmail(email) {
+            return "Email is invalid"
+        }
+        
+        return nil
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
 }
-
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
