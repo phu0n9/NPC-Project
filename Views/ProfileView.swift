@@ -1,5 +1,5 @@
 //
-//  SignUpView.swift
+//  ProfileView.swift
 //  NPC
 //
 //  Created by Nguyen Huynh Phuong Anh on 31/08/2022.
@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+
     @StateObject var userViewModel : UserViewModel = UserViewModel()
     @State var isPickerShowing = false
     @State var selectedImage: UIImage?
@@ -50,7 +51,7 @@ struct ProfileView: View {
     }
 }
 
-struct SignUpView_Previews: PreviewProvider {
+struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
     }

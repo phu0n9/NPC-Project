@@ -18,8 +18,8 @@ struct TopNavBar: View {
            HStack {
             
             Text("Trending")
-                .font(.headline)
-                .padding(20)
+                .font(.largeTitle)
+                .foregroundColor(Color.black)
             
             Spacer()
             
