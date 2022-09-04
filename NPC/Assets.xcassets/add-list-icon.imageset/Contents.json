@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icons8-notification-25.png",
+      "filename" : "icons8-add-list-30.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-notification-50.png",
+      "filename" : "icons8-add-list-60.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icons8-notification-75.png",
+      "filename" : "icons8-add-list-90.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

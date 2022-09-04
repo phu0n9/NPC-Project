@@ -9,33 +9,34 @@ import SwiftUI
 
 struct EpisodeComponent: View {
     var body: some View {
-//        ScrollView{
-//            LazyVStack{
-//                ForEach(0 ... 20, id: \.self) { _ in
-//                    Text("episode row view")
-//                }
-//            }
-//        }
+
         
-        VStack {
+        VStack(alignment: .leading,spacing: 10) {
             // podcast cover img, info
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: 20) {
                 Circle()
                     .frame(width: 56, height: 56)
                     .foregroundColor(Color.orange)
                     .padding(0)
                 
-                VStack {
-                    Text("Episode Ttitle here")
-                        .font(.subheadline).bold()
-                    Text("uploaded date here")
+                VStack(alignment: .leading, spacing: 10){
+                    HStack {
+                        Text("Episode Ttitle here")
+                            .font(.subheadline).bold()
+                    }
+                    Text("date here")
                             .font(.caption)
+
                 }
+            }.padding()
+            Text("description will be here.")
+                .multilineTextAlignment(.center)
+            
+            HStack(alignment: .top, spacing: 0){
+                PlayButton()
             }
-            Text("description will be here.description will be here.description will be heredescription will be here.")
-                .multilineTextAlignment(.leading)
             Divider()
-        }
+        }.padding()
     }
 }
 

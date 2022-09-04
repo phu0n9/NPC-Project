@@ -74,7 +74,7 @@ struct LoginView: View {
                         .padding(0)
                         .overlay(
                             HStack {
-                                Image(systemName: "lock")
+                                Image(systemName: "l  ock")
                                     .resizable()
                                     .frame(width: 20, height: 30, alignment: .trailing)
                                     .offset(x: 25, y: 0)
