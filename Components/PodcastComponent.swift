@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct podcastOnTrendingView: View {
+struct PodcastComponent: View {
     var body: some View {
-        VStack{
+        VStack {
         Rectangle()
             .font(.title)
             .frame(width: 90, height: 90,alignment: .leading)
             .foregroundColor(.orange)
             .cornerRadius(20)
-            HStack(alignment: .firstTextBaseline, spacing: 10){
+            HStack(alignment: .firstTextBaseline, spacing: 10) {
                 Text("Title 1")
                     .font(.title3)
                     .frame(alignment: .leading)
@@ -31,8 +31,8 @@ struct podcastOnTrendingView: View {
     }
 }
 
-struct podcastOnTrendingView_Previews: PreviewProvider {
+struct PodcastComponent_Previews: PreviewProvider {
     static var previews: some View {
-        podcastOnTrendingView()
+        PodcastComponent()
     }
 }

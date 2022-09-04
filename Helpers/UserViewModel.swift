@@ -102,6 +102,7 @@ class UserViewModel : ObservableObject {
                 print("Document added with ID: \(ref!.documentID)")
                 self.userSettings.token = token
                 self.userSettings.username = self.user.userName
+                self.userSettings.userCategories = self.user.favoriteTopics
             }
         }
     }
@@ -121,6 +122,7 @@ class UserViewModel : ObservableObject {
             documents[0].reference.updateData(["token": token])
             self.userSettings.token = token
             self.userSettings.username = documents[0].get("userName") as! String
+            self.userSettings.userCategories = documents[0].get("categoryList") as! [String]
         })
     }
     

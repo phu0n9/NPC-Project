@@ -9,7 +9,6 @@ import SwiftUI
 
 struct EpisodeComponent: View {
     var body: some View {
-
         
         VStack(alignment: .leading,spacing: 10) {
             // podcast cover img, info
@@ -19,7 +18,7 @@ struct EpisodeComponent: View {
                     .foregroundColor(Color.orange)
                     .padding(0)
                 
-                VStack(alignment: .leading, spacing: 10){
+                VStack(alignment: .leading, spacing: 10) {
                     HStack {
                         Text("Episode Ttitle here")
                             .font(.subheadline).bold()
@@ -32,7 +31,7 @@ struct EpisodeComponent: View {
             Text("description will be here.")
                 .multilineTextAlignment(.center)
             
-            HStack(alignment: .top, spacing: 0){
+            HStack(alignment: .top, spacing: 0) {
                 PlayButton()
             }
             Divider()
