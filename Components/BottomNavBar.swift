@@ -11,6 +11,20 @@ struct BottomNavBar: View {
     
     @State var selectedIndex = 0
     
+    //Styling topnavbar
+    init(){
+        let navbarApperance = UINavigationBarAppearance()
+        navbarApperance.titleTextAttributes = [.foregroundColor:UIColor.systemBackground]
+        navbarApperance.largeTitleTextAttributes = [.foregroundColor:UIColor.systemBackground]
+        navbarApperance.backgroundColor = UIColor.orange
+        navbarApperance.shadowColor = .orange
+        UINavigationBar.appearance().standardAppearance = navbarApperance
+        UINavigationBar.appearance().compactAppearance = navbarApperance
+        UINavigationBar.appearance().scrollEdgeAppearance = navbarApperance
+        UINavigationBar.appearance().tintColor = UIColor.systemBackground
+    }
+
+    
     let icons = [
         "podcasts-icon",
         "play-icon",
@@ -22,8 +36,10 @@ struct BottomNavBar: View {
     var body: some View {
         
         VStack {
+ 
             // MARK: contents
             ZStack {
+                
                 switch selectedIndex {
                 case 0:
                     NavigationView {
@@ -31,6 +47,33 @@ struct BottomNavBar: View {
                             TrendingView()
                         }
                         .navigationTitle("Trending")
+                        .toolbar{
+                            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                                Button{
+                                    print("search clicked")
+                                } label:{
+                                    Image("search-icon")
+                                        .resizable()
+                                        .frame(width: 30, height: 30, alignment: .leading)
+                                }
+                                 
+                                Button{
+                                    print("notification clicked")
+                                } label:{
+                                    Image("notification-icon")
+                                        .resizable()
+                                        .frame(width: 30, height: 30, alignment: .leading)
+                                }
+                                
+                                Button{
+                                    print("message clicked")
+                                } label:{
+                                    Image("chat-icon")
+                                        .resizable()
+                                        .frame(width: 20, height: 20, alignment: .leading)
+                                }
+                            }
+                        }
                     }
                 case 1:
                     NavigationView {

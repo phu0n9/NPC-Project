@@ -10,10 +10,29 @@ import SwiftUI
 struct TrendingView: View {
     var body: some View {
 
-        ZStack {
-            Text("This is from trendingview()")
-            
+      
+        ScrollView{
+            ScrollView(.horizontal) {
+                HStack(spacing: 10) {
+                    ForEach(0..<10, id: \.self) { _ in
+                        podcastOnTrendingView()
+                    }
+                }.padding()
         }
+
+            Divider()
+            Divider()
+            
+            ScrollView{
+                LazyVStack{
+                    ForEach(0 ... 20, id: \.self) { _ in
+                        EpisodeComponent()
+                    }
+                }
+            }
+        }
+        
+        
     }
 }
 
