@@ -50,7 +50,7 @@ struct BottomNavBar: View {
                         .toolbar{
                             ToolbarItemGroup(placement: .navigationBarTrailing) {
                                 Button{
-                                    print("search clicked")
+                                    
                                 } label:{
                                     Image("search-icon")
                                         .resizable()

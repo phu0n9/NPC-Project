@@ -30,6 +30,8 @@
 		A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B43B28C1F44E007AE794 /* FieldComponent.swift */; };
 		A457B44228C2019F007AE794 /* TransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B44128C2019F007AE794 /* TransitionView.swift */; };
 		A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */; };
+		A491C60528C4CC6100509092 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491C60428C4CC6100509092 /* PopUp.swift */; };
+		A491C60728C4D45F00509092 /* PopUpTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491C60628C4D45F00509092 /* PopUpTesting.swift */; };
 		A497D80528C1A84900D8A5CA /* TrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80428C1A84900D8A5CA /* TrendingView.swift */; };
 		A497D80728C1C08100D8A5CA /* CastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80628C1C08100D8A5CA /* CastingView.swift */; };
 		A497D80B28C1C0C300D8A5CA /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80A28C1C0C300D8A5CA /* ActivityView.swift */; };
@@ -72,6 +74,8 @@
 		A457B43B28C1F44E007AE794 /* FieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldComponent.swift; sourceTree = "<group>"; };
 		A457B44128C2019F007AE794 /* TransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionView.swift; sourceTree = "<group>"; };
 		A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
+		A491C60428C4CC6100509092 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
+		A491C60628C4D45F00509092 /* PopUpTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTesting.swift; sourceTree = "<group>"; };
 		A497D80428C1A84900D8A5CA /* TrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingView.swift; sourceTree = "<group>"; };
 		A497D80628C1C08100D8A5CA /* CastingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastingView.swift; sourceTree = "<group>"; };
 		A497D80A28C1C0C300D8A5CA /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 				A457B43B28C1F44E007AE794 /* FieldComponent.swift */,
 				A4F8235328C2FA50007856F2 /* PlayButton.swift */,
 				A4F8235528C30F47007856F2 /* podcastOnTrendingView.swift */,
+				A491C60428C4CC6100509092 /* PopUp.swift */,
+				A491C60628C4D45F00509092 /* PopUpTesting.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -327,6 +333,8 @@
 				4E6D455728BF2842005B7DF0 /* PodcastViewModel.swift in Sources */,
 				4E6D455928BF285D005B7DF0 /* ContentView.swift in Sources */,
 				4E6D455528BF2838005B7DF0 /* Settings.swift in Sources */,
+				A491C60728C4D45F00509092 /* PopUpTesting.swift in Sources */,
+				A491C60528C4CC6100509092 /* PopUp.swift in Sources */,
 				4E6D456C28BF4F8E005B7DF0 /* ImagePicker.swift in Sources */,
 				09D6F4E528C0FDD900D056C2 /* LoginView.swift in Sources */,
 				4E6D455128BF282E005B7DF0 /* Users.swift in Sources */,
