@@ -22,9 +22,10 @@ struct PlayButton: View {
                 }) {
                     if btnClicked%2 == 0{
                         Image("play-circle-icon")
+                            .resizable()
                             .renderingMode(.template)
                             .foregroundColor(.orange)
-                            .frame(width:15, height: 6, alignment: .leading)
+                            .frame(width:30, height: 30, alignment: .leading)
                             .padding(5)
                         
                         Text("Length")
@@ -32,10 +33,11 @@ struct PlayButton: View {
                             .foregroundColor(.black)
                             .padding(9)
                     } else{
-                        Image("pause-circle-icon")
+                        Image("pause-icon")
+                            .resizable()
                             .renderingMode(.template)
                             .foregroundColor(.orange)
-                            .frame(width:15, height: 6, alignment: .leading)
+                            .frame(width:30, height: 30, alignment: .leading)
                             .padding(5)
                         Text("Length")
                             .font(.caption)
