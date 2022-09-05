@@ -16,8 +16,8 @@ class PodcastViewModel: ObservableObject {
     private var db = Firestore.firestore()
     
     // MARK: fetching podcasts API with 20 documents with categories
-    func fetchPodcasts(categories: [String]) {
-        db.collection(Settings.podcastsCollection).whereField("categories", arrayContainsAny: categories).limit(to: 10).getDocuments(completion: {querySnapShot, error in
+    func fetchPodcasts(categories: [String], numberOfItems: Int) {
+        db.collection(Settings.podcastsCollection).whereField("categories", arrayContainsAny: categories).limit(to: numberOfItems).getDocuments(completion: {querySnapShot, error in
             if let err = error {
                 print("Error getting documents: \(err)")
             }
