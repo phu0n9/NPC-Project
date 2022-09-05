@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct podcastOnTrendingView: View {
+struct ItemPodcast: View {
     var body: some View {
         VStack{
         Rectangle()
@@ -16,7 +16,7 @@ struct podcastOnTrendingView: View {
             .foregroundColor(.orange)
             .cornerRadius(20)
             HStack(alignment: .firstTextBaseline, spacing: 10){
-                Text("Title 1")
+                Text("P Title")
                     .font(.title3)
                     .frame(alignment: .leading)
                 Image("add-list-icon")
@@ -31,8 +31,8 @@ struct podcastOnTrendingView: View {
     }
 }
 
-struct podcastOnTrendingView_Previews: PreviewProvider {
+struct ItemPodcast_Previews: PreviewProvider {
     static var previews: some View {
-        podcastOnTrendingView()
+        ItemPodcast()
     }
 }

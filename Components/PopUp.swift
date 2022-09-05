@@ -8,26 +8,30 @@
 import SwiftUI
 
 struct PopUp: View {
+    
+    let config: SheetManager.Config
+    let didClose: () -> Void
+
     var body: some View {
     
             VStack(spacing: 0){
+                close
                 title
                 content
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal,24)
-                .padding(.vertical,10)
-                .multilineTextAlignment(.center)
-                .background(background)
-//                .overlay(alignment: .topTrailing){
-//                    Image("close-icon")
-//                }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal,24)
+                    .padding(.vertical,10)
+                    .multilineTextAlignment(.center)
+                    .background(background)
+                    .transition(.move(edge: .top))
+        
         }
 }
 
 struct PopUp_Previews: PreviewProvider {
     static var previews: some View {
-        PopUp()
+        PopUp(config: .init(systemName: "xmark", title: "Notification", content: "Podcast added to your list")){}
             .background(.orange)
             .previewLayout(.sizeThatFits)
             .padding()
@@ -36,25 +40,44 @@ struct PopUp_Previews: PreviewProvider {
 
 private extension PopUp{
     var background: some View{
-        RoundedCorners(color: .white, tl: 20, tr: 20, bl: 0, br: 0)
+        RoundedCorners(color: .white, tl: 0, tr: 0, bl: 30, br: 30)
             .shadow(color: .black.opacity(0.2),radius: 3)
     }
 }
+
 private extension PopUp {
-    var title:some View{
-        Text("Text here")
+    var close:some View{
+        Button {
+            didClose()
+        } label: {
+            Image(systemName:config.systemName)
+                .symbolVariant(.circle.fill)
+                .font(
+                    .system(size:25,
+                            weight:.bold,
+                            design:.rounded)
+                )
+                .foregroundColor(.gray.opacity(0.4))
+                .padding(5)
+        }
+    }
+    
+    var title:some View {
+        Text(config.title)
             .font(
                 .system(size:30
                         ,weight: .bold,
                         design:.rounded)
             ).padding()
+
     }
     
     var content:some View{
-        Text("Notification here")
+        Text(config.content)
     }
     
 }
+
 //MARK:
     //stackoverfl.com/questions/56760335/round-specific-corners-swiftui
 struct RoundedCorners: View {

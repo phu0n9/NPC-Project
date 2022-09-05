@@ -9,7 +9,8 @@ import SwiftUI
 
 struct PlayButton: View {
     
-    @State public var isActive = false
+    @State private var isDownload = 0
+    @State private var isAddedToMyList = 0
     @State public var btnClicked = 0
     
     var body: some View {
@@ -46,13 +47,41 @@ struct PlayButton: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color(red: 1, green: 0.4902, blue: 0.3216), lineWidth: 1))
         
-            Image("mylist-icon")
-                .resizable()
-                .frame(width:20, height: 20, alignment: .leading)
-                .padding()
-            Image("download-icon")
-                .resizable()
-                .frame(width:20, height: 15, alignment: .leading)
+            Button(action: {
+                isAddedToMyList += 1
+                print("addlist-button cliekd")
+            }) {
+                if isAddedToMyList%2 == 0{
+                    Image("add-list-icon")
+                        .frame(width:20, height: 20, alignment: .leading)
+                        .padding()
+                }else{
+                    Image("add-list-icon")
+                        .renderingMode(.template)
+                        .foregroundColor(.orange)
+                        .frame(width:20, height: 20, alignment: .leading)
+                        .padding()
+                }
+            }
+            
+            Button(action: {
+                isDownload += 1
+                print("download-button cliekd")
+            }) {
+                if isDownload%2 == 0{
+                    Image("download-icon")
+                        .frame(width:15, height: 15, alignment: .leading)
+                        .padding()
+
+                }else{
+                    Image("download-icon")
+                        .renderingMode(.template)
+                        .foregroundColor(.orange)
+                        .frame(width:15, height: 10, alignment: .leading)
+                        .padding()
+                }
+            }
+
         }.padding()
     }
     

@@ -15,7 +15,7 @@ struct TrendingView: View {
             ScrollView(.horizontal) {
                 HStack(spacing: 10) {
                     ForEach(0..<10, id: \.self) { _ in
-                        podcastOnTrendingView()
+                        ItemPodcast()
                     }
                 }.padding()
         }
