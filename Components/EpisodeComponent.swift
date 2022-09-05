@@ -13,6 +13,9 @@ struct EpisodeComponent: View {
     var description: String
     var audio: String
     var image: String
+    var id: String
+    @Binding var isExpanded: Bool
+    @Binding var selectedId: String
     
     var body: some View {
         
@@ -38,11 +41,27 @@ struct EpisodeComponent: View {
                             .font(.subheadline).bold()
                     }
                     Text(self.pub_date)
-                            .font(.caption)
+                        .font(.caption)
                 }
             }.padding()
             Text(self.description)
-                .multilineTextAlignment(.center)
+                .id(self.selectedId)
+                .lineLimit(isExpanded ? nil : 3)
+                .overlay(
+                    GeometryReader { proxy in
+                        Button(action: {
+                            self.selectedId = self.id
+                            isExpanded.toggle()
+                        }, label: {
+                            Text(isExpanded && self.selectedId == self.id ? "Less" : "More")
+                                .font(.caption).bold()
+                                .padding(.leading, 8.0)
+                                .padding(.top, 4.0)
+                                .background(Color.white)
+                        })
+                        .frame(width: proxy.size.width, height: proxy.size.height, alignment: .bottomTrailing)
+                    }
+                )
             
             HStack(alignment: .top, spacing: 0) {
                 PlayButton(soundName: self.audio)
@@ -54,6 +73,6 @@ struct EpisodeComponent: View {
 
 struct EpisodeComponent_Previews: PreviewProvider {
     static var previews: some View {
-        EpisodeComponent(title: "Title", pub_date: "2022/09/09", description: "Description", audio: "a link", image: "")
+        EpisodeComponent(title: "Title", pub_date: "2022/09/09", description: "Description", audio: "a link", image: "", id: "1", isExpanded: Binding.constant(false), selectedId: Binding.constant("1"))
     }
 }

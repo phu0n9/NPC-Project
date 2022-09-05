@@ -26,6 +26,16 @@ class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
             self.audioPlayer.pause()
         } else {
             self.audioPlayer.play()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 7.0) {
+                self.audioPlayer.volume = 2.0
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 9.0) {
+                self.audioPlayer.volume = 1.0
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+                self.audioPlayer.pause()
+                self.isActive.toggle()
+            }
         }
     }
 }

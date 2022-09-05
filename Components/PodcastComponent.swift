@@ -27,18 +27,18 @@ struct PodcastComponent: View {
             HStack(alignment: .firstTextBaseline, spacing: 10) {
                 Text(self.title)
                     .font(.title3)
-                    .frame(alignment: .leading)
+                    .frame(maxWidth: 100, alignment: .leading)
             }.padding(0)
             Text(self.author)
                 .font(.caption)
                 .foregroundColor(.gray)
-                .frame(alignment: .leading)
+                .frame(maxWidth: 100, alignment: .leading)
         }.padding(0)
     }
 }
 
 struct PodcastComponent_Previews: PreviewProvider {
     static var previews: some View {
-        PodcastComponent(title: "Title", image: "add-list-icon", author: "Author")
+        PodcastComponent(title: "A very long long long long text", image: "add-list-icon", author: "Author")
     }
 }
