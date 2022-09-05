@@ -12,8 +12,10 @@ struct PopUp: View {
     let config: SheetManager.Config
     let didClose: () -> Void
 
+    
     var body: some View {
     
+ 
             VStack(spacing: 0){
                 close
                 title
@@ -28,6 +30,7 @@ struct PopUp: View {
         
         }
 }
+
 
 struct PopUp_Previews: PreviewProvider {
     static var previews: some View {
@@ -115,3 +118,5 @@ struct RoundedCorners: View {
         }
     }
 }
+
+

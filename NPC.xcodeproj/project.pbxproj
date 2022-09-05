@@ -34,6 +34,7 @@
 		A491C60728C4D45F00509092 /* PopUpTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491C60628C4D45F00509092 /* PopUpTesting.swift */; };
 		A491C60928C5833D00509092 /* SheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491C60828C5833D00509092 /* SheetManager.swift */; };
 		A491C60D28C58A9800509092 /* PopupModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491C60C28C58A9800509092 /* PopupModifier.swift */; };
+		A491C60F28C5A34C00509092 /* TimerForPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491C60E28C5A34C00509092 /* TimerForPopUp.swift */; };
 		A497D80528C1A84900D8A5CA /* TrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80428C1A84900D8A5CA /* TrendingView.swift */; };
 		A497D80728C1C08100D8A5CA /* CastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80628C1C08100D8A5CA /* CastingView.swift */; };
 		A497D80B28C1C0C300D8A5CA /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80A28C1C0C300D8A5CA /* ActivityView.swift */; };
@@ -80,6 +81,7 @@
 		A491C60628C4D45F00509092 /* PopUpTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTesting.swift; sourceTree = "<group>"; };
 		A491C60828C5833D00509092 /* SheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetManager.swift; sourceTree = "<group>"; };
 		A491C60C28C58A9800509092 /* PopupModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupModifier.swift; sourceTree = "<group>"; };
+		A491C60E28C5A34C00509092 /* TimerForPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerForPopUp.swift; sourceTree = "<group>"; };
 		A497D80428C1A84900D8A5CA /* TrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingView.swift; sourceTree = "<group>"; };
 		A497D80628C1C08100D8A5CA /* CastingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastingView.swift; sourceTree = "<group>"; };
 		A497D80A28C1C0C300D8A5CA /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				A491C60628C4D45F00509092 /* PopUpTesting.swift */,
 				A491C60828C5833D00509092 /* SheetManager.swift */,
 				A491C60C28C58A9800509092 /* PopupModifier.swift */,
+				A491C60E28C5A34C00509092 /* TimerForPopUp.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				A457B44228C2019F007AE794 /* TransitionView.swift in Sources */,
 				A497D80B28C1C0C300D8A5CA /* ActivityView.swift in Sources */,
 				4E6D45A428C21FC3005B7DF0 /* ProfileView.swift in Sources */,
+				A491C60F28C5A34C00509092 /* TimerForPopUp.swift in Sources */,
 				A491C60D28C58A9800509092 /* PopupModifier.swift in Sources */,
 				A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */,
 				A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */,
