@@ -27,7 +27,7 @@ struct TrendingView: View {
             ScrollView {
                 LazyVStack {
                     ForEach(self.podcastViewModel.episodes, id: \.id) { episode in
-                        EpisodeComponent(title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio)
+                        EpisodeComponent(title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio, image: episode.image)
                     }
                 }
             }

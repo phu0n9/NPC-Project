@@ -30,4 +30,5 @@ struct Episodes: Identifiable, Codable {
     var podcast_uuid: String
     var pub_date: String
     var title: String
+    var image: String
 }
