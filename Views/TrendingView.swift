@@ -15,8 +15,8 @@ struct TrendingView: View {
         ScrollView {
             ScrollView(.horizontal) {
                 HStack(spacing: 10) {
-                    ForEach(0..<10, id: \.self) { _ in
-                        PodcastComponent()
+                    ForEach(self.podcastViewModel.podcasts, id: \.id) { podcast in
+                        PodcastComponent(title: podcast.title, image: podcast.image, author: podcast.author)
                     }
                 }.padding()
         }
@@ -26,8 +26,8 @@ struct TrendingView: View {
             
             ScrollView {
                 LazyVStack {
-                    ForEach(0 ... 20, id: \.self) { _ in
-                        EpisodeComponent()
+                    ForEach(self.podcastViewModel.episodes, id: \.id) { episode in
+                        EpisodeComponent(title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio)
                     }
                 }
             }
@@ -35,8 +35,6 @@ struct TrendingView: View {
         .onAppear {
             DispatchQueue.main.async {
                 self.podcastViewModel.fetchPodcasts(categories: self.userSettings.userCategories)
-                print(self.podcastViewModel.podcasts)
-                print(self.podcastViewModel.episodes)
             }
         }
     }

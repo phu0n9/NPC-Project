@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct EpisodeComponent: View {
+    var title: String
+    var pub_date: String
+    var description: String
+    var audio: String
+    
     var body: some View {
         
-        VStack(alignment: .leading,spacing: 10) {
+        VStack(alignment: .leading, spacing: 10) {
             // podcast cover img, info
             HStack(alignment: .top, spacing: 20) {
                 Circle()
@@ -20,19 +25,18 @@ struct EpisodeComponent: View {
                 
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
-                        Text("Episode Ttitle here")
+                        Text(self.title)
                             .font(.subheadline).bold()
                     }
-                    Text("date here")
+                    Text(self.pub_date)
                             .font(.caption)
-
                 }
             }.padding()
-            Text("description will be here.")
+            Text(self.description)
                 .multilineTextAlignment(.center)
             
             HStack(alignment: .top, spacing: 0) {
-                PlayButton()
+                PlayButton(soundName: self.audio)
             }
             Divider()
         }.padding()
@@ -41,6 +45,6 @@ struct EpisodeComponent: View {
 
 struct EpisodeComponent_Previews: PreviewProvider {
     static var previews: some View {
-        EpisodeComponent()
+        EpisodeComponent(title: "Title", pub_date: "2022/09/09", description: "Description", audio: "a link")
     }
 }

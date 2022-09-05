@@ -8,22 +8,28 @@
 import SwiftUI
 
 struct PodcastComponent: View {
+    var title: String
+    var image: String
+    var author: String
+    
     var body: some View {
         VStack {
-        Rectangle()
-            .font(.title)
-            .frame(width: 90, height: 90,alignment: .leading)
-            .foregroundColor(.orange)
-            .cornerRadius(20)
+            AsyncImage(url: URL(string: self.image)) { podcastImage in
+                podcastImage
+                    .resizable()
+                    .font(.title)
+                    .frame(width: 90, height: 90, alignment: .leading)
+                    .foregroundColor(.orange)
+                    .cornerRadius(20)
+            } placeholder: {
+                ProgressView()
+            }
             HStack(alignment: .firstTextBaseline, spacing: 10) {
-                Text("Title 1")
+                Text(self.title)
                     .font(.title3)
                     .frame(alignment: .leading)
-                Image("add-list-icon")
-                    .resizable()
-                    .frame(width: 20, height: 20, alignment: .leading)
             }.padding(0)
-            Text("BroadCasting station")
+            Text(self.author)
                 .font(.caption)
                 .foregroundColor(.gray)
                 .frame(alignment: .leading)
@@ -33,6 +39,6 @@ struct PodcastComponent: View {
 
 struct PodcastComponent_Previews: PreviewProvider {
     static var previews: some View {
-        PodcastComponent()
+        PodcastComponent(title: "Title", image: "add-list-icon", author: "Author")
     }
 }

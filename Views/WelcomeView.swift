@@ -10,27 +10,42 @@ import SwiftUI
 struct WelcomeView: View {
     
     @ObservedObject private var userViewModel = UserViewModel()
-    @State private var isChanged = false
     @State var state = 0
+    @State private var isActive = false
+    @State private var yAxis :CGFloat = 0
+    @State private var addThis: CGFloat = 50
     
     var body: some View {
         NavigationView {
-            VStack {
-                NavigationLink("", destination: chooseDestination(), isActive: $isChanged)
-                Text("Welcome")
+            NavigationLink(destination: chooseDestination(), isActive: $isActive) {
+                ZStack {
+                    Image("transition")
+                        .resizable()
+                        .frame(maxWidth: 300, maxHeight: 250)
+                        .aspectRatio(contentMode: .fit)
+                        .offset(x: 0, y: yAxis)
+                        .onAppear {
+                            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                                withAnimation(.easeInOut(duration: 2.0)) {
+                                    self.addThis = -self.addThis
+                                    self.yAxis += self.addThis
+                                }
+                            }
+                        }
+                }
             }
         }
         .onAppear {
-            let group = DispatchGroup()
-            group.enter()
             DispatchQueue.main.async {
                 self.userViewModel.checkUserValidation()
-                group.leave()
             }
-            group.wait()
-            if self.userViewModel.userSettings.token != "" || self.userViewModel.isValid {
-                self.state = 1
-                self.isChanged = true
+            DispatchQueue.main.asyncAfter(deadline: .now()+3.0) {
+                withAnimation {
+                    if self.userViewModel.userSettings.token != "" || self.userViewModel.isValid {
+                        self.state = 1
+                        self.isActive = true
+                    }
+                }
             }
         }
     }

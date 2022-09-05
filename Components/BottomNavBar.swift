@@ -11,8 +11,8 @@ struct BottomNavBar: View {
     
     @State var selectedIndex = 0
     
-    //Styling topnavbar
-    init(){
+    // Styling topnavbar
+    init() {
         let navbarApperance = UINavigationBarAppearance()
         navbarApperance.titleTextAttributes = [.foregroundColor:UIColor.systemBackground]
         navbarApperance.largeTitleTextAttributes = [.foregroundColor:UIColor.systemBackground]
@@ -24,7 +24,6 @@ struct BottomNavBar: View {
         UINavigationBar.appearance().tintColor = UIColor.systemBackground
     }
 
-    
     let icons = [
         "podcasts-icon",
         "play-icon",
@@ -47,27 +46,27 @@ struct BottomNavBar: View {
                             TrendingView()
                         }
                         .navigationTitle("Trending")
-                        .toolbar{
+                        .toolbar {
                             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                                Button{
+                                Button {
                                     print("search clicked")
-                                } label:{
+                                } label: {
                                     Image("search-icon")
                                         .resizable()
                                         .frame(width: 30, height: 30, alignment: .leading)
                                 }
                                  
-                                Button{
+                                Button {
                                     print("notification clicked")
-                                } label:{
+                                } label: {
                                     Image("notification-icon")
                                         .resizable()
                                         .frame(width: 30, height: 30, alignment: .leading)
                                 }
                                 
-                                Button{
+                                Button {
                                     print("message clicked")
-                                } label:{
+                                } label: {
                                     Image("chat-icon")
                                         .resizable()
                                         .frame(width: 20, height: 20, alignment: .leading)

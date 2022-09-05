@@ -31,12 +31,12 @@ struct UploadView : View {
                     .padding(12)
                     .background(Color.white)
                     
-//                    List(self.soundControl.audios, id: \.self) { value in
-//                        // printing only file name...
-//                        Text(value.relativeString)
-//                    }
+                    //                    List(self.soundControl.audios, id: \.self) { value in
+                    //                        // printing only file name...
+                    //                        Text(value.relativeString)
+                    //                    }
                     
-                    Button(action: {self.uploadControl.recordAudio()}) {
+                    Button(action: {self.uploadControl.recordAudio()}, label: {
                         ZStack {
                             Circle()
                                 .fill(Color.red)
@@ -48,8 +48,7 @@ struct UploadView : View {
                                     .frame(width: 85, height: 85)
                             }
                         }
-                    }
-                    
+                    })
                     .padding(.vertical, 25)
                     Button("Cast away") {
                         self.uploadControl.uploadCast(title: title, description: description, pub_date: "2022/09/02", image: "", language: "english")
