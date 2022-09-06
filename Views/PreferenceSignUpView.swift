@@ -12,8 +12,9 @@ struct PreferenceSignUpView: View {
     @State var isOnArtToggle = false
     @State var isOnLoveToggle = false
     @State var isLoginMode = false
-    @State var email = ""
-    @State var password = ""
+    @Binding var email : String
+    @Binding var password : String
+    
     @StateObject var userViewModel : UserViewModel = UserViewModel()
     @State var loginStatusMessage = ""
     @State var alert = false
@@ -70,19 +71,59 @@ struct PreferenceSignUpView: View {
                         .multilineTextAlignment(.center)
                         .offset(x: -130)
                     }.padding(6.0).background(Color(red: 1, green: 0.4902, blue: 0.3216))}
-                    .frame(width: 350, height: 50)
+                    .frame(width: 350, height:50)
                     .clipShape(Capsule())
             }
         }
     }
+    
+    
+    // MARK: Migrate SignUp Function
+    private func handleSignUpAction() {
+        FirebaseManager.shared.auth.createUser(withEmail: email, password: password) { result, err in
+            if let err = err {
+                print("Failed to create user:", err)
+                self.alert = true
+                self.loginStatusMessage = "Failed to create user: \(err)"
+                return
+            }
+
+            print("Successfully created user: \(result?.user.uid ?? "")")
+
+            self.loginStatusMessage = "Successfully created user: \(result?.user.uid ?? "")"
+            self.userViewModel.user = Users(uuid: result?.user.uid ?? "", email: self.email, userName: "", profilePic: "", favoriteTopics: ["Technology", "Art", "Love"], uploadedList: [])
+            self.userViewModel.addUser()
+            self.userViewModel.userSettings.uuid = result?.user.uid ?? ""
+            self.loginSuccess = true
+        }
+    }
+    
+    // MARK: Email validation
+    private func validView() -> String? {
+        if email.isEmpty {
+            return "Email cannot be empty"
+        }
+        
+        if !self.isValidEmail(email) {
+            return "Email is invalid"
+        }
+        
+        return nil
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
 }
 
-private func handleSignUpAction() {
-    // Migrate SignUp
-}
+
 
 struct PreferenceSignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        PreferenceSignUpView()
+        Group{
+            PreferenceSignUpView(email: .constant("ambinh01@example.com"), password: .constant("Password"))
+        }
     }
 }
