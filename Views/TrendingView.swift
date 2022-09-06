@@ -24,7 +24,6 @@ struct TrendingView: View {
             Divider()
             Divider()
             
-            // TODO: more button behavior not correct
             ScrollView {
                 LazyVStack {
                     ForEach(self.$podcastViewModel.episodes, id: \.id) { $episode in
