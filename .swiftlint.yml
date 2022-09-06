@@ -20,6 +20,7 @@ disabled_rules:
     - mark
     - type_name
     - legacy_constructor
+    - identifier_name
 
 # todo warnings
 todo: warning

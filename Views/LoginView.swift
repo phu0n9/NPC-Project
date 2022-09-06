@@ -37,7 +37,6 @@ struct LoginView: View {
                             .padding()
                     }
                     
-                    
                     Capsule()
                     /* #f5f5f5 */
                         .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))

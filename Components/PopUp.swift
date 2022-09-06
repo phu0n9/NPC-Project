@@ -12,25 +12,21 @@ struct PopUp: View {
     let config: SheetManager.Config
     let didClose: () -> Void
 
-    
     var body: some View {
-    
- 
-            VStack(spacing: 0){
+            VStack(spacing: 0) {
                 close
                 title
                 content
                     }
                     .frame(maxWidth: .infinity)
-                    .padding(.horizontal,24)
-                    .padding(.vertical,10)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 10)
                     .multilineTextAlignment(.center)
                     .background(background)
                     .transition(.move(edge: .top))
         
         }
 }
-
 
 struct PopUp_Previews: PreviewProvider {
     static var previews: some View {
@@ -41,15 +37,15 @@ struct PopUp_Previews: PreviewProvider {
     }
 }
 
-private extension PopUp{
-    var background: some View{
+private extension PopUp {
+    var background: some View {
         RoundedCorners(color: .white, tl: 0, tr: 0, bl: 30, br: 30)
-            .shadow(color: .black.opacity(0.2),radius: 3)
+            .shadow(color: .black.opacity(0.2), radius: 3)
     }
 }
 
 private extension PopUp {
-    var close:some View{
+    var close:some View {
         Button {
             didClose()
         } label: {
@@ -68,21 +64,18 @@ private extension PopUp {
     var title:some View {
         Text(config.title)
             .font(
-                .system(size:30
-                        ,weight: .bold,
-                        design:.rounded)
+                .system(size:30, weight: .bold, design:.rounded)
             ).padding()
 
     }
     
-    var content:some View{
+    var content:some View {
         Text(config.content)
     }
     
 }
 
-//MARK:
-    //stackoverfl.com/questions/56760335/round-specific-corners-swiftui
+// MARK: stackoverfl.com/questions/56760335/round-specific-corners-swiftui
 struct RoundedCorners: View {
     var color: Color = .blue
     var tl: CGFloat = 0.0
@@ -118,5 +111,3 @@ struct RoundedCorners: View {
         }
     }
 }
-
-

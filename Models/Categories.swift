@@ -10,4 +10,5 @@ import Foundation
 struct Categories: Identifiable, Codable {
     var id : String = UUID().uuidString
     var categories : String
+    var checked: Bool = false
 }
