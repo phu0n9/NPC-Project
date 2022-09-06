@@ -11,12 +11,13 @@ import FirebaseFirestore
 class PodcastViewModel: ObservableObject {
     @Published var podcasts = [Podcasts]()
     @Published var categories = [Categories]()
+    @Published var episodes = [Episodes]()
     
     private var db = Firestore.firestore()
     
     // MARK: fetching podcasts API with 20 documents with categories
-    func fetchPodcasts(categories: [String]) {
-        db.collection(Settings.podcastsCollection).whereField("categories", arrayContainsAny: categories).limit(to: 20).getDocuments(completion: {querySnapShot, error in
+    func fetchPodcasts(categories: [String], numberOfItems: Int) {
+        db.collection(Settings.podcastsCollection).whereField("categories", arrayContainsAny: categories).limit(to: numberOfItems).getDocuments(completion: {querySnapShot, error in
             if let err = error {
                 print("Error getting documents: \(err)")
             }
@@ -38,7 +39,9 @@ class PodcastViewModel: ObservableObject {
                 let episodes = queryDocumentSnapshot.get("episodes") as! [[String: Any]]
                 
                 let episodeObj = episodes.map {(value) -> Episodes in
-                    return Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String)
+                    let episode = Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String, image: image)
+                    self.episodes.append(episode)
+                    return episode
                 }
                 
                 return Podcasts(uuid: uuid, author: author, description: description, image: image, itunes_id: itunes_id, language: language, title: title, website: website, categories: categories, episodes: episodeObj)

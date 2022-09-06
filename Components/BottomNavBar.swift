@@ -11,8 +11,8 @@ struct BottomNavBar: View {
     
     @State var selectedIndex = 0
     
-    //Styling topnavbar
-    init(){
+    // Styling topnavbar
+    init() {
         let navbarApperance = UINavigationBarAppearance()
         navbarApperance.titleTextAttributes = [.foregroundColor:UIColor.systemBackground]
         navbarApperance.largeTitleTextAttributes = [.foregroundColor:UIColor.systemBackground]
@@ -24,7 +24,6 @@ struct BottomNavBar: View {
         UINavigationBar.appearance().tintColor = UIColor.systemBackground
     }
 
-    
     let icons = [
         "podcasts-icon",
         "play-icon",
@@ -42,74 +41,17 @@ struct BottomNavBar: View {
                 
                 switch selectedIndex {
                 case 0:
-                    NavigationView {
-                        VStack {
-                            TrendingView()
-                        }
-                        .navigationTitle("Trending")
-                        .toolbar{
-                            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                                Button{
-                                    
-                                } label:{
-                                    Image("search-icon")
-                                        .resizable()
-                                        .frame(width: 30, height: 30, alignment: .leading)
-                                }
-                                 
-                                Button{
-                                    print("notification clicked")
-                                } label:{
-                                    Image("notification-icon")
-                                        .resizable()
-                                        .frame(width: 30, height: 30, alignment: .leading)
-                                }
-                                
-                                Button{
-                                    print("message clicked")
-                                } label:{
-                                    Image("chat-icon")
-                                        .resizable()
-                                        .frame(width: 20, height: 20, alignment: .leading)
-                                }
-                            }
-                        }
-                    }
+                    ViewComponent(destination: TrendingView(), viewTitle: "Trending")
                 case 1:
-                    NavigationView {
-                        VStack {
-                            CastingView()
-                        }
-                        .navigationTitle("Casting")
-                    }
+                    ViewComponent(destination: CastingView(), viewTitle: "Casting")
                 case 2:
-                    NavigationView {
-                        VStack {
-                            UploadView()
-                        }
-                        .navigationTitle("Upload Cast")
-                    }
+                    ViewComponent(destination: UploadView(), viewTitle: "Uploading")
                 case 3:
-                    NavigationView {
-                        VStack {
-                            ActivityView()
-                        }
-                        .navigationTitle("Activity")
-                    }
+                    ViewComponent(destination: ActivityView(), viewTitle: "Activity")
                 case 4:
-                    NavigationView {
-                        VStack {
-                            ProfileView()
-                        }
-                        .navigationTitle("Profile ")
-                    }
+                    ViewComponent(destination: ProfileView(), viewTitle: "Profile")
                 default:
-                    NavigationView {
-                        VStack {
-                            Text("Trending")
-                        }
-                        .navigationTitle("Trending")
-                    }
+                    ViewComponent(destination: TrendingView(), viewTitle: "Trending")
                 }
             }
             

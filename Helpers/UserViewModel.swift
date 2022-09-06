@@ -102,6 +102,7 @@ class UserViewModel : ObservableObject {
                 print("Document added with ID: \(ref!.documentID)")
                 self.userSettings.token = token
                 self.userSettings.username = self.user.userName
+                self.userSettings.userCategories = self.user.favoriteTopics
             }
         }
     }
@@ -121,6 +122,7 @@ class UserViewModel : ObservableObject {
             documents[0].reference.updateData(["token": token])
             self.userSettings.token = token
             self.userSettings.username = documents[0].get("userName") as! String
+            self.userSettings.userCategories = documents[0].get("categoryList") as! [String]
         })
     }
     
@@ -184,7 +186,7 @@ class UserViewModel : ObservableObject {
             var episodeObj = [Episodes]()
             if let episodes = episodeList {
                 episodeObj = episodes.map {(value) -> Episodes in
-                    return Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String)
+                    return Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String, image: image)
                 }
             }
             

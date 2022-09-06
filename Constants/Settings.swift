@@ -18,4 +18,5 @@ struct Settings {
     static let userToken = "token"
     static let uuid = "uuid"
     static let userName = "userName"
+    static let userCategories = "userCategories"
 }

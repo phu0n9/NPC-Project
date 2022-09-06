@@ -8,31 +8,37 @@
 import SwiftUI
 
 struct TrendingView: View {
+    @ObservedObject var podcastViewModel = PodcastViewModel()
+    @ObservedObject var userSettings = UserSettings()
+    @State private var isExpanded = false
+    
     var body: some View {
-
-      
-        ScrollView{
+        ScrollView {
             ScrollView(.horizontal) {
                 HStack(spacing: 10) {
-                    ForEach(0..<10, id: \.self) { _ in
-                        ItemPodcast()
+                    ForEach(self.podcastViewModel.podcasts, id: \.id) { podcast in
+                        PodcastComponent(title: podcast.title, image: podcast.image, author: podcast.author)
                     }
                 }.padding()
-        }
-
+            }
+            
             Divider()
             Divider()
             
-            ScrollView{
-                LazyVStack{
-                    ForEach(0 ... 20, id: \.self) { _ in
-                        EpisodeComponent()
+            // TODO: more button behavior not correct
+            ScrollView {
+                LazyVStack {
+                    ForEach(self.podcastViewModel.episodes, id: \.id) { episode in
+                        EpisodeComponent(title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio, image: episode.image, id: episode.id, isExpanded: $isExpanded, selectedId: Binding.constant(episode.id))
                     }
                 }
             }
         }
-        
-        
+        .onAppear {
+            DispatchQueue.main.async {
+                self.podcastViewModel.fetchPodcasts(categories: self.userSettings.userCategories, numberOfItems: 10)
+            }
+        }
     }
 }
 
