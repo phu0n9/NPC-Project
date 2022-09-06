@@ -8,29 +8,27 @@
 import Foundation
 import SwiftUI
 
-struct PopupModifier: ViewModifier{
+struct PopupModifier: ViewModifier {
     
     @ObservedObject var sheetManager: SheetManager
     
-    func body(content: Content) -> some View{
+    func body(content: Content) -> some View {
         content
-            .overlay(alignment: .top){
+            .overlay(alignment: .top) {
                 if case let .present(config) = sheetManager.action {
-                    PopUp(config: config){
-                        withAnimation{
+                    PopUp(config: config) {
+                        withAnimation {
                             sheetManager.dismiss()
                             }
                         }
                     }
         }
                 .ignoresSafeArea()
-                    
     }
 }
 
-
-extension View{
-    func popup(with sheetManager: SheetManager) -> some View{
+extension View {
+    func popup(with sheetManager: SheetManager) -> some View {
         self.modifier(PopupModifier(sheetManager: sheetManager))
     }
 }

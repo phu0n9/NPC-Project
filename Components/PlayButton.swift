@@ -38,19 +38,20 @@ struct PlayButton: View {
             Button(action: {
                 isAddedToMyList += 1
                 print("addlist-button clicked")
-            }) {
-                if isAddedToMyList%2 == 0{
+            }, label: {
+                if isAddedToMyList % 2 == 0{
                     Image("add-list-icon")
                         .frame(width:20, height: 20, alignment: .leading)
                         .padding()
-                }else{
+                } else {
                     Image("add-list-icon")
                         .renderingMode(.template)
                         .foregroundColor(.orange)
                         .frame(width:20, height: 20, alignment: .leading)
                         .padding()
                 }
-            }
+                
+            })
             Image("download-icon")
                 .resizable()
                 .frame(width:20, height: 15, alignment: .leading)

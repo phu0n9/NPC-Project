@@ -13,14 +13,14 @@ struct PopUpTesting: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        ZStack{
+        ZStack {
             Color(.orange)
                 .ignoresSafeArea()
             
             Button(
                     "Pop up!",
                    action: { self.presentationMode.wrappedValue.dismiss()
-                       withAnimation{
+                       withAnimation {
                            sheetManager.present(with: .init(systemName:"xmark",
                                                 title:"Notification",
                                                             content:"content1"))

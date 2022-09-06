@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ItemPodcast: View {
     var body: some View {
-        VStack{
+        VStack {
         Rectangle()
             .font(.title)
-            .frame(width: 90, height: 90,alignment: .leading)
+            .frame(width: 90, height: 90, alignment: .leading)
             .foregroundColor(.orange)
             .cornerRadius(20)
-            HStack(alignment: .firstTextBaseline, spacing: 10){
+            HStack(alignment: .firstTextBaseline, spacing: 10) {
                 Text("P Title")
                     .font(.title3)
                     .frame(alignment: .leading)
