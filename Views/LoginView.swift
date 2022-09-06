@@ -29,23 +29,14 @@ struct LoginView: View {
                         Text("Create Account")
                             .tag(false)
                     }.pickerStyle(SegmentedPickerStyle())
-                    if isLoginMode {
-                        Button {
+
+                    Button {
                         } label: {
                             Image("transition")
                                 .font(.system(size: 64))
                                 .padding()
                         }
-                    }
-                    
-                    if !isLoginMode {
-                        Button {
-                        } label: {
-                            Image("transition")
-                                .font(.system(size: 64))
-                                .padding()
-                        }
-                    }
+
                     
                     Capsule()
                     /* #f5f5f5 */
@@ -87,11 +78,11 @@ struct LoginView: View {
                         .background(Color.white)
                     
                     Button {
-                        handleAction()
-                        // TODO: Navigate to preference page after click create Account button
                         if let errorMessage = self.validView() {
                             print(errorMessage)
                             return
+                        handleAction()
+                        
                         }
                     } label: {
                         HStack {
