@@ -10,7 +10,6 @@ import SwiftUI
 struct TrendingView: View {
     @ObservedObject var podcastViewModel = PodcastViewModel()
     @ObservedObject var userSettings = UserSettings()
-    @State private var isExpanded = false
     
     var body: some View {
         ScrollView {
@@ -28,8 +27,8 @@ struct TrendingView: View {
             // TODO: more button behavior not correct
             ScrollView {
                 LazyVStack {
-                    ForEach(self.podcastViewModel.episodes, id: \.id) { episode in
-                        EpisodeComponent(title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio, image: episode.image, id: episode.id, isExpanded: $isExpanded, selectedId: Binding.constant(episode.id))
+                    ForEach(self.$podcastViewModel.episodes, id: \.id) { $episode in
+                        EpisodeComponent(title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio, image: episode.image, isExpanded: $episode.isExpanding)
                     }
                 }
             }

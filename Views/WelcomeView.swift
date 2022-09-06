@@ -41,13 +41,16 @@ struct WelcomeView: View {
             }
             DispatchQueue.main.asyncAfter(deadline: .now()+3.0) {
                 withAnimation {
-                    if self.userViewModel.userSettings.token != "" || self.userViewModel.isValid {
+                    if self.userViewModel.userSettings.token != "" && self.userViewModel.isValid {
                         self.state = 1
+                        self.isActive = true
+                    } else {
                         self.isActive = true
                     }
                 }
             }
         }
+        .navigationBarHidden(true)
     }
     
     @ViewBuilder

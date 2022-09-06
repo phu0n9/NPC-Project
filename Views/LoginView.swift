@@ -17,11 +17,13 @@ struct LoginView: View {
     @State var alert = false
     @State var loginSuccess = false
     @State private var isSecured: Bool = true
+    @State private var btnClicked = false
     
     var body: some View {
         NavigationView {
             ScrollView {
                 NavigationLink("", destination: UploadView(), isActive: self.$loginSuccess)
+                NavigationLink("", destination: PreferenceSignUpView(email: $email, password: $password), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
                 VStack(spacing: 16) {
                     Picker(selection: $isLoginMode, label: Text("Picker here")) {
                         Text("Login")
@@ -77,9 +79,8 @@ struct LoginView: View {
                         .background(Color.white)
                     
                     Button {
-                        
+                        self.btnClicked.toggle()
                         handleAction()
-                        
                     } label: {
                         HStack {
                             Spacer()
@@ -94,7 +95,6 @@ struct LoginView: View {
                     .frame(width: 380, height: 50)
                 }
             }
-            
             .alert(isPresented: self.$alert, content: {
                 Alert(title: Text("Error"), message: Text(self.loginStatusMessage))
             })

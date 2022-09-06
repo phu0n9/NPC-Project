@@ -23,7 +23,7 @@ struct NPCApp: App {
     
     var body: some Scene {
         WindowGroup {
-            PreferenceSignUpView(email: Binding.constant("hello@gmail.com"), password: Binding.constant("hello123"))
+            WelcomeView()
         }
     }
 }
