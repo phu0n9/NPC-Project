@@ -29,23 +29,14 @@ struct LoginView: View {
                         Text("Create Account")
                             .tag(false)
                     }.pickerStyle(SegmentedPickerStyle())
-                    if isLoginMode {
-                        Button {
-                        } label: {
-                            Image("transition")
-                                .font(.system(size: 64))
-                                .padding()
-                        }
+                    
+                    Button {
+                    } label: {
+                        Image("transition")
+                            .font(.system(size: 64))
+                            .padding()
                     }
                     
-                    if !isLoginMode {
-                        Button {
-                        } label: {
-                            Image("transition")
-                                .font(.system(size: 64))
-                                .padding()
-                        }
-                    }
                     
                     Capsule()
                     /* #f5f5f5 */
@@ -74,7 +65,7 @@ struct LoginView: View {
                         .padding(0)
                         .overlay(
                             HStack {
-                                Image(systemName: "l  ock")
+                                Image(systemName: "lock")
                                     .resizable()
                                     .frame(width: 20, height: 30, alignment: .trailing)
                                     .offset(x: 25, y: 0)
@@ -87,12 +78,9 @@ struct LoginView: View {
                         .background(Color.white)
                     
                     Button {
+                        
                         handleAction()
-                        // TODO: Navigate to preference page after click create Account button
-                        if let errorMessage = self.validView() {
-                            print(errorMessage)
-                            return
-                        }
+                        
                     } label: {
                         HStack {
                             Spacer()
@@ -143,41 +131,7 @@ struct LoginView: View {
     }
     
     private func createNewAccount() {
-        FirebaseManager.shared.auth.createUser(withEmail: email, password: password) { result, err in
-            if let err = err {
-                print("Failed to create user:", err)
-                self.alert = true
-                self.loginStatusMessage = "Failed to create user: \(err)"
-                return
-            }
-            
-            print("Successfully created user: \(result?.user.uid ?? "")")
-            
-            self.loginStatusMessage = "Successfully created user: \(result?.user.uid ?? "")"
-            self.userViewModel.user = Users(uuid: result?.user.uid ?? "", email: self.email, userName: "", profilePic: "", favoriteTopics: ["Technology", "Art", "Love"], uploadedList: [])
-            self.userViewModel.addUser()
-            self.userViewModel.userSettings.uuid = result?.user.uid ?? ""
-            self.loginSuccess = true
-        }
-    }
-    
-    // MARK: Email validation
-    private func validView() -> String? {
-        if email.isEmpty {
-            return "Email cannot be empty"
-        }
         
-        if !self.isValidEmail(email) {
-            return "Email is invalid"
-        }
-        
-        return nil
-    }
-    
-    private func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
     }
 }
 
