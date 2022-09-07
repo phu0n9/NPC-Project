@@ -22,6 +22,7 @@ class UploadControl : ObservableObject {
     var localPath = ""
     private var userViewModel = UserViewModel()
     private var userSettings = UserSettings()
+    private var uploadViewModel = UploadViewModel()
     
     func recordAudio () {
         // Now going to record audio...
@@ -93,10 +94,6 @@ class UploadControl : ObservableObject {
             // fetch all data from document directory...
             var result = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .producesRelativePathURLs)
             // updated means remove all old data..
-            //            self.audios.removeAll()
-            //            for value in result {
-            //                self.audios.append(value)
-            //            }
             result.removeAll()
             if !result.isEmpty {
                 self.audio = result[0]
@@ -124,7 +121,9 @@ class UploadControl : ObservableObject {
                         }
                         guard let downloadURL = url else { return }
                         debugPrint("download link", downloadURL)
-                        let upload = Uploads(uuid: UUID().uuidString, title: title, description: description, audioPath: downloadURL.absoluteString, author: self.userSettings.username, pub_date: pub_date, image: image, language: language, userID: self.userSettings.uuid)
+                        let upload = Uploads(uuid: UUID().uuidString, title: title, description: description, audioPath: downloadURL.absoluteString, author: self.userSettings.username, pub_date: pub_date, image: image, language: language, userID: self.userSettings.uuid, numOfLikes: 0, likes: [], comments: [])
+                        self.uploadViewModel.upload = upload
+                        self.uploadViewModel.addUploads()
                         self.userViewModel.addUploadCast(upload: upload)
                     }
                 }

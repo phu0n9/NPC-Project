@@ -12,7 +12,7 @@ import UIKit
 
 class UserViewModel : ObservableObject {
     @Published var users = [Users]()
-    @Published var user = Users(uuid: "", email: "", userName: "", profilePic: "", favoriteTopics: [], uploadedList: [])
+    @Published var user = Users(uuid: "", email: "", userName: "", profilePic: "", favoriteTopics: [], uploadedList: [], watchedList: [], favoriteList: [])
     @Published var image: UIImage = UIImage()
     @Published var userSettings = UserSettings()
     @Published var isValid = false
@@ -103,6 +103,8 @@ class UserViewModel : ObservableObject {
             "profilePic": "",
             "categoryList": self.user.favoriteTopics,
             "uploadedList" : self.user.uploadedList,
+            "favoriteList": self.user.favoriteList,
+            "watchedList": self.user.watchedList,
             "token": token
         ]) { error in
             if let err = error {
@@ -152,17 +154,50 @@ class UserViewModel : ObservableObject {
             let userName = documents[0].get("userName") as! String
             let profilePic = documents[0].get("profilePic") as! String
             let uuid = documents[0].get("uuid") as! String
-            let favoriteTopics = documents[0].get("favoriteList") as! [String]
+            let favoriteTopics = documents[0].get("categoryList") as! [String]
             let uploadedList = documents[0].get("uploadedList") as? [[String: Any]]
+            let watchedList = documents[0].get("watchedList") as? [[String: Any]]
+            let favoriteList = documents[0].get("favoriteList") as? [[String: Any]]
             var uploadObj = [Uploads]()
+            var watchedObj = [Episodes]()
+            var favoriteListObj = [Episodes]()
             
             if let uploads = uploadedList {
                 uploadObj = uploads.map {(value) -> Uploads in
-                    return Uploads(uuid: value["uuid"] as! String, title: value["title"] as! String, description: value["description"] as! String, audioPath: value["audioPath"] as! String, author: value["author"] as! String, pub_date: value["pub_date"] as! String, image: value["image"] as! String, language: value["language"] as! String, userID: uuid)
+                    let likedList = value["likedList"] as? [[String: Any]]
+                    let commentList = value["commentList"] as? [[String: Any]]
+                    var likedObj = [Likes]()
+                    var commentObj = [Comments]()
+                    
+                    if let likes = likedList {
+                        likedObj = likes.map {(value) -> Likes in
+                            return Likes(author: value["author"] as! String, userID: value["userID"] as! String)
+                        }
+                    }
+                    
+                    if let comments = commentList {
+                        commentObj = comments.map {(value) -> Comments in
+                            return Comments(author: value["author"] as! String, userID: value["userID"] as! String, content: value["content"] as! String)
+                        }
+                    }
+                    
+                    return Uploads(uuid: value["uuid"] as! String, title: value["title"] as! String, description: value["description"] as! String, audioPath: value["audio"] as! String, author: value["author"] as! String, pub_date: value["pub_date"] as! String, image: value["image"] as! String, language: value["language"] as! String, userID: uuid, numOfLikes: value["numOfLikes"] as! Int, likes: likedObj, comments: commentObj)
                 }
             }
             
-            self.user = Users(uuid: uuid, email: email, userName: userName, profilePic: profilePic, favoriteTopics: favoriteTopics, uploadedList: uploadObj)
+            if let watchedItems = watchedList {
+                watchedObj = watchedItems.map {(value) -> Episodes in
+                    return Episodes(audio: value["audio"] as! String, audio_length: value["audio_lentgh"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String, image: "")
+                }
+            }
+            
+            if let favoriteItems = favoriteList {
+                favoriteListObj = favoriteItems.map {(value) -> Episodes in
+                    return Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String, image: "")
+                }
+            }
+            
+            self.user = Users(uuid: uuid, email: email, userName: userName, profilePic: profilePic, favoriteTopics: favoriteTopics, uploadedList: uploadObj, watchedList: watchedObj, favoriteList: favoriteListObj)
             
             let storageRef = Storage.storage().reference()
             let fileRef = storageRef.child(profilePic)

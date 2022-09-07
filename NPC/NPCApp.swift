@@ -24,7 +24,7 @@ struct NPCApp: App {
     var body: some Scene {
         WindowGroup {
             //LoginView()
-            WelcomeView()
+            BottomNavBar()
         }
     }
 }

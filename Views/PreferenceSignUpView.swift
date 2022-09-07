@@ -107,7 +107,7 @@ struct PreferenceSignUpView: View {
             print("Successfully created user: \(result?.user.uid ?? "")")
             
             self.loginStatusMessage = "Successfully created user: \(result?.user.uid ?? "")"
-            self.userViewModel.user = Users(uuid: result?.user.uid ?? "", email: self.email, userName: "", profilePic: "", favoriteTopics: self.categoryList, uploadedList: [])
+            self.userViewModel.user = Users(uuid: result?.user.uid ?? "", email: self.email, userName: "", profilePic: "", favoriteTopics: self.categoryList, uploadedList: [], watchedList: [], favoriteList: [])
             self.userViewModel.addUser()
             self.userViewModel.userSettings.uuid = result?.user.uid ?? ""
             self.loginSuccess = true

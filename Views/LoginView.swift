@@ -108,7 +108,7 @@ struct LoginView: View {
                         .background(Color.white)
                     
                     // Password check field
-                    if (!isLoginMode) {
+                    if !isLoginMode {
                         Capsule()
                         /* #f5f5f5 */
                             .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))

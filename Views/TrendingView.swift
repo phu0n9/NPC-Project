@@ -10,6 +10,7 @@ import SwiftUI
 struct TrendingView: View {
     @ObservedObject var podcastViewModel = PodcastViewModel()
     @ObservedObject var userSettings = UserSettings()
+    @State var time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
     
     var body: some View {
         ScrollView {
@@ -26,15 +27,37 @@ struct TrendingView: View {
             
             ScrollView {
                 LazyVStack {
-                    ForEach(self.$podcastViewModel.episodes, id: \.id) { $episode in
-                        EpisodeComponent(title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio, image: episode.image, isExpanded: $episode.isExpanding)
+                    ForEach(self.$podcastViewModel.paginatedEpisodes, id: \.id) { $episode in
+                        
+                        ZStack {
+                            // reaching end of the list then load new data
+                            if self.podcastViewModel.paginatedEpisodes.last?.id == episode.id {
+                                GeometryReader { bounds in
+                                    LoadingRows()
+                                        .onAppear {
+                                            self.time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
+                                        }
+                                        .onReceive(self.time) { (_) in
+                                            if bounds.frame(in: .global).maxY < UIScreen.main.bounds.height - 80 {
+                                                self.podcastViewModel.paginateEpisodes()
+                                                self.time.upstream.connect().cancel()
+                                            }
+                                        }
+                                }
+                                .frame(height: 300)
+                            } else {
+                                // return original data
+                                EpisodeComponent(title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio, image: episode.image, isExpanded: $episode.isExpanding)
+                            }
+                        }
                     }
                 }
             }
         }
         .onAppear {
             DispatchQueue.main.async {
-                self.podcastViewModel.fetchPodcasts(categories: self.userSettings.userCategories, numberOfItems: 10)
+                self.podcastViewModel.fetchPodcasts(categories: self.userSettings.userCategories)
+                print(self.podcastViewModel.paginatedEpisodes)
             }
         }
     }

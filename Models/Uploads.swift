@@ -18,4 +18,20 @@ struct Uploads : Identifiable {
     var image: String
     var language: String
     var userID : String
+    var numOfLikes: Int
+    var likes: [Likes]
+    var comments: [Comments]
+}
+
+struct Likes : Identifiable {
+    var id: String = UUID().uuidString
+    var author: String
+    var userID: String
+}
+
+struct Comments: Identifiable {
+    var id: String = UUID().uuidString
+    var author: String
+    var userID: String
+    var content: String
 }
