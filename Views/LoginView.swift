@@ -12,6 +12,8 @@ struct LoginView: View {
     @State var isLoginMode = false
     @State var email = ""
     @State var password = ""
+    @State var username = ""
+    @State var confirmPassword = ""
     @StateObject var userViewModel : UserViewModel = UserViewModel()
     @State var loginStatusMessage = ""
     @State var alert = false
@@ -39,6 +41,29 @@ struct LoginView: View {
                             .padding()
                     }
                     
+                    if (!isLoginMode) {
+                        Capsule()
+                        /* #f5f5f5 */
+                            .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
+                            .frame(width: 380, height: 50)
+                            .padding(0)
+                            .overlay(
+                                HStack {
+                                    Image(systemName: "person")
+                                        .resizable()
+                                        .frame(width: 24, height: 24, alignment: .trailing)
+                                        .offset(x: 20, y: 0)
+                                    TextField("Username", text: $username)
+                                        .keyboardType(.emailAddress)
+                                        .offset(x: 40, y: 0)
+                                }
+                                
+                            )
+                            .padding(6)
+                        
+                            .autocapitalization(.none)
+                    }
+                    
                     Capsule()
                     /* #f5f5f5 */
                         .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
@@ -56,7 +81,7 @@ struct LoginView: View {
                             }
                             
                         )
-                        .padding()
+                        .padding(6)
                     
                         .autocapitalization(.none)
                     Capsule()
@@ -75,8 +100,29 @@ struct LoginView: View {
                                     .offset(x: 60, y: 0)
                             }
                         )
-                        .padding(12)
+                        .padding(6)
                         .background(Color.white)
+                    
+                    // Password check field
+                    if (!isLoginMode) {
+                        Capsule()
+                        /* #f5f5f5 */
+                            .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
+                            .frame(width: 380, height: 50)
+                            .padding(0)
+                            .overlay(
+                                HStack {
+                                    Image(systemName: "lock")
+                                        .resizable()
+                                        .frame(width: 20, height: 30, alignment: .trailing)
+                                        .offset(x: 25, y: 0)
+                                    SecureField("Confirm password", text: $confirmPassword)
+                                        .offset(x: 60, y: 0)
+                                }
+                            )
+                            .padding(6)
+                            .background(Color.white)
+                    }
                     
                     Button {
                         self.btnClicked.toggle()
@@ -101,6 +147,7 @@ struct LoginView: View {
             .navigationTitle(isLoginMode ? "Log In" : "Create Account")
             .background(Color(.init(white: 0, alpha: 0.005))
                 .ignoresSafeArea())
+            
         }
     }
     
