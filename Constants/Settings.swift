@@ -12,7 +12,7 @@ struct Settings {
     static let podcastsCollection = "podcasts"
     static let categoriesCollection = "categories"
     static let usersCollection = "users"
-    static let storageLink = "gs://npc-project-742bd.appspot.com/"
+    static let uploadsCollection = "uploads"
     
     // MARK: User Defaults
     static let userToken = "token"

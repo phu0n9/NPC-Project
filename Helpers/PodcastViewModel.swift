@@ -12,12 +12,13 @@ class PodcastViewModel: ObservableObject {
     @Published var podcasts = [Podcasts]()
     @Published var categories = [Categories]()
     @Published var episodes = [Episodes]()
+    @Published var paginatedEpisodes = [Episodes]()
     
     private var db = Firestore.firestore()
     
-    // MARK: fetching podcasts API with 20 documents with categories
-    func fetchPodcasts(categories: [String], numberOfItems: Int) {
-        db.collection(Settings.podcastsCollection).whereField("categories", arrayContainsAny: categories).limit(to: numberOfItems).getDocuments(completion: {querySnapShot, error in
+    // MARK: fetching podcasts API with x documents with categories
+    func fetchPodcasts(categories: [String]) {
+        db.collection(Settings.podcastsCollection).limit(to: 10).whereField("categories", arrayContainsAny: categories).getDocuments(completion: {querySnapShot, error in
             if let err = error {
                 print("Error getting documents: \(err)")
             }
@@ -43,10 +44,33 @@ class PodcastViewModel: ObservableObject {
                     self.episodes.append(episode)
                     return episode
                 }
-                
+
                 return Podcasts(uuid: uuid, author: author, description: description, image: image, itunes_id: itunes_id, language: language, title: title, website: website, categories: categories, episodes: episodeObj)
             }
+            self.paginateEpisodes()
         })
+    }
+    
+    func paginateEpisodes() {
+        guard !self.episodes.isEmpty else {
+            return
+        }
+        
+        guard self.paginatedEpisodes.count < self.episodes.count else {
+            return
+        }
+        
+        if self.paginatedEpisodes.count + 5 < self.episodes.count {
+            addPaginationList(start: self.paginatedEpisodes.count, end: self.paginatedEpisodes.count + 5)
+        } else {
+            addPaginationList(start: self.paginatedEpisodes.count, end: self.episodes.count)
+        }
+    }
+    
+    func addPaginationList(start: Int, end: Int) {
+        for i in start..<end {
+            self.paginatedEpisodes.append(self.episodes[i])
+        }
     }
     
     // MARK: fetch all categories

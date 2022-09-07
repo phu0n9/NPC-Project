@@ -18,8 +18,10 @@ struct EpisodeComponent: View {
     var body: some View {
         
         VStack(alignment: .leading, spacing: 10) {
-            // podcast cover img, info
+            // MARK: podcast episode info
             HStack(alignment: .top, spacing: 20) {
+                
+                // MARK: podcast image
                 AsyncImage(url: URL(string: self.image)) { podcastImage in
                     podcastImage
                         .resizable()
@@ -35,13 +37,17 @@ struct EpisodeComponent: View {
                 
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
+                        // MARK: title
                         Text(self.title)
                             .font(.subheadline).bold()
                     }
+                    // MARK: publish date
                     Text(self.pub_date)
                         .font(.caption)
                 }
             }.padding()
+            
+            // MARK: description
             Text(self.description)
                 .lineLimit(isExpanded ? nil : 3)
                 .overlay(
@@ -55,7 +61,7 @@ struct EpisodeComponent: View {
                                 .padding(.top, 4.0)
                                 .background(Color.white)
                         })
-                        .frame(width: proxy.size.width, height: proxy.size.height, alignment: .bottomTrailing)
+                        .frame(width: proxy.size.width, height: abs(proxy.size.height), alignment: .bottomTrailing)
                     }
                 )
             
