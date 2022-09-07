@@ -21,11 +21,15 @@ struct LoginView: View {
     @State private var isSecured: Bool = true
     @State private var btnClicked = false
     
+    @State private var isActive : Bool = false
+    
     var body: some View {
         NavigationView {
             ScrollView {
-                NavigationLink("", destination: UploadView(), isActive: self.$loginSuccess)
+                NavigationLink("", destination: BottomNavBar(), isActive: self.$loginSuccess)
+                    .isDetailLink(false)
                 NavigationLink("", destination: PreferenceSignUpView(email: $email, password: $password), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
+                    .isDetailLink(false)
                 VStack(spacing: 16) {
                     Picker(selection: $isLoginMode, label: Text("Picker here")) {
                         Text("Login")
@@ -147,8 +151,7 @@ struct LoginView: View {
             .navigationTitle(isLoginMode ? "Log In" : "Create Account")
             .background(Color(.init(white: 0, alpha: 0.005))
                 .ignoresSafeArea())
-            
-        }
+        }.environment(\.rootPresentationMode, self.$isActive)
     }
     
     private func handleAction() {
@@ -171,7 +174,7 @@ struct LoginView: View {
             print("Successfully logged in as user: \(result?.user.uid ?? "")")
             
             self.loginStatusMessage = "Successfully logged in as user: \(result?.user.uid ?? "")"
-            self.userViewModel.userLogin()
+            self.userViewModel.userLogin(userID: result?.user.uid ?? "")
             self.loginSuccess = true
         }
     }

@@ -39,34 +39,31 @@ struct PreferenceSignUpView: View {
                     .padding(.vertical, 10)
                     .font(.system(size: 16, weight: .semibold))
                 ZStack {
-                    VStack(alignment: .trailing, spacing: 6) {
-                        ForEach(self.$podcastViewModel.categories, id: \.id) { $category in
-                            // MARK: solution 1
-                            Toggle(category.categories, isOn: $category.checked).toggleStyle(CheckBoxToggleStyle())
-                                .font(.system(size: 20, weight: .semibold))
-                                .padding()
-                                .disabled(isFull == true && category.checked == false)
+                    VStack(alignment: .leading, spacing: 6) {
+                        if self.podcastViewModel.categories.isEmpty {
+                            ProgressView()
+                        } else {
                             
-                            // MARK: solution 2
-                            //                            HStack {
-                            //                                Image(systemName: category.checked ? "checkmark.square" : "square")
-                            //                                    .toggleStyle(CheckBoxToggleStyle())
-                            //                                    .onTapGesture {
-                            //                                        category.checked.toggle()
-                            //                                    }
-                            //                                Spacer()
-                            //                                Text(category.categories)
-                            //                            }
-                        }
-                        .onChange(of: self.podcastViewModel.categories.filter {$0.checked}.count) { value in
-                            self.isFull = value >= 3 ? true : false
-                            if value == 3 {
-                                self.categoryList.removeAll()
-                                for category in self.podcastViewModel.categories.filter({$0.checked == true}) {
-                                    self.categoryList.append(category.categories)
+                            ForEach(self.$podcastViewModel.categories, id: \.id) { $category in
+                                // MARK: solution 1
+                                Toggle(category.categories, isOn: $category.checked).toggleStyle(CheckBoxToggleStyle())
+                                    .font(.system(size: 20, weight: .semibold))
+                                    .padding()
+                                    .disabled(isFull == true && category.checked == false)
+                                
+                                
+                            }
+                            .onChange(of: self.podcastViewModel.categories.filter {$0.checked}.count) { value in
+                                self.isFull = value >= 3 ? true : false
+                                if value == 3 {
+                                    self.categoryList.removeAll()
+                                    for category in self.podcastViewModel.categories.filter({$0.checked == true}) {
+                                        self.categoryList.append(category.categories)
+                                    }
                                 }
                             }
                         }
+                        
                     }.padding()
                     
                     RoundedRectangle(cornerRadius: 5)

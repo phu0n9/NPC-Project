@@ -49,8 +49,8 @@
 		A497D80B28C1C0C300D8A5CA /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80A28C1C0C300D8A5CA /* ActivityView.swift */; };
 		A497D80F28C1C1F800D8A5CA /* EpisodeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80E28C1C1F800D8A5CA /* EpisodeComponent.swift */; };
 		A4AFBB9028C1128300B87BC9 /* BottomNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AFBB8F28C1128200B87BC9 /* BottomNavBar.swift */; };
+		A4CEE8EE28C8A28400054E14 /* EnviromentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CEE8ED28C8A28400054E14 /* EnviromentExtension.swift */; };
 		A4F8235428C2FA50007856F2 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8235328C2FA50007856F2 /* PlayButton.swift */; };
-		A4F8235628C30F47007856F2 /* ItemPodcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8235528C30F47007856F2 /* ItemPodcast.swift */; };
 		A4F8235628C30F47007856F2 /* PodcastComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8235528C30F47007856F2 /* PodcastComponent.swift */; };
 		A4FBD12828C781CF00F6E3EB /* CheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FBD12728C781CE00F6E3EB /* CheckboxToggleStyle.swift */; };
 		A4FBD12A28C795AE00F6E3EB /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */; };
@@ -96,8 +96,8 @@
 		A497D80A28C1C0C300D8A5CA /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		A497D80E28C1C1F800D8A5CA /* EpisodeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeComponent.swift; sourceTree = "<group>"; };
 		A4AFBB8F28C1128200B87BC9 /* BottomNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavBar.swift; sourceTree = "<group>"; };
+		A4CEE8ED28C8A28400054E14 /* EnviromentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnviromentExtension.swift; sourceTree = "<group>"; };
 		A4F8235328C2FA50007856F2 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
-		A4F8235528C30F47007856F2 /* ItemPodcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPodcast.swift; sourceTree = "<group>"; };
 		A4F8235528C30F47007856F2 /* PodcastComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastComponent.swift; sourceTree = "<group>"; };
 		A4FBD12728C781CE00F6E3EB /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
 		A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
@@ -183,7 +183,6 @@
 				A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */,
 				A457B43B28C1F44E007AE794 /* FieldComponent.swift */,
 				A4F8235328C2FA50007856F2 /* PlayButton.swift */,
-				A4F8235528C30F47007856F2 /* ItemPodcast.swift */,
 				A491C60428C4CC6100509092 /* PopUp.swift */,
 				A491C60628C4D45F00509092 /* PopUpTesting.swift */,
 				A491C60828C5833D00509092 /* SheetManager.swift */,
@@ -193,6 +192,7 @@
 				4E98FDD728C5C18D006D2566 /* ViewComponent.swift */,
 				A4FBD12728C781CE00F6E3EB /* CheckboxToggleStyle.swift */,
 				A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */,
+				A4CEE8ED28C8A28400054E14 /* EnviromentExtension.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -347,6 +347,7 @@
 				4E6D455328BF282E005B7DF0 /* Podcasts.swift in Sources */,
 				0931000B28C109EE007776F9 /* FirebaseManager.swift in Sources */,
 				4E6D458028C11AB5005B7DF0 /* WelcomeView.swift in Sources */,
+				A4CEE8EE28C8A28400054E14 /* EnviromentExtension.swift in Sources */,
 				4EEF6B6D28BD273B00610B54 /* NPCApp.swift in Sources */,
 				4E98FDD828C5C18D006D2566 /* ViewComponent.swift in Sources */,
 				A4FBD12A28C795AE00F6E3EB /* ButtonStyle.swift in Sources */,
@@ -376,7 +377,7 @@
 				4E6D458328C14531005B7DF0 /* UploadView.swift in Sources */,
 				4E6D457E28C1195D005B7DF0 /* UserSettings.swift in Sources */,
 				4EEF6B9828BD2F8B00610B54 /* UploadControl.swift in Sources */,
-				A4F8235628C30F47007856F2 /* ItemPodcast.swift in Sources */,
+				A4F8235628C30F47007856F2 /* PodcastComponent.swift in Sources */,
 				A4F8235628C30F47007856F2 /* PodcastComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

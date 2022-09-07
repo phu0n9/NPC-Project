@@ -33,7 +33,7 @@ struct WelcomeView: View {
                             }
                         }
                 }
-            }
+            }.isDetailLink(false)
         }
         .onAppear {
             DispatchQueue.main.async {
@@ -43,8 +43,6 @@ struct WelcomeView: View {
                 withAnimation {
                     if self.userViewModel.userSettings.token != "" && self.userViewModel.isValid {
                         self.state = 1
-                        self.isActive = true
-                    } else {
                         self.isActive = true
                     }
                 }
