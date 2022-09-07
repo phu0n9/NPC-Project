@@ -16,6 +16,15 @@ class UserViewModel : ObservableObject {
     @Published var image: UIImage = UIImage()
     @Published var userSettings = UserSettings()
     @Published var isValid = false
+    @Published var isUserCurrentlyLoggedOut = false
+    
+    
+    init() {
+        DispatchQueue.main.async {
+            self.isUserCurrentlyLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
+        }
+    }
+
     
     private var db = Firestore.firestore()
     
@@ -42,7 +51,7 @@ class UserViewModel : ObservableObject {
             }
         }
     }
-
+    
     // MARK: update user profile picture
     func updateProfilePicture(imagePath: String) {
         db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: self.userSettings.uuid).getDocuments(completion: { (querySnapShot, error) in
@@ -110,7 +119,8 @@ class UserViewModel : ObservableObject {
     }
     
     // MARK: user log in
-    func userLogin() {
+    func userLogin(userID: String) {
+        self.userSettings.uuid = userID
         db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: self.userSettings.uuid).getDocuments(completion: { (querySnapShot, error) in
             if let err = error {
                 print("Error getting documents: \(err)")
@@ -122,6 +132,7 @@ class UserViewModel : ObservableObject {
             }
             let token = UUID().uuidString
             documents[0].reference.updateData(["token": token])
+            
             self.userSettings.token = token
             self.userSettings.username = documents[0].get("userName") as! String
             self.userSettings.userCategories = documents[0].get("categoryList") as! [String]
@@ -243,5 +254,11 @@ class UserViewModel : ObservableObject {
             
             self.isValid = true
         })
+    }
+    
+    func resetUserDefault() {
+        self.userSettings.token = ""
+        self.userSettings.username = ""
+        self.userSettings.userCategories = ["Art","Music","Technology"]
     }
 }

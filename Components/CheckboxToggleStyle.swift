@@ -21,6 +21,7 @@ struct CheckBoxToggleStyle: ToggleStyle {
                     .foregroundColor(configuration.isOn ? .accentColor : .secondary)
                     .accessibility(label: Text(configuration.isOn ? "Checked" : "Unchecked"))
                     .imageScale(.large)
+                Spacer()
             }
         }
         .buttonStyle(PlainButtonStyle())
