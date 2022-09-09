@@ -45,9 +45,7 @@ struct ProfileView: View {
                 
                 .onChange(of: isSubmit) { value in
                     if value {
-                        if selectedImage != nil {
-                            self.userViewModel.uploadPhoto(selectedImage: selectedImage)
-                        }
+                        self.userViewModel.updateUser(selectedImage: selectedImage, categoryList: ["Technology", "Music"])
                     }
                 }
             }

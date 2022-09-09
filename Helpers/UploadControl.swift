@@ -115,17 +115,21 @@ class UploadControl : ObservableObject {
                 
                 if error == nil && metadata != nil {
                     print("uploading")
-                    fileRef.downloadURL { (url, error) in
-                        if let err = error {
-                            print(err.localizedDescription)
-                        }
-                        guard let downloadURL = url else { return }
-                        debugPrint("download link", downloadURL)
-                        let upload = Uploads(uuid: UUID().uuidString, title: title, description: description, audioPath: downloadURL.absoluteString, author: self.userSettings.username, pub_date: pub_date, image: image, language: language, userID: self.userSettings.uuid, numOfLikes: 0, likes: [], comments: [])
-                        self.uploadViewModel.upload = upload
-                        self.uploadViewModel.addUploads()
-                        self.userViewModel.addUploadCast(upload: upload)
-                    }
+                    
+//                    fileRef.downloadURL { (url, error) in
+//                        if let err = error {
+//                            print(err.localizedDescription)
+//                        }
+//                        guard let downloadURL = url else { return }
+//                        debugPrint("download link", downloadURL)
+//                        debugPrint("path", downloadURL.path)
+//
+//
+//                    }
+                    let upload = Uploads(uuid: UUID().uuidString, title: title, description: description, audioPath: globalPath, author: self.userSettings.username, pub_date: pub_date, image: image, language: language, userID: self.userSettings.uuid, numOfLikes: 0, likes: [], comments: [])
+                    self.uploadViewModel.upload = upload
+                    self.uploadViewModel.addUploads()
+                    self.userViewModel.addUploadCast(upload: upload)
                 }
             }
         } catch {

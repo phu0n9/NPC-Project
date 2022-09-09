@@ -29,16 +29,17 @@ class UserViewModel : ObservableObject {
     }
     
     // MARK: uploading photo with selected image
-    func uploadPhoto(selectedImage: UIImage?) {
+    func uploadPhoto(selectedImage: UIImage?) -> String {
+        var fileLocation = ""
         guard selectedImage != nil else {
-            return
+            return fileLocation
         }
         let storageRef = Storage.storage().reference()
         
         let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
         
         guard imageData != nil else {
-            return
+            return fileLocation
         }
         
         let path = "images/\(UUID().uuidString).jpg"
@@ -50,27 +51,57 @@ class UserViewModel : ObservableObject {
         _ = fileRef.putData(imageData!, metadata: metadataLocal) { metadata, error in
             
             if error == nil && metadata != nil {
-                self.updateProfilePicture(imagePath: path)
+                fileLocation = path
             }
         }
+        return fileLocation
     }
     
-    // MARK: update user profile picture
-    func updateProfilePicture(imagePath: String) {
+    // MARK: update user profile picture and categories
+    func updateUser(selectedImage: UIImage?, categoryList: [String]) {
         db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: self.userSettings.uuid).getDocuments(completion: { (querySnapShot, error) in
             if let err = error {
                 print("Error getting documents: \(err)")
             }
             
             guard let documents = querySnapShot?.documents else {
-                print("No data")
+                print("No user found")
                 return
             }
-            documents[0].reference.updateData(["profilePic": imagePath])
+            
+            // if users don't choose image to update
+            guard selectedImage != nil else {
+                // update new data
+                documents[0].reference.updateData(["categoryList": categoryList])
+                self.userSettings.userCategories = categoryList
+                return
+            }
+            
+            // upload new photo to firebase storage
+            let imagePath = self.uploadPhoto(selectedImage: selectedImage)
+            
+            // find old photo and delete it
+            let image = documents[0].get("image") as! String
+            if image != "" {
+                let storageRef = Storage.storage().reference().child(image)
+
+                // Delete the image file
+                storageRef.delete { error in
+                  if let err = error {
+                      print(err.localizedDescription)
+                  } else {
+                      print("Deleted old picture")
+                  }
+                }
+            }
+            
+            // update new data
+            documents[0].reference.updateData(["profilePic": imagePath, "categoryList": categoryList])
+            self.userSettings.userCategories = categoryList
         })
     }
     
-    // MARK: User upload cast
+    // MARK: User upload list in user collection
     func addUploadCast(upload: Uploads) {
         db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: self.userSettings.uuid).getDocuments(completion: { (querySnapShot, error) in
             if let err = error {
@@ -339,7 +370,7 @@ class UserViewModel : ObservableObject {
         })
     }
     
-    // MARK: fetch user watched list
+    // MARK: fetch all watched list by userID
     func fetchWatchedList() {
         db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: userSettings.uuid).getDocuments(completion: { (querySnapshot, error) in
             if let err = error {
