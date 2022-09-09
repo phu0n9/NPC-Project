@@ -15,18 +15,18 @@ class UserViewModel : ObservableObject {
     @Published var user = Users(uuid: "", email: "", userName: "", profilePic: "", favoriteTopics: [], uploadedList: [], watchedList: [], favoriteList: [])
     @Published var image: UIImage = UIImage()
     @Published var userSettings = UserSettings()
+    @Published var userFavoriteList = [Episodes]()
+    @Published var userWatchedList = [Episodes]()
     @Published var isValid = false
-    @Published var isUserCurrentlyLoggedOut = false
     
+    @Published var isUserCurrentlyLoggedOut = false
+    private var db = Firestore.firestore()
     
     init() {
         DispatchQueue.main.async {
             self.isUserCurrentlyLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
         }
     }
-
-    
-    private var db = Firestore.firestore()
     
     // MARK: uploading photo with selected image
     func uploadPhoto(selectedImage: UIImage?) {
@@ -44,7 +44,10 @@ class UserViewModel : ObservableObject {
         let path = "images/\(UUID().uuidString).jpg"
         let fileRef = storageRef.child(path)
         
-        _ = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+        let metadataLocal = StorageMetadata()
+        metadataLocal.contentType = "image/jpeg"
+        
+        _ = fileRef.putData(imageData!, metadata: metadataLocal) { metadata, error in
             
             if error == nil && metadata != nil {
                 self.updateProfilePicture(imagePath: path)
@@ -256,9 +259,106 @@ class UserViewModel : ObservableObject {
         })
     }
     
+    // MARK: add to favorite list
+    func addFavorite(favorite: Episodes) {
+        db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: userSettings.uuid).getDocuments(completion: {(querySnapShot, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            }
+            guard let data = querySnapShot?.documents else {
+                print("No data")
+                return
+            }
+            let favoriteList = data[0].get("favoriteList") as? [[String: Any]]
+            let favoriteObj = ["audio": favorite.audio, "audio_length": favorite.audio_length, "description": favorite.description, "episode_uuid": favorite.episode_uuid, "podcast_uuid": favorite.podcast_uuid, "pub_date": favorite.pub_date, "title": favorite.title, "image": favorite.image] as [String : Any]
+            
+            if var favorites = favoriteList {
+                guard !favorites.isEmpty else {
+                    favorites.append(favoriteObj)
+                    return
+                }
+                
+                for (index, item) in favorites.enumerated() {
+                    if NSDictionary(dictionary: item).isEqual(to: favoriteObj) {
+                        favorites.remove(at: index)
+                    } else {
+                        favorites.append(favoriteObj)
+                    }
+                }
+                
+                data[0].reference.updateData(["favoriteList": favorites])
+            }
+            
+        })
+    }
+    
+    // MARK: fetch favorite list
+    func fetchFavoriteList() {
+        db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: userSettings.uuid).getDocuments(completion: { (querySnapshot, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            }
+            guard let documents = querySnapshot?.documents else {
+                print("No data")
+                return
+            }
+            
+            self.userFavoriteList = documents.map {(value) -> Episodes in
+                return Episodes(audio: value.get("audio") as! String, audio_length: value.get("audio_length") as! Int, description: value.get("description") as! String, episode_uuid: value.get("episode_uuid") as! String, podcast_uuid: value.get("podcast_uuid") as! String, pub_date: value.get("pub_date") as! String, title: value.get("title") as! String, image: value.get("episode_image") as! String)
+            }
+        })
+    }
+    
+    // MARK: add watched episodes
+    func addWatchList(watchItem: Episodes) {
+        db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: userSettings.uuid).getDocuments(completion: {(querySnapShot, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            }
+            guard let data = querySnapShot?.documents else {
+                print("No data")
+                return
+            }
+            let watchedList = data[0].get("watchedList") as? [[String: Any]]
+            let watchedObj = ["audio": watchItem.audio, "audio_length": watchItem.audio_length, "description": watchItem.description, "episode_uuid": watchItem.episode_uuid, "podcast_uuid": watchItem.podcast_uuid, "pub_date": watchItem.pub_date, "title": watchItem.title, "image": watchItem.image] as [String : Any]
+            
+            if var watchItems = watchedList {
+                guard !watchItems.isEmpty else {
+                    watchItems.append(watchedObj)
+                    return
+                }
+                
+                for item in watchItems {
+                    if !NSDictionary(dictionary: item).isEqual(to: watchedObj) {
+                        watchItems.append(watchedObj)
+                    }
+                }
+                
+                data[0].reference.updateData(["watchedList": watchItems])
+            }
+        })
+    }
+    
+    // MARK: fetch user watched list
+    func fetchWatchedList() {
+        db.collection(Settings.usersCollection).whereField("uuid", isEqualTo: userSettings.uuid).getDocuments(completion: { (querySnapshot, error) in
+            if let err = error {
+                print("Error getting documents: \(err)")
+            }
+            guard let documents = querySnapshot?.documents else {
+                print("No data")
+                return
+            }
+            
+            self.userWatchedList = documents.map {(value) -> Episodes in
+                return Episodes(audio: value.get("audio") as! String, audio_length: value.get("audio_length") as! Int, description: value.get("description") as! String, episode_uuid: value.get("episode_uuid") as! String, podcast_uuid: value.get("podcast_uuid") as! String, pub_date: value.get("pub_date") as! String, title: value.get("title") as! String, image: value.get("episode_image") as! String)
+            }
+        })
+    }
+    
     func resetUserDefault() {
         self.userSettings.token = ""
         self.userSettings.username = ""
-        self.userSettings.userCategories = ["Art","Music","Technology"]
+        self.userSettings.userCategories = ["Art", "Music", "Technology"]
     }
 }

@@ -40,7 +40,7 @@ class PodcastViewModel: ObservableObject {
                 let episodes = queryDocumentSnapshot.get("episodes") as! [[String: Any]]
                 
                 let episodeObj = episodes.map {(value) -> Episodes in
-                    let episode = Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String, image: image)
+                    let episode = Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String, image: value["episode_image"] as! String)
                     self.episodes.append(episode)
                     return episode
                 }
@@ -51,6 +51,7 @@ class PodcastViewModel: ObservableObject {
         })
     }
     
+    // MARK: append pagination episodes
     func paginateEpisodes() {
         guard !self.episodes.isEmpty else {
             return
@@ -67,6 +68,7 @@ class PodcastViewModel: ObservableObject {
         }
     }
     
+    // MARK: add pagination episode list
     func addPaginationList(start: Int, end: Int) {
         for i in start..<end {
             self.paginatedEpisodes.append(self.episodes[i])

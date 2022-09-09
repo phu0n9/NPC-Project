@@ -93,4 +93,33 @@ class UploadViewModel: ObservableObject {
                 }
             }
     }
+    
+    func updateUploads() {
+        
+    }
+    
+    func deleteUplodads() {
+        
+    }
+    
+    func fetchCommentsByUpload() {
+        
+    }
+    
+    func addComments() {
+        
+    }
+    
+    func editComments() {
+        
+    }
+    
+    func deleteComments() {
+        
+    }
+    
+    func updateLikes() {
+        
+    }
+    
 }
