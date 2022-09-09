@@ -34,6 +34,10 @@
 		A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B43B28C1F44E007AE794 /* FieldComponent.swift */; };
 		A457B44228C2019F007AE794 /* TransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B44128C2019F007AE794 /* TransitionView.swift */; };
 		A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */; };
+		A48E2F5B28CB534A00B24C5E /* ActivityViewTopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */; };
+		A48E2F5D28CB5B8400B24C5E /* MyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5C28CB5B8400B24C5E /* MyList.swift */; };
+		A48E2F5F28CB5C9F00B24C5E /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5E28CB5C9F00B24C5E /* Download.swift */; };
+		A48E2F6328CB5D3A00B24C5E /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F6228CB5D3A00B24C5E /* History.swift */; };
 		A491745E28C5D99700443F0D /* PreferenceSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491745D28C5D99700443F0D /* PreferenceSignUpView.swift */; };
 		A491746128C5DA6F00443F0D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A491746028C5DA6F00443F0D /* FirebaseAnalytics */; };
 		A491746328C5DA6F00443F0D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A491746228C5DA6F00443F0D /* FirebaseAuth */; };
@@ -89,6 +93,10 @@
 		A457B43B28C1F44E007AE794 /* FieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldComponent.swift; sourceTree = "<group>"; };
 		A457B44128C2019F007AE794 /* TransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionView.swift; sourceTree = "<group>"; };
 		A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
+		A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewTopNavBar.swift; sourceTree = "<group>"; };
+		A48E2F5C28CB5B8400B24C5E /* MyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyList.swift; sourceTree = "<group>"; };
+		A48E2F5E28CB5C9F00B24C5E /* Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		A48E2F6228CB5D3A00B24C5E /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		A491745D28C5D99700443F0D /* PreferenceSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceSignUpView.swift; sourceTree = "<group>"; };
 		A491C60428C4CC6100509092 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		A491C60628C4D45F00509092 /* PopUpTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTesting.swift; sourceTree = "<group>"; };
@@ -198,6 +206,7 @@
 				A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */,
 				A4CEE8ED28C8A28400054E14 /* EnviromentExtension.swift */,
 				4E98FDDB28C930CD006D2566 /* LoadingRows.swift */,
+				A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -237,6 +246,9 @@
 				4E6D458228C14531005B7DF0 /* UploadView.swift */,
 				4E6D45A328C21FC3005B7DF0 /* ProfileView.swift */,
 				A491745D28C5D99700443F0D /* PreferenceSignUpView.swift */,
+				A48E2F5C28CB5B8400B24C5E /* MyList.swift */,
+				A48E2F5E28CB5C9F00B24C5E /* Download.swift */,
+				A48E2F6228CB5D3A00B24C5E /* History.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -354,6 +366,7 @@
 				0931000B28C109EE007776F9 /* FirebaseManager.swift in Sources */,
 				4E6D458028C11AB5005B7DF0 /* WelcomeView.swift in Sources */,
 				A4CEE8EE28C8A28400054E14 /* EnviromentExtension.swift in Sources */,
+				A48E2F5F28CB5C9F00B24C5E /* Download.swift in Sources */,
 				4EEF6B6D28BD273B00610B54 /* NPCApp.swift in Sources */,
 				4E98FDD828C5C18D006D2566 /* ViewComponent.swift in Sources */,
 				A4FBD12A28C795AE00F6E3EB /* ButtonStyle.swift in Sources */,
@@ -367,6 +380,7 @@
 				A457B44228C2019F007AE794 /* TransitionView.swift in Sources */,
 				A497D80B28C1C0C300D8A5CA /* ActivityView.swift in Sources */,
 				4E6D45A428C21FC3005B7DF0 /* ProfileView.swift in Sources */,
+				A48E2F5B28CB534A00B24C5E /* ActivityViewTopNavBar.swift in Sources */,
 				A491C60F28C5A34C00509092 /* TimerForPopUp.swift in Sources */,
 				A491C60D28C58A9800509092 /* PopupModifier.swift in Sources */,
 				A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */,
@@ -377,7 +391,9 @@
 				4E6D455528BF2838005B7DF0 /* Settings.swift in Sources */,
 				A491C60728C4D45F00509092 /* PopUpTesting.swift in Sources */,
 				A491C60528C4CC6100509092 /* PopUp.swift in Sources */,
+				A48E2F5D28CB5B8400B24C5E /* MyList.swift in Sources */,
 				4E6D456C28BF4F8E005B7DF0 /* ImagePicker.swift in Sources */,
+				A48E2F6328CB5D3A00B24C5E /* History.swift in Sources */,
 				09D6F4E528C0FDD900D056C2 /* LoginView.swift in Sources */,
 				4E98FDDA28C87C54006D2566 /* UploadViewModel.swift in Sources */,
 				4E6D455128BF282E005B7DF0 /* Users.swift in Sources */,
