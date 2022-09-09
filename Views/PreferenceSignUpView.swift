@@ -22,76 +22,59 @@ struct PreferenceSignUpView: View {
     @State private var categoryList = [String]()
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                Button {
-                } label: {
-                    Image("transition")
-                        .font(.system(size: 64))
-                        .padding()
-                }
-                Text("Create Your Account")
-                    .multilineTextAlignment(.center)
-                    .padding(.vertical, 10)
-                    .font(.system(size: 26, weight: .semibold))
-                Text("Tell us about your preference topic")
-                    .multilineTextAlignment(.center)
-                    .padding(.vertical, 10)
-                    .font(.system(size: 16, weight: .semibold))
-                ZStack {
-                    VStack(alignment: .leading, spacing: 6) {
-                        if self.podcastViewModel.categories.isEmpty {
-                            ProgressView()
-                        } else {
-                            
-                            ForEach(self.$podcastViewModel.categories, id: \.id) { $category in
-                                // MARK: solution 1
-                                Toggle(category.categories, isOn: $category.checked).toggleStyle(CheckBoxToggleStyle())
-                                    .font(.system(size: 20, weight: .semibold))
-                                    .padding()
-                                    .disabled(isFull == true && category.checked == false)
-                                
-                                
-                            }
-                            .onChange(of: self.podcastViewModel.categories.filter {$0.checked}.count) { value in
-                                self.isFull = value >= 3 ? true : false
-                                if value == 3 {
-                                    self.categoryList.removeAll()
-                                    for category in self.podcastViewModel.categories.filter({$0.checked == true}) {
-                                        self.categoryList.append(category.categories)
-                                    }
-                                }
-                            }
+            ScrollView {
+                if self.podcastViewModel.categories.isEmpty {
+                    ProgressView()
+                        .frame(alignment: .center)
+                } else {
+                    VStack(spacing: 16) {
+                        Button {
+                        } label: {
+                            Image("transition")
+                                .font(.system(size: 64))
+                                .padding()
                         }
-                        
-                    }.padding()
-                    
-                    RoundedRectangle(cornerRadius: 5)
-                        .fill(Color.orange.opacity(0.07))
-                        .allowsHitTesting(false)
-                        .frame(width: 356, height: 263)
-                }
-                Button {
-                    handleSignUpAction()
-                } label: {
-                    HStack {
-                        Spacer()
-                        Text("Sign Up")
-                            .font(.system(size: 26, weight: .semibold))
-                            .fontWeight(.regular)
-                            .foregroundColor(.white)
+                        Text("Create Your Account")
                             .multilineTextAlignment(.center)
-                            .offset(x: -130)
-                    }.padding(6.0).background(Color(red: 1, green: 0.4902, blue: 0.3216))}
-                .frame(width: 350, height:50)
-                .clipShape(Capsule())
+                            .padding(.vertical, 10)
+                            .font(.system(size: 26, weight: .semibold))
+                        Text("Tell us about your preference topic")
+                            .multilineTextAlignment(.center)
+                            .padding(.vertical, 10)
+                            .font(.system(size: 16, weight: .semibold))
+                        ZStack {
+                            ScrollView {
+                                CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: self.$isFull, categoryList: self.$categoryList)
+                            }
+                            .frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.height / 3)
+                            
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(Color.orange.opacity(0.07))
+                                .allowsHitTesting(false)
+                                .frame(width: 356, height: 263)
+                        }
+                        Button {
+                            handleSignUpAction()
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text("Sign Up")
+                                    .font(.system(size: 26, weight: .semibold))
+                                    .fontWeight(.regular)
+                                    .foregroundColor(.white)
+                                    .multilineTextAlignment(.center)
+                                    .offset(x: -130)
+                            }.padding(6.0).background(Color(red: 1, green: 0.4902, blue: 0.3216))}
+                        .frame(width: 350, height:50)
+                        .clipShape(Capsule())
+                    }
+                }
             }
-        }
-        .onAppear {
-            DispatchQueue.main.async {
-                self.podcastViewModel.fetchCategories()
+            .onAppear {
+                DispatchQueue.main.async {
+                    self.podcastViewModel.fetchCategories()
+                }
             }
-        }
     }
     
     // MARK: Migrate SignUp Function
