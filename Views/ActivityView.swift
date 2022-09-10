@@ -2,14 +2,21 @@
 //  ActivityView.swift
 //  NPC
 //
-//  Created by Le Nguyen on 02/09/2022.
+//  Created by Nguyen Anh Minh on 02/09/2022.
 //
 
 import SwiftUI
 
 struct ActivityView: View {
+    @ObservedObject var podcastViewModel = PodcastViewModel()
+    @ObservedObject var userSettings = UserSettings()
+    @State var time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
+    
     var body: some View {
-        Text("This is from ActivityView()")
+        ZStack {
+            ActivityViewTopNavBar()
+            Spacer()
+        }
     }
 }
 
