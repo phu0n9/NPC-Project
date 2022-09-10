@@ -14,4 +14,3 @@ extension View {
               .overlay(roundedRect.strokeBorder(content, lineWidth: width))
      }
  }
-

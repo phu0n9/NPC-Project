@@ -13,24 +13,28 @@ struct CategoryCheckbox: View {
     @Binding var categoryList: [String]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            ForEach(self.$fetchCategoryList, id: \.id) { $category in
-                    Toggle(category.categories, isOn: $category.checked).toggleStyle(CheckBoxToggleStyle())
-                        .font(.system(size: 20, weight: .semibold))
-                        .padding()
-                        .disabled(isFull == true && category.checked == false)
-                }
-                .onChange(of: self.fetchCategoryList.filter {$0.checked}.count) { value in
-                    self.isFull = value >= 3 ? true : false
-                    if value == 3 {
-                        self.categoryList.removeAll()
-                        for category in self.fetchCategoryList.filter({$0.checked == true}) {
-                            self.categoryList.append(category.categories)
+        ZStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 5) {
+                    ForEach(self.$fetchCategoryList, id: \.id) { $category in
+                            Toggle(category.categories, isOn: $category.checked).toggleStyle(CheckBoxToggleStyle())
+                                .font(.system(size: 20, weight: .semibold))
+                                .padding()
+                                .disabled(isFull == true && category.checked == false)
                         }
-                    }
+                        .onChange(of: self.fetchCategoryList.filter {$0.checked}.count) { value in
+                            self.isFull = value >= 3 ? true : false
+                            if value == 3 {
+                                self.categoryList.removeAll()
+                                for category in self.fetchCategoryList.filter({$0.checked == true}) {
+                                    self.categoryList.append(category.categories)
+                                }
+                            }
+                        }
+                    
                 }
-            
-        }.padding()
+            }.frame(width: UIScreen.main.bounds.width - 70, height: 350, alignment: .center)
+        }
     }
 }
 

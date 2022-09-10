@@ -23,63 +23,44 @@ struct SignUpView: View {
     @State private var categoryList = [String]()
     
     var body: some View {
-        ScrollView {
             VStack(spacing: 16) {
                 PrefTopComponent()
-                
-                ZStack {
-                    VStack(alignment: .leading) {
-                        if self.podcastViewModel.categories.isEmpty {
-                            Section() {
-                                ProgressView("Downloading…")
-                                    .scaleEffect(2)
-                                    .font(.body)
-                            }
-                        } else {
-                            
-                            ForEach(self.$podcastViewModel.categories, id: \.id) { $category in
-                                Toggle(category.categories, isOn: $category.checked).toggleStyle(CheckBoxToggleStyle())
-                                    .font(.system(size: 20, weight: .semibold))
-                                    .padding()
-                                    .disabled(isFull == true && category.checked == false)
-                                
-                            }
-                            .onChange(of: self.podcastViewModel.categories.filter {$0.checked}.count) { value in
-                                self.isFull = value >= 3 ? true : false
-                                if value == 3 {
-                                    self.categoryList.removeAll()
-                                    for category in self.podcastViewModel.categories.filter({$0.checked == true}) {
-                                        self.categoryList.append(category.categories)
-                                    }
-                                }
-                            }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                if self.podcastViewModel.categories.isEmpty {
+                    Section {
+                        ProgressView("Loading...")
+                            .scaleEffect(2)
+                            .font(.body)
+                            .padding()
+                    }
+                } else {
+                    ZStack {
+                        VStack {
+                            CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: $isFull, categoryList: self.$categoryList)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .fill(Color.orange.opacity(0.05))
+                                        .allowsHitTesting(false)
+                                        .frame(width: UIScreen.main.bounds.width - 70, height: 350)
+                                        .addBorder(Color.orange, width: 2, cornerRadius: 5)
+                                )
+                            Button {
+                                handleSignUpAction()
+                            } label: {
+                                HStack {
+                                    Spacer()
+                                    Text("Sign Up")
+                                        .font(.system(size: 26, weight: .semibold))
+                                        .fontWeight(.regular)
+                                        .foregroundColor(.white)
+                                        .multilineTextAlignment(.center)
+                                        .offset(x: -130)
+                                }.padding(6.0).background(Color(red: 1, green: 0.4902, blue: 0.3216))}
+                            .frame(width: 350, height:50)
+                            .clipShape(Capsule())
                         }
-                        
-                    }.padding(1.0)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(Color.orange.opacity(0.05))
-                                .allowsHitTesting(false)
-                                .frame(width: 356, height: 2250)
-                                .addBorder(Color.orange, width: 2, cornerRadius: 5)
-                        )
-                }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                Button {
-                    handleSignUpAction()
-                } label: {
-                    HStack {
-                        Spacer()
-                        Text("Sign Up")
-                            .font(.system(size: 26, weight: .semibold))
-                            .fontWeight(.regular)
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                            .offset(x: -130)
-                    }.padding(6.0).background(Color(red: 1, green: 0.4902, blue: 0.3216))}
-                .frame(width: 350, height:50)
-                .clipShape(Capsule())
+                    }
+                }
             }
-        }
         .navigationBarHidden(true)
         .onAppear {
             DispatchQueue.main.async {
