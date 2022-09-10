@@ -29,11 +29,7 @@ struct LoginView: View {
             ScrollView {
                 NavigationLink("", destination: BottomNavBar(), isActive: self.$loginSuccess)
                     .isDetailLink(false)
-<<<<<<< HEAD
-                NavigationLink("", destination: PreferenceSignUpView(email: $controller.email, password: $password), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
-=======
-                NavigationLink("", destination: PreferenceSignUpView(email: $email, password: $password, userName: $username), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
->>>>>>> 77c9199 (fix: database structure)
+                NavigationLink("", destination: PreferenceSignUpView(email: $controller.email, password: $password, userName: $username), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
                     .isDetailLink(false)
                 VStack(spacing: 16) {
                     Picker(selection: $isLoginMode, label: Text("Picker here")) {
