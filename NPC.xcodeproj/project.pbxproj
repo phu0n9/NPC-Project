@@ -26,6 +26,7 @@
 		4E98FDD828C5C18D006D2566 /* ViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98FDD728C5C18D006D2566 /* ViewComponent.swift */; };
 		4E98FDDA28C87C54006D2566 /* UploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98FDD928C87C54006D2566 /* UploadViewModel.swift */; };
 		4E98FDDC28C930CE006D2566 /* LoadingRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98FDDB28C930CD006D2566 /* LoadingRows.swift */; };
+		4E98FDDE28CB3725006D2566 /* CategoryCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98FDDD28CB3725006D2566 /* CategoryCheckbox.swift */; };
 		4EEF6B6D28BD273B00610B54 /* NPCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEF6B6C28BD273B00610B54 /* NPCApp.swift */; };
 		4EEF6B7128BD273C00610B54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF6B7028BD273C00610B54 /* Assets.xcassets */; };
 		4EEF6B7428BD273C00610B54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF6B7328BD273C00610B54 /* Preview Assets.xcassets */; };
@@ -85,6 +86,7 @@
 		4E98FDD728C5C18D006D2566 /* ViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewComponent.swift; sourceTree = "<group>"; };
 		4E98FDD928C87C54006D2566 /* UploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewModel.swift; sourceTree = "<group>"; };
 		4E98FDDB28C930CD006D2566 /* LoadingRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingRows.swift; sourceTree = "<group>"; };
+		4E98FDDD28CB3725006D2566 /* CategoryCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCheckbox.swift; sourceTree = "<group>"; };
 		4EEF6B6928BD273B00610B54 /* NPC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NPC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEF6B6C28BD273B00610B54 /* NPCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NPCApp.swift; sourceTree = "<group>"; };
 		4EEF6B7028BD273C00610B54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				4E98FDDB28C930CD006D2566 /* LoadingRows.swift */,
 				A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */,
 				A477165628CC53BC00BCA3F8 /* AddBorder.swift */,
+				4E98FDDD28CB3725006D2566 /* CategoryCheckbox.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				A48E2F5D28CB5B8400B24C5E /* MyList.swift in Sources */,
 				4E6D456C28BF4F8E005B7DF0 /* ImagePicker.swift in Sources */,
 				A48E2F6328CB5D3A00B24C5E /* History.swift in Sources */,
+				4E98FDDE28CB3725006D2566 /* CategoryCheckbox.swift in Sources */,
 				09D6F4E528C0FDD900D056C2 /* LoginView.swift in Sources */,
 				4E98FDDA28C87C54006D2566 /* UploadViewModel.swift in Sources */,
 				4E6D455128BF282E005B7DF0 /* Users.swift in Sources */,
