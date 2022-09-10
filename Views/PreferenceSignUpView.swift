@@ -70,21 +70,22 @@ struct PreferenceSignUpView: View {
                     HStack {
                         Spacer()
                         Text("Sign Up")
-                            .font(.system(size: 26, weight: .semibold))
-                            .fontWeight(.regular)
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                            .offset(x: -130)
-                    }.padding(6.0).background(Color(red: 1, green: 0.4902, blue: 0.3216))}
-                .frame(width: 350, height:50)
-                .clipShape(Capsule())
+                                    .font(.system(size: 26, weight: .semibold))
+                                    .fontWeight(.regular)
+                                    .foregroundColor(.white)
+                                    .multilineTextAlignment(.center)
+                                    .offset(x: -130)
+                            }.padding(6.0).background(Color(red: 1, green: 0.4902, blue: 0.3216))}
+                        .frame(width: 350, height:50)
+                        .clipShape(Capsule())
+                    }
+                }
             }
-        }
-        .onAppear {
-            DispatchQueue.main.async {
-                self.podcastViewModel.fetchCategories()
+            .onAppear {
+                DispatchQueue.main.async {
+                    self.podcastViewModel.fetchCategories()
+                }
             }
-        }
     }
     
     // MARK: Migrate SignUp Function
