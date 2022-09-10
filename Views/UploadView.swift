@@ -50,7 +50,7 @@ struct UploadView : View {
                         }
                     })
                     .padding(.vertical, 25)
-                    Button("Cast away") {
+                    Button("Cast away".localized()) {
                         self.uploadControl.uploadCast(title: title, description: description, pub_date: "2022/09/02", image: "", language: "english")
                     }
                 }
