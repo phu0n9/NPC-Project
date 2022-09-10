@@ -70,7 +70,7 @@ struct PreferenceSignUpView: View {
                     }.padding(1.0)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
-                                .fill(Color.orange.opacity(0.07))
+                                .fill(Color.orange.opacity(0.05))
                                 .allowsHitTesting(false)
                                 .frame(width: 356, height: 2250)
                                 .addBorder(Color.orange, width: 2, cornerRadius: 5)
