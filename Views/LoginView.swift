@@ -29,7 +29,7 @@ struct LoginView: View {
             ScrollView {
                 NavigationLink("", destination: BottomNavBar(), isActive: self.$loginSuccess)
                     .isDetailLink(false)
-                NavigationLink("", destination: PreferenceSignUpView(email: $controller.email, password: $password, userName: $username), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
+                NavigationLink("", destination: SignUpView(email: $controller.email, password: $password, userName: $username), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
                     .isDetailLink(false)
                 VStack(spacing: 16) {
                     Picker(selection: $isLoginMode, label: Text("Picker here")) {
@@ -46,7 +46,7 @@ struct LoginView: View {
                             .padding()
                     }
                     
-                    if (!isLoginMode) {
+                    if !isLoginMode {
                         Capsule()
                         /* #f5f5f5 */
                             .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
@@ -92,7 +92,6 @@ struct LoginView: View {
                         )
                         .padding(6)
                         .autocapitalization(.none)
-                    
                     
                     Capsule()
                     /* #f5f5f5 */
@@ -158,6 +157,7 @@ struct LoginView: View {
             .background(Color(.init(white: 0, alpha: 0.005))
                 .ignoresSafeArea())
         }.environment(\.rootPresentationMode, self.$isActive)
+            .navigationBarHidden(true)
     }
     
     private func handleAction() {

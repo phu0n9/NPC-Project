@@ -35,8 +35,8 @@
 		A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B43B28C1F44E007AE794 /* FieldComponent.swift */; };
 		A457B44228C2019F007AE794 /* TransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B44128C2019F007AE794 /* TransitionView.swift */; };
 		A477165728CC53BC00BCA3F8 /* AddBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165628CC53BC00BCA3F8 /* AddBorder.swift */; };
-		A477165928CC608F00BCA3F8 /* PreferenceViewTopComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165828CC608F00BCA3F8 /* PreferenceViewTopComponent.swift */; };
-		A477165B28CC611200BCA3F8 /* PreferenceViewCategoryComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165A28CC611200BCA3F8 /* PreferenceViewCategoryComponent.swift */; };
+		A477165928CC608F00BCA3F8 /* PrefTopComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165828CC608F00BCA3F8 /* PrefTopComponent.swift */; };
+		A477165B28CC611200BCA3F8 /* PrefCategoryComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165A28CC611200BCA3F8 /* PrefCategoryComponent.swift */; };
 		A477165D28CC63D000BCA3F8 /* ValidateEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165C28CC63D000BCA3F8 /* ValidateEmail.swift */; };
 		A477166028CC676A00BCA3F8 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165F28CC676A00BCA3F8 /* Controller.swift */; };
 		A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */; };
@@ -44,7 +44,7 @@
 		A48E2F5D28CB5B8400B24C5E /* MyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5C28CB5B8400B24C5E /* MyList.swift */; };
 		A48E2F5F28CB5C9F00B24C5E /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5E28CB5C9F00B24C5E /* Download.swift */; };
 		A48E2F6328CB5D3A00B24C5E /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F6228CB5D3A00B24C5E /* History.swift */; };
-		A491745E28C5D99700443F0D /* PreferenceSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491745D28C5D99700443F0D /* PreferenceSignUpView.swift */; };
+		A491745E28C5D99700443F0D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491745D28C5D99700443F0D /* SignUpView.swift */; };
 		A491746128C5DA6F00443F0D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A491746028C5DA6F00443F0D /* FirebaseAnalytics */; };
 		A491746328C5DA6F00443F0D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A491746228C5DA6F00443F0D /* FirebaseAuth */; };
 		A491746528C5DA6F00443F0D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A491746428C5DA6F00443F0D /* FirebaseFirestore */; };
@@ -100,8 +100,8 @@
 		A457B43B28C1F44E007AE794 /* FieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldComponent.swift; sourceTree = "<group>"; };
 		A457B44128C2019F007AE794 /* TransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionView.swift; sourceTree = "<group>"; };
 		A477165628CC53BC00BCA3F8 /* AddBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBorder.swift; sourceTree = "<group>"; };
-		A477165828CC608F00BCA3F8 /* PreferenceViewTopComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewTopComponent.swift; sourceTree = "<group>"; };
-		A477165A28CC611200BCA3F8 /* PreferenceViewCategoryComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewCategoryComponent.swift; sourceTree = "<group>"; };
+		A477165828CC608F00BCA3F8 /* PrefTopComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefTopComponent.swift; sourceTree = "<group>"; };
+		A477165A28CC611200BCA3F8 /* PrefCategoryComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefCategoryComponent.swift; sourceTree = "<group>"; };
 		A477165C28CC63D000BCA3F8 /* ValidateEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateEmail.swift; sourceTree = "<group>"; };
 		A477165F28CC676A00BCA3F8 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		A48E2F5C28CB5B8400B24C5E /* MyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyList.swift; sourceTree = "<group>"; };
 		A48E2F5E28CB5C9F00B24C5E /* Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
 		A48E2F6228CB5D3A00B24C5E /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
-		A491745D28C5D99700443F0D /* PreferenceSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceSignUpView.swift; sourceTree = "<group>"; };
+		A491745D28C5D99700443F0D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		A491C60428C4CC6100509092 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		A491C60628C4D45F00509092 /* PopUpTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTesting.swift; sourceTree = "<group>"; };
 		A491C60828C5833D00509092 /* SheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetManager.swift; sourceTree = "<group>"; };
@@ -221,13 +221,10 @@
 				4E98FDDB28C930CD006D2566 /* LoadingRows.swift */,
 				A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */,
 				A477165628CC53BC00BCA3F8 /* AddBorder.swift */,
-
-				A477165828CC608F00BCA3F8 /* PreferenceViewTopComponent.swift */,
-				A477165A28CC611200BCA3F8 /* PreferenceViewCategoryComponent.swift */,
+				A477165828CC608F00BCA3F8 /* PrefTopComponent.swift */,
+				A477165A28CC611200BCA3F8 /* PrefCategoryComponent.swift */,
 				A477165C28CC63D000BCA3F8 /* ValidateEmail.swift */,
-
 				4E98FDDD28CB3725006D2566 /* CategoryCheckbox.swift */,
-
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -266,7 +263,7 @@
 				4E6D457F28C11AB5005B7DF0 /* WelcomeView.swift */,
 				4E6D458228C14531005B7DF0 /* UploadView.swift */,
 				4E6D45A328C21FC3005B7DF0 /* ProfileView.swift */,
-				A491745D28C5D99700443F0D /* PreferenceSignUpView.swift */,
+				A491745D28C5D99700443F0D /* SignUpView.swift */,
 				A48E2F5C28CB5B8400B24C5E /* MyList.swift */,
 				A48E2F5E28CB5C9F00B24C5E /* Download.swift */,
 				A48E2F6228CB5D3A00B24C5E /* History.swift */,
@@ -393,7 +390,7 @@
 				A497D80F28C1C1F800D8A5CA /* EpisodeComponent.swift in Sources */,
 				4E6D455328BF282E005B7DF0 /* Podcasts.swift in Sources */,
 				A477166028CC676A00BCA3F8 /* Controller.swift in Sources */,
-				A477165928CC608F00BCA3F8 /* PreferenceViewTopComponent.swift in Sources */,
+				A477165928CC608F00BCA3F8 /* PrefTopComponent.swift in Sources */,
 				0931000B28C109EE007776F9 /* FirebaseManager.swift in Sources */,
 				4E6D458028C11AB5005B7DF0 /* WelcomeView.swift in Sources */,
 				A4CEE8EE28C8A28400054E14 /* EnviromentExtension.swift in Sources */,
@@ -419,11 +416,11 @@
 				A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */,
 				A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */,
 				4E6D455728BF2842005B7DF0 /* PodcastViewModel.swift in Sources */,
-				A491745E28C5D99700443F0D /* PreferenceSignUpView.swift in Sources */,
+				A491745E28C5D99700443F0D /* SignUpView.swift in Sources */,
 				4E6D455928BF285D005B7DF0 /* ContentView.swift in Sources */,
 				4E6D455528BF2838005B7DF0 /* Settings.swift in Sources */,
 				A491C60728C4D45F00509092 /* PopUpTesting.swift in Sources */,
-				A477165B28CC611200BCA3F8 /* PreferenceViewCategoryComponent.swift in Sources */,
+				A477165B28CC611200BCA3F8 /* PrefCategoryComponent.swift in Sources */,
 				A491C60528C4CC6100509092 /* PopUp.swift in Sources */,
 				A48E2F5D28CB5B8400B24C5E /* MyList.swift in Sources */,
 				4E6D456C28BF4F8E005B7DF0 /* ImagePicker.swift in Sources */,

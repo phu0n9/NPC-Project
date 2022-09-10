@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PreferenceViewTopComponent: View {
+struct PrefTopComponent: View {
     var body: some View {
         VStack(spacing: 16) {
             Button {
@@ -28,8 +28,8 @@ struct PreferenceViewTopComponent: View {
     }
 }
 
-struct PreferenceViewTopComponent_Previews: PreviewProvider {
+struct PrefTopComponent_Previews: PreviewProvider {
     static var previews: some View {
-        PreferenceViewTopComponent()
+        PrefTopComponent()
     }
 }

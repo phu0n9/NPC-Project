@@ -181,6 +181,10 @@ class UserViewModel : ObservableObject {
     
     // MARK: check current user token
     func checkUserValidation() {
+        guard self.userSettings.uuid != "" else {
+            return
+        }
+        
         db.collection(Settings.usersCollection).document(self.userSettings.uuid).getDocument(completion: { (querySnapShot, error) in
         if let err = error {
                 print("Error getting documents: \(err)")

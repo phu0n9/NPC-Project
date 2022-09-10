@@ -10,14 +10,20 @@ import SwiftUI
 struct WelcomeView: View {
     
     @ObservedObject private var userViewModel = UserViewModel()
-    @State var state = 0
-    @State private var isActive = false
-    @State private var yAxis :CGFloat = 0
-    @State private var addThis: CGFloat = 50
+    @State private var yAxis : CGFloat = 0
+    @State private var addThis : CGFloat = 50
+    @State private var isActive: Bool?
     
     var body: some View {
         NavigationView {
-            NavigationLink(destination: chooseDestination(), isActive: $isActive) {
+            VStack {
+                if let isActive = isActive {
+                    NavigationLink(destination: BottomNavBar(), isActive: Binding.constant(isActive)) {
+                    }
+                    NavigationLink(destination: LoginView(), isActive: Binding.constant(!isActive)) {
+                    }
+                }
+                
                 ZStack {
                     Image("transition")
                         .resizable()
@@ -33,31 +39,24 @@ struct WelcomeView: View {
                             }
                         }
                 }
-            }.isDetailLink(false)
+            }
         }
         .onAppear {
             DispatchQueue.main.async {
                 self.userViewModel.checkUserValidation()
             }
-            DispatchQueue.main.asyncAfter(deadline: .now()+3.0) {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 withAnimation {
                     if self.userViewModel.userSettings.token != "" && self.userViewModel.isValid {
-                        self.state = 1
                         self.isActive = true
+                    } else {
+                        self.isActive = false
                     }
                 }
             }
         }
         .navigationBarHidden(true)
-    }
-    
-    @ViewBuilder
-    func chooseDestination() -> some View {
-        switch state {
-        case 0: LoginView()
-        case 1: BottomNavBar()
-        default: EmptyView()
-        }
     }
 }
 

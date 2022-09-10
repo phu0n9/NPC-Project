@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PreferenceSignUpView: View {
+struct SignUpView: View {
     @State var isLoginMode = false
     @Binding var email : String
     @Binding var password : String
@@ -25,9 +25,9 @@ struct PreferenceSignUpView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                PreferenceViewTopComponent()
+                PrefTopComponent()
                 
-                ZStack{
+                ZStack {
                     VStack(alignment: .leading) {
                         if self.podcastViewModel.categories.isEmpty {
                             Section() {
@@ -38,7 +38,6 @@ struct PreferenceSignUpView: View {
                         } else {
                             
                             ForEach(self.$podcastViewModel.categories, id: \.id) { $category in
-                                // MARK: solution 1
                                 Toggle(category.categories, isOn: $category.checked).toggleStyle(CheckBoxToggleStyle())
                                     .font(.system(size: 20, weight: .semibold))
                                     .padding()
@@ -81,6 +80,7 @@ struct PreferenceSignUpView: View {
                 .clipShape(Capsule())
             }
         }
+        .navigationBarHidden(true)
         .onAppear {
             DispatchQueue.main.async {
                 self.podcastViewModel.fetchCategories()
@@ -109,10 +109,10 @@ struct PreferenceSignUpView: View {
     }
 }
 
-struct PreferenceSignUpView_Previews: PreviewProvider {
+struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PreferenceSignUpView(email: .constant("ambinh01@example.com"), password: .constant("Password"), userName: .constant("hello"))
+            SignUpView(email: .constant("ambinh01@example.com"), password: .constant("Password"), userName: .constant("hello"))
         }
     }
 }

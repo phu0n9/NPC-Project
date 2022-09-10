@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PreferenceViewCategoryComponent: View {
+struct PrefCategoryComponent: View {
     @StateObject var userViewModel : UserViewModel = UserViewModel()
     @StateObject var podcastViewModel = PodcastViewModel()
     
@@ -57,8 +57,8 @@ struct PreferenceViewCategoryComponent: View {
     }
 }
 
-struct PreferenceViewCategoryComponent_Previews: PreviewProvider {
+struct PrefCategoryComponent_Previews: PreviewProvider {
     static var previews: some View {
-        PreferenceViewCategoryComponent()
+        PrefCategoryComponent()
     }
 }
