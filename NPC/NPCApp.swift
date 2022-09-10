@@ -23,8 +23,9 @@ struct NPCApp: App {
     
     var body: some Scene {
         WindowGroup {
-            //LoginView()
-            BottomNavBar()
+            LoginView()
+            // BottomNavBar()
+            // sPreferenceSignUpView()
         }
     }
 }

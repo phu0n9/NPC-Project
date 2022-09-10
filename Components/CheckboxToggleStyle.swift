@@ -21,7 +21,7 @@ struct CheckBoxToggleStyle: ToggleStyle {
                     .foregroundColor(configuration.isOn ? .accentColor : .secondary)
                     .accessibility(label: Text(configuration.isOn ? "Checked" : "Unchecked"))
                     .imageScale(.large)
-                Spacer()
+                // Remove spacer since it "store" space so the item shift to the right
             }
         }
         .buttonStyle(PlainButtonStyle())

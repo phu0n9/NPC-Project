@@ -38,10 +38,14 @@ struct PreferenceSignUpView: View {
                     .multilineTextAlignment(.center)
                     .padding(.vertical, 10)
                     .font(.system(size: 16, weight: .semibold))
-                ZStack {
-                    VStack(alignment: .leading, spacing: 6) {
+                ZStack{
+                    VStack(alignment: .leading) {
                         if self.podcastViewModel.categories.isEmpty {
-                            ProgressView()
+                            Section() {
+                                ProgressView("Downloading…")
+                                    .scaleEffect(2)
+                                    .font(.body)
+                            }
                         } else {
                             
                             ForEach(self.$podcastViewModel.categories, id: \.id) { $category in
@@ -50,7 +54,6 @@ struct PreferenceSignUpView: View {
                                     .font(.system(size: 20, weight: .semibold))
                                     .padding()
                                     .disabled(isFull == true && category.checked == false)
-                                
                                 
                             }
                             .onChange(of: self.podcastViewModel.categories.filter {$0.checked}.count) { value in
@@ -61,16 +64,18 @@ struct PreferenceSignUpView: View {
                                         self.categoryList.append(category.categories)
                                     }
                                 }
-                            }
+                            }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         }
                         
-                    }.padding()
-                    
-                    RoundedRectangle(cornerRadius: 5)
-                        .fill(Color.orange.opacity(0.07))
-                        .allowsHitTesting(false)
-                        .frame(width: 356, height: 263)
-                }
+                    }.padding(1.0)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(Color.orange.opacity(0.07))
+                                .allowsHitTesting(false)
+                                .frame(width: 356, height: 2250)
+                                .addBorder(Color.orange, width: 2, cornerRadius: 5)
+                        )
+                }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 Button {
                     handleSignUpAction()
                 } label: {
