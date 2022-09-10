@@ -14,7 +14,4 @@ struct Users : Identifiable {
     var userName : String
     var profilePic : String
     var favoriteTopics : [String]
-    var uploadedList : [Uploads]
-    var watchedList: [Episodes]
-    var favoriteList : [Episodes]
 }

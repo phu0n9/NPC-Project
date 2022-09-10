@@ -16,8 +16,7 @@ struct ContentView: View {
             .padding()
             .onAppear {
                 DispatchQueue.main.async {
-                    self.userViewModel.fetchUsers(uuid: self.userSettings.uuid)
-                    print(self.userViewModel.user)
+                    self.userViewModel.addFavorite(favorite: Episodes(audio: "hi", audio_length: 100, description: "hi", episode_uuid: "123", podcast_uuid: "hi", pub_date: "2022/09/09", title: "hi", image: "hi", user_id: self.userSettings.uuid))
                 }
             }
     }

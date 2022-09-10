@@ -129,7 +129,6 @@ class UploadControl : ObservableObject {
                     let upload = Uploads(uuid: UUID().uuidString, title: title, description: description, audioPath: globalPath, author: self.userSettings.username, pub_date: pub_date, image: image, language: language, userID: self.userSettings.uuid, numOfLikes: 0, likes: [], comments: [])
                     self.uploadViewModel.upload = upload
                     self.uploadViewModel.addUploads()
-                    self.userViewModel.addUploadCast(upload: upload)
                 }
             }
         } catch {

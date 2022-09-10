@@ -11,6 +11,7 @@ struct PreferenceSignUpView: View {
     @State var isLoginMode = false
     @Binding var email : String
     @Binding var password : String
+    @Binding var userName: String
     
     @StateObject var userViewModel : UserViewModel = UserViewModel()
     @StateObject var podcastViewModel = PodcastViewModel()
@@ -101,7 +102,7 @@ struct PreferenceSignUpView: View {
             print("Successfully created user: \(result?.user.uid ?? "")")
             
             self.loginStatusMessage = "Successfully created user: \(result?.user.uid ?? "")"
-            self.userViewModel.user = Users(uuid: result?.user.uid ?? "", email: self.email, userName: "", profilePic: "", favoriteTopics: self.categoryList, uploadedList: [], watchedList: [], favoriteList: [])
+            self.userViewModel.user = Users(uuid: result?.user.uid ?? "", email: self.email, userName: self.userName, profilePic: "", favoriteTopics: self.categoryList)
             self.userViewModel.addUser()
             self.userViewModel.userSettings.uuid = result?.user.uid ?? ""
             self.loginSuccess = true
@@ -112,7 +113,7 @@ struct PreferenceSignUpView: View {
 struct PreferenceSignUpView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PreferenceSignUpView(email: .constant("ambinh01@example.com"), password: .constant("Password"))
+            PreferenceSignUpView(email: .constant("ambinh01@example.com"), password: .constant("Password"), userName: .constant("hello"))
         }
     }
 }

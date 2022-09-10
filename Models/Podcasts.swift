@@ -31,5 +31,6 @@ struct Episodes: Identifiable, Codable {
     var pub_date: String
     var title: String
     var image: String
+    var user_id : String
     var isExpanding: Bool = false
 }

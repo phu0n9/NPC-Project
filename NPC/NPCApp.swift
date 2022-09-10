@@ -23,9 +23,15 @@ struct NPCApp: App {
     
     var body: some Scene {
         WindowGroup {
+<<<<<<< HEAD
             LoginView()
             // BottomNavBar()
             // sPreferenceSignUpView()
+=======
+//            TrendingView()
+//            BottomNavBar()
+            ContentView()
+>>>>>>> 77c9199 (fix: database structure)
         }
     }
 }

@@ -13,6 +13,8 @@ struct Settings {
     static let categoriesCollection = "categories"
     static let usersCollection = "users"
     static let uploadsCollection = "uploads"
+    static let watchListCollection = "watchedLists"
+    static let favoriteListCollection = "favoriteLists"
     
     // MARK: User Defaults
     static let userToken = "token"
