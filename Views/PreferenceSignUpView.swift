@@ -60,7 +60,7 @@ struct PreferenceSignUpView: View {
                             RoundedRectangle(cornerRadius: 5)
                                 .fill(Color.orange.opacity(0.05))
                                 .allowsHitTesting(false)
-                                .frame(width: 356, height: 2250)
+                                .frame(width: 400, height: 2250)
                                 .addBorder(Color.orange, width: 2, cornerRadius: 5)
                         )
                 }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
