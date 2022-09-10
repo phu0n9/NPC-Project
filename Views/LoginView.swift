@@ -82,7 +82,7 @@ struct LoginView: View {
                                     .offset(x: 20, y: 0)
                                 TextField("Email", text: $controller.email)
                                     .keyboardType(.emailAddress)
-                                    .offset(x: 40, y: 0).foregroundColor(controller.inputValid ? .primary : .red)
+                                    .offset(x: 40, y: 0).foregroundColor(controller.inputValid ? .primary : .black)
                                 controller.validationMessage.map { message in
                                     Text(message)
                                         .foregroundColor(.red)

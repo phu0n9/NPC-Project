@@ -31,7 +31,7 @@ class Controller: ObservableObject {
                     return "Email cannot be left empty"
                 }
                 
-                // Validator
+                // Validator most case, call check regrex function
                 guard input.isValidEmail else {
                     return "Email is not valid"
                 }
