@@ -22,43 +22,66 @@ struct PreferenceSignUpView: View {
     @State private var categoryList = [String]()
     
     var body: some View {
-            ScrollView {
-                if self.podcastViewModel.categories.isEmpty {
-                    ProgressView()
-                        .frame(alignment: .center)
-                } else {
-                    VStack(spacing: 16) {
-                        Button {
-                        } label: {
-                            Image("transition")
-                                .font(.system(size: 64))
-                                .padding()
-                        }
-                        Text("Create Your Account")
-                            .multilineTextAlignment(.center)
-                            .padding(.vertical, 10)
-                            .font(.system(size: 26, weight: .semibold))
-                        Text("Tell us about your preference topic")
-                            .multilineTextAlignment(.center)
-                            .padding(.vertical, 10)
-                            .font(.system(size: 16, weight: .semibold))
-                        ZStack {
-                            ScrollView {
-                                CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: self.$isFull, categoryList: self.$categoryList)
+        ScrollView {
+            VStack(spacing: 16) {
+                Button {
+                } label: {
+                    Image("transition")
+                        .font(.system(size: 64))
+                        .padding()
+                }
+                Text("Create Your Account")
+                    .multilineTextAlignment(.center)
+                    .padding(.vertical, 10)
+                    .font(.system(size: 26, weight: .semibold))
+                Text("Tell us about your preference topic")
+                    .multilineTextAlignment(.center)
+                    .padding(.vertical, 10)
+                    .font(.system(size: 16, weight: .semibold))
+                ZStack{
+                    VStack(alignment: .leading) {
+                        if self.podcastViewModel.categories.isEmpty {
+                            Section() {
+                                ProgressView("Downloading…")
+                                    .scaleEffect(2)
+                                    .font(.body)
                             }
-                            .frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.height / 3)
+                        } else {
                             
+                            ForEach(self.$podcastViewModel.categories, id: \.id) { $category in
+                                // MARK: solution 1
+                                Toggle(category.categories, isOn: $category.checked).toggleStyle(CheckBoxToggleStyle())
+                                    .font(.system(size: 20, weight: .semibold))
+                                    .padding()
+                                    .disabled(isFull == true && category.checked == false)
+                                
+                            }
+                            .onChange(of: self.podcastViewModel.categories.filter {$0.checked}.count) { value in
+                                self.isFull = value >= 3 ? true : false
+                                if value == 3 {
+                                    self.categoryList.removeAll()
+                                    for category in self.podcastViewModel.categories.filter({$0.checked == true}) {
+                                        self.categoryList.append(category.categories)
+                                    }
+                                }
+                            }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        }
+                        
+                    }.padding(1.0)
+                        .overlay(
                             RoundedRectangle(cornerRadius: 5)
                                 .fill(Color.orange.opacity(0.07))
                                 .allowsHitTesting(false)
-                                .frame(width: 356, height: 263)
-                        }
-                        Button {
-                            handleSignUpAction()
-                        } label: {
-                            HStack {
-                                Spacer()
-                                Text("Sign Up")
+                                .frame(width: 356, height: 2250)
+                                .addBorder(Color.orange, width: 2, cornerRadius: 5)
+                        )
+                }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                Button {
+                    handleSignUpAction()
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("Sign Up")
                                     .font(.system(size: 26, weight: .semibold))
                                     .fontWeight(.regular)
                                     .foregroundColor(.white)

@@ -34,6 +34,7 @@
 		4EEF6B9828BD2F8B00610B54 /* UploadControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEF6B9728BD2F8B00610B54 /* UploadControl.swift */; };
 		A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B43B28C1F44E007AE794 /* FieldComponent.swift */; };
 		A457B44228C2019F007AE794 /* TransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B44128C2019F007AE794 /* TransitionView.swift */; };
+		A477165728CC53BC00BCA3F8 /* AddBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165628CC53BC00BCA3F8 /* AddBorder.swift */; };
 		A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */; };
 		A48E2F5B28CB534A00B24C5E /* ActivityViewTopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */; };
 		A48E2F5D28CB5B8400B24C5E /* MyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5C28CB5B8400B24C5E /* MyList.swift */; };
@@ -94,6 +95,7 @@
 		4EEF6B9728BD2F8B00610B54 /* UploadControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadControl.swift; sourceTree = "<group>"; };
 		A457B43B28C1F44E007AE794 /* FieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldComponent.swift; sourceTree = "<group>"; };
 		A457B44128C2019F007AE794 /* TransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionView.swift; sourceTree = "<group>"; };
+		A477165628CC53BC00BCA3F8 /* AddBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBorder.swift; sourceTree = "<group>"; };
 		A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewTopNavBar.swift; sourceTree = "<group>"; };
 		A48E2F5C28CB5B8400B24C5E /* MyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyList.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				A4CEE8ED28C8A28400054E14 /* EnviromentExtension.swift */,
 				4E98FDDB28C930CD006D2566 /* LoadingRows.swift */,
 				A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */,
+				A477165628CC53BC00BCA3F8 /* AddBorder.swift */,
 				4E98FDDD28CB3725006D2566 /* CategoryCheckbox.swift */,
 			);
 			path = Components;
@@ -384,6 +387,7 @@
 				A497D80B28C1C0C300D8A5CA /* ActivityView.swift in Sources */,
 				4E6D45A428C21FC3005B7DF0 /* ProfileView.swift in Sources */,
 				A48E2F5B28CB534A00B24C5E /* ActivityViewTopNavBar.swift in Sources */,
+				A477165728CC53BC00BCA3F8 /* AddBorder.swift in Sources */,
 				A491C60F28C5A34C00509092 /* TimerForPopUp.swift in Sources */,
 				A491C60D28C58A9800509092 /* PopupModifier.swift in Sources */,
 				A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */,

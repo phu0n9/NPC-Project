@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActivityView: View {
-    @ObservedObject var podcastViewModel = PodcastViewModel()
+    @ObservedObject var podcaCstViewModel = PodcastViewModel()
     @ObservedObject var userSettings = UserSettings()
     @State var time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
     
