@@ -25,9 +25,10 @@ struct WelcomeView: View {
                 }
                 
                 ZStack {
-                    Image("transition")
+                    Color.orange.opacity(0.05).ignoresSafeArea()
+                    Image("welcomeScreen")
                         .resizable()
-                        .frame(maxWidth: 300, maxHeight: 250)
+                        .frame(maxWidth: 372, maxHeight: 534)
                         .aspectRatio(contentMode: .fit)
                         .offset(x: 0, y: yAxis)
                         .onAppear {
