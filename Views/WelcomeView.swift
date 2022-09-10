@@ -16,29 +16,31 @@ struct WelcomeView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                if let isActive = isActive {
-                    NavigationLink(destination: BottomNavBar(), isActive: Binding.constant(isActive)) {
+            ZStack {
+                Color.welcomeBackground.ignoresSafeArea()
+                VStack {
+                    if let isActive = isActive {
+                        NavigationLink(destination: BottomNavBar(), isActive: Binding.constant(isActive)) {
+                        }
+                        NavigationLink(destination: LoginView(), isActive: Binding.constant(!isActive)) {
+                        }
                     }
-                    NavigationLink(destination: LoginView(), isActive: Binding.constant(!isActive)) {
-                    }
-                }
-                
-                ZStack {
-                    Color.orange.opacity(0.05).ignoresSafeArea()
-                    Image("welcomeScreen")
-                        .resizable()
-                        .frame(maxWidth: 372, maxHeight: 534)
-                        .aspectRatio(contentMode: .fit)
-                        .offset(x: 0, y: yAxis)
-                        .onAppear {
-                            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                                withAnimation(.easeInOut(duration: 2.0)) {
-                                    self.addThis = -self.addThis
-                                    self.yAxis += self.addThis
+                    ZStack {
+                        Color.orange.opacity(0.05).ignoresSafeArea()
+                        Image("welcomeScreen")
+                            .resizable()
+                            .frame(maxWidth: 372, maxHeight: 534)
+                            .aspectRatio(contentMode: .fit)
+                            .offset(x: 0, y: yAxis)
+                            .onAppear {
+                                Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                                    withAnimation(.easeInOut(duration: 2.0)) {
+                                        self.addThis = -self.addThis
+                                        self.yAxis += self.addThis
+                                    }
                                 }
                             }
-                        }
+                    }
                 }
             }
         }
@@ -65,4 +67,8 @@ struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
         WelcomeView()
     }
+}
+
+extension Color {
+    static let welcomeBackground = Color("WelcomeView")
 }

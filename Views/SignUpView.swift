@@ -67,10 +67,18 @@ struct SignUpView: View {
                 self.podcastViewModel.fetchCategories()
             }
         }
+        .alert(isPresented: self.$alert, content: {
+            Alert(title: Text("Error"), message: Text(self.loginStatusMessage))
+        })
     }
     
     // MARK: Migrate SignUp Function
     private func handleSignUpAction() {
+        guard isFull else {
+            self.alert = true
+            self.loginStatusMessage = "Please assign 3 topics"
+            return
+        }
         FirebaseManager.shared.auth.createUser(withEmail: email, password: password) { result, err in
             if let err = err {
                 print("Failed to create user:", err)
