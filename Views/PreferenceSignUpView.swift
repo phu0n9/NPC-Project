@@ -24,20 +24,8 @@ struct PreferenceSignUpView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                Button {
-                } label: {
-                    Image("transition")
-                        .font(.system(size: 64))
-                        .padding()
-                }
-                Text("Create Your Account")
-                    .multilineTextAlignment(.center)
-                    .padding(.vertical, 10)
-                    .font(.system(size: 26, weight: .semibold))
-                Text("Tell us about your preference topic")
-                    .multilineTextAlignment(.center)
-                    .padding(.vertical, 10)
-                    .font(.system(size: 16, weight: .semibold))
+                PreferenceViewTopComponent()
+                
                 ZStack{
                     VStack(alignment: .leading) {
                         if self.podcastViewModel.categories.isEmpty {
@@ -118,25 +106,6 @@ struct PreferenceSignUpView: View {
             self.userViewModel.userSettings.uuid = result?.user.uid ?? ""
             self.loginSuccess = true
         }
-    }
-    
-    // MARK: Email validation
-    private func validView() -> String? {
-        if email.isEmpty {
-            return "Email cannot be empty"
-        }
-        
-        if !self.isValidEmail(email) {
-            return "Email is invalid"
-        }
-        
-        return nil
-    }
-    
-    private func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
     }
 }
 

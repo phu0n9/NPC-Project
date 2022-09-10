@@ -20,15 +20,16 @@ struct LoginView: View {
     @State var loginSuccess = false
     @State private var isSecured: Bool = true
     @State private var btnClicked = false
-    
     @State private var isActive : Bool = false
+    
+    @StateObject var controller = Controller()
     
     var body: some View {
         NavigationView {
             ScrollView {
                 NavigationLink("", destination: BottomNavBar(), isActive: self.$loginSuccess)
                     .isDetailLink(false)
-                NavigationLink("", destination: PreferenceSignUpView(email: $email, password: $password), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
+                NavigationLink("", destination: PreferenceSignUpView(email: $controller.email, password: $password), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
                     .isDetailLink(false)
                 VStack(spacing: 16) {
                     Picker(selection: $isLoginMode, label: Text("Picker here")) {
@@ -79,15 +80,20 @@ struct LoginView: View {
                                     .resizable()
                                     .frame(width: 36, height: 24, alignment: .trailing)
                                     .offset(x: 20, y: 0)
-                                TextField("Email", text: $email)
+                                TextField("Email", text: $controller.email)
                                     .keyboardType(.emailAddress)
-                                    .offset(x: 40, y: 0)
+                                    .offset(x: 40, y: 0).foregroundColor(controller.inputValid ? .primary : .red)
+                                controller.validationMessage.map { message in
+                                    Text(message)
+                                        .foregroundColor(.red)
+                                }
+
                             }
-                            
                         )
                         .padding(6)
-                    
                         .autocapitalization(.none)
+                    
+                    
                     Capsule()
                     /* #f5f5f5 */
                         .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
