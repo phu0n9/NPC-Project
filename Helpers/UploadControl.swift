@@ -8,6 +8,7 @@
 import Foundation
 import AVKit
 import FirebaseStorage
+import UIKit
 
 class UploadControl : ObservableObject {
     @Published var record = false
@@ -18,7 +19,8 @@ class UploadControl : ObservableObject {
     
     @Published var alert = false
     // Fetch Audios...
-    @Published var audio = URL(string: "")
+    @Published var audio: [URL] = []
+    @Published var selectedUpload = URL(string: "")
     var localPath = ""
     private var userViewModel = UserViewModel()
     private var userSettings = UserSettings()
@@ -47,7 +49,6 @@ class UploadControl : ObservableObject {
             let fileName = url.appendingPathComponent("\(localPath).m4a")
             
             let settings = [
-                
                 AVFormatIDKey : Int(kAudioFormatMPEG4AAC),
                 AVSampleRateKey : 12000,
                 AVNumberOfChannelsKey : 1,
@@ -95,15 +96,48 @@ class UploadControl : ObservableObject {
             var result = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .producesRelativePathURLs)
             // updated means remove all old data..
             result.removeAll()
-            if !result.isEmpty {
-                self.audio = result[0]
+            print(result.count)
+            for value in result {
+                self.audio.append(value)
             }
         } catch {
             print(error.localizedDescription)
         }
     }
+    
+    func uploadCastImage(title: String, description: String, pub_date: String, selectedImage: UIImage?) {
+        guard selectedImage != nil else {
+            return
+        }
+        let storageRef = Storage.storage().reference()
+        
+        let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
+        
+        guard imageData != nil else {
+            return
+        }
+        
+        let path = "recording_images/\(UUID().uuidString).jpg"
+        let fileRef = storageRef.child(path)
+        
+        let metadataLocal = StorageMetadata()
+        metadataLocal.contentType = "image/jpeg"
+        
+        _ = fileRef.putData(imageData!, metadata: metadataLocal) { metadata, error in
+            
+            if error == nil && metadata != nil {
+                fileRef.downloadURL { (url, error) in
+                    if let err = error {
+                        print(err.localizedDescription)
+                    }
+                    guard let downloadURL = url else { return }
+                    self.uploadCast(title: title, description: description, pub_date: pub_date, image: downloadURL.absoluteString)
+                }
+            }
+        }
+    }
 
-    func uploadCast(title: String, description: String, pub_date: String, image: String, language: String) {
+    func uploadCast(title: String, description: String, pub_date: String, image: String) {
         let storageRef = Storage.storage().reference()
         let globalPath = "recordings/\(localPath)"
         let fileRef = storageRef.child(globalPath)
@@ -116,19 +150,14 @@ class UploadControl : ObservableObject {
                 if error == nil && metadata != nil {
                     print("uploading")
                     
-//                    fileRef.downloadURL { (url, error) in
-//                        if let err = error {
-//                            print(err.localizedDescription)
-//                        }
-//                        guard let downloadURL = url else { return }
-//                        debugPrint("download link", downloadURL)
-//                        debugPrint("path", downloadURL.path)
-//
-//
-//                    }
-                    let upload = Uploads(uuid: UUID().uuidString, title: title, description: description, audioPath: globalPath, author: self.userSettings.username, pub_date: pub_date, image: image, language: language, userID: self.userSettings.uuid, numOfLikes: 0, likes: [], comments: [])
-                    self.uploadViewModel.upload = upload
-                    self.uploadViewModel.addUploads()
+                    fileRef.downloadURL { (url, error) in
+                        if let err = error {
+                            print(err.localizedDescription)
+                        }
+                        guard let downloadURL = url else { return }
+                        self.uploadViewModel.upload = Uploads(title: title, description: description, audioPath: downloadURL.absoluteString, author: self.userSettings.username, pub_date: pub_date, image: image, userID: self.userSettings.uuid, numOfLikes: 0, likes: [], comments: [])
+                        self.uploadViewModel.addUploads()
+                    }
                 }
             }
         } catch {

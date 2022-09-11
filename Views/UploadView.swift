@@ -15,51 +15,159 @@ struct UploadView : View {
     @State var isSubmit = false
     @StateObject var uploadControl = UploadControl()
     @ObservedObject var userSettings = UserSettings()
+    @State private var state = 0
+    @State var selectedImage: UIImage?
+    @State var isPickerShowing = false
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack {
-                    Group {
-                        TextField("Title", text: $title)
-                            .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
-                        TextField("Description", text: $description)
-                    }
-                    .padding(12)
-                    .background(Color.white)
-                    
-                    //                    List(self.soundControl.audios, id: \.self) { value in
-                    //                        // printing only file name...
-                    //                        Text(value.relativeString)
-                    //                    }
-                    
-                    Button(action: {self.uploadControl.recordAudio()}, label: {
-                        ZStack {
-                            Circle()
-                                .fill(Color.red)
-                                .frame(width: 70, height: 70)
-                            
-                            if self.uploadControl.record {
-                                Circle()
-                                //                                    .stroke(colorScheme == .dark ? Color.white : Color.black, lineWidth: 6)
-                                    .frame(width: 85, height: 85)
-                            }
+                    switch state {
+                    case 0:
+                        Text("Cover Image")
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                        if self.selectedImage != nil {
+                            Image(uiImage: selectedImage!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 150, height: 150, alignment: .center)
+                                .padding()
+                                .onTapGesture {
+                                    self.isPickerShowing = true
+                                }
+                        } else {
+                            Image(systemName: "photo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 200, height: 200, alignment: .center)
+                                .padding()
+                                .onTapGesture {
+                                    self.isPickerShowing = true
+                                }
                         }
-                    })
-                    .padding(.vertical, 25)
-                    Button("Cast away") {
-                        self.uploadControl.uploadCast(title: title, description: description, pub_date: "2022/09/02", image: "", language: "english")
+                        Text("Title")
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                        Capsule()
+                        /* #f5f5f5 */
+                            .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
+                            .frame(width: 380, height: 50)
+                            .padding(0)
+                            .overlay(
+                                HStack {
+                                    TextField("Title", text: $title)
+                                        .offset(x: 40, y: 0)
+                                }
+                            )
+                            .padding(6)
+                            .autocapitalization(.none)
+                        
+                    case 1:
+                        Text("Recording your cast")
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                        Button(action: {
+                            self.uploadControl.recordAudio()
+                            
+                        }, label: {
+                            ZStack {
+                                Circle()
+                                    .frame(width: 150, height: 150)
+                                    .foregroundColor(Color("MainButton"))
+                                if self.uploadControl.record {
+                                    Circle()
+                                        .stroke(Color.black)
+                                        .frame(width: 160, height: 160)
+                                }
+                                Image(systemName: "play")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40, height: 40, alignment: .center)
+                                    .foregroundColor(Color.black)
+                                    .padding()
+                            }
+                        })
+                        .padding(.vertical, 25)
+                        .onAppear {
+                            self.uploadControl.requestRecording()
+                        }
+                        
+//                        Section {
+//                            Picker("Pick your best upload", selection: self.$uploadControl.selectedUpload) {
+//                                ForEach(self.uploadControl.audio, id: \.self) { record in
+//                                    Text(record.relativeString)
+//                                }
+//                            }
+//                        }
+                        List(self.uploadControl.audio, id: \.self) {value in
+                            
+                            Text(value.relativeString)
+                        }
+                        
+                    case 2:
+                        Text("Description")
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                        TextField("Description", text: $description)
+                            .frame(width: UIScreen.main.bounds.width - 50, height: 100, alignment: .leading)
+                        
+                    default:
+                        EmptyView()
+                    }
+                    Button {
+                        self.state += 1
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text(state != 2 ? "Next": "Cast away")
+                                .foregroundColor(.white)
+                                .padding(.vertical, 10)
+                                .font(.system(size: 14, weight: .semibold))
+                            Spacer()
+                        }.background(Color("MainButton"))
+                    }
+                    .padding(0)
+                    .frame(width: 380, height: 50)
+                    .onChange(of: state) { value in
+                        if value == 3 {
+                            let mytime = Date()
+                            let format = DateFormatter()
+                            format.timeStyle = .short
+                            format.dateStyle = .short
+                            let time = format.string(from: mytime)
+                            self.uploadControl.uploadCastImage(title: title, description: description, pub_date: time, selectedImage: selectedImage)
+                            print("Uploading")
+                            self.state = 0
+                        }
+                    }
+                    if state != 0 {
+                        Button {
+                            self.state -= 1
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text("Back")
+                                    .foregroundColor(.white)
+                                    .padding(.vertical, 10)
+                                    .font(.system(size: 14, weight: .semibold))
+                                Spacer()
+                            }.background(Color("MainButton"))
+                        }
+                        .padding(0)
+                        .frame(width: 380, height: 50)
                     }
                 }
-                .navigationBarTitle("Upload cast")
             }
+            .navigationBarHidden(true)
+            .frame(alignment: .leading)
         }
         .alert(isPresented: self.$uploadControl.alert, content: {
-            Alert(title: Text("Error"), message: Text("Enable Acess"))
+            Alert(title: Text("Error"), message: Text("Please enable microphone access"))
         })
-        .onAppear {
-            self.uploadControl.requestRecording()
+        .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
+            ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
         }
     }
 }
