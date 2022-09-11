@@ -7,12 +7,14 @@
 
 import Foundation
 import FirebaseFirestore
+import SwiftUI
 
 class PodcastViewModel: ObservableObject {
     @Published var podcasts = [Podcasts]()
     @Published var categories = [Categories]()
     @Published var episodes = [Episodes]()
     @Published var paginatedEpisodes = [Episodes]()
+    @Published var angle : Double = 0
     
     private var db = Firestore.firestore()
     
@@ -111,6 +113,22 @@ class PodcastViewModel: ObservableObject {
             }
             self.getPodcastByQuerySnapShot(documents: documents)
         })
+    }
+    
+    
+    func onChanged(value: DragGesture.Value){
+        
+        let vector = CGVector(dx: value.location.x,dy: value.location.y)
+        
+        let radians = atan2(vector.dy - 12.5, vector.dx - 12.5)
+        let tempAngle = radians * 180 / .pi
+        
+        let angle = tempAngle < 0 ? 360 + tempAngle : tempAngle
+        
+        if angle <= 288{
+            withAnimation(Animation.linear(duration: 0.1)){self.angle =  Double(angle)}
+        }
+        
     }
     
 }
