@@ -1,0 +1,41 @@
+/* 
+  Localizable.strings
+  NPC
+
+  Created by Le Nguyen on 11/09/2022.
+  
+*/
+
+"Cast away" = "Thu âm ngay";
+"Checked" = "Đánh dấu";
+"Confirm password" = "Xác nhận mật khẩu";
+"Cover Image" = "Ảnh bìa";
+"Create Account" = "Tạo tài khoản";
+"Create Your Account" = "Tạo tài khoản đê bạn ơi ";
+"Description" = "Mô tả";
+"Download" = "DS Tải xuống";
+"Download is Empty" = "DS Tải xuống trống";
+"Downloading…" = "Đang tải chờ xíu nhé";
+"Edit" = "Chỉnh sửa";
+"Episode" = "Tập";
+"Error" = "Lỗi";
+"History" = "Lịch sử";
+"History is Empty" = "Lịch sử xem trống";
+"Length" = "Thời lượng";
+"Login" = "Đăng nhập";
+"Log In" = "Đăng nhập";
+"My List" = "List của tui";
+"My List is Empty" = "List đang trống";
+"Password" = "Mật khẩu";
+"Password:" = "Mật khẩu: ";
+"Please enable microphone access" = "Cho phép ứng dụng truy cập microphone thu âm nhé";
+"Processing" = "Đang tải";
+"Recording your cast" = "Thu âm giọng";
+"Sign Up" = "Đăng kí";
+"Tell us about your preference topic" = "Chọn Topic cho Podcast của bạn";
+"title" = "tiêu đề";
+"Title" = "Tiêu đề";
+"Trending" = "Xu hướng";
+"Username" = "Tên người dùng";
+"Activity" = "Hoạt động";
+
