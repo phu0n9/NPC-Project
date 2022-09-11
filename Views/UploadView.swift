@@ -17,7 +17,6 @@ struct UploadView : View {
     @ObservedObject var userSettings = UserSettings()
     
     var body: some View {
-        
         NavigationView {
             ScrollView {
                 VStack {
@@ -29,7 +28,7 @@ struct UploadView : View {
                     }
                     .padding(12)
                     .background(Color.white)
-                    Text("hi")
+                    
                     //                    List(self.soundControl.audios, id: \.self) { value in
                     //                        // printing only file name...
                     //                        Text(value.relativeString)
@@ -43,7 +42,7 @@ struct UploadView : View {
                             
                             if self.uploadControl.record {
                                 Circle()
-//                                    .stroke(colorScheme == .dark ? Color.white : Color.black, lineWidth: 6)
+                                //                                    .stroke(colorScheme == .dark ? Color.white : Color.black, lineWidth: 6)
                                     .frame(width: 85, height: 85)
                             }
                         }

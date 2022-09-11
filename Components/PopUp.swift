@@ -30,7 +30,7 @@ struct PopUp: View {
 
 struct PopUp_Previews: PreviewProvider {
     static var previews: some View {
-        PopUp(config: .init(systemName: "xmark", title: "Notification", content: "Podcast added to your list")){}
+        PopUp(config: .init(systemName: "xmark", title: "Notification", content: "Podcast added to your list")) {}
             .background(.orange)
             .previewLayout(.sizeThatFits)
             .padding()

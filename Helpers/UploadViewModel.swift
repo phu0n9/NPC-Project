@@ -138,8 +138,7 @@ class UploadViewModel: ObservableObject {
     
     // MARK: delete upload by ID
     func deleteUplodads(uploadID: String, imagePath: String) {
-        db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.uploadsCollection).document(uploadID).delete()
-        { error in
+        db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.uploadsCollection).document(uploadID).delete() { error in
             if let err = error {
                 print("Error removing document: \(err)")
             } else {

@@ -39,7 +39,7 @@ struct PlayButton: View {
                 isAddedToMyList += 1
                 print("addlist-button clicked")
             }, label: {
-                if isAddedToMyList % 2 == 0{
+                if isAddedToMyList % 2 == 0 {
                     Image("add-list-icon")
                         .frame(width:20, height: 20, alignment: .leading)
                         .padding()

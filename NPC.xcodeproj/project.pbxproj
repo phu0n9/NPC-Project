@@ -10,6 +10,12 @@
 		0931000B28C109EE007776F9 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0931000A28C109EE007776F9 /* FirebaseManager.swift */; };
 		09D6F4E528C0FDD900D056C2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6F4E428C0FDD900D056C2 /* LoginView.swift */; };
 		4E26036E28CCFEB000DC739B /* DisableTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26036D28CCFEB000DC739B /* DisableTextComponent.swift */; };
+		4E26037328CD970200DC739B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4E26037228CD970200DC739B /* FirebaseAnalytics */; };
+		4E26037528CD970200DC739B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4E26037428CD970200DC739B /* FirebaseAuth */; };
+		4E26037728CD970200DC739B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4E26037628CD970200DC739B /* FirebaseFirestore */; };
+		4E26037928CD970200DC739B /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4E26037828CD970200DC739B /* FirebaseFirestoreSwift */; };
+		4E26037B28CD970200DC739B /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 4E26037A28CD970200DC739B /* FirebaseMessaging */; };
+		4E26037D28CD970200DC739B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4E26037C28CD970200DC739B /* FirebaseStorage */; };
 		4E6D455128BF282E005B7DF0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454E28BF282E005B7DF0 /* Users.swift */; };
 		4E6D455228BF282E005B7DF0 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454F28BF282E005B7DF0 /* Categories.swift */; };
 		4E6D455328BF282E005B7DF0 /* Podcasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D455028BF282E005B7DF0 /* Podcasts.swift */; };
@@ -33,7 +39,6 @@
 		4EEF6B7428BD273C00610B54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF6B7328BD273C00610B54 /* Preview Assets.xcassets */; };
 		4EEF6B8C28BD2BE000610B54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF6B8B28BD2BE000610B54 /* GoogleService-Info.plist */; };
 		4EEF6B9828BD2F8B00610B54 /* UploadControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEF6B9728BD2F8B00610B54 /* UploadControl.swift */; };
-		8598314431310EF6C501F1D8 /* Pods_NPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54E18832CFDC3940077566C0 /* Pods_NPC.framework */; };
 		A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B43B28C1F44E007AE794 /* FieldComponent.swift */; };
 		A457B44228C2019F007AE794 /* TransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457B44128C2019F007AE794 /* TransitionView.swift */; };
 		A477165728CC53BC00BCA3F8 /* AddBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165628CC53BC00BCA3F8 /* AddBorder.swift */; };
@@ -94,7 +99,6 @@
 		4EEF6B7328BD273C00610B54 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4EEF6B8B28BD2BE000610B54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4EEF6B9728BD2F8B00610B54 /* UploadControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadControl.swift; sourceTree = "<group>"; };
-		54E18832CFDC3940077566C0 /* Pods_NPC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NPC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A457B43B28C1F44E007AE794 /* FieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldComponent.swift; sourceTree = "<group>"; };
 		A457B44128C2019F007AE794 /* TransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionView.swift; sourceTree = "<group>"; };
 		A477165628CC53BC00BCA3F8 /* AddBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBorder.swift; sourceTree = "<group>"; };
@@ -123,9 +127,7 @@
 		A4F8235528C30F47007856F2 /* PodcastComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastComponent.swift; sourceTree = "<group>"; };
 		A4FBD12728C781CE00F6E3EB /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
 		A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
-		B0D16682B0F1865FE38DFC52 /* Pods-NPC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NPC.debug.xcconfig"; path = "Target Support Files/Pods-NPC/Pods-NPC.debug.xcconfig"; sourceTree = "<group>"; };
 		BBCF9EFB28BF148D006BCA16 /* TopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBar.swift; sourceTree = "<group>"; };
-		F5573D552DBDF791043E0DBA /* Pods-NPC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NPC.release.xcconfig"; path = "Target Support Files/Pods-NPC/Pods-NPC.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,21 +135,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8598314431310EF6C501F1D8 /* Pods_NPC.framework in Frameworks */,
+				4E26037B28CD970200DC739B /* FirebaseMessaging in Frameworks */,
+				4E26037928CD970200DC739B /* FirebaseFirestoreSwift in Frameworks */,
+				4E26037328CD970200DC739B /* FirebaseAnalytics in Frameworks */,
+				4E26037728CD970200DC739B /* FirebaseFirestore in Frameworks */,
+				4E26037D28CD970200DC739B /* FirebaseStorage in Frameworks */,
+				4E26037528CD970200DC739B /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		24DED5A02CCB350B3C2BCBE1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				54E18832CFDC3940077566C0 /* Pods_NPC.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4EEF6B6028BD273B00610B54 = {
 			isa = PBXGroup;
 			children = (
@@ -160,8 +159,6 @@
 				4EEF6B8E28BD2D5900610B54 /* Models */,
 				4EEF6B6B28BD273B00610B54 /* NPC */,
 				4EEF6B6A28BD273B00610B54 /* Products */,
-				C59250E84CDB82D9F02FF2F7 /* Pods */,
-				24DED5A02CCB350B3C2BCBE1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,15 +282,6 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		C59250E84CDB82D9F02FF2F7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B0D16682B0F1865FE38DFC52 /* Pods-NPC.debug.xcconfig */,
-				F5573D552DBDF791043E0DBA /* Pods-NPC.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -301,12 +289,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4EEF6B7728BD273C00610B54 /* Build configuration list for PBXNativeTarget "NPC" */;
 			buildPhases = (
-				1955BF03FF48CC9C7A8C2808 /* [CP] Check Pods Manifest.lock */,
 				4EEF6B6528BD273B00610B54 /* Sources */,
 				4EEF6B6628BD273B00610B54 /* Frameworks */,
 				4EEF6B6728BD273B00610B54 /* Resources */,
 				4EEF6B8D28BD2D0500610B54 /* SwiftLint */,
-				1820C3949FBD55315EEE769D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -314,6 +300,12 @@
 			);
 			name = NPC;
 			packageProductDependencies = (
+				4E26037228CD970200DC739B /* FirebaseAnalytics */,
+				4E26037428CD970200DC739B /* FirebaseAuth */,
+				4E26037628CD970200DC739B /* FirebaseFirestore */,
+				4E26037828CD970200DC739B /* FirebaseFirestoreSwift */,
+				4E26037A28CD970200DC739B /* FirebaseMessaging */,
+				4E26037C28CD970200DC739B /* FirebaseStorage */,
 			);
 			productName = NPC;
 			productReference = 4EEF6B6928BD273B00610B54 /* NPC.app */;
@@ -344,6 +336,7 @@
 			);
 			mainGroup = 4EEF6B6028BD273B00610B54;
 			packageReferences = (
+				4E26037128CD970100DC739B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 4EEF6B6A28BD273B00610B54 /* Products */;
 			projectDirPath = "";
@@ -368,45 +361,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1820C3949FBD55315EEE769D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NPC/Pods-NPC-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NPC/Pods-NPC-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NPC/Pods-NPC-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1955BF03FF48CC9C7A8C2808 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NPC-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4EEF6B8D28BD2D0500610B54 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -607,39 +561,6 @@
 		};
 		4EEF6B7828BD273C00610B54 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B0D16682B0F1865FE38DFC52 /* Pods-NPC.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NPC/Preview Content\"";
-				DEVELOPMENT_TEAM = M4QH79V24B;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NPC/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = RMITUniversityVietnam.NPC;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		4EEF6B7928BD273C00610B54 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5573D552DBDF791043E0DBA /* Pods-NPC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -656,10 +577,33 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = RMITUniversityVietnam.NPC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4EEF6B7928BD273C00610B54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"NPC/Preview Content\"";
+				DEVELOPMENT_TEAM = 7RTY8D8R5Z;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NPC/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = RMITUniversityVietnam.NPC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -691,6 +635,50 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4E26037128CD970100DC739B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4E26037228CD970200DC739B /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E26037128CD970100DC739B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		4E26037428CD970200DC739B /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E26037128CD970100DC739B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		4E26037628CD970200DC739B /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E26037128CD970100DC739B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		4E26037828CD970200DC739B /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E26037128CD970100DC739B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		4E26037A28CD970200DC739B /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E26037128CD970100DC739B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		4E26037C28CD970200DC739B /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E26037128CD970100DC739B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4EEF6B6128BD273B00610B54 /* Project object */;
 }

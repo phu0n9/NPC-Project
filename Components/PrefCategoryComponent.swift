@@ -16,10 +16,10 @@ struct PrefCategoryComponent: View {
     @State private var categoryList = [String]()
     
     var body: some View {
-        ZStack{
+        ZStack {
             VStack(alignment: .leading) {
                 if self.podcastViewModel.categories.isEmpty {
-                    Section() {
+                    Section {
                         ProgressView("Downloading…")
                             .scaleEffect(2)
                             .font(.body)

@@ -72,4 +72,3 @@ struct ActivityViewTopNavBar_Previews: PreviewProvider {
         ActivityViewTopNavBar()
     }
 }
-
