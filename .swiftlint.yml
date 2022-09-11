@@ -21,6 +21,7 @@ disabled_rules:
     - type_name
     - legacy_constructor
     - identifier_name
+    - empty_count
 
 # todo warnings
 todo: warning

@@ -13,7 +13,6 @@ struct UploadView : View {
     @State var title = ""
     @State var description = ""
     @State var isSubmit = false
-    @Environment(\.colorScheme) var colorScheme
     @StateObject var uploadControl = UploadControl()
     @ObservedObject var userSettings = UserSettings()
     
@@ -44,7 +43,7 @@ struct UploadView : View {
                             
                             if self.uploadControl.record {
                                 Circle()
-                                    .stroke(colorScheme == .dark ? Color.white : Color.black, lineWidth: 6)
+//                                    .stroke(colorScheme == .dark ? Color.white : Color.black, lineWidth: 6)
                                     .frame(width: 85, height: 85)
                             }
                         }

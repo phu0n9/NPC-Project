@@ -75,7 +75,7 @@ struct ProfileView: View {
                         } label: {
                             HStack {
                                 Spacer()
-                                Text("Update")
+                                Text("Edit")
                                     .foregroundColor(.white)
                                     .padding(.vertical, 10)
                                     .font(.system(size: 14, weight: .semibold))
