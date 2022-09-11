@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Localization/en.lproj/Localizable.strings" source-language="en" target-language="vi" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.4.1" build-num="13F100"/>
+    </header>
+    <body>
+      <trans-unit id="Button Overlay Text" xml:space="preserve">
+        <source>Button Overlay Text</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cast away" xml:space="preserve">
+        <source>Thu âm ngay</source>
+        <target>Thu âm ngay</target>
+        <note>Localizable.strings
+  NPC
+
+  Created by Le Nguyen on 11/09/2022.</note>
+      </trans-unit>
+      <trans-unit id="Checked" xml:space="preserve">
+        <source>Checked</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Confirm password" xml:space="preserve">
+        <source>Confirm password</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Create Account" xml:space="preserve">
+        <source>Create Account</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Create Your Account" xml:space="preserve">
+        <source>Create Your Account</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Description" xml:space="preserve">
+        <source>Description</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Download" xml:space="preserve">
+        <source>Download</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Download is Empty" xml:space="preserve">
+        <source>Download is Empty</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Downloading…" xml:space="preserve">
+        <source>Downloading…</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Email" xml:space="preserve">
+        <source>Email</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Email " xml:space="preserve">
+        <source>Email </source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Enable Acess" xml:space="preserve">
+        <source>Enable Acess</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error" xml:space="preserve">
+        <source>Error</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hello, world!" xml:space="preserve">
+        <source>Hello, world!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="History" xml:space="preserve">
+        <source>History</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="History is Empty" xml:space="preserve">
+        <source>History is Empty</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Length" xml:space="preserve">
+        <source>Length</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Less" xml:space="preserve">
+        <source>Less</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Log In" xml:space="preserve">
+        <source>Log In</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Login" xml:space="preserve">
+        <source>Login</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="More" xml:space="preserve">
+        <source>More</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="My List" xml:space="preserve">
+        <source>My List</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="My List is Empty" xml:space="preserve">
+        <source>My List is Empty</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Password" xml:space="preserve">
+        <source>Password</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Password: " xml:space="preserve">
+        <source>Password: </source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Picker here" xml:space="preserve">
+        <source>Picker here</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Pop to root" xml:space="preserve">
+        <source>Pop to root</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Pop up!" xml:space="preserve">
+        <source>Pop up!</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Processing " xml:space="preserve">
+        <source>Processing </source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sign Up" xml:space="preserve">
+        <source>Sign Up</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Submit" xml:space="preserve">
+        <source>Submit</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Tell us about your preference topic" xml:space="preserve">
+        <source>Tell us about your preference topic</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This is from CastgingView()" xml:space="preserve">
+        <source>This is from CastgingView()</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Title" xml:space="preserve">
+        <source>Title</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Trending" xml:space="preserve">
+        <source>Trending</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Unchecked" xml:space="preserve">
+        <source>Unchecked</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Upload cast" xml:space="preserve">
+        <source>Upload cast</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Username" xml:space="preserve">
+        <source>Username</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="email" xml:space="preserve">
+        <source>email</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="username" xml:space="preserve">
+        <source>username</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="NPC/en.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="vi">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="13.4.1" build-num="13F100"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>NPC</source>
+        <note>Bundle name</note>
+      </trans-unit>
+      <trans-unit id="NSMicrophoneUsageDescription" xml:space="preserve">
+        <source>NPC wants to access your microphone</source>
+        <note>Privacy - Microphone Usage Description</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

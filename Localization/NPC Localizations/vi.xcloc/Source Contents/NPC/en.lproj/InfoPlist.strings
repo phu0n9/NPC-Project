@@ -1,0 +1,4 @@
+/* Bundle name */
+"CFBundleName" = "NPC";
+/* Privacy - Microphone Usage Description */
+"NSMicrophoneUsageDescription" = "NPC wants to access your microphone";
