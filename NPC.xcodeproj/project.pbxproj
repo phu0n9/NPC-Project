@@ -16,6 +16,8 @@
 		4E26037928CD970200DC739B /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4E26037828CD970200DC739B /* FirebaseFirestoreSwift */; };
 		4E26037B28CD970200DC739B /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 4E26037A28CD970200DC739B /* FirebaseMessaging */; };
 		4E26037D28CD970200DC739B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4E26037C28CD970200DC739B /* FirebaseStorage */; };
+		4E26037F28CE315D00DC739B /* TextBindingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26037E28CE315D00DC739B /* TextBindingManager.swift */; };
+		4E26038328CE639D00DC739B /* RecordingPlayerBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038228CE639D00DC739B /* RecordingPlayerBtn.swift */; };
 		4E6D455128BF282E005B7DF0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454E28BF282E005B7DF0 /* Users.swift */; };
 		4E6D455228BF282E005B7DF0 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454F28BF282E005B7DF0 /* Categories.swift */; };
 		4E6D455328BF282E005B7DF0 /* Podcasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D455028BF282E005B7DF0 /* Podcasts.swift */; };
@@ -74,6 +76,8 @@
 		0931000A28C109EE007776F9 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		09D6F4E428C0FDD900D056C2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4E26036D28CCFEB000DC739B /* DisableTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableTextComponent.swift; sourceTree = "<group>"; };
+		4E26037E28CE315D00DC739B /* TextBindingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBindingManager.swift; sourceTree = "<group>"; };
+		4E26038228CE639D00DC739B /* RecordingPlayerBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingPlayerBtn.swift; sourceTree = "<group>"; };
 		4E6D454E28BF282E005B7DF0 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		4E6D454F28BF282E005B7DF0 /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		4E6D455028BF282E005B7DF0 /* Podcasts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Podcasts.swift; sourceTree = "<group>"; };
@@ -227,6 +231,7 @@
 				4E98FDDD28CB3725006D2566 /* CategoryCheckbox.swift */,
 				4E26036D28CCFEB000DC739B /* DisableTextComponent.swift */,
 				BB99BBD828CDDB7900D80BF6 /* StreamingPage.swift */,
+				4E26038228CE639D00DC739B /* RecordingPlayerBtn.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 				4E6D457D28C1195D005B7DF0 /* UserSettings.swift */,
 				4E98FDD328C56653006D2566 /* SoundControl.swift */,
 				4E98FDD928C87C54006D2566 /* UploadViewModel.swift */,
+				4E26037E28CE315D00DC739B /* TextBindingManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -414,6 +420,7 @@
 				A477166028CC676A00BCA3F8 /* Controller.swift in Sources */,
 				A477165928CC608F00BCA3F8 /* PrefTopComponent.swift in Sources */,
 				0931000B28C109EE007776F9 /* FirebaseManager.swift in Sources */,
+				4E26038328CE639D00DC739B /* RecordingPlayerBtn.swift in Sources */,
 				4E6D458028C11AB5005B7DF0 /* WelcomeView.swift in Sources */,
 				A4CEE8EE28C8A28400054E14 /* EnviromentExtension.swift in Sources */,
 				A48E2F5F28CB5C9F00B24C5E /* Download.swift in Sources */,
@@ -456,6 +463,7 @@
 				4E6D457E28C1195D005B7DF0 /* UserSettings.swift in Sources */,
 				4EEF6B9828BD2F8B00610B54 /* UploadControl.swift in Sources */,
 				A4F8235628C30F47007856F2 /* PodcastComponent.swift in Sources */,
+				4E26037F28CE315D00DC739B /* TextBindingManager.swift in Sources */,
 				A4F8235628C30F47007856F2 /* PodcastComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

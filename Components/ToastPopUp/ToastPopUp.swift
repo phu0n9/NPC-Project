@@ -8,7 +8,7 @@
 import SwiftUI
 import SimpleToast
 
-struct ToastPopUp: View{
+struct ToastPopUp: View {
     
     @State private var showToast = false
     @State private var value = 0
@@ -22,40 +22,38 @@ struct ToastPopUp: View{
         modifierType: .slide
     )
     
-    
-    var body: some View{
-    
-            Button(action: {
-                showToast.toggle()
-             },
-                   label: {
-                Image(systemName: "heart.fill")
-                    .renderingMode(.template)
-                    .foregroundColor(.orange)
-                    .frame(width:20, height: 20, alignment: .leading)
-                    .padding()
-                    .simpleToast(isPresented: $showToast, options: toastOptions, onDismiss: {
-                            value += 1
-                                }) {
+    var body: some View {
+        
+        Button(action: {
+            showToast.toggle()
+        },
+               label: {
+            Image(systemName: "heart.fill")
+                .renderingMode(.template)
+                .foregroundColor(.orange)
+                .frame(width:20, height: 20, alignment: .leading)
+                .padding()
+                .simpleToast(isPresented: $showToast, options: toastOptions, onDismiss: {
+                    value += 1
+                }) {
                     
-                                    HStack{
-                                        Text(self.message)
-                                        }
-                                        .padding(20)
-                                        .background(Color.orange)
-                                        .foregroundColor(Color.white)
-                                        .cornerRadius(15)
-                                    }
+                    HStack{
+                        Text(self.message)
+                    }
+                    .padding(20)
+                    .background(Color.orange)
+                    .foregroundColor(Color.white)
+                    .cornerRadius(15)
                 }
-            )
-
+        }
+        )
+        
     }
     
 }
 
-
 struct ContentView_previews: PreviewProvider {
-    static var previews: some View{
+    static var previews: some View {
         ToastPopUp(message:"Episode added to my list")
     }
 }

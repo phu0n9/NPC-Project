@@ -11,7 +11,7 @@ import SimpleToast
 struct PlayButton: View {
     
     @State private var isDownload = 0
-    @State private var isAddedToMyList = 0
+    @State private var isFavorite = false
     @ObservedObject var soundControl = SoundControl()
     var soundName: String
 
@@ -38,29 +38,15 @@ struct PlayButton: View {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color(red: 1, green: 0.4902, blue: 0.3216), lineWidth: 1))
             
-            //MARK: add list btn
+            // MARK: heart icon
             Button(action: {
-                isAddedToMyList += 1
-                print("addlist-button clicked")
-              
+                self.isFavorite.toggle()
             }, label: {
-                if isAddedToMyList % 2 == 0 {
-
-                    Image(systemName: "heart")
-                        .renderingMode(.template)
-                        .foregroundColor(.orange)
-                        .frame(width:20, height: 20, alignment: .leading)
-                        .padding()
-                    
-                } else {
-
-                    Image(systemName: "heart.fill")
-                        .renderingMode(.template)
-                        .foregroundColor(.orange)
-                        .frame(width:20, height: 20, alignment: .leading)
-                        .padding()
-                }
-                
+                Image(systemName: self.isFavorite ? "heart.fill" : "heart")
+                    .renderingMode(.template)
+                    .foregroundColor(.orange)
+                    .frame(width:20, height: 20, alignment: .leading)
+                    .padding()
             })
         }.padding()
             

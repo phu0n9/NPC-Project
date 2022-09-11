@@ -8,7 +8,6 @@
 import SwiftUI
 import AVKit
 
-
 struct StreamingView: View {
     
     @ObservedObject var podcastViewModel = PodcastViewModel()
@@ -53,7 +52,6 @@ struct StreamingView: View {
                 .rotationEffect(.init(degrees: 126))
             }
 
-            
             Text("title")
                 .font(.title2)
                 .fontWeight(.heavy)
@@ -78,5 +76,4 @@ struct StreamingView_Previews: PreviewProvider {
         StreamingView()
     }
 }
-
 

@@ -5,7 +5,6 @@
 //  Created by Sang Yeob Han  on 11/09/2022.
 //
 
-
 import SwiftUI
 
 struct StreamingPage: View {
@@ -107,7 +106,6 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable{
         }
     }
 }
-
 
 class CustomHostingController<Content: View>: UIHostingController<Content>{
     
