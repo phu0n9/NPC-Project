@@ -166,7 +166,7 @@ struct LoginView: View {
     }
     
     private func loginUser() {
-        FirebaseManager.shared.auth.signIn(withEmail: email, password: password) { result, err in
+        FirebaseManager.shared.auth.signIn(withEmail: controller.email, password: password) { result, err in
             if let err = err {
                 print("Failed to login user:", err)
                 self.alert = true
