@@ -29,7 +29,7 @@ struct UploadView : View {
                     }
                     .padding(12)
                     .background(Color.white)
-                    
+                    Text("hi")
                     //                    List(self.soundControl.audios, id: \.self) { value in
                     //                        // printing only file name...
                     //                        Text(value.relativeString)
