@@ -51,6 +51,7 @@
 		A48E2F5D28CB5B8400B24C5E /* MyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5C28CB5B8400B24C5E /* MyList.swift */; };
 		A48E2F5F28CB5C9F00B24C5E /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5E28CB5C9F00B24C5E /* Download.swift */; };
 		A48E2F6328CB5D3A00B24C5E /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F6228CB5D3A00B24C5E /* History.swift */; };
+		A48FECEB28CE44AA0018F177 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A48FECED28CE44AA0018F177 /* Localizable.strings */; };
 		A491745E28C5D99700443F0D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491745D28C5D99700443F0D /* SignUpView.swift */; };
 		A497D80528C1A84900D8A5CA /* TrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80428C1A84900D8A5CA /* TrendingView.swift */; };
 		A497D80728C1C08100D8A5CA /* CastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80628C1C08100D8A5CA /* CastingView.swift */; };
@@ -110,6 +111,8 @@
 		A48E2F5C28CB5B8400B24C5E /* MyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyList.swift; sourceTree = "<group>"; };
 		A48E2F5E28CB5C9F00B24C5E /* Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
 		A48E2F6228CB5D3A00B24C5E /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		A48FECEC28CE44AA0018F177 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A48FECEE28CE44AC0018F177 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A491745D28C5D99700443F0D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		A497D80428C1A84900D8A5CA /* TrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingView.swift; sourceTree = "<group>"; };
 		A497D80628C1C08100D8A5CA /* CastingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastingView.swift; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 		4EEF6B6028BD273B00610B54 = {
 			isa = PBXGroup;
 			children = (
+				A48FECE828CE44870018F177 /* Localization */,
 				A477165E28CC675A00BCA3F8 /* Controller */,
 				4EEF6B8B28BD2BE000610B54 /* GoogleService-Info.plist */,
 				4EEF6B9228BD2D8D00610B54 /* Views */,
@@ -278,6 +282,14 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		A48FECE828CE44870018F177 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				A48FECED28CE44AA0018F177 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		BB99BBCB28CD9E0700D80BF6 /* ToastPopUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +350,7 @@
 			knownRegions = (
 				en,
 				Base,
+				vi,
 			);
 			mainGroup = 4EEF6B6028BD273B00610B54;
 			packageReferences = (
@@ -359,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EEF6B7428BD273C00610B54 /* Preview Assets.xcassets in Resources */,
+				A48FECEB28CE44AA0018F177 /* Localizable.strings in Resources */,
 				4EEF6B7128BD273C00610B54 /* Assets.xcassets in Resources */,
 				4EEF6B8C28BD2BE000610B54 /* GoogleService-Info.plist in Resources */,
 			);
@@ -447,6 +461,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A48FECED28CE44AA0018F177 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A48FECEC28CE44AA0018F177 /* en */,
+				A48FECEE28CE44AC0018F177 /* vi */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4EEF6B7528BD273C00610B54 /* Debug */ = {
