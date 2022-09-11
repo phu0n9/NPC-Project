@@ -17,23 +17,43 @@ struct CategoryCheckbox: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 5) {
                     ForEach(self.$fetchCategoryList, id: \.id) { $category in
-                            Toggle(category.categories, isOn: $category.checked).toggleStyle(CheckBoxToggleStyle())
-                                .font(.system(size: 20, weight: .semibold))
-                                .padding()
-                                .disabled(isFull == true && category.checked == false)
-                        }
-                        .onChange(of: self.fetchCategoryList.filter {$0.checked}.count) { value in
-                            self.isFull = value >= 3 ? true : false
-                            if value == 3 {
-                                self.categoryList.removeAll()
-                                for category in self.fetchCategoryList.filter({$0.checked == true}) {
-                                    self.categoryList.append(category.categories)
+                        Toggle(category.categories, isOn: $category.checked).toggleStyle(CheckBoxToggleStyle())
+                            .font(.system(size: 20, weight: .semibold))
+                            .padding()
+                            .disabled(isFull == true && category.checked == false)
+                    }
+                    .onAppear {
+                        DispatchQueue.main.async {
+                            if self.categoryList.count == 3 {
+                                for i in 0..<self.fetchCategoryList.count {
+                                    for j in 0..<self.categoryList.count where self.fetchCategoryList[i].categories == self.categoryList[j] {
+                                        self.fetchCategoryList[i].checked = true
+                                    }
                                 }
                             }
                         }
-                    
+                    }
+                    .onChange(of: self.fetchCategoryList.filter {$0.checked}.count) { value in
+                        self.isFull = value >= 3 ? true : false
+                        if value == 3 {
+                            self.categoryList.removeAll()
+                            for category in self.fetchCategoryList.filter({$0.checked == true}) {
+                                self.categoryList.append(category.categories)
+                            }
+                            print(self.categoryList)
+                        }
+                    }
                 }
-            }.frame(width: UIScreen.main.bounds.width - 70, height: 350, alignment: .center)
+            }
+            .frame(width: UIScreen.main.bounds.width - 70, height: 350, alignment: .center)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(Color.orange.opacity(0.05))
+                    .allowsHitTesting(false)
+                    .frame(width: UIScreen.main.bounds.width - 70, height: 350)
+                    .addBorder(Color.orange, width: 2, cornerRadius: 5)
+            )
+            .padding()
         }
     }
 }

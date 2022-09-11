@@ -130,8 +130,7 @@ class UploadViewModel: ObservableObject {
                 if let err = error {
                     print(err.localizedDescription)
                 } else {
-                    let imagePath = self.userViewModel.uploadPhoto(selectedImage: selectedImage)
-                    data.reference.updateData(["title": title, "image": imagePath, "description": description])
+//                    data.reference.updateData(["title": title, "image": imagePath, "description": description])
                 }
             }
         })

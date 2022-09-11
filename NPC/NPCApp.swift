@@ -23,10 +23,7 @@ struct NPCApp: App {
     
     var body: some Scene {
         WindowGroup {
-            // BottomNavBar()
-             LoginView()
-//            TrendingView()
-//            BottomNavBar()
+            WelcomeView()
         }
     }
 }

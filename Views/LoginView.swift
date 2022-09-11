@@ -62,10 +62,8 @@ struct LoginView: View {
                                         .keyboardType(.emailAddress)
                                         .offset(x: 40, y: 0)
                                 }
-                                
                             )
                             .padding(6)
-                        
                             .autocapitalization(.none)
                     }
                     
@@ -87,7 +85,6 @@ struct LoginView: View {
                                     Text(message)
                                         .foregroundColor(.red)
                                 }
-
                             }
                         )
                         .padding(6)

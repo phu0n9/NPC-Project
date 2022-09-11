@@ -30,17 +30,16 @@ class UserViewModel : ObservableObject {
     }
     
     // MARK: uploading photo with selected image
-    func uploadPhoto(selectedImage: UIImage?) -> String {
-        var fileLocation = ""
+    func uploadPhoto(selectedImage: UIImage?, categoryList: [String]) {
         guard selectedImage != nil else {
-            return fileLocation
+            return
         }
         let storageRef = Storage.storage().reference()
         
         let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
         
         guard imageData != nil else {
-            return fileLocation
+            return
         }
         
         let path = "images/\(UUID().uuidString).jpg"
@@ -52,14 +51,21 @@ class UserViewModel : ObservableObject {
         _ = fileRef.putData(imageData!, metadata: metadataLocal) { metadata, error in
             
             if error == nil && metadata != nil {
-                fileLocation = path
+                fileRef.downloadURL { (url, error) in
+                    if let err = error {
+                        print(err.localizedDescription)
+                    }
+                    guard let downloadURL = url else { return }
+                    
+                    self.updateUser(selectedImage: downloadURL.absoluteString, categoryList: categoryList)
+
+                }
             }
         }
-        return fileLocation
     }
     
     // MARK: update user profile picture and categories
-    func updateUser(selectedImage: UIImage?, categoryList: [String]) {
+    func updateUser(selectedImage: String, categoryList: [String]) {
         db.collection(Settings.usersCollection).document(self.userSettings.uuid).getDocument(completion: { (querySnapShot, error) in
             if let err = error {
                 print("Error getting documents: \(err)")
@@ -71,33 +77,31 @@ class UserViewModel : ObservableObject {
             }
             
             // if users don't choose image to update
-            guard selectedImage != nil else {
+            guard selectedImage != "" else {
                 // update new data
                 document.reference.updateData(["categoryList": categoryList])
                 self.userSettings.userCategories = categoryList
                 return
             }
             
-            // upload new photo to firebase storage
-            let imagePath = self.uploadPhoto(selectedImage: selectedImage)
-            
             // find old photo and delete it
-            let image = document.get("image") as! String
-            if image != "" {
-                let storageRef = Storage.storage().reference().child(image)
-                
-                // Delete the image file
-                storageRef.delete { error in
-                    if let err = error {
-                        print(err.localizedDescription)
-                    } else {
-                        print("Deleted old picture")
+            if let image = document.get("profilePic") as? String {
+                if image != "" {
+                    let storageRef = Storage.storage().reference(forURL: image)
+                    
+                    // Delete the image file
+                    storageRef.delete { error in
+                        if let err = error {
+                            print(err.localizedDescription)
+                        } else {
+                            print("Deleted old picture")
+                        }
                     }
                 }
             }
             
             // update new data
-            document.reference.updateData(["profilePic": imagePath, "categoryList": categoryList])
+            document.reference.updateData(["profilePic": selectedImage, "categoryList": categoryList])
             self.userSettings.userCategories = categoryList
         })
     }
@@ -145,7 +149,7 @@ class UserViewModel : ObservableObject {
     }
     
     // MARK: fetch users by their uuid
-    func fetchUsers(uuid: String) {
+    func fetchUser() {
         db.collection(Settings.usersCollection).document(self.userSettings.uuid).getDocument(completion: {document, error in
             if let err = error {
                 print("Error getting documents: \(err)")
@@ -186,15 +190,17 @@ class UserViewModel : ObservableObject {
         }
         
         db.collection(Settings.usersCollection).document(self.userSettings.uuid).getDocument(completion: { (querySnapShot, error) in
-        if let err = error {
+            if let err = error {
                 print("Error getting documents: \(err)")
             }
             guard let document = querySnapShot else {
                 return
             }
             
-            if document.get("token") as! String == self.userSettings.token {
-                self.isValid = true
+            if let token = document.get("token") as? String {
+                if token == self.userSettings.token {
+                    self.isValid = true
+                }
             }
         })
     }

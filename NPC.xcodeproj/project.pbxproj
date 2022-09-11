@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0931000B28C109EE007776F9 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0931000A28C109EE007776F9 /* FirebaseManager.swift */; };
 		09D6F4E528C0FDD900D056C2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D6F4E428C0FDD900D056C2 /* LoginView.swift */; };
+		4E26036E28CCFEB000DC739B /* DisableTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26036D28CCFEB000DC739B /* DisableTextComponent.swift */; };
 		4E6D455128BF282E005B7DF0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454E28BF282E005B7DF0 /* Users.swift */; };
 		4E6D455228BF282E005B7DF0 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454F28BF282E005B7DF0 /* Categories.swift */; };
 		4E6D455328BF282E005B7DF0 /* Podcasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D455028BF282E005B7DF0 /* Podcasts.swift */; };
@@ -72,6 +73,7 @@
 /* Begin PBXFileReference section */
 		0931000A28C109EE007776F9 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		09D6F4E428C0FDD900D056C2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4E26036D28CCFEB000DC739B /* DisableTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableTextComponent.swift; sourceTree = "<group>"; };
 		4E6D454E28BF282E005B7DF0 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		4E6D454F28BF282E005B7DF0 /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		4E6D455028BF282E005B7DF0 /* Podcasts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Podcasts.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				A477165A28CC611200BCA3F8 /* PrefCategoryComponent.swift */,
 				A477165C28CC63D000BCA3F8 /* ValidateEmail.swift */,
 				4E98FDDD28CB3725006D2566 /* CategoryCheckbox.swift */,
+				4E26036D28CCFEB000DC739B /* DisableTextComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */,
 				A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */,
 				4E6D455728BF2842005B7DF0 /* PodcastViewModel.swift in Sources */,
+				4E26036E28CCFEB000DC739B /* DisableTextComponent.swift in Sources */,
 				A491745E28C5D99700443F0D /* SignUpView.swift in Sources */,
 				4E6D455928BF285D005B7DF0 /* ContentView.swift in Sources */,
 				4E6D455528BF2838005B7DF0 /* Settings.swift in Sources */,

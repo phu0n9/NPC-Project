@@ -24,6 +24,7 @@ struct SignUpView: View {
     
     var body: some View {
             VStack(spacing: 16) {
+                NavigationLink("", destination: BottomNavBar(), isActive: $loginSuccess)
                 PrefTopComponent()
                 if self.podcastViewModel.categories.isEmpty {
                     Section {
@@ -36,13 +37,6 @@ struct SignUpView: View {
                     ZStack {
                         VStack {
                             CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: $isFull, categoryList: self.$categoryList)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .fill(Color.orange.opacity(0.05))
-                                        .allowsHitTesting(false)
-                                        .frame(width: UIScreen.main.bounds.width - 70, height: 350)
-                                        .addBorder(Color.orange, width: 2, cornerRadius: 5)
-                                )
                             Button {
                                 handleSignUpAction()
                             } label: {

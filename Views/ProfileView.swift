@@ -7,62 +7,114 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State var shouldShowLogOutOptions = false
-    @StateObject var userViewModel : UserViewModel = UserViewModel()
+    @StateObject var userViewModel = UserViewModel()
+    @StateObject var podcastViewModel = PodcastViewModel()
     @State var isPickerShowing = false
     @State var selectedImage: UIImage?
     @State var isSubmit = false
-    @State var isUserCurrentlyLoggedOut = false
-    @ObservedObject private var vm = UserViewModel()
-    @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
+    @State var isFull = true
+    @State var alert = false
+    @State var updateStatus = ""
     
     var body: some View {
-        
         NavigationView {
-            NavigationLink("", destination: LoginView(), isActive: self.$isUserCurrentlyLoggedOut)
-                .isDetailLink(false)
-            VStack {
-                if selectedImage != nil {
-                    Image(uiImage: selectedImage!)
-                        .resizable()
-                        .frame(width: 200, height: 200, alignment: .center)
-                }
-                
-                Button (action: { self.rootPresentationMode.wrappedValue.dismiss() } )
-                            { Text("Pop to root") }
-                
-                TextField("username", text: Binding.constant(userViewModel.user.userName))
-                TextField("email", text: Binding.constant(userViewModel.user.userName))
-                
-                Button("Submit") {
-                    self.isSubmit.toggle()
-                }
-                
-                Image(uiImage: self.userViewModel.image)
-                    .resizable()
-                    .frame(width: 200, height: 200, alignment: .center)
-                
-                
-                .onChange(of: isSubmit) { value in
-                    if value {
-                        self.userViewModel.updateUser(selectedImage: selectedImage, categoryList: ["Technology", "Music"])
+            if self.userViewModel.user.favoriteTopics.count != 3 {
+                ProgressView("Loading...")
+                    .scaleEffect(2)
+                    .font(.body)
+                    .padding()
+            } else {
+                ScrollView {
+                    VStack(spacing: 16) {
+                        if selectedImage != nil {
+                            Image(uiImage: selectedImage!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                                .frame(width: 200, height: 200, alignment: .center)
+                                .padding()
+                                .onTapGesture {
+                                    self.isPickerShowing = true
+                                }
+                        } else {
+                            if self.userViewModel.user.profilePic == "" {
+                                Image(systemName: "person.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipShape(Circle())
+                                    .frame(width: 200, height: 200, alignment: .center)
+                                    .padding()
+                                    .onTapGesture {
+                                        self.isPickerShowing = true
+                                    }
+                            } else {
+                                AsyncImage(url: URL(string: self.userViewModel.user.profilePic)) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .clipShape(Circle())
+                                        .frame(width: 200, height: 200, alignment: .center)
+                                        .padding()
+                                        .onTapGesture {
+                                            self.isPickerShowing = true
+                                        }
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                            }
+                        }
+                        
+                        DisableTextComponent(title: Binding.constant("username"), textValue: Binding.constant(self.userViewModel.user.userName), imageName: Binding.constant("person"))
+                        
+                        DisableTextComponent(title: Binding.constant("email"), textValue: Binding.constant(self.userViewModel.user.email), imageName: Binding.constant("envelope"))
+                        
+                        CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: self.$isFull, categoryList: self.$userViewModel.user.favoriteTopics)
+                        
+                        Button {
+                            self.handleUpdate()
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text("Update")
+                                    .foregroundColor(.white)
+                                    .padding(.vertical, 10)
+                                    .font(.system(size: 14, weight: .semibold))
+                                Spacer()
+                            }.background(Color(red: 1, green: 0.4902, blue: 0.3216))
+                        }
+                        .padding(0)
+                        .frame(width: 380, height: 50)
                     }
                 }
             }
-            .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
-                ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
         }
+        .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
+            ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
         }
-        Button (action: { self.rootPresentationMode.wrappedValue.dismiss() } )
-                    { Text("Pop to root") }
+        .alert(isPresented: self.$alert, content: {
+            Alert(title: Text("Status"), message: Text(self.updateStatus))
+        })
+        .onAppear {
+            DispatchQueue.global().async {
+                self.userViewModel.fetchUser()
+                self.podcastViewModel.fetchCategories()
+                print(self.userViewModel.user)
+            }
+        }
     }
     
-    private func handleSignOut() {
-        isUserCurrentlyLoggedOut.toggle()
-        try? FirebaseManager.shared.auth.signOut()
+    func handleUpdate() {
+        self.alert = true
+        if self.userViewModel.user.favoriteTopics.count == 3 {
+            DispatchQueue.main.async {
+                self.userViewModel.uploadPhoto(selectedImage: selectedImage, categoryList: self.userViewModel.user.favoriteTopics)
+                self.updateStatus = "Update successfully"
+            }
+        } else {
+            self.updateStatus = "Update error"
+        }
     }
     
-
 }
 
 struct ProfileView_Previews: PreviewProvider {
