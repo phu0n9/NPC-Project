@@ -46,7 +46,7 @@
 		A477165728CC53BC00BCA3F8 /* AddBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165628CC53BC00BCA3F8 /* AddBorder.swift */; };
 		A477165928CC608F00BCA3F8 /* PrefTopComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165828CC608F00BCA3F8 /* PrefTopComponent.swift */; };
 		A477165B28CC611200BCA3F8 /* PrefCategoryComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165A28CC611200BCA3F8 /* PrefCategoryComponent.swift */; };
-		A477165D28CC63D000BCA3F8 /* ValidateEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165C28CC63D000BCA3F8 /* ValidateEmail.swift */; };
+		A477165D28CC63D000BCA3F8 /* ValidateEmail+Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165C28CC63D000BCA3F8 /* ValidateEmail+Password.swift */; };
 		A477166028CC676A00BCA3F8 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165F28CC676A00BCA3F8 /* Controller.swift */; };
 		A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */; };
 		A48E2F5B28CB534A00B24C5E /* ActivityViewTopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */; };
@@ -108,7 +108,7 @@
 		A477165628CC53BC00BCA3F8 /* AddBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBorder.swift; sourceTree = "<group>"; };
 		A477165828CC608F00BCA3F8 /* PrefTopComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefTopComponent.swift; sourceTree = "<group>"; };
 		A477165A28CC611200BCA3F8 /* PrefCategoryComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefCategoryComponent.swift; sourceTree = "<group>"; };
-		A477165C28CC63D000BCA3F8 /* ValidateEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateEmail.swift; sourceTree = "<group>"; };
+		A477165C28CC63D000BCA3F8 /* ValidateEmail+Password.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidateEmail+Password.swift"; sourceTree = "<group>"; };
 		A477165F28CC676A00BCA3F8 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewTopNavBar.swift; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 				A477165628CC53BC00BCA3F8 /* AddBorder.swift */,
 				A477165828CC608F00BCA3F8 /* PrefTopComponent.swift */,
 				A477165A28CC611200BCA3F8 /* PrefCategoryComponent.swift */,
-				A477165C28CC63D000BCA3F8 /* ValidateEmail.swift */,
+				A477165C28CC63D000BCA3F8 /* ValidateEmail+Password.swift */,
 				4E98FDDD28CB3725006D2566 /* CategoryCheckbox.swift */,
 				4E26036D28CCFEB000DC739B /* DisableTextComponent.swift */,
 				BB99BBD828CDDB7900D80BF6 /* StreamingPage.swift */,
@@ -425,7 +425,7 @@
 				A4CEE8EE28C8A28400054E14 /* EnviromentExtension.swift in Sources */,
 				A48E2F5F28CB5C9F00B24C5E /* Download.swift in Sources */,
 				4EEF6B6D28BD273B00610B54 /* NPCApp.swift in Sources */,
-				A477165D28CC63D000BCA3F8 /* ValidateEmail.swift in Sources */,
+				A477165D28CC63D000BCA3F8 /* ValidateEmail+Password.swift in Sources */,
 				4E98FDD828C5C18D006D2566 /* ViewComponent.swift in Sources */,
 				A4FBD12A28C795AE00F6E3EB /* ButtonStyle.swift in Sources */,
 				A497D80728C1C08100D8A5CA /* CastingView.swift in Sources */,
