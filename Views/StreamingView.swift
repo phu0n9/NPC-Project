@@ -25,7 +25,7 @@ struct StreamingView: View {
            Spacer(minLength: 0)
             
             ZStack{
-                Image(systemName: "leaf.fill")
+                Image("transition")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: width, height: height)
@@ -39,11 +39,11 @@ struct StreamingView: View {
                     
                     Circle()
                         .trim(from: 0, to: CGFloat((podcastViewModel.angle)/360))
-                        .stroke(Color("blue"),lineWidth: 4)
+                        .stroke(Color(.orange),lineWidth: 4)
                         .frame(width: width+45, height: height+45)
                     
                     Circle()
-                        .fill(Color("blue"))
+                        .fill(Color("MainButton"))
                         .frame(width: 25, height: 25)
                         .offset(x: (width + 45) / 2)
                         .rotationEffect(.init(degrees: podcastViewModel.angle))
@@ -51,21 +51,73 @@ struct StreamingView: View {
                 }
                 .rotationEffect(.init(degrees: 126))
             }
-
-            Text("title")
-                .font(.title2)
-                .fontWeight(.heavy)
-                .foregroundColor(.black)
-                .padding(.top,25)
-                .padding(.horizontal)
-                .lineLimit(1)
-            
-            Text("author")
-                .foregroundColor(.gray)
-                .padding(.top,5)
             
             Spacer()
+        
+            HStack{
+                
+                Image(systemName: "person")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 45, height: 45)
+                    .clipShape(Circle())
+                
+                VStack{
+                    Text("title")
+                        .font(.caption)
+                        .fontWeight(.heavy)
+                        .foregroundColor(.black)
+                        .lineLimit(1)
+                        .frame(alignment: .trailing)
+                    
+                    Text("UserName")
+                        .font(.caption2)
+                        .foregroundColor(.gray)
+                        .lineLimit(1)
+                    
+                    Text("author")
+                        .font(.caption2)
+                        .foregroundColor(.gray)
+                        .lineLimit(1)
+                    
+                        
+                }.padding()
+                
+                Spacer()
+
+                HStack{
+                    
+                    Spacer()
+                    
+                    VStack{
+                        Image(systemName: "message")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+
+                        
+                        Text("comments(INT)")
+                            .font(.caption2)
+                            .foregroundColor(.gray)
+                            .lineLimit(1)
+                    
+                        Image(systemName: "heart")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+
+                        
+                        Text("likes(INT)")
+                            .font(.caption2)
+                            .foregroundColor(.gray)
+                            .lineLimit(1)
+                  
+                        
+                    }
+                    
+                }.padding()
+                
+            }.padding()
         }
+        
     
     }
         
