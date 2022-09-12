@@ -53,7 +53,7 @@ struct TrendingView: View {
                                 .frame(height: 300)
                             } else {
                                 // return original data
-                                EpisodeComponent(title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio, image: episode.image, isExpanded: $episode.isExpanding)
+                                EpisodeComponent(episode_uuid: episode.episode_uuid, podcast_uuid: episode.podcast_uuid, title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio, image: episode.image, isExpanded: $episode.isExpanding)
                             }
                         }
                     }

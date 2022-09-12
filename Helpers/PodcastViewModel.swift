@@ -16,6 +16,7 @@ class PodcastViewModel: ObservableObject {
     @Published var paginatedEpisodes = [Episodes]()
     @Published var angle : Double = 0
     @Published var podcast = Podcasts(uuid: "", author: "", description: "", image: "", itunes_id: 0, language: "", title: "", website: "", categories: [], episodes: [])
+    @Published var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "")
     
     private var db = Firestore.firestore()
     
@@ -36,7 +37,7 @@ class PodcastViewModel: ObservableObject {
     }
     
     // MARK: get podcast by query snap shot document
-    func getPodcastByQuerySnapShot(queryDocumentSnapshot: QueryDocumentSnapshot) -> Podcasts {
+    func getPodcastByQuerySnapShot(queryDocumentSnapshot: DocumentSnapshot, episodeId: String) -> Podcasts {
         let author = queryDocumentSnapshot.get("author") as! String
         let categories = queryDocumentSnapshot.get("categories") as! [String]
         let description = queryDocumentSnapshot.get("description") as! String
@@ -50,6 +51,9 @@ class PodcastViewModel: ObservableObject {
         
         let episodeObj = episodes.map {(value) -> Episodes in
             let episode = Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String, image: value["episode_image"] as! String, user_id: "")
+            if value["episode_uuid"] as! String == episodeId {
+                self.episode = episode
+            }
             self.episodes.append(episode)
             return episode
         }
@@ -58,9 +62,9 @@ class PodcastViewModel: ObservableObject {
     }
     
     // MARK: assign podcasts
-    func getPodcastByQuerySnapShot(documents: [QueryDocumentSnapshot]) {
+    func getPodcastByQuerySnapShot(documents: [DocumentSnapshot]) {
         self.podcasts = documents.map {(queryDocumentSnapshot) -> Podcasts in
-            return getPodcastByQuerySnapShot(queryDocumentSnapshot: queryDocumentSnapshot)
+            return getPodcastByQuerySnapShot(queryDocumentSnapshot: queryDocumentSnapshot, episodeId: "")
         }
         self.paginateEpisodes()
     }
@@ -90,7 +94,7 @@ class PodcastViewModel: ObservableObject {
     }
     
     // MARK: get podcast by id
-    func fetchPodcastById(podcastId: String) {
+    func fetchPodcastById(podcastId: String, episodeId: String) {
         db.collection(Settings.podcastsCollection).document(podcastId).getDocument(completion: { (querySnapShot, error) in
             if let err = error {
                 print(err.localizedDescription)
@@ -101,7 +105,7 @@ class PodcastViewModel: ObservableObject {
                 return
             }
             
-            self.podcast = self.getPodcastByQuerySnapShot(queryDocumentSnapshot: document as! QueryDocumentSnapshot)
+            self.podcast = self.getPodcastByQuerySnapShot(queryDocumentSnapshot: document, episodeId: episodeId)
         })
     }
     

@@ -10,21 +10,20 @@ import SwiftUI
 struct StreamingPage: View {
     
     @State var showSheet:Bool = false
-    
     var body: some View {
             
-        Button{
+        Button {
             showSheet.toggle()
         } label: {
             Text("Episode")
         }
-        .halfSheet(showsheet: $showSheet){
-            ZStack{
+        .halfSheet(showsheet: $showSheet) {
+            ZStack {
                 Color.white
                     
         //Mark:: From streamingView.swift
                 
-                StreamingView()
+//                StreamingView()
             }.ignoresSafeArea()
         } onEnd: {
             print("Dismissed")
@@ -38,8 +37,7 @@ struct StreamingPage_Previews: PreviewProvider {
     }
 }
 
-
-extension View{
+extension View {
     func halfSheet<SheetView: View>(showsheet: Binding<Bool>,@ViewBuilder sheetView: @escaping ()->SheetView,onEnd: @escaping ()->())->some View{
         return self
             .background(
@@ -48,12 +46,11 @@ extension View{
     }
 }
 
-
-struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable{
+struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
     
     var sheetView: SheetView
     @Binding var showSheet: Bool
-    var onEnd: ()->()
+    var onEnd: ()-> ()
     
     let controller = UIViewController()
     
@@ -61,7 +58,6 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable{
 //
 //        return Coordinator(self)
 //    }
-    
     
     func makeUIViewController(context: Context) -> UIViewController {
         
@@ -72,7 +68,7 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable{
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
         
-        if showSheet{
+        if showSheet {
             
             let sheetController = CustomHostingController(rootView: sheetView)
             
@@ -96,7 +92,7 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable{
         
         var parent: HalfSheetHelper
         
-        init(parent: HalfSheetHelper){
+        init(parent: HalfSheetHelper) {
             self.parent = parent
         }
         

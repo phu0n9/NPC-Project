@@ -22,6 +22,8 @@
 		4E26038728CEFD7800DC739B /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038628CEFD7800DC739B /* TabBarItem.swift */; };
 		4E26038928CEFDDD00DC739B /* ActivityViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038828CEFDDD00DC739B /* ActivityViewItem.swift */; };
 		4E26038B28CF014B00DC739B /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038A28CF014B00DC739B /* EmptyListView.swift */; };
+		4E26038E28CF284900DC739B /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 4E26038D28CF284900DC739B /* PopupView */; };
+		4E26039028CF2BAE00DC739B /* ActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038F28CF2BAE00DC739B /* ActionSheetView.swift */; };
 		4E6D455128BF282E005B7DF0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454E28BF282E005B7DF0 /* Users.swift */; };
 		4E6D455228BF282E005B7DF0 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454F28BF282E005B7DF0 /* Categories.swift */; };
 		4E6D455328BF282E005B7DF0 /* Podcasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D455028BF282E005B7DF0 /* Podcasts.swift */; };
@@ -84,6 +86,7 @@
 		4E26038628CEFD7800DC739B /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		4E26038828CEFDDD00DC739B /* ActivityViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewItem.swift; sourceTree = "<group>"; };
 		4E26038A28CF014B00DC739B /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
+		4E26038F28CF2BAE00DC739B /* ActionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetView.swift; sourceTree = "<group>"; };
 		4E6D454E28BF282E005B7DF0 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		4E6D454F28BF282E005B7DF0 /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		4E6D455028BF282E005B7DF0 /* Podcasts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Podcasts.swift; sourceTree = "<group>"; };
@@ -143,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E26038E28CF284900DC739B /* PopupView in Frameworks */,
 				4E26037B28CD970200DC739B /* FirebaseMessaging in Frameworks */,
 				4E26037928CD970200DC739B /* FirebaseFirestoreSwift in Frameworks */,
 				4E26037328CD970200DC739B /* FirebaseAnalytics in Frameworks */,
@@ -239,6 +243,7 @@
 				4E26038628CEFD7800DC739B /* TabBarItem.swift */,
 				4E26038828CEFDDD00DC739B /* ActivityViewItem.swift */,
 				4E26038A28CF014B00DC739B /* EmptyListView.swift */,
+				4E26038F28CF2BAE00DC739B /* ActionSheetView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 				4E26037A28CD970200DC739B /* FirebaseMessaging */,
 				4E26037C28CD970200DC739B /* FirebaseStorage */,
 				BB99BBD628CDAA4300D80BF6 /* SimpleToast */,
+				4E26038D28CF284900DC739B /* PopupView */,
 			);
 			productName = NPC;
 			productReference = 4EEF6B6928BD273B00610B54 /* NPC.app */;
@@ -368,6 +374,7 @@
 			packageReferences = (
 				4E26037128CD970100DC739B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				BB99BBD528CDAA4300D80BF6 /* XCRemoteSwiftPackageReference "SimpleToast" */,
+				4E26038C28CF284900DC739B /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = 4EEF6B6A28BD273B00610B54 /* Products */;
 			projectDirPath = "";
@@ -421,6 +428,7 @@
 				A4AFBB9028C1128300B87BC9 /* BottomNavBar.swift in Sources */,
 				4E6D455228BF282E005B7DF0 /* Categories.swift in Sources */,
 				A4F8235428C2FA50007856F2 /* PlayButton.swift in Sources */,
+				4E26039028CF2BAE00DC739B /* ActionSheetView.swift in Sources */,
 				A497D80F28C1C1F800D8A5CA /* EpisodeComponent.swift in Sources */,
 				4E6D455328BF282E005B7DF0 /* Podcasts.swift in Sources */,
 				A477166028CC676A00BCA3F8 /* Controller.swift in Sources */,
@@ -691,6 +699,14 @@
 				kind = branch;
 			};
 		};
+		4E26038C28CF284900DC739B /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		BB99BBD528CDAA4300D80BF6 /* XCRemoteSwiftPackageReference "SimpleToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sanzaru/SimpleToast";
@@ -731,6 +747,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4E26037128CD970100DC739B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		4E26038D28CF284900DC739B /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E26038C28CF284900DC739B /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
 		};
 		BB99BBD628CDAA4300D80BF6 /* SimpleToast */ = {
 			isa = XCSwiftPackageProductDependency;
