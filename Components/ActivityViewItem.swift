@@ -39,7 +39,7 @@ struct ActivityViewItem: View {
                                 .frame(height: 300)
                             } else {
                                 // return original data
-                                EpisodeComponent(episode_uuid: item.episode_uuid, podcast_uuid: item.podcast_uuid, title: item.title, pub_date: item.pub_date, description: item.description, audio: item.audio, image: item.image, isExpanded: $item.isExpanding)
+                                EpisodeComponent(episode_uuid: item.episode_uuid, podcast_uuid: item.podcast_uuid, title: item.title, pub_date: item.pub_date, description: item.description, audio: item.audio, image: item.image, length: item.audio_length, isExpanded: $item.isExpanding)
                             }
                         }
                     }

@@ -15,6 +15,7 @@ struct EpisodeComponent: View {
     var description: String
     var audio: String
     var image: String
+    var length: Int
     @Binding var isExpanded: Bool
     @State private var isTapped: Bool = false
     
@@ -69,7 +70,7 @@ struct EpisodeComponent: View {
                 )
             
             HStack(alignment: .top, spacing: 0) {
-                PlayButton(soundName: self.audio)
+                PlayButton(length: Binding.constant(self.length), soundName: self.audio)
             }
             Divider()
         }
@@ -82,6 +83,6 @@ struct EpisodeComponent: View {
 
 struct EpisodeComponent_Previews: PreviewProvider {
     static var previews: some View {
-        EpisodeComponent(episode_uuid: "6bf59a32de804ede9101f7ba75d12677", podcast_uuid: "0c28802a7e814a55ada3ba54847258bc", title: "Title", pub_date: "2022/09/09", description: "Description", audio: "a link", image: "", isExpanded: Binding.constant(false))
+        EpisodeComponent(episode_uuid: "6bf59a32de804ede9101f7ba75d12677", podcast_uuid: "0c28802a7e814a55ada3ba54847258bc", title: "Title", pub_date: "2022/09/09", description: "Description", audio: "a link", image: "", length:0, isExpanded: Binding.constant(false))
     }
 }

@@ -16,6 +16,7 @@ struct TrendingView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {
+        
         ScrollView {
             NavigationLink("", destination: LoginView(), isActive: self.$logoutSuccess)
                 .isDetailLink(false)
@@ -53,7 +54,7 @@ struct TrendingView: View {
                                 .frame(height: 300)
                             } else {
                                 // return original data
-                                EpisodeComponent(episode_uuid: episode.episode_uuid, podcast_uuid: episode.podcast_uuid, title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio, image: episode.image, isExpanded: $episode.isExpanding)
+                                EpisodeComponent(episode_uuid: episode.episode_uuid, podcast_uuid: episode.podcast_uuid, title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio, image: episode.image, length: episode.audio_length, isExpanded: $episode.isExpanding)
                             }
                         }
                     }

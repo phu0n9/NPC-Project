@@ -13,6 +13,7 @@ struct PlayButton: View {
     @State private var isDownload = 0
     @State private var isFavorite = false
     @ObservedObject var soundControl = SoundControl()
+    @Binding var length:Int
     var soundName: String
 
     var body: some View {
@@ -26,7 +27,7 @@ struct PlayButton: View {
                         .foregroundColor(.orange)
                         .frame(width:15, height: 6, alignment: .leading)
                         .padding(5)
-                    Text("Length")
+                    Text(String(self.length))
                         .font(.caption)
                         .foregroundColor(.black)
                         .padding(9)
@@ -73,7 +74,7 @@ struct PlayButton: View {
 
 struct PlayButton_Previews: PreviewProvider {
     static var previews: some View {
-        PlayButton(soundName: "sound link")
+        PlayButton(length:Binding.constant(0), soundName: "sound link")
     }
 }
 }

@@ -14,11 +14,13 @@ struct StreamingView: View {
     @ObservedObject var userSettings = UserSettings()
     var podcast_uuid : String
     var episode_uuid : String
+    @ObservedObject var soundControl = SoundControl();
     
     //   @State var width : CGFloat = UIScreen.main.bounds.height < 750 ? 130 : 230
     var width:CGFloat = 200
     var height:CGFloat = 200
-    
+//    var isplaying:Bool = false;
+//
     var body: some View {
         VStack {
             Spacer(minLength: 0)
@@ -54,8 +56,20 @@ struct StreamingView: View {
                         .gesture(DragGesture().onChanged(podcastViewModel.onChanged(value:)))
                 }
                 .rotationEffect(.init(degrees: 126))
+            }.padding(30)
+            
+            // MARK: PLAY BTN
+            HStack(spacing:50){
+                
+                Button(action:{soundControl.playSound(soundName: self.podcastViewModel.episode.audio, isPreview: false)}){
+                    Image(systemName: soundControl.isActive ?  "play.fill" : "pause.fill")
+                        .resizable()
+                        .font(.title)
+                        .foregroundColor(.orange)
+                        .frame(width: 50, height: 50, alignment: .center)
+                    
+                }
             }
-
             Spacer()
             
             HStack{
@@ -87,7 +101,7 @@ struct StreamingView: View {
                 }.padding()
                 
                 Spacer()
-                
+
                 HStack{
                     Spacer()
                     VStack{
@@ -110,7 +124,7 @@ struct StreamingView: View {
                             .lineLimit(1)
                     }
                 }.padding()
-                
+
             }.padding()
         }
         .onAppear {

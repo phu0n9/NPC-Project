@@ -11,7 +11,7 @@ import AVKit
 struct UploadView : View {
     
     @State var title = ""
-    @ObservedObject var textBindingManager = TextBindingManager(limit: 100)
+    @ObservedObject var textBindingManager = TextBindingManager(limit: 30)
     @State var isSubmit = false
     @StateObject var uploadControl = UploadControl()
     @ObservedObject var userSettings = UserSettings()
