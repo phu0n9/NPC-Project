@@ -15,6 +15,7 @@ class PodcastViewModel: ObservableObject {
     @Published var episodes = [Episodes]()
     @Published var paginatedEpisodes = [Episodes]()
     @Published var angle : Double = 0
+    @Published var podcast = Podcasts(uuid: "", author: "", description: "", image: "", itunes_id: 0, language: "", title: "", website: "", categories: [], episodes: [])
     
     private var db = Firestore.firestore()
     
@@ -34,27 +35,32 @@ class PodcastViewModel: ObservableObject {
         })
     }
     
+    // MARK: get podcast by query snap shot document
+    func getPodcastByQuerySnapShot(queryDocumentSnapshot: QueryDocumentSnapshot) -> Podcasts {
+        let author = queryDocumentSnapshot.get("author") as! String
+        let categories = queryDocumentSnapshot.get("categories") as! [String]
+        let description = queryDocumentSnapshot.get("description") as! String
+        let image = queryDocumentSnapshot.get("image") as! String
+        let itunes_id = queryDocumentSnapshot.get("itunes_id") as! Int32
+        let language = queryDocumentSnapshot.get("language") as! String
+        let title = queryDocumentSnapshot.get("title") as! String
+        let uuid = queryDocumentSnapshot.get("uuid") as! String
+        let website = queryDocumentSnapshot.get("website") as! String
+        let episodes = queryDocumentSnapshot.get("episodes") as! [[String: Any]]
+        
+        let episodeObj = episodes.map {(value) -> Episodes in
+            let episode = Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String, image: value["episode_image"] as! String, user_id: "")
+            self.episodes.append(episode)
+            return episode
+        }
+
+        return Podcasts(uuid: uuid, author: author, description: description, image: image, itunes_id: itunes_id, language: language, title: title, website: website, categories: categories, episodes: episodeObj)
+    }
+    
     // MARK: assign podcasts
     func getPodcastByQuerySnapShot(documents: [QueryDocumentSnapshot]) {
         self.podcasts = documents.map {(queryDocumentSnapshot) -> Podcasts in
-            let author = queryDocumentSnapshot.get("author") as! String
-            let categories = queryDocumentSnapshot.get("categories") as! [String]
-            let description = queryDocumentSnapshot.get("description") as! String
-            let image = queryDocumentSnapshot.get("image") as! String
-            let itunes_id = queryDocumentSnapshot.get("itunes_id") as! Int32
-            let language = queryDocumentSnapshot.get("language") as! String
-            let title = queryDocumentSnapshot.get("title") as! String
-            let uuid = queryDocumentSnapshot.get("uuid") as! String
-            let website = queryDocumentSnapshot.get("website") as! String
-            let episodes = queryDocumentSnapshot.get("episodes") as! [[String: Any]]
-            
-            let episodeObj = episodes.map {(value) -> Episodes in
-                let episode = Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String, image: value["episode_image"] as! String, user_id: "")
-                self.episodes.append(episode)
-                return episode
-            }
-
-            return Podcasts(uuid: uuid, author: author, description: description, image: image, itunes_id: itunes_id, language: language, title: title, website: website, categories: categories, episodes: episodeObj)
+            return getPodcastByQuerySnapShot(queryDocumentSnapshot: queryDocumentSnapshot)
         }
         self.paginateEpisodes()
     }
@@ -81,6 +87,22 @@ class PodcastViewModel: ObservableObject {
         for i in start..<end {
             self.paginatedEpisodes.append(self.episodes[i])
         }
+    }
+    
+    // MARK: get podcast by id
+    func fetchPodcastById(podcastId: String) {
+        db.collection(Settings.podcastsCollection).document(podcastId).getDocument(completion: { (querySnapShot, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            
+            guard let document = querySnapShot else {
+                print("No document with ID: \(podcastId)")
+                return
+            }
+            
+            self.podcast = self.getPodcastByQuerySnapShot(queryDocumentSnapshot: document as! QueryDocumentSnapshot)
+        })
     }
     
     // MARK: fetch all categories
@@ -114,7 +136,6 @@ class PodcastViewModel: ObservableObject {
             self.getPodcastByQuerySnapShot(documents: documents)
         })
     }
-    
     
     func onChanged(value: DragGesture.Value){
         

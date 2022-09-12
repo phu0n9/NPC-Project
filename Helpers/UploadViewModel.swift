@@ -69,7 +69,12 @@ class UploadViewModel: ObservableObject {
                 print("\(err.localizedDescription)")
             }
             
-            if snapshot!.isEmpty {
+            guard let documents = snapshot?.documents else {
+                print("No upload data")
+                return
+            }
+            
+            if documents.isEmpty {
                 self.fetchingMore = false
                 return
             } else {

@@ -18,6 +18,10 @@
 		4E26037D28CD970200DC739B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4E26037C28CD970200DC739B /* FirebaseStorage */; };
 		4E26037F28CE315D00DC739B /* TextBindingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26037E28CE315D00DC739B /* TextBindingManager.swift */; };
 		4E26038328CE639D00DC739B /* RecordingPlayerBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038228CE639D00DC739B /* RecordingPlayerBtn.swift */; };
+		4E26038528CEFD3200DC739B /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038428CEFD3200DC739B /* TabBarView.swift */; };
+		4E26038728CEFD7800DC739B /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038628CEFD7800DC739B /* TabBarItem.swift */; };
+		4E26038928CEFDDD00DC739B /* ActivityViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038828CEFDDD00DC739B /* ActivityViewItem.swift */; };
+		4E26038B28CF014B00DC739B /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038A28CF014B00DC739B /* EmptyListView.swift */; };
 		4E6D455128BF282E005B7DF0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454E28BF282E005B7DF0 /* Users.swift */; };
 		4E6D455228BF282E005B7DF0 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454F28BF282E005B7DF0 /* Categories.swift */; };
 		4E6D455328BF282E005B7DF0 /* Podcasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D455028BF282E005B7DF0 /* Podcasts.swift */; };
@@ -49,10 +53,6 @@
 		A477165D28CC63D000BCA3F8 /* ValidateEmail+Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165C28CC63D000BCA3F8 /* ValidateEmail+Password.swift */; };
 		A477166028CC676A00BCA3F8 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A477165F28CC676A00BCA3F8 /* Controller.swift */; };
 		A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */; };
-		A48E2F5B28CB534A00B24C5E /* ActivityViewTopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */; };
-		A48E2F5D28CB5B8400B24C5E /* MyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5C28CB5B8400B24C5E /* MyList.swift */; };
-		A48E2F5F28CB5C9F00B24C5E /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F5E28CB5C9F00B24C5E /* Download.swift */; };
-		A48E2F6328CB5D3A00B24C5E /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48E2F6228CB5D3A00B24C5E /* History.swift */; };
 		A48FECEB28CE44AA0018F177 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A48FECED28CE44AA0018F177 /* Localizable.strings */; };
 		A491745E28C5D99700443F0D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491745D28C5D99700443F0D /* SignUpView.swift */; };
 		A497D80528C1A84900D8A5CA /* TrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80428C1A84900D8A5CA /* TrendingView.swift */; };
@@ -80,6 +80,10 @@
 		4E26036D28CCFEB000DC739B /* DisableTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableTextComponent.swift; sourceTree = "<group>"; };
 		4E26037E28CE315D00DC739B /* TextBindingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBindingManager.swift; sourceTree = "<group>"; };
 		4E26038228CE639D00DC739B /* RecordingPlayerBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingPlayerBtn.swift; sourceTree = "<group>"; };
+		4E26038428CEFD3200DC739B /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		4E26038628CEFD7800DC739B /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
+		4E26038828CEFDDD00DC739B /* ActivityViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewItem.swift; sourceTree = "<group>"; };
+		4E26038A28CF014B00DC739B /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		4E6D454E28BF282E005B7DF0 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		4E6D454F28BF282E005B7DF0 /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		4E6D455028BF282E005B7DF0 /* Podcasts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Podcasts.swift; sourceTree = "<group>"; };
@@ -113,10 +117,6 @@
 		A477165C28CC63D000BCA3F8 /* ValidateEmail+Password.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidateEmail+Password.swift"; sourceTree = "<group>"; };
 		A477165F28CC676A00BCA3F8 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
-		A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewTopNavBar.swift; sourceTree = "<group>"; };
-		A48E2F5C28CB5B8400B24C5E /* MyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyList.swift; sourceTree = "<group>"; };
-		A48E2F5E28CB5C9F00B24C5E /* Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
-		A48E2F6228CB5D3A00B24C5E /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		A48FECEC28CE44AA0018F177 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A48FECEE28CE44AC0018F177 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A491745D28C5D99700443F0D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -227,7 +227,6 @@
 				A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */,
 				A4CEE8ED28C8A28400054E14 /* EnviromentExtension.swift */,
 				4E98FDDB28C930CD006D2566 /* LoadingRows.swift */,
-				A48E2F5A28CB534A00B24C5E /* ActivityViewTopNavBar.swift */,
 				A477165628CC53BC00BCA3F8 /* AddBorder.swift */,
 				A477165828CC608F00BCA3F8 /* PrefTopComponent.swift */,
 				A477165A28CC611200BCA3F8 /* PrefCategoryComponent.swift */,
@@ -236,6 +235,10 @@
 				4E26036D28CCFEB000DC739B /* DisableTextComponent.swift */,
 				BB99BBD828CDDB7900D80BF6 /* StreamingPage.swift */,
 				4E26038228CE639D00DC739B /* RecordingPlayerBtn.swift */,
+				4E26038428CEFD3200DC739B /* TabBarView.swift */,
+				4E26038628CEFD7800DC739B /* TabBarItem.swift */,
+				4E26038828CEFDDD00DC739B /* ActivityViewItem.swift */,
+				4E26038A28CF014B00DC739B /* EmptyListView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -276,9 +279,6 @@
 				4E6D458228C14531005B7DF0 /* UploadView.swift */,
 				4E6D45A328C21FC3005B7DF0 /* ProfileView.swift */,
 				A491745D28C5D99700443F0D /* SignUpView.swift */,
-				A48E2F5C28CB5B8400B24C5E /* MyList.swift */,
-				A48E2F5E28CB5C9F00B24C5E /* Download.swift */,
-				A48E2F6228CB5D3A00B24C5E /* History.swift */,
 				BB99BBCC28CDA10F00D80BF6 /* StreamingView.swift */,
 				A498E01528CF029F00098FBB /* MotherView.swift */,
 				A498E01728CF02CD00098FBB /* ViewRouter.swift */,
@@ -429,11 +429,12 @@
 				4E26038328CE639D00DC739B /* RecordingPlayerBtn.swift in Sources */,
 				4E6D458028C11AB5005B7DF0 /* WelcomeView.swift in Sources */,
 				A4CEE8EE28C8A28400054E14 /* EnviromentExtension.swift in Sources */,
-				A48E2F5F28CB5C9F00B24C5E /* Download.swift in Sources */,
+				4E26038B28CF014B00DC739B /* EmptyListView.swift in Sources */,
 				4EEF6B6D28BD273B00610B54 /* NPCApp.swift in Sources */,
 				A477165D28CC63D000BCA3F8 /* ValidateEmail+Password.swift in Sources */,
 				4E98FDD828C5C18D006D2566 /* ViewComponent.swift in Sources */,
 				A4FBD12A28C795AE00F6E3EB /* ButtonStyle.swift in Sources */,
+				4E26038928CEFDDD00DC739B /* ActivityViewItem.swift in Sources */,
 				A497D80728C1C08100D8A5CA /* CastingView.swift in Sources */,
 				4E98FDD428C56653006D2566 /* SoundControl.swift in Sources */,
 				A498E01628CF029F00098FBB /* MotherView.swift in Sources */,
@@ -445,8 +446,8 @@
 				A457B44228C2019F007AE794 /* TransitionView.swift in Sources */,
 				A497D80B28C1C0C300D8A5CA /* ActivityView.swift in Sources */,
 				4E6D45A428C21FC3005B7DF0 /* ProfileView.swift in Sources */,
-				A48E2F5B28CB534A00B24C5E /* ActivityViewTopNavBar.swift in Sources */,
 				A477165728CC53BC00BCA3F8 /* AddBorder.swift in Sources */,
+				4E26038528CEFD3200DC739B /* TabBarView.swift in Sources */,
 				A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */,
 				A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */,
 				4E6D455728BF2842005B7DF0 /* PodcastViewModel.swift in Sources */,
@@ -455,11 +456,10 @@
 				A491745E28C5D99700443F0D /* SignUpView.swift in Sources */,
 				4E6D455928BF285D005B7DF0 /* ContentView.swift in Sources */,
 				4E6D455528BF2838005B7DF0 /* Settings.swift in Sources */,
+				4E26038728CEFD7800DC739B /* TabBarItem.swift in Sources */,
 				A477165B28CC611200BCA3F8 /* PrefCategoryComponent.swift in Sources */,
-				A48E2F5D28CB5B8400B24C5E /* MyList.swift in Sources */,
 				BB99BBCF28CDA2D200D80BF6 /* ToastPopUp.swift in Sources */,
 				4E6D456C28BF4F8E005B7DF0 /* ImagePicker.swift in Sources */,
-				A48E2F6328CB5D3A00B24C5E /* History.swift in Sources */,
 				BB99BBCD28CDA10F00D80BF6 /* StreamingView.swift in Sources */,
 				4E98FDDE28CB3725006D2566 /* CategoryCheckbox.swift in Sources */,
 				09D6F4E528C0FDD900D056C2 /* LoginView.swift in Sources */,

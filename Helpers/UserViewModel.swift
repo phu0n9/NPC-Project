@@ -16,13 +16,15 @@ class UserViewModel : ObservableObject {
     @Published var user = Users(uuid: "", email: "", userName: "", profilePic: "", favoriteTopics: [])
     @Published var image: UIImage = UIImage()
     @Published var userSettings = UserSettings()
-    @Published var userFavoriteList = [Episodes]()
-    @Published var userWatchedList = [Episodes]()
+    @Published var userActivityList = [Episodes]()
     @Published var isValid = false
     
     @Published var isUserCurrentlyLoggedOut = false
+    @Published var fetchingMore = false
+    @Published var lastDocumentSnapshot: DocumentSnapshot!
+
     private var db = Firestore.firestore()
-    
+        
     init() {
         DispatchQueue.main.async {
             self.isUserCurrentlyLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
@@ -212,7 +214,7 @@ class UserViewModel : ObservableObject {
                 print("Error getting documents: \(err)")
             }
             
-            let favoriteObj = ["audio": favorite.audio, "audio_length": favorite.audio_length, "description": favorite.description, "episode_uuid": favorite.episode_uuid, "podcast_uuid": favorite.podcast_uuid, "pub_date": favorite.pub_date, "title": favorite.title, "image": favorite.image, "user_id": self.userSettings.uuid] as [String : Any]
+            let favoriteObj = ["audio": favorite.audio, "audio_length": favorite.audio_length, "description": favorite.description, "episode_uuid": favorite.episode_uuid, "podcast_uuid": favorite.podcast_uuid, "pub_date": favorite.pub_date, "title": favorite.title, "episode_image": favorite.image, "user_id": self.userSettings.uuid] as [String : Any]
             
             guard let data = querySnapShot?.documents else {
                 print("No data")
@@ -221,6 +223,7 @@ class UserViewModel : ObservableObject {
             }
             
             guard !data.isEmpty else {
+                self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.favoriteListCollection).document(favorite.episode_uuid).setData(favoriteObj)
                 return
             }
             
@@ -238,23 +241,6 @@ class UserViewModel : ObservableObject {
         })
     }
     
-    // MARK: fetch favorite list
-    func fetchFavoriteList() {
-        db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.favoriteListCollection).getDocuments(completion: { (querySnapshot, error) in
-            if let err = error {
-                print("Error getting documents: \(err)")
-            }
-            guard let documents = querySnapshot?.documents else {
-                print("No data")
-                return
-            }
-            
-            self.userFavoriteList = documents.map {(value) -> Episodes in
-                return Episodes(audio: value.get("audio") as! String, audio_length: value.get("audio_length") as! Int, description: value.get("description") as! String, episode_uuid: value.get("episode_uuid") as! String, podcast_uuid: value.get("podcast_uuid") as! String, pub_date: value.get("pub_date") as! String, title: value.get("title") as! String, image: value.get("episode_image") as! String, user_id: value.get("user_id") as! String)
-            }
-        })
-    }
-    
     // MARK: add watched episodes
     func addWatchList(watchItem: Episodes) {
         db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.watchListCollection).getDocuments(completion: {(querySnapShot, error) in
@@ -262,7 +248,7 @@ class UserViewModel : ObservableObject {
                 print("Error getting documents: \(err)")
             }
             
-            let watchedObj = ["audio": watchItem.audio, "audio_length": watchItem.audio_length, "description": watchItem.description, "episode_uuid": watchItem.episode_uuid, "podcast_uuid": watchItem.podcast_uuid, "pub_date": watchItem.pub_date, "title": watchItem.title, "image": watchItem.image, "user_id": self.userSettings.uuid] as [String : Any]
+            let watchedObj = ["audio": watchItem.audio, "audio_length": watchItem.audio_length, "description": watchItem.description, "episode_uuid": watchItem.episode_uuid, "podcast_uuid": watchItem.podcast_uuid, "pub_date": watchItem.pub_date, "title": watchItem.title, "episode_image": watchItem.image, "user_id": self.userSettings.uuid] as [String : Any]
             
             guard let data = querySnapShot?.documents else {
                 print("No data")
@@ -271,6 +257,7 @@ class UserViewModel : ObservableObject {
             }
             
             guard !data.isEmpty else {
+                self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.watchListCollection).document(watchItem.episode_uuid).setData(watchedObj)
                 return
             }
             
@@ -282,19 +269,43 @@ class UserViewModel : ObservableObject {
         })
     }
     
-    // MARK: fetch all watched list by userID
-    func fetchWatchedList() {
-        db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.watchListCollection).getDocuments(completion: { (querySnapshot, error) in
+    // MARK: fetch user activity list
+    func fetchUserActivityList(listName: String) {
+        var query: Query!
+        
+        if self.userActivityList.isEmpty {
+            query = db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(listName).limit(to: 5)
+            print("First 5 items loaded")
+        } else {
+            query = db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(listName).start(afterDocument: lastDocumentSnapshot).limit(to: 5)
+            print("Next 5 items loaded")
+        }
+        
+        query.getDocuments(completion: {(snapshot, error) in
             if let err = error {
-                print("Error getting documents: \(err)")
+                print("\(err.localizedDescription)")
             }
-            guard let documents = querySnapshot?.documents else {
+            
+            guard let documents = snapshot?.documents else {
                 print("No data")
                 return
             }
-            
-            self.userWatchedList = documents.map {(value) -> Episodes in
-                return Episodes(audio: value.get("audio") as! String, audio_length: value.get("audio_length") as! Int, description: value.get("description") as! String, episode_uuid: value.get("episode_uuid") as! String, podcast_uuid: value.get("podcast_uuid") as! String, pub_date: value.get("pub_date") as! String, title: value.get("title") as! String, image: value.get("episode_image") as! String, user_id: value.get("user_id") as! String)
+
+            if documents.isEmpty {
+                self.fetchingMore = false
+                return
+            } else {
+                for value in documents {
+                    let newDocument = Episodes(audio: value.get("audio") as! String, audio_length: value.get("audio_length") as! Int, description: value.get("description") as! String, episode_uuid: value.get("episode_uuid") as! String, podcast_uuid: value.get("podcast_uuid") as! String, pub_date: value.get("pub_date") as! String, title: value.get("title") as! String, image: value.get("episode_image") as! String, user_id: value.get("user_id") as! String)
+                    self.userActivityList.append(newDocument)
+                }
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    self.fetchingMore = false
+                })
+
+                self.lastDocumentSnapshot = snapshot!.documents.last
+                return
             }
         })
     }

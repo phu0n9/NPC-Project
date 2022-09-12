@@ -24,6 +24,7 @@ struct ProfileView: View {
                     .scaleEffect(2)
                     .font(.body)
                     .padding()
+                    .navigationBarHidden(true)
             } else {
                 ScrollView {
                     VStack(spacing: 16) {
@@ -102,6 +103,7 @@ struct ProfileView: View {
                         .frame(width: 380, height: 50)
                     }
                 }
+                .navigationBarHidden(true)
             }
         }
         .sheet(isPresented: $isPickerShowing, onDismiss: nil) {

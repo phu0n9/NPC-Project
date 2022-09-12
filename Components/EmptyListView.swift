@@ -1,19 +1,19 @@
 //
-//  Download.swift
+//  EmptyListView.swift
 //  NPC
 //
-//  Created by Nguyen Anh Minh on 09/09/2022.
+//  Created by Nguyen Huynh Phuong Anh on 12/09/2022.
 //
 
 import SwiftUI
 
-struct Download: View {
+struct EmptyListView: View {
+    var title: String
     var body: some View {
         VStack {
-            // if (!item) return empty list
             Image("transition")
                 .padding(5.0)
-            Text("Download is Empty")
+            Text("\(self.title) is empty.")
                 .font(.title)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
@@ -22,8 +22,8 @@ struct Download: View {
     }
 }
 
-struct Download_Previews: PreviewProvider {
+struct EmptyListView_Previews: PreviewProvider {
     static var previews: some View {
-        Download()
+        EmptyListView(title: "Favorite List")
     }
 }

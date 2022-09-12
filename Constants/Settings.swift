@@ -21,4 +21,5 @@ struct Settings {
     static let uuid = "uuid"
     static let userName = "userName"
     static let userCategories = "userCategories"
+    static let download = "download"
 }

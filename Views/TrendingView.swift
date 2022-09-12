@@ -63,7 +63,6 @@ struct TrendingView: View {
         .onAppear {
             DispatchQueue.main.async {
                 self.podcastViewModel.fetchPodcasts(categories: self.userSettings.userCategories)
-                print(self.podcastViewModel.podcasts)
             }
         }
     }
