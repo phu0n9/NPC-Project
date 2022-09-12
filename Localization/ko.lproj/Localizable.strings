@@ -1,0 +1,39 @@
+/* 
+  Localizable.strings
+  NPC
+
+  Created by Tony on 11/09/2022.
+  
+*/
+"Cast away" = "업로드";
+"Checked" = "확인완료";
+"Confirm password" = "비밀번호 재확인";
+"Cover Image" = "커버 이미지";
+"Create Account" = "계정 생성";
+"Create Your Account" = "계정 생성하기";
+"Description" = "설명";
+"Download" = "다운로드";
+"Download is Empty" = "다운로드함이 비어있습니다";
+"Downloading…" = "다운로드중…";
+"Edit" = "편집";
+"Episode" = "애피소드";
+"Error" = "애러";
+"History" = "히스토리";
+"History is Empty" = "히스토리가 비어있습니다";
+"Length" = "시간";
+"Login" = "로그인";
+"Log In" = "로그인";
+"My List" = "내 목록";
+"My List is Empty" = "목록이 비어있습니다";
+"Password" = "비밀번호";
+"Password:" = "비밀번호: ";
+"Please enable microphone access" = "마이크 액세스를 활성화 해주세요";
+"Processing" = "처리중";
+"Recording your cast" = "팟케스트를 녹음해주세요";
+"Sign Up" = "계정생성";
+"Tell us about your preference topic" = "관심있는 주제를 선택해주세요";
+"title" = "제목";
+"Title" = "제목";
+"Trending" = "트랜드";
+"Username" = "유저";
+"Activity" = "활동";

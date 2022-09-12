@@ -25,7 +25,8 @@ struct NPCApp: App {
     
     var body: some Scene {
         WindowGroup {
-            WelcomeView()
+            // WelcomeView()
+            MotherView().environmentObject(viewRouter)
         }
     }
 }

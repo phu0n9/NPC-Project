@@ -129,6 +129,7 @@
 		A497D80E28C1C1F800D8A5CA /* EpisodeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeComponent.swift; sourceTree = "<group>"; };
 		A498E01528CF029F00098FBB /* MotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
 		A498E01728CF02CD00098FBB /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		A4A4F91728CF76C4000C2248 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A4AFBB8F28C1128200B87BC9 /* BottomNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavBar.swift; sourceTree = "<group>"; };
 		A4CEE8ED28C8A28400054E14 /* EnviromentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnviromentExtension.swift; sourceTree = "<group>"; };
 		A4F8235328C2FA50007856F2 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
@@ -369,6 +370,7 @@
 				en,
 				Base,
 				vi,
+				ko,
 			);
 			mainGroup = 4EEF6B6028BD273B00610B54;
 			packageReferences = (
@@ -492,6 +494,7 @@
 			children = (
 				A48FECEC28CE44AA0018F177 /* en */,
 				A48FECEE28CE44AC0018F177 /* vi */,
+				A4A4F91728CF76C4000C2248 /* ko */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
