@@ -30,7 +30,7 @@ struct TopNavBar: View {
                 Image("notification-icon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                Image("chat-icon")
+                Image(systemName:"square.arrow.left.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }

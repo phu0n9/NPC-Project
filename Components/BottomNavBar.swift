@@ -14,6 +14,7 @@ struct BottomNavBar: View {
     // Styling topnavbar
     init() {
         let navbarApperance = UINavigationBarAppearance()
+        
         navbarApperance.titleTextAttributes = [.foregroundColor:UIColor.systemBackground]
         navbarApperance.largeTitleTextAttributes = [.foregroundColor:UIColor.systemBackground]
         navbarApperance.backgroundColor = UIColor.orange
@@ -26,12 +27,12 @@ struct BottomNavBar: View {
 
     let icons = [
         "podcasts-icon",
-        "play-icon",
+        "play.fill",
         "todo",
-        "mylist-icon",
-        "user-icon"
+        "music.note.list",
+        "person"
     ]
-    
+
     var body: some View {
         
         VStack {
@@ -56,6 +57,7 @@ struct BottomNavBar: View {
             }
             
             Divider()
+            
             HStack {
                 ForEach(0..<5, id: \.self) { number in
                     Spacer()
@@ -64,6 +66,7 @@ struct BottomNavBar: View {
                     }, label: {
                         if number == 2 {
                             Image(icons[number])
+                                .renderingMode(.template)
                                 .font(.system(size:40,
                                               weight: .regular,
                                               design: .default))
@@ -71,14 +74,49 @@ struct BottomNavBar: View {
                                 .frame(width: 45, height: 45)
                                 .background(Color.orange)
                                 .cornerRadius(30)
-                        } else {
+                        }
+                        else if number == 0 {
                             Image(icons[number])
+                            .renderingMode(.template)
+                            .font(.system(size:25,
+                                          weight: .regular,
+                                          design: .default))
+                            .foregroundColor(selectedIndex == number ? .orange : Color(UIColor.black))
+                        }
+                        else if number == 1 {
+                            Image(systemName: "play.fill")
+                            .renderingMode(.template)
+                            .font(.system(size:25,
+                                          weight: .regular,
+                                          design: .default))
+                            .foregroundColor(selectedIndex == number ? .orange : Color(UIColor.black))
+                        }
+                        else if number == 3{
+                            Image(systemName: "music.note.list")
+                            .renderingMode(.template)
+                            .font(.system(size:25,
+                                          weight: .regular,
+                                          design: .default))
+                            .foregroundColor(selectedIndex == number ? .orange : Color(UIColor.black))
+                        }
+                        else if number == 4{
+                            Image(systemName: "person")
+                            .renderingMode(.template)
+                            .font(.system(size:25,
+                                          weight: .regular,
+                                          design: .default))
+                            .foregroundColor(selectedIndex == number ? .orange : Color(UIColor.black))
+                        }
+                        else {
+                            Image(icons[number])
+                                .renderingMode(.template)
                                 .font(.system(size:25,
                                               weight: .regular,
                                               design: .default))
-                                .foregroundColor(selectedIndex == number ? .black : Color(UIColor.lightGray))
+                                .foregroundColor(selectedIndex == number ? .orange : Color(UIColor.black))
                         }
                     })
+                    
                     Spacer()
                 }
             }

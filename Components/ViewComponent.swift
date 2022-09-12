@@ -21,23 +21,23 @@ struct ViewComponent<Destination:View>: View {
                     Button {
                         print("search clicked")
                     } label: {
-                        Image("search-icon")
+                        Image(systemName: "waveform.and.magnifyingglass")
                             .resizable()
-                            .frame(width: 30, height: 30, alignment: .leading)
+                            .frame(width: 20, height: 20, alignment: .leading)
                     }
                      
                     Button {
                         print("notification clicked")
                     } label: {
-                        Image("notification-icon")
+                        Image(systemName: "bell")
                             .resizable()
-                            .frame(width: 30, height: 30, alignment: .leading)
+                            .frame(width: 20, height: 20, alignment: .leading)
                     }
                     
                     Button {
-                        print("message clicked")
+                        print("loggout clicked")
                     } label: {
-                        Image("chat-icon")
+                        Image(systemName: "arrow.left.square")
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .leading)
                     }
