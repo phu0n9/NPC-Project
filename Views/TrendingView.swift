@@ -12,9 +12,15 @@ struct TrendingView: View {
     @ObservedObject var userSettings = UserSettings()
     @State var time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
     
+    @State var logoutSuccess = false
+    @EnvironmentObject var viewRouter: ViewRouter
+    
     var body: some View {
         ScrollView {
+            NavigationLink("", destination: LoginView(), isActive: self.$logoutSuccess)
+                .isDetailLink(false)
             ScrollView(.horizontal) {
+            
                 HStack(spacing: 10) {
                     ForEach(self.podcastViewModel.podcasts, id: \.id) { podcast in
                         PodcastComponent(title: podcast.title, image: podcast.image, author: podcast.author)

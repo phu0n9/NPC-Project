@@ -24,7 +24,7 @@ struct SignUpView: View {
     
     var body: some View {
             VStack(spacing: 16) {
-                NavigationLink("", destination: BottomNavBar(), isActive: $loginSuccess)
+                NavigationLink("", destination: BottomNavBar(), isActive: $loginSuccess).isDetailLink(false)
                 PrefTopComponent()
                 if self.podcastViewModel.categories.isEmpty {
                     Section {

@@ -15,6 +15,7 @@ struct ProfileView: View {
     @State var isFull = true
     @State var alert = false
     @State var updateStatus = ""
+    @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {
         NavigationView {
@@ -84,6 +85,21 @@ struct ProfileView: View {
                         }
                         .padding(0)
                         .frame(width: 380, height: 50)
+                        
+                        Button {
+                            signOutUser()
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text("Log out")
+                                    .foregroundColor(.white)
+                                    .padding(.vertical, 10)
+                                    .font(.system(size: 14, weight: .semibold))
+                                Spacer()
+                            }.background(Color(red: 1, green: 0.4902, blue: 0.3216))
+                        }
+                        .padding(0)
+                        .frame(width: 380, height: 50)
                     }
                 }
             }
@@ -115,6 +131,17 @@ struct ProfileView: View {
         }
     }
     
+    func signOutUser() {
+        do {
+          try FirebaseManager.shared.auth.signOut()
+            print("Successfully sign out")
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
+        withAnimation {
+                viewRouter.currentPage = .login
+            }
+    }
 }
 
 struct ProfileView_Previews: PreviewProvider {
