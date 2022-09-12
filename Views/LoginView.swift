@@ -24,6 +24,8 @@ struct LoginView: View {
     
     @StateObject var controller = Controller()
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         NavigationView {
             ScrollView {
