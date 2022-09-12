@@ -18,6 +18,7 @@ struct Uploads : Identifiable {
     var image: String
     var userID : String
     var numOfLikes: Int
+    var audio_length: Int
     var likes: [Likes]
     var comments: [Comments]
 }

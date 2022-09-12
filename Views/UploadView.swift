@@ -27,6 +27,7 @@ struct UploadView : View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading) {
+                    NavigationLink("", destination: CastingView(), isActive: self.$uploadControl.isUploaded)
                     switch state {
                     case 0:
                         Text("Cover Image")
@@ -88,6 +89,18 @@ struct UploadView : View {
                             .autocapitalization(.none)
                         
                     case 1:
+                        // MARK: Back button
+                        Button {
+                            self.state -= 1
+                        } label: {
+                            Image(systemName: "arrowshape.backward")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 50, height: 50)
+                                .background(Color("MainButton"))
+                        }
+                        .padding(.leading, 20)
+                        
                         Text("Recording your cast")
                             .font(.system(size: 20))
                             .fontWeight(.bold)
@@ -114,19 +127,21 @@ struct UploadView : View {
                                         .padding()
                                 }
                             })
-                            .disabled(self.isFinishedRecord && !self.uploadControl.record)
+                            .disabled(self.isFinishedRecord)
                             .onAppear {
                                 self.uploadControl.requestRecording()
                             }
-                            .onChange(of: self.uploadControl.recorder) { value in
-                                if value != nil {
-                                    self.isFinishedRecord = true
+                            .onChange(of: self.uploadControl.record) { value in
+                                if !value {
+                                    if self.uploadControl.recorder?.url != nil {
+                                        self.isFinishedRecord = true
+                                    }
                                 }
                             }
                             
                             if self.isFinishedRecord {
                                 withAnimation(.spring()) {
-                                    RecordingPlayerBtn(soundName: self.uploadControl.recorder?.url.relativePath ?? "")
+                                    RecordingPlayerBtn(soundName: self.uploadControl.recorder?.url.relativeString ?? "", isDeleted: self.$isFinishedRecord)
                                 }
                             }
                         }
@@ -149,22 +164,6 @@ struct UploadView : View {
                     }
                     .padding(.leading, 20)
                     .frame(width: 380, height: 50)
-                    if state != 0 {
-                        Button {
-                            self.state -= 1
-                        } label: {
-                            HStack {
-                                Spacer()
-                                Text("Back")
-                                    .foregroundColor(.white)
-                                    .padding(.vertical, 10)
-                                    .font(.system(size: 14, weight: .semibold))
-                                Spacer()
-                            }.background(Color("MainButton"))
-                        }
-                        .padding(.leading, 20)
-                        .frame(width: 380, height: 50)
-                    }
                 }
             }
             .navigationBarHidden(true)
@@ -205,7 +204,6 @@ struct UploadView : View {
                 format.dateStyle = .short
                 let time = format.string(from: mytime)
                 self.uploadControl.uploadCastImage(title: title, description: self.textBindingManager.text, pub_date: time, selectedImage: selectedImage)
-                print("Uploading")
                 self.state = 0
             }
         default:

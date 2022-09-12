@@ -12,7 +12,7 @@ import UIKit
 
 class UploadViewModel: ObservableObject {
     @Published var uploads = [Uploads]()
-    @Published var upload = Uploads(uuid: "", title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, likes: [], comments: [])
+    @Published var upload = Uploads(uuid: "", title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, likes: [], comments: [])
     @Published var lastDocumentSnapshot: DocumentSnapshot!
     @Published var fetchingMore = false
     
@@ -29,7 +29,7 @@ class UploadViewModel: ObservableObject {
                 print("Error getting documents: \(err)")
             }
             
-            let uploadObj = ["uuid": self.upload.uuid, "title": self.upload.title, "description": self.upload.description, "audioPath": self.upload.audioPath, "author": self.upload.author, "pub_date": self.upload.pub_date, "image": self.upload.image, "userID": self.upload.userID, "numOfLikes": self.upload.numOfLikes, "likes": [], "comments": []] as [String : Any]
+            let uploadObj = ["uuid": self.upload.uuid, "title": self.upload.title, "description": self.upload.description, "audioPath": self.upload.audioPath, "author": self.upload.author, "pub_date": self.upload.pub_date, "image": self.upload.image, "userID": self.upload.userID, "numOfLikes": self.upload.numOfLikes, "likes": [], "comments": [], "audio_length": self.upload.audio_length] as [String : Any]
         
             self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.uploadsCollection).addDocument(data: uploadObj)
         })
@@ -79,7 +79,7 @@ class UploadViewModel: ObservableObject {
                     
                     self.getCommentAndLikeList(likedList: likedList, commentList: commentList)
                     
-                    let newUploads = Uploads(uuid: value.get("uuid") as! String, title: value.get("title") as! String, description: value.get("description") as! String, audioPath: value.get("audio") as! String, author: value.get("author") as! String, pub_date: value.get("pub_date") as! String, image: value.get("image") as! String, userID: value.get("user_id") as! String, numOfLikes: value.get("numOfLikes") as! Int, likes: self.likedObj, comments: self.commentObj)
+                    let newUploads = Uploads(uuid: value.get("uuid") as! String, title: value.get("title") as! String, description: value.get("description") as! String, audioPath: value.get("audio") as! String, author: value.get("author") as! String, pub_date: value.get("pub_date") as! String, image: value.get("image") as! String, userID: value.get("user_id") as! String, numOfLikes: value.get("numOfLikes") as! Int, audio_length: value.get("audio_length") as! Int, likes: self.likedObj, comments: self.commentObj)
                     self.uploads.append(newUploads)
                 }
                 
@@ -108,7 +108,7 @@ class UploadViewModel: ObservableObject {
             
             self.getCommentAndLikeList(likedList: likedList, commentList: commentList)
             
-            self.upload = Uploads(uuid: uploadID, title: document.get("title") as! String, description: document.get("description") as! String, audioPath: document.get("audio") as! String, author: document.get("author") as! String, pub_date: document.get("pub_date") as! String, image: document.get("image") as! String, userID: document.get("user_id") as! String, numOfLikes: document.get("numOfLikes") as! Int, likes: self.likedObj, comments: self.commentObj)
+            self.upload = Uploads(uuid: uploadID, title: document.get("title") as! String, description: document.get("description") as! String, audioPath: document.get("audio") as! String, author: document.get("author") as! String, pub_date: document.get("pub_date") as! String, image: document.get("image") as! String, userID: document.get("user_id") as! String, numOfLikes: document.get("numOfLikes") as! Int, audio_length: document.get("audio_length") as! Int, likes: self.likedObj, comments: self.commentObj)
         })
     }
     
@@ -175,7 +175,7 @@ class UploadViewModel: ObservableObject {
                 let commentList = value.get("commentList") as? [[String : Any]]
                 
                 self.getCommentAndLikeList(likedList: likedList, commentList: commentList)
-                return Uploads(uuid: value.get("uuid") as! String, title: value.get("title") as! String, description: value.get("description") as! String, audioPath: value.get("audio") as! String, author: value.get("author") as! String, pub_date: value.get("pub_date") as! String, image: value.get("image") as! String, userID: value.get("user_id") as! String, numOfLikes: value.get("numOfLikes") as! Int, likes: self.likedObj, comments: self.commentObj)
+                return Uploads(uuid: value.get("uuid") as! String, title: value.get("title") as! String, description: value.get("description") as! String, audioPath: value.get("audio") as! String, author: value.get("author") as! String, pub_date: value.get("pub_date") as! String, image: value.get("image") as! String, userID: value.get("user_id") as! String, numOfLikes: value.get("numOfLikes") as! Int, audio_length: value.get("audio_length") as! Int, likes: self.likedObj, comments: self.commentObj)
             }
         })
     }

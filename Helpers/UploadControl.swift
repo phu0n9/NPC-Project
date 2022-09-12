@@ -15,9 +15,10 @@ class UploadControl : ObservableObject {
     // creating instance for recroding...
     
     @Published var session : AVAudioSession!
-    @Published var recorder : AVAudioRecorder?
+    @Published var recorder : AVAudioRecorder!
     
     @Published var alert = false
+    @Published var isUploaded = false
     // Fetch Audios...
     var localPath = ""
     private var userViewModel = UserViewModel()
@@ -31,9 +32,7 @@ class UploadControl : ObservableObject {
         do {
             if self.record {
                 // Already Started Recording means stopping and saving...
-                if let recorder = self.recorder {
-                    recorder.stop()
-                }
+                self.recorder.stop()
                 self.record.toggle()
                 return
             }
@@ -53,9 +52,8 @@ class UploadControl : ObservableObject {
             ]
             
             self.recorder = try AVAudioRecorder(url: fileName, settings: settings)
-            if let recorder = self.recorder {
-                recorder.record()
-            }
+            self.recorder.record()
+            
             self.record.toggle()
         } catch {
             print(error.localizedDescription)
@@ -121,21 +119,20 @@ class UploadControl : ObservableObject {
         do {
             let metadataLocal = StorageMetadata()
             metadataLocal.contentType = "audio/m4a"
-            if let recorder = self.recorder {
-                let audioData = try Data(contentsOf: recorder.url)
-                _ = fileRef.putData(audioData, metadata: metadataLocal) { metadata, error in
+            let audioData = try Data(contentsOf: self.recorder.url)
+            _ = fileRef.putData(audioData, metadata: metadataLocal) { metadata, error in
+                
+                if error == nil && metadata != nil {
                     
-                    if error == nil && metadata != nil {
-                        print("uploading")
-                        
-                        fileRef.downloadURL { (url, error) in
-                            if let err = error {
-                                print(err.localizedDescription)
-                            }
-                            guard let downloadURL = url else { return }
-                            self.uploadViewModel.upload = Uploads(title: title, description: description, audioPath: downloadURL.absoluteString, author: self.userSettings.username, pub_date: pub_date, image: image, userID: self.userSettings.uuid, numOfLikes: 0, likes: [], comments: [])
-                            self.uploadViewModel.addUploads()
+                    fileRef.downloadURL { (url, error) in
+                        if let err = error {
+                            print(err.localizedDescription)
                         }
+                        guard let downloadURL = url else { return }
+                        let audio_length = NSInteger(self.recorder.currentTime) % 60
+                        self.uploadViewModel.upload = Uploads(title: title, description: description, audioPath: downloadURL.absoluteString, author: self.userSettings.username, pub_date: pub_date, image: image, userID: self.userSettings.uuid, numOfLikes: 0, audio_length: audio_length, likes: [], comments: [])
+                        self.uploadViewModel.addUploads()
+                        self.isUploaded = true
                     }
                 }
             }
@@ -143,7 +140,6 @@ class UploadControl : ObservableObject {
         } catch {
             print(error.localizedDescription)
         }
-        
     }
     
 }

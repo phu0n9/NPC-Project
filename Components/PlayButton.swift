@@ -19,9 +19,7 @@ struct PlayButton: View {
         HStack {
             VStack(spacing:10) {
                 Button(action: {
-              
-                    self.soundControl.playSound(soundName: self.soundName)
-        
+                    self.soundControl.playSound(soundName: soundName, isPreview: true)
                 }, label: {
                     Image(self.soundControl.isActive ? "play-circle-icon" : "pause-circle-icon")
                         .renderingMode(.template)
