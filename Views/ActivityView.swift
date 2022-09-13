@@ -14,7 +14,7 @@ struct ActivityView: View {
 
     var body: some View {
         VStack {
-            TabBarView(currentTab: self.$currentTab)
+            TabBarView(currentTab: self.$currentTab, state: 0)
             TabView(selection: self.$currentTab) {
                 ActivityViewItem(selectedTab: currentTab, currentTabCollection: Binding.constant(tabOptions[currentTab] ?? Settings.favoriteListCollection), currentTabTitle: Binding.constant(titleTab[currentTab] ?? "Favorite List")).tag(0)
                 ActivityViewItem(selectedTab: currentTab, currentTabCollection: Binding.constant(tabOptions[currentTab] ?? Settings.favoriteListCollection), currentTabTitle: Binding.constant(titleTab[currentTab] ?? "Favorite List")).tag(1)

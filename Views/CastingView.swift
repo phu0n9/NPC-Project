@@ -15,7 +15,7 @@ struct CastingView: View {
     
     var body: some View {
         VStack {
-            TabBarView(currentTab: self.$currentTab)
+            TabBarView(currentTab: self.$currentTab, state: 1)
             TabView(selection: self.$currentTab) {
                 StreamingView(episode: self.$episode, upload: self.$upload, state: 1).tag(0)
                 UserCastingView().tag(1)
