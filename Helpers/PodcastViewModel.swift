@@ -16,9 +16,11 @@ class PodcastViewModel: ObservableObject {
     @Published var paginatedEpisodes = [Episodes]()
     @Published var angle : Double = 0
     @Published var podcast = Podcasts(uuid: "", author: "", description: "", image: "", itunes_id: 0, language: "", title: "", website: "", categories: [], episodes: [])
-    @Published var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "")
+    @Published var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
     
     private var db = Firestore.firestore()
+    private var userSettings = UserSettings()
+    @Published var isFetchingMore = false
     
     // MARK: fetching podcasts API with x documents with categories
     func fetchPodcasts(categories: [String]) {
@@ -35,7 +37,7 @@ class PodcastViewModel: ObservableObject {
             self.getPodcastByQuerySnapShot(documents: documents)
         })
     }
-    
+        
     // MARK: get podcast by query snap shot document
     func getPodcastByQuerySnapShot(queryDocumentSnapshot: DocumentSnapshot, episodeId: String) -> Podcasts {
         let author = queryDocumentSnapshot.get("author") as! String
@@ -50,8 +52,9 @@ class PodcastViewModel: ObservableObject {
         let episodes = queryDocumentSnapshot.get("episodes") as! [[String: Any]]
         
         let episodeObj = episodes.map {(value) -> Episodes in
-            let episode = Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: value["episode_uuid"] as! String, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String, image: value["episode_image"] as! String, user_id: "")
-            if value["episode_uuid"] as! String == episodeId {
+            let episodeObjId = value["episode_uuid"] as! String
+            let episode = Episodes(audio: value["audio"] as! String, audio_length: value["audio_length"] as! Int, description: value["description"] as! String, episode_uuid: episodeObjId, podcast_uuid: value["podcast_uuid"] as! String, pub_date: value["pub_date"] as! String, title: value["title"] as! String, image: value["episode_image"] as! String, user_id: "", isLiked: false)
+            if episodeObjId == episodeId {
                 self.episode = episode
             }
             self.episodes.append(episode)
@@ -71,6 +74,7 @@ class PodcastViewModel: ObservableObject {
     
     // MARK: append pagination episodes
     func paginateEpisodes() {
+        self.isFetchingMore = true
         guard !self.episodes.isEmpty else {
             return
         }
@@ -83,6 +87,7 @@ class PodcastViewModel: ObservableObject {
             addPaginationList(start: self.paginatedEpisodes.count, end: self.paginatedEpisodes.count + 5)
         } else {
             addPaginationList(start: self.paginatedEpisodes.count, end: self.episodes.count)
+            self.isFetchingMore = false
         }
     }
     

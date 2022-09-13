@@ -14,6 +14,9 @@ struct TrendingView: View {
     
     @State var logoutSuccess = false
     @EnvironmentObject var viewRouter: ViewRouter
+    @State private var isTapped: Bool = false
+    @State private var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
+    @State private var upload = Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, likes: [], comments: [])
     
     var body: some View {
         
@@ -21,7 +24,7 @@ struct TrendingView: View {
             NavigationLink("", destination: LoginView(), isActive: self.$logoutSuccess)
                 .isDetailLink(false)
             ScrollView(.horizontal) {
-            
+                
                 HStack(spacing: 10) {
                     ForEach(self.podcastViewModel.podcasts, id: \.id) { podcast in
                         PodcastComponent(title: podcast.title, image: podcast.image, author: podcast.author)
@@ -38,7 +41,7 @@ struct TrendingView: View {
                         
                         ZStack {
                             // reaching end of the list then load new data
-                            if self.podcastViewModel.paginatedEpisodes.last?.id == episode.id {
+                            if self.podcastViewModel.paginatedEpisodes.last?.id == episode.id && self.podcastViewModel.isFetchingMore {
                                 GeometryReader { bounds in
                                     LoadingRows()
                                         .onAppear {
@@ -54,13 +57,21 @@ struct TrendingView: View {
                                 .frame(height: 300)
                             } else {
                                 // return original data
-                                EpisodeComponent(episode_uuid: episode.episode_uuid, podcast_uuid: episode.podcast_uuid, title: episode.title, pub_date: episode.pub_date, description: episode.description, audio: episode.audio, image: episode.image, length: episode.audio_length, isExpanded: $episode.isExpanding)
+                                EpisodeComponent(episode: $episode, isExpanded: $episode.isExpanding)
+                                    .onTapGesture {
+                                        self.isTapped = true
+                                        self.episode = episode
+                                    }
                             }
                         }
                     }
                 }
             }
         }
+        .sheet(isPresented: self.$isTapped) {
+            StreamingView(episode: self.$episode, upload: self.$upload, state: 0)
+        }
+        .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height - 200)
         .onAppear {
             DispatchQueue.main.async {
                 self.podcastViewModel.fetchPodcasts(categories: self.userSettings.userCategories)

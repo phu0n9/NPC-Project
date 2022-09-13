@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Settings {
     // MARK: Firebase Collections
@@ -22,4 +23,5 @@ struct Settings {
     static let userName = "userName"
     static let userCategories = "userCategories"
     static let download = "download"
+    static let language = "AppleLanguages"
 }

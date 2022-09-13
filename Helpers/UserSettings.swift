@@ -31,10 +31,17 @@ class UserSettings: ObservableObject {
         }
     }
     
+    @Published var selectedLanguages: String {
+        didSet {
+            UserDefaults.standard.set(selectedLanguages, forKey: Settings.language)
+        }
+    }
+    
     init() {
         self.token = UserDefaults.standard.string(forKey: Settings.userToken) ?? ""
         self.uuid = UserDefaults.standard.string(forKey: Settings.uuid) ?? ""
         self.username = UserDefaults.standard.string(forKey: Settings.userName) ?? ""
         self.userCategories = UserDefaults.standard.array(forKey: Settings.userCategories) as? [String] ?? ["Music", "Arts"]
+        self.selectedLanguages = UserDefaults.standard.string(forKey: Settings.language) ?? "en"
     }
 }

@@ -214,7 +214,7 @@ class UserViewModel : ObservableObject {
                 print("Error getting documents: \(err)")
             }
             
-            let favoriteObj = ["audio": favorite.audio, "audio_length": favorite.audio_length, "description": favorite.description, "episode_uuid": favorite.episode_uuid, "podcast_uuid": favorite.podcast_uuid, "pub_date": favorite.pub_date, "title": favorite.title, "episode_image": favorite.image, "user_id": self.userSettings.uuid] as [String : Any]
+            let favoriteObj = ["audio": favorite.audio, "audio_length": favorite.audio_length, "description": favorite.description, "episode_uuid": favorite.episode_uuid, "podcast_uuid": favorite.podcast_uuid, "pub_date": favorite.pub_date, "title": favorite.title, "episode_image": favorite.image, "user_id": self.userSettings.uuid, "isLiked": favorite.isLiked] as [String : Any]
             
             guard let data = querySnapShot?.documents else {
                 print("No data")
@@ -227,16 +227,17 @@ class UserViewModel : ObservableObject {
                 return
             }
             
-            for item in data {
-                if item.get("episode_uuid") as! String != favorite.episode_uuid {
-                    print("not equal")
-                    self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.favoriteListCollection).document(favorite.episode_uuid).setData(favoriteObj)
-                    return
-                } else {
-                    print("equal")
-                    self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.favoriteListCollection).document(favorite.episode_uuid).delete()
-                    return
-                }
+            let isExisted = data.filter { $0.get("episode_uuid") as! String == favorite.episode_uuid }
+            
+            if isExisted.isEmpty {
+                print("object \(favorite.episode_uuid)")
+                print("not equal")
+                self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.favoriteListCollection).document(favorite.episode_uuid).setData(favoriteObj)
+                return
+            } else {
+                print("equal")
+                self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.favoriteListCollection).document(favorite.episode_uuid).delete()
+                return
             }
         })
     }
@@ -248,7 +249,7 @@ class UserViewModel : ObservableObject {
                 print("Error getting documents: \(err)")
             }
             
-            let watchedObj = ["audio": watchItem.audio, "audio_length": watchItem.audio_length, "description": watchItem.description, "episode_uuid": watchItem.episode_uuid, "podcast_uuid": watchItem.podcast_uuid, "pub_date": watchItem.pub_date, "title": watchItem.title, "episode_image": watchItem.image, "user_id": self.userSettings.uuid] as [String : Any]
+            let watchedObj = ["audio": watchItem.audio, "audio_length": watchItem.audio_length, "description": watchItem.description, "episode_uuid": watchItem.episode_uuid, "podcast_uuid": watchItem.podcast_uuid, "pub_date": watchItem.pub_date, "title": watchItem.title, "episode_image": watchItem.image, "user_id": self.userSettings.uuid, "isLiked": watchItem.isLiked] as [String : Any]
             
             guard let data = querySnapShot?.documents else {
                 print("No data")
@@ -261,8 +262,9 @@ class UserViewModel : ObservableObject {
                 return
             }
             
-            for item in data where item.get("episode_uuid") as! String != watchItem.episode_uuid {
-                print("not equal")
+            let isExisted = data.filter { $0.get("episode_uuid") as! String == watchItem.episode_uuid }
+            
+            if isExisted.isEmpty {
                 self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.watchListCollection).document(watchItem.episode_uuid).setData(watchedObj)
                 return
             }
@@ -296,7 +298,7 @@ class UserViewModel : ObservableObject {
                 return
             } else {
                 for value in documents {
-                    let newDocument = Episodes(audio: value.get("audio") as! String, audio_length: value.get("audio_length") as! Int, description: value.get("description") as! String, episode_uuid: value.get("episode_uuid") as! String, podcast_uuid: value.get("podcast_uuid") as! String, pub_date: value.get("pub_date") as! String, title: value.get("title") as! String, image: value.get("episode_image") as! String, user_id: value.get("user_id") as! String)
+                    let newDocument = Episodes(audio: value.get("audio") as! String, audio_length: value.get("audio_length") as! Int, description: value.get("description") as! String, episode_uuid: value.get("episode_uuid") as! String, podcast_uuid: value.get("podcast_uuid") as! String, pub_date: value.get("pub_date") as! String, title: value.get("title") as! String, image: value.get("episode_image") as! String, user_id: value.get("user_id") as! String, isLiked: value.get("isLiked") as? Bool ?? false)
                     self.userActivityList.append(newDocument)
                 }
 

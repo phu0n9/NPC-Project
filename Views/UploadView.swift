@@ -205,6 +205,7 @@ struct UploadView : View {
                 let time = format.string(from: mytime)
                 self.uploadControl.uploadCastImage(title: title, description: self.textBindingManager.text, pub_date: time, selectedImage: selectedImage)
                 self.state = 0
+                
             }
         default:
             self.state = 0

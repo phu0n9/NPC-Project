@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MotherView: View {
+struct RootView: View {
     
     @EnvironmentObject var viewRouter: ViewRouter
     
@@ -28,8 +28,8 @@ struct MotherView: View {
     }
 }
 
-struct MotherView_Previews: PreviewProvider {
+struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        MotherView().environmentObject(ViewRouter())
+        RootView().environmentObject(ViewRouter())
     }
 }

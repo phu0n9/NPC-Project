@@ -8,25 +8,16 @@
 import SwiftUI
 
 struct EpisodeComponent: View {
-    var episode_uuid: String
-    var podcast_uuid: String
-    var title: String
-    var pub_date: String
-    var description: String
-    var audio: String
-    var image: String
-    var length: Int
+    @Binding var episode: Episodes
     @Binding var isExpanded: Bool
-    @State private var isTapped: Bool = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            NavigationLink("", destination: StreamingView(podcast_uuid: self.podcast_uuid, episode_uuid: self.episode_uuid), isActive: self.$isTapped)
             // MARK: podcast episode info
             HStack(alignment: .top, spacing: 20) {
                 
                 // MARK: podcast image
-                AsyncImage(url: URL(string: self.image)) { podcastImage in
+                AsyncImage(url: URL(string: self.episode.image)) { podcastImage in
                     podcastImage
                         .resizable()
                         .font(.title)
@@ -42,17 +33,17 @@ struct EpisodeComponent: View {
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
                         // MARK: title
-                        Text(self.title)
+                        Text(self.episode.title)
                             .font(.subheadline).bold()
                     }
                     // MARK: publish date
-                    Text(self.pub_date)
+                    Text(self.episode.pub_date)
                         .font(.caption)
                 }
             }.padding()
             
             // MARK: description
-            Text(self.description)
+            Text(self.episode.description)
                 .lineLimit(isExpanded ? nil : 3)
                 .overlay(
                     GeometryReader { proxy in
@@ -70,19 +61,16 @@ struct EpisodeComponent: View {
                 )
             
             HStack(alignment: .top, spacing: 0) {
-                PlayButton(length: Binding.constant(self.length), soundName: self.audio)
+                PlayButton(length: Binding.constant(self.episode.audio_length), episode: $episode, soundName: self.episode.audio)
             }
             Divider()
         }
         .padding()
-        .onTapGesture {
-            self.isTapped = true
-        }
     }
 }
 
 struct EpisodeComponent_Previews: PreviewProvider {
     static var previews: some View {
-        EpisodeComponent(episode_uuid: "6bf59a32de804ede9101f7ba75d12677", podcast_uuid: "0c28802a7e814a55ada3ba54847258bc", title: "Title", pub_date: "2022/09/09", description: "Description", audio: "a link", image: "", length:0, isExpanded: Binding.constant(false))
+        EpisodeComponent(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), isExpanded: Binding.constant(false))
     }
 }

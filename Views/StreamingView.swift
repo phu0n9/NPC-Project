@@ -11,23 +11,26 @@ import AVKit
 struct StreamingView: View {
     
     @ObservedObject var podcastViewModel = PodcastViewModel()
+    @StateObject var userViewModel = UserViewModel()
+    @ObservedObject var uploadViewModel = UploadViewModel()
     @ObservedObject var userSettings = UserSettings()
-    var podcast_uuid : String
-    var episode_uuid : String
-    @ObservedObject var soundControl = SoundControl();
+    @Binding var episode: Episodes
+    @ObservedObject var soundControl = SoundControl()
+    @Binding var upload: Uploads
     
     //   @State var width : CGFloat = UIScreen.main.bounds.height < 750 ? 130 : 230
-    var width:CGFloat = 200
-    var height:CGFloat = 200
-//    var isplaying:Bool = false;
-//
+    var width : CGFloat = 200
+    var height : CGFloat = 200
+    var state: Int
+    //    var isplaying:Bool = false;
+    //
     var body: some View {
         VStack {
             Spacer(minLength: 0)
-    
+            
             ZStack {
                 // MARK: podcast image
-                AsyncImage(url: URL(string: self.podcastViewModel.episode.image)) { image in
+                AsyncImage(url: URL(string: self.state == 0 ? self.episode.image : self.upload.image)) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -40,12 +43,12 @@ struct StreamingView: View {
                 ZStack {
                     Circle()
                         .trim(from: 0, to:0.8)
-                        .stroke(Color.black.opacity(0.06),lineWidth: 4)
+                        .stroke(Color.black.opacity(0.06), lineWidth: 4)
                         .frame(width: width+45, height: height+45)
-                    
+                    // MARK: add tenery operator based on state below theses circles
                     Circle()
                         .trim(from: 0, to: CGFloat((podcastViewModel.angle)/360))
-                        .stroke(Color(.orange),lineWidth: 4)
+                        .stroke(Color(.orange), lineWidth: 4)
                         .frame(width: width+45, height: height+45)
                     
                     Circle()
@@ -59,20 +62,21 @@ struct StreamingView: View {
             }.padding(30)
             
             // MARK: PLAY BTN
-            HStack(spacing:50){
+            HStack(spacing:50) {
                 
-                Button(action:{soundControl.playSound(soundName: self.podcastViewModel.episode.audio, isPreview: false)}){
-                    Image(systemName: soundControl.isActive ?  "play.fill" : "pause.fill")
+                Button(action: {
+                    soundControl.playSound(soundName: self.state == 0 ? self.episode.audio : self.upload.audioPath, isPreview: false)
+                }, label: {
+                    Image(systemName: self.soundControl.isActive ?  "play.fill" : "pause.fill")
                         .resizable()
                         .font(.title)
                         .foregroundColor(.orange)
                         .frame(width: 50, height: 50, alignment: .center)
-                    
-                }
+                })
             }
             Spacer()
             
-            HStack{
+            HStack {
                 
                 Image(systemName: "person")
                     .resizable()
@@ -80,20 +84,15 @@ struct StreamingView: View {
                     .frame(width: 45, height: 45)
                     .clipShape(Circle())
                 
-                VStack{
-                    Text(self.podcastViewModel.episode.title)
+                VStack {
+                    Text(self.state == 0 ? self.episode.title : self.upload.title)
                         .font(.caption)
                         .fontWeight(.heavy)
                         .foregroundColor(.black)
                         .lineLimit(1)
                         .frame(alignment: .trailing)
                     
-                    Text("UserName")
-                        .font(.caption2)
-                        .foregroundColor(.gray)
-                        .lineLimit(1)
-                    
-                    Text(self.podcastViewModel.podcast.author)
+                    Text(self.state == 0 ? self.podcastViewModel.podcast.author : self.upload.author)
                         .font(.caption2)
                         .foregroundColor(.gray)
                         .lineLimit(1)
@@ -101,35 +100,51 @@ struct StreamingView: View {
                 }.padding()
                 
                 Spacer()
-
-                HStack{
+                
+                HStack {
                     Spacer()
-                    VStack{
-                        Image(systemName: "message")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                        
-                        Text("comments(INT)")
-                            .font(.caption2)
-                            .foregroundColor(.gray)
-                            .lineLimit(1)
-                        
+                    VStack {
+                        if state == 1 {
+                            Image(systemName: "message")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                            
+                            Text("comments(INT)")
+                                .font(.caption2)
+                                .foregroundColor(.gray)
+                                .lineLimit(1)
+                        }
                         Image(systemName: "heart")
                             .resizable()
                             .frame(width: 20, height: 20)
-                        
-                        Text("likes(INT)")
-                            .font(.caption2)
-                            .foregroundColor(.gray)
-                            .lineLimit(1)
+                            .onTapGesture {
+                                if state == 0 {
+                                    DispatchQueue.main.async {
+                                        self.userViewModel.addFavorite(favorite: episode)
+                                    }
+                                } else {
+                                    print("Users like this upload")
+                                }
+                            }
+                        if state == 1 {
+                            Text("likes(INT)")
+                                .font(.caption2)
+                                .foregroundColor(.gray)
+                                .lineLimit(1)
+                        }
                     }
                 }.padding()
-
+                
             }.padding()
         }
         .onAppear {
             DispatchQueue.main.async {
-                self.podcastViewModel.fetchPodcastById(podcastId: self.podcast_uuid, episodeId: self.episode_uuid)
+                if state == 0 {
+                    self.podcastViewModel.fetchPodcastById(podcastId: self.episode.podcast_uuid, episodeId: self.episode.episode_uuid)
+                    self.userViewModel.addWatchList(watchItem: self.episode)
+                } else {
+                    print("fetching uploads")
+                }
             }
         }
     }
@@ -137,6 +152,6 @@ struct StreamingView: View {
 
 struct StreamingView_Previews: PreviewProvider {
     static var previews: some View {
-        StreamingView(podcast_uuid: "0c28802a7e814a55ada3ba54847258bc", episode_uuid: "6bf59a32de804ede9101f7ba75d12677")
+        StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, likes: [], comments: [])), state: 0)
     }
 }

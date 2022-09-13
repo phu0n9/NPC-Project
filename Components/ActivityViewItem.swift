@@ -23,7 +23,7 @@ struct ActivityViewItem: View {
                     ForEach(self.$userViewModel.userActivityList, id: \.id) { $item in
                         ZStack {
                             // reaching end of the list then load new data
-                            if self.userViewModel.userActivityList.last?.id == item.id {
+                            if self.userViewModel.userActivityList.last?.id == item.id && self.userViewModel.fetchingMore {
                                 GeometryReader { bounds in
                                     LoadingRows()
                                         .onAppear {
@@ -39,7 +39,7 @@ struct ActivityViewItem: View {
                                 .frame(height: 300)
                             } else {
                                 // return original data
-                                EpisodeComponent(episode_uuid: item.episode_uuid, podcast_uuid: item.podcast_uuid, title: item.title, pub_date: item.pub_date, description: item.description, audio: item.audio, image: item.image, length: item.audio_length, isExpanded: $item.isExpanding)
+                                EpisodeComponent(episode: $item, isExpanded: $item.isExpanding)
                             }
                         }
                     }

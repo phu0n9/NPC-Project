@@ -16,7 +16,7 @@ struct ProfileView: View {
     @State var alert = false
     @State var updateStatus = ""
     @EnvironmentObject var viewRouter: ViewRouter
-    
+
     var body: some View {
         NavigationView {
             if self.userViewModel.user.favoriteTopics.count != 3 {
@@ -28,6 +28,7 @@ struct ProfileView: View {
             } else {
                 ScrollView {
                     VStack(spacing: 16) {
+                        
                         if selectedImage != nil {
                             Image(uiImage: selectedImage!)
                                 .resizable()
@@ -66,9 +67,9 @@ struct ProfileView: View {
                             }
                         }
                         
-                        DisableTextComponent(title: Binding.constant("username"), textValue: Binding.constant(self.userViewModel.user.userName), imageName: Binding.constant("person"))
+                        DisableTextComponent(title: Binding.constant("Username"), textValue: Binding.constant(self.userViewModel.user.userName), imageName: Binding.constant("person"))
                         
-                        DisableTextComponent(title: Binding.constant("email"), textValue: Binding.constant(self.userViewModel.user.email), imageName: Binding.constant("envelope"))
+                        DisableTextComponent(title: Binding.constant("Email"), textValue: Binding.constant(self.userViewModel.user.email), imageName: Binding.constant("envelope"))
                         
                         CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: self.$isFull, categoryList: self.$userViewModel.user.favoriteTopics)
                         
@@ -77,7 +78,7 @@ struct ProfileView: View {
                         } label: {
                             HStack {
                                 Spacer()
-                                Text("Edit")
+                                Text("Update")
                                     .foregroundColor(.white)
                                     .padding(.vertical, 10)
                                     .font(.system(size: 14, weight: .semibold))
@@ -113,10 +114,9 @@ struct ProfileView: View {
             Alert(title: Text("Status"), message: Text(self.updateStatus))
         })
         .onAppear {
-            DispatchQueue.global().async {
+            DispatchQueue.main.async {
                 self.userViewModel.fetchUser()
                 self.podcastViewModel.fetchCategories()
-                print(self.userViewModel.user)
             }
         }
     }
@@ -135,14 +135,14 @@ struct ProfileView: View {
     
     func signOutUser() {
         do {
-          try FirebaseManager.shared.auth.signOut()
+            try FirebaseManager.shared.auth.signOut()
             print("Successfully sign out")
         } catch let signOutError as NSError {
-          print("Error signing out: %@", signOutError)
+            print("Error signing out: %@", signOutError)
         }
         withAnimation {
-                viewRouter.currentPage = .login
-            }
+            viewRouter.currentPage = .login
+        }
     }
 }
 

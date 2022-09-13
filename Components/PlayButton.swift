@@ -11,9 +11,10 @@ import SimpleToast
 struct PlayButton: View {
     
     @State private var isDownload = 0
-    @State private var isFavorite = false
     @ObservedObject var soundControl = SoundControl()
+    @ObservedObject private var userViewModel = UserViewModel()
     @Binding var length:Int
+    @Binding var episode : Episodes
     var soundName: String
 
     var body: some View {
@@ -39,15 +40,17 @@ struct PlayButton: View {
             
             // MARK: heart icon
             Button(action: {
-                self.isFavorite.toggle()
+                self.episode.isLiked.toggle()
+                self.userViewModel.addFavorite(favorite: episode)
             }, label: {
-                Image(systemName: self.isFavorite ? "heart.fill" : "heart")
+                Image(systemName: self.episode.isLiked ? "heart.fill" : "heart")
                     .renderingMode(.template)
                     .foregroundColor(.orange)
                     .frame(width:20, height: 20, alignment: .leading)
                     .padding()
             })
-        }.padding()
+        }
+        .padding()
             
 //            //MARK: add list btn
 //            Button(action: {
@@ -74,7 +77,7 @@ struct PlayButton: View {
 
 struct PlayButton_Previews: PreviewProvider {
     static var previews: some View {
-        PlayButton(length:Binding.constant(0), soundName: "sound link")
+        PlayButton(length:Binding.constant(0), episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), soundName: "sound link")
     }
 }
 }
