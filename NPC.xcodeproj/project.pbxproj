@@ -132,6 +132,7 @@
 		A498E01528CF029F00098FBB /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		A498E01728CF02CD00098FBB /* RouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterView.swift; sourceTree = "<group>"; };
 		A4A4F91728CF76C4000C2248 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A4A4F91828D0C721000C2248 /* NPC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NPC.entitlements; sourceTree = "<group>"; };
 		A4AFBB8F28C1128200B87BC9 /* BottomNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavBar.swift; sourceTree = "<group>"; };
 		A4CEE8ED28C8A28400054E14 /* EnviromentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnviromentExtension.swift; sourceTree = "<group>"; };
 		A4F8235328C2FA50007856F2 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
@@ -190,6 +191,7 @@
 		4EEF6B6B28BD273B00610B54 /* NPC */ = {
 			isa = PBXGroup;
 			children = (
+				A4A4F91828D0C721000C2248 /* NPC.entitlements */,
 				4E6D458128C13248005B7DF0 /* Info.plist */,
 				4EEF6B6C28BD273B00610B54 /* NPCApp.swift */,
 				4EEF6B7028BD273C00610B54 /* Assets.xcassets */,
@@ -625,6 +627,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NPC/NPC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NPC/Preview Content\"";
@@ -652,6 +655,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NPC/NPC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NPC/Preview Content\"";
