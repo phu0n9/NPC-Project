@@ -8,6 +8,8 @@
 import Foundation
 import FirebaseFirestore
 import SwiftUI
+import AVFoundation
+import AVKit
 
 class PodcastViewModel: ObservableObject {
     @Published var podcasts = [Podcasts]()
@@ -146,6 +148,8 @@ class PodcastViewModel: ObservableObject {
         })
     }
     
+
+
     func onChanged(value: DragGesture.Value){
         
         let vector = CGVector(dx: value.location.x,dy: value.location.y)
@@ -156,7 +160,12 @@ class PodcastViewModel: ObservableObject {
         let angle = tempAngle < 0 ? 360 + tempAngle : tempAngle
         
         if angle <= 288{
+            let progress = angle / 288
+            let time = TimeInterval(progress) * Double(episode.audio_length)
+            
+ 
             withAnimation(Animation.linear(duration: 0.1)){self.angle =  Double(angle)}
+            
         }
         
     }
