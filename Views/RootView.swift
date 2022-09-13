@@ -9,10 +9,10 @@ import SwiftUI
 
 struct RootView: View {
     
-    @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var routerView: RouterView
     
     var body: some View {
-        switch viewRouter.currentPage {
+        switch routerView.currentPage {
         case .welcome:
             WelcomeView()
         case .login:
@@ -23,13 +23,18 @@ struct RootView: View {
             ProfileView()
         case .activity:
             ActivityView()
+        case .castingUser:
+            CastingView(currentTab: 1)
+        case .castingCommunity:
+            CastingView(currentTab: 0)
+        case .bottomNavBar:
+            BottomNavBar()
         }
-        
     }
 }
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView().environmentObject(ViewRouter())
+        RootView().environmentObject(RouterView())
     }
 }

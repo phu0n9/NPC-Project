@@ -21,6 +21,7 @@ struct StreamingView: View {
     //   @State var width : CGFloat = UIScreen.main.bounds.height < 750 ? 130 : 230
     var width : CGFloat = 200
     var height : CGFloat = 200
+    // MARK: 0 is episode view, 1 is casting view
     var state: Int
     //    var isplaying:Bool = false;
     //

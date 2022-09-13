@@ -13,18 +13,13 @@ struct WelcomeView: View {
     @State private var yAxis : CGFloat = 0
     @State private var addThis : CGFloat = 50
     @State private var isActive: Bool?
+    @EnvironmentObject var routerView: RouterView
     
     var body: some View {
         NavigationView {
             ZStack {
                 Color.welcomeBackground.ignoresSafeArea()
                 VStack {
-                    if let isActive = isActive {
-                        NavigationLink(destination: BottomNavBar(), isActive: Binding.constant(isActive)) {
-                        }
-                        NavigationLink(destination: LoginView(), isActive: Binding.constant(!isActive)) {
-                        }
-                    }
                     ZStack {
                         Color.orange.opacity(0.05).ignoresSafeArea()
                         Image("welcomeScreen")
@@ -52,9 +47,9 @@ struct WelcomeView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 withAnimation {
                     if self.userViewModel.userSettings.token != "" && self.userViewModel.isValid {
-                        self.isActive = true
+                        self.routerView.currentPage = .bottomNavBar
                     } else {
-                        self.isActive = false
+                        self.routerView.currentPage = .login
                     }
                 }
             }

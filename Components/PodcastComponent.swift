@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct PodcastComponent: View {
-    var title: String
-    var image: String
-    var author: String
-    
+    var podcast: Podcasts
+    @State private var isTapped : Bool = false
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: self.image)) { podcastImage in
+            NavigationLink("", destination: PodcastDetailView(podcast: podcast), isActive: self.$isTapped)
+            AsyncImage(url: URL(string: self.podcast.image)) { podcastImage in
                 podcastImage
                     .resizable()
                     .font(.title)
@@ -25,20 +24,24 @@ struct PodcastComponent: View {
                 ProgressView()
             }
             HStack(alignment: .firstTextBaseline, spacing: 10) {
-                Text(self.title)
+                Text(self.podcast.title)
                     .font(.title3)
                     .frame(maxWidth: 100, alignment: .leading)
             }.padding(0)
-            Text(self.author)
+            Text(self.podcast.author)
                 .font(.caption)
                 .foregroundColor(.gray)
                 .frame(maxWidth: 100, alignment: .leading)
-        }.padding(0)
+        }
+        .onTapGesture {
+            self.isTapped.toggle()
+        }
+        .padding(0)
     }
 }
 
 struct PodcastComponent_Previews: PreviewProvider {
     static var previews: some View {
-        PodcastComponent(title: "A very long long long long text", image: "add-list-icon", author: "Author")
+        PodcastComponent(podcast: Podcasts(uuid: "", author: "", description: "", image: "", itunes_id: 23, language: "", title: "", website: "", categories: ["Technology", "Arts"], episodes: []))
     }
 }

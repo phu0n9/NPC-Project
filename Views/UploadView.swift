@@ -22,12 +22,12 @@ struct UploadView : View {
     @State var alertMessage = ""
     @State var alertState = false
     @State var isFinishedRecord = false
-    
+    @EnvironmentObject var routerView: RouterView
+
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading) {
-                    NavigationLink("", destination: CastingView(), isActive: self.$uploadControl.isUploaded)
                     switch state {
                     case 0:
                         Text("Cover Image")
@@ -204,8 +204,10 @@ struct UploadView : View {
                 format.dateStyle = .short
                 let time = format.string(from: mytime)
                 self.uploadControl.uploadCastImage(title: title, description: self.textBindingManager.text, pub_date: time, selectedImage: selectedImage)
+                withAnimation {
+                    routerView.currentPage = .castingUser
+                }
                 self.state = 0
-                
             }
         default:
             self.state = 0

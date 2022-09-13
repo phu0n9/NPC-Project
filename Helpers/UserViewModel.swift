@@ -312,6 +312,7 @@ class UserViewModel : ObservableObject {
         })
     }
     
+    // MARK: reset user default
     func resetUserDefault() {
         self.userSettings.token = ""
         self.userSettings.username = ""

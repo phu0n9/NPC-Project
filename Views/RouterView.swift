@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class ViewRouter: ObservableObject {
+class RouterView: ObservableObject {
     // By default it direct the user to the user welcome page
     @Published var currentPage: Page = .welcome
 }
@@ -18,4 +18,7 @@ enum Page {
     case trending // In case we want to access these page
     case activity
     case profile
+    case castingUser
+    case castingCommunity
+    case bottomNavBar
 }

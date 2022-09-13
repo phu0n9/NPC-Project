@@ -11,9 +11,7 @@ struct TrendingView: View {
     @ObservedObject var podcastViewModel = PodcastViewModel()
     @ObservedObject var userSettings = UserSettings()
     @State var time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
-    
-    @State var logoutSuccess = false
-    @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var routerView: RouterView
     @State private var isTapped: Bool = false
     @State private var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
     @State private var upload = Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, likes: [], comments: [])
@@ -21,15 +19,14 @@ struct TrendingView: View {
     var body: some View {
         
         ScrollView {
-            NavigationLink("", destination: LoginView(), isActive: self.$logoutSuccess)
-                .isDetailLink(false)
             ScrollView(.horizontal) {
                 
                 HStack(spacing: 10) {
                     ForEach(self.podcastViewModel.podcasts, id: \.id) { podcast in
-                        PodcastComponent(title: podcast.title, image: podcast.image, author: podcast.author)
+                        PodcastComponent(podcast: podcast)
                     }
-                }.padding()
+                }
+                .padding()
             }
             
             Divider()

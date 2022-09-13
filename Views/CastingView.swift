@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CastingView: View {
-    @State var currentTab: Int = 0
+    @State var currentTab: Int
     @State var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
     @State var upload = Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, likes: [], comments: [])
     let titleTab = [0: "Community", 1: "Your Cast"]
@@ -27,6 +27,6 @@ struct CastingView: View {
 
 struct CastingView_Previews: PreviewProvider {
     static var previews: some View {
-        CastingView()
+        CastingView(currentTab: 0)
     }
 }
