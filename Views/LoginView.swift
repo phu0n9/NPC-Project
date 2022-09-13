@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct LoginView: View {
     
@@ -132,8 +133,12 @@ struct LoginView: View {
                     }
                     
                     Button {
+                        
                         self.btnClicked.toggle()
+                        allowShowNotification()
+                        showNotificationWhenLogin()
                         handleAction()
+                    
                     } label: {
                         HStack {
                             Spacer()
@@ -191,8 +196,28 @@ struct LoginView: View {
         }
     }
     
-    private func createNewAccount() {
+    private func createNewAccount(){}
+    
+    private func allowShowNotification(){
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){success,_ in
+            guard success else {
+                return
+            }
+            print("Succesfully Allow Notification")
+        }
+    }
+    
+    private func showNotificationWhenLogin(){
+        let content = UNMutableNotificationContent()
+        content.title = "NPC App has new updates for you"
+        content.subtitle = "Welcome back \(username)"
+        content.sound = UNNotificationSound.default
         
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
     }
 }
 
