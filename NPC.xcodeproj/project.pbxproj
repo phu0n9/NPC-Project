@@ -66,6 +66,7 @@
 		A497D80F28C1C1F800D8A5CA /* EpisodeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A497D80E28C1C1F800D8A5CA /* EpisodeComponent.swift */; };
 		A498E01628CF029F00098FBB /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498E01528CF029F00098FBB /* RootView.swift */; };
 		A498E01828CF02CD00098FBB /* RouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498E01728CF02CD00098FBB /* RouterView.swift */; };
+		A4A4F91A28D17B93000C2248 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A4F91928D17B93000C2248 /* LocalNotificationManager.swift */; };
 		A4AFBB9028C1128300B87BC9 /* BottomNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AFBB8F28C1128200B87BC9 /* BottomNavBar.swift */; };
 		A4CEE8EE28C8A28400054E14 /* EnviromentExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CEE8ED28C8A28400054E14 /* EnviromentExtension.swift */; };
 		A4F8235428C2FA50007856F2 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8235328C2FA50007856F2 /* PlayButton.swift */; };
@@ -136,6 +137,8 @@
 		A498E01528CF029F00098FBB /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		A498E01728CF02CD00098FBB /* RouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterView.swift; sourceTree = "<group>"; };
 		A4A4F91728CF76C4000C2248 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A4A4F91828D0C721000C2248 /* NPC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NPC.entitlements; sourceTree = "<group>"; };
+		A4A4F91928D17B93000C2248 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		A4AFBB8F28C1128200B87BC9 /* BottomNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavBar.swift; sourceTree = "<group>"; };
 		A4CEE8ED28C8A28400054E14 /* EnviromentExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnviromentExtension.swift; sourceTree = "<group>"; };
 		A4F8235328C2FA50007856F2 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
@@ -194,6 +197,7 @@
 		4EEF6B6B28BD273B00610B54 /* NPC */ = {
 			isa = PBXGroup;
 			children = (
+				A4A4F91828D0C721000C2248 /* NPC.entitlements */,
 				4E6D458128C13248005B7DF0 /* Info.plist */,
 				4EEF6B6C28BD273B00610B54 /* NPCApp.swift */,
 				4EEF6B7028BD273C00610B54 /* Assets.xcassets */,
@@ -266,6 +270,7 @@
 				4E98FDD328C56653006D2566 /* SoundControl.swift */,
 				4E98FDD928C87C54006D2566 /* UploadViewModel.swift */,
 				4E26037E28CE315D00DC739B /* TextBindingManager.swift */,
+				A4A4F91928D17B93000C2248 /* LocalNotificationManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -475,6 +480,7 @@
 				4E26039428D0498600DC739B /* UserCastingView.swift in Sources */,
 				A491745E28C5D99700443F0D /* SignUpView.swift in Sources */,
 				4E6D455928BF285D005B7DF0 /* ContentView.swift in Sources */,
+				A4A4F91A28D17B93000C2248 /* LocalNotificationManager.swift in Sources */,
 				4E6D455528BF2838005B7DF0 /* Settings.swift in Sources */,
 				4E26038728CEFD7800DC739B /* TabBarItem.swift in Sources */,
 				A477165B28CC611200BCA3F8 /* PrefCategoryComponent.swift in Sources */,
@@ -633,6 +639,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NPC/NPC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NPC/Preview Content\"";
@@ -660,6 +667,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NPC/NPC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NPC/Preview Content\"";

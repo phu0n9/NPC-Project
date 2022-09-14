@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct LoginView: View {
     
@@ -27,6 +28,8 @@ struct LoginView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var routerView: RouterView
     
+    @ObservedObject var notificationManager = LocalNotificationManager() // Notification
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -41,6 +44,9 @@ struct LoginView: View {
                     }.pickerStyle(SegmentedPickerStyle())
                     
                     Button {
+                        withAnimation {
+                            self.notificationManager.sendNotification(title: "Hurray!", subtitle: nil, body: "If you see this text, launching the local notification worked!", launchIn: 5)
+                        }
                     } label: {
                         Image("transition")
                             .font(.system(size: 64))
@@ -132,8 +138,10 @@ struct LoginView: View {
                     }
                     
                     Button {
+                        
                         self.btnClicked.toggle()
                         handleAction()
+                    
                     } label: {
                         HStack {
                             Spacer()
@@ -191,8 +199,28 @@ struct LoginView: View {
         }
     }
     
-    private func createNewAccount() {
+    private func createNewAccount(){}
+    
+    private func allowShowNotification(){
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){success,_ in
+            guard success else {
+                return
+            }
+            print("Succesfully Allow Notification")
+        }
+    }
+    
+    private func showNotificationWhenLogin(){
+        let content = UNMutableNotificationContent()
+        content.title = "NPC App has new updates for you"
+        content.subtitle = "Welcome back \(username)"
+        content.sound = UNNotificationSound.default
         
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
     }
 }
 
