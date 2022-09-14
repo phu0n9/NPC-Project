@@ -13,6 +13,7 @@ struct ProfileView: View {
     @State var selectedImage: UIImage?
     @State var isSubmit = false
     @State var isFull = true
+    //
     @State var alert = false
     @State var updateStatus = ""
     @EnvironmentObject var routerView: RouterView
