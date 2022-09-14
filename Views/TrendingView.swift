@@ -28,19 +28,17 @@ struct TrendingView: View {
                     .fontWeight(.regular)
                     .frame(alignment: .topTrailing)
                     .padding(5)
-                    .font(.system(size: 24))
+                    .font(.system(size: 20))
                 Spacer()
-            }.padding(10)
+            }.padding(5)
 
             ScrollView(.horizontal) {
-
                 HStack(spacing: 10) {
-          
                     ForEach(self.podcastViewModel.podcasts, id: \.id) { podcast in
                         PodcastComponent(podcast: podcast)
                     }
                 }
-                .padding()
+               
             }
             
             Divider()
@@ -52,9 +50,9 @@ struct TrendingView: View {
                     
                         Text("Your Episodes")
                             .fontWeight(.regular)
-                            .font(.system(size: 24))
                             .frame(alignment: .topTrailing)
                             .padding(5)
+                            .font(.system(size: 20))
                         Spacer()
                          
                     }.padding(10)

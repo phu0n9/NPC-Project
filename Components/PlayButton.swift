@@ -23,10 +23,10 @@ struct PlayButton: View {
                 Button(action: {
                     self.soundControl.playSound(soundName: soundName, isPreview: true)
                 }, label: {
-                    Image(self.soundControl.isActive ? "play-circle-icon" : "pause-circle-icon")
+                    Image(systemName: self.soundControl.isActive ?  "play.fill" : "pause.fill")
                         .renderingMode(.template)
                         .foregroundColor(.orange)
-                        .frame(width:15, height: 6, alignment: .leading)
+                        .frame(width:13, height: 6, alignment: .leading)
                         .padding(5)
                     Text(String(self.length))
                         .font(.caption)
@@ -37,7 +37,7 @@ struct PlayButton: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color(red: 1, green: 0.4902, blue: 0.3216), lineWidth: 1))
-            
+                    
             // MARK: heart icon
             Button(action: {
                 self.episode.isLiked.toggle()
@@ -48,9 +48,9 @@ struct PlayButton: View {
                     .foregroundColor(.orange)
                     .frame(width:20, height: 20, alignment: .leading)
                     .padding()
-            })
+            }).padding(0)
         }
-        .padding()
+        .padding(0)
             
 }
     
