@@ -28,6 +28,8 @@ struct LoginView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var routerView: RouterView
     
+    @ObservedObject var notificationManager = LocalNotificationManager() // Notification
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -42,6 +44,9 @@ struct LoginView: View {
                     }.pickerStyle(SegmentedPickerStyle())
                     
                     Button {
+                        withAnimation {
+                            self.notificationManager.sendNotification(title: "Hurray!", subtitle: nil, body: "If you see this text, launching the local notification worked!", launchIn: 5)
+                        }
                     } label: {
                         Image("transition")
                             .font(.system(size: 64))
@@ -135,8 +140,6 @@ struct LoginView: View {
                     Button {
                         
                         self.btnClicked.toggle()
-                        allowShowNotification()
-                        showNotificationWhenLogin()
                         handleAction()
                     
                     } label: {

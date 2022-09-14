@@ -10,12 +10,20 @@ import FirebaseCore
 import Firebase
 import FirebaseMessaging
 
-class AppDelegate: NSObject, UIApplicationDelegate  {
+class AppDelegate: NSObject, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
         
-//        // Notification stuff
+        // Configure notification local
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){success,_ in
+            guard success else {
+                return
+            }
+            print("Succesfully Allow Notification")
+        }
+        
+//        // Push Notification (Server), MessagingDelegate, UNUserNotificationCenterDelegate
 //        Messaging.messaging().delegate = self
 //        UNUserNotificationCenter.current().delegate = self
 //
@@ -50,8 +58,8 @@ struct NPCApp: App {
     var body: some Scene {
         WindowGroup {
             // WelcomeView()
-            ContentView()
-            // RootView().environmentObject(routerView)
+            // ContentView()
+            RootView().environmentObject(routerView)
         }
     }
 }
