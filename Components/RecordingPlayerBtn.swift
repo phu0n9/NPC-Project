@@ -13,29 +13,42 @@ struct RecordingPlayerBtn: View {
     @Binding var isDeleted: Bool
     
     var body: some View {
-        Button(action: {
-            self.soundControl.playSound(soundName: soundName, isPreview: false)
-        }, label: {
-            Image(self.soundControl.isActive ? "play-circle-icon" : "pause-circle-icon")
-                .renderingMode(.template)
-                .foregroundColor(.orange)
-                .frame(width:15, height: 6, alignment: .leading)
+    
+        VStack{
+            
+            HStack(alignment:.firstTextBaseline, spacing: 0){
+
+                
+                    Button(action :{
+                        self.soundControl.playSound(soundName: self.soundName, isPreview: false)
+                    },label: {
+                        Image(systemName: self.soundControl.isActive ? "play.fill" : "pause.fill")
+                            .renderingMode(.template)
+                            .foregroundColor(.black)
+                            .frame( width:290,alignment: .bottomTrailing)
+                            .padding(4)
+                        
+                    })
+                    
+                    Button(action: {
+                            self.isDeleted.toggle()
+                        }, label: {
+                            Spacer()
+                            Text("Delete")
+                                .background(.black)
+                                .cornerRadius(5)
+                                .foregroundColor(.white)
+                                .padding(5)
+                    })
+                
+                    Spacer()
+                }
+            
+            Text("Your cast has been recorded successfully!")
                 .padding(5)
-            Text(soundName)
-                .font(.caption)
+                .lineLimit(1)
                 .foregroundColor(.black)
-                .padding(9)
-            Button(action: {
-                self.isDeleted.toggle()
-            }, label: {
-                Image(systemName: "x.square.fill")
-                    .renderingMode(.template)
-                    .foregroundColor(.orange)
-                    .frame(width:30, height: 15, alignment: .trailing)
-                    .padding(5)
-            })
-        })
-        .overlay(
+        }.overlay(
             RoundedRectangle(cornerRadius: 5)
                 .fill(Color.orange.opacity(0.05))
                 .allowsHitTesting(false)

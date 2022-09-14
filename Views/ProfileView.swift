@@ -81,12 +81,12 @@ struct ProfileView: View {
                                 Text("Update")
                                     .foregroundColor(.white)
                                     .padding(.vertical, 10)
-                                    .font(.system(size: 14, weight: .semibold))
+                                    .font(.system(size: 18, weight: .bold))
                                 Spacer()
                             }.background(Color(red: 1, green: 0.4902, blue: 0.3216))
                         }
                         .padding(0)
-                        .frame(width: 380, height: 50)
+                        .frame(width: 280, height: 50)
                         
                         Button {
                             signOutUser()
@@ -96,12 +96,12 @@ struct ProfileView: View {
                                 Text("Log out")
                                     .foregroundColor(.white)
                                     .padding(.vertical, 10)
-                                    .font(.system(size: 14, weight: .semibold))
+                                    .font(.system(size: 18, weight: .bold))
                                 Spacer()
-                            }.background(Color(red: 1, green: 0.4902, blue: 0.3216))
+                            }.background(.red)
                         }
                         .padding(0)
-                        .frame(width: 380, height: 50)
+                        .frame(width: 280, height: 50)
                     }
                 }
                 .navigationBarHidden(true)
