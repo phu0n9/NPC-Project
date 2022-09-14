@@ -57,10 +57,10 @@ class UploadViewModel: ObservableObject {
         var query: Query!
         
         if uploads.isEmpty {
-            query = db.collectionGroup(Settings.uploadsCollection).order(by: "numOfLikes", descending: true).limit(to: 5)
+            query = db.collectionGroup(Settings.uploadsCollection).order(by: "numOfLikes", descending: true).limit(to: 2)
             print("First 5 uploads loaded")
         } else {
-            query = db.collectionGroup(Settings.uploadsCollection).order(by: "numOfLikes", descending: true).start(afterDocument: lastDocumentSnapshot).limit(to: 5)
+            query = db.collectionGroup(Settings.uploadsCollection).order(by: "numOfLikes", descending: true).start(afterDocument: lastDocumentSnapshot).limit(to: 2)
             print("Next 5 uploads loaded")
         }
         

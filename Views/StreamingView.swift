@@ -75,10 +75,9 @@ struct StreamingView: View {
                         .frame(width: 50, height: 50, alignment: .center)
                 })
             }
-            Spacer()
+//            Spacer()
             
             HStack {
-                
                 Image(systemName: "person")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -98,7 +97,8 @@ struct StreamingView: View {
                         .foregroundColor(.gray)
                         .lineLimit(1)
                     
-                }.padding()
+                }
+                .padding()
                 
                 Spacer()
                 
@@ -134,10 +134,11 @@ struct StreamingView: View {
                                 .lineLimit(1)
                         }
                     }
-                }.padding()
-                
+                }
+                .padding()
             }.padding()
         }
+        .frame(height: UIScreen.main.bounds.height)
         .background(Color(UIColor.systemBackground))
         .onAppear {
             DispatchQueue.main.async {
@@ -150,8 +151,8 @@ struct StreamingView: View {
     }
 }
 
-// struct StreamingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, likes: [], comments: [])), state: 0)
-//    }
-// }
+struct StreamingView_Previews: PreviewProvider {
+    static var previews: some View {
+        StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, likes: [], comments: [])), state: 0)
+    }
+}
