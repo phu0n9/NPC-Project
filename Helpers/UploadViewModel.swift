@@ -45,7 +45,7 @@ class UploadViewModel: ObservableObject {
         
         if let comments = commentList {
             self.commentObj = comments.map {(value) -> Comments in
-                return Comments(author: value["author"] as! String, userID: value["userID"] as! String, content: value["content"] as! String)
+                return Comments(author: value["author"] as! String, userID: value["userID"] as! String, content: value["content"] as! String, image: value["image"] as! String)
             }
         }
     }
@@ -185,16 +185,51 @@ class UploadViewModel: ObservableObject {
         })
     }
     
-    func fetchCommentsByUpload() {
-        
+    // MARK: Fetch comments by upload ID
+    func fetchCommentsByUploadID(uploadID: String) {
+        db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.uploadsCollection).document(uploadID)
+            .addSnapshotListener( {(querySnapShot, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            
+            guard let document = querySnapShot else {
+                print("No upload from userID: \(self.userSettings.uuid)")
+                return
+            }
+            
+            let commentList = document.get("comments") as? [[String:Any]]
+            
+            if let comments = commentList {
+                for comment in comments {
+                    let commentItem = Comments(author: comment["author"] as! String, userID: comment["userID"] as! String, content: comment["content"] as! String, image: comment["image"] as! String)
+                    self.commentObj.append(commentItem)
+                }
+            }
+        })
     }
     
-    func addComments() {
-        
-    }
-    
-    func editComments() {
-        
+    // MARK: Add comments by upload ID
+    func addComments(uploadID: String, comment: Comments) {
+        db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.uploadsCollection).document(uploadID)
+            .addSnapshotListener( {(querySnapShot, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            
+            guard let document = querySnapShot else {
+                print("No upload from userID: \(self.userSettings.uuid)")
+                return
+            }
+            
+            let commentList = document.get("comments") as? [[String:Any]]
+            
+            if var comments = commentList {
+                let commentObject = ["author": comment.author, "userID": comment.userID, "content": comment.content, "image": comment.image]
+                comments.append(commentObject)
+                document.reference.updateData(["comments" : comments])
+            }
+        })
     }
     
     func deleteComments() {

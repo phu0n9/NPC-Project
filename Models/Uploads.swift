@@ -34,4 +34,5 @@ struct Comments: Identifiable {
     var author: String
     var userID: String
     var content: String
+    var image : String
 }

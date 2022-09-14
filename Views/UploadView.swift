@@ -50,7 +50,7 @@ struct UploadView : View {
                             Image(systemName: "photo")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 100, height: 100,alignment: .center)
+                                .frame(width: 100, height: 100, alignment: .center)
                                 .clipShape(Circle())
                                 .onTapGesture {
                                     self.isPickerShowing = true
@@ -203,7 +203,7 @@ struct UploadView : View {
             let time = format.string(from: mytime)
             self.uploadControl.uploadCastImage(title: title, description: self.textBindingManager.text, pub_date: time, selectedImage: selectedImage)
             withAnimation {
-                routerView.currentPage = .castingUser
+                routerView.currentPage = .bottomNavBar
             }
         }
     }
