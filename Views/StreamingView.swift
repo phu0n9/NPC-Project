@@ -51,6 +51,7 @@ struct StreamingView: View {
                         .stroke(Color(.orange), lineWidth: 4)
                         .frame(width: width+45, height: height+45)
                     
+                    
                     Circle()
                         .fill(Color("MainButton"))
                         .frame(width: 25, height: 25)

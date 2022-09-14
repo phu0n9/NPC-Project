@@ -27,6 +27,13 @@ struct UploadView : View {
     var body: some View {
         NavigationView {
             ScrollView {
+
+                VStack(spacing:0) {
+                    NavigationLink("", destination: CastingView(currentTab: 0), isActive: self.$uploadControl.isUploaded)
+//                    switch state {
+//                    case 0:
+//
+
                 VStack(alignment: .leading) {
                     switch state {
                     case 0:
@@ -34,97 +41,97 @@ struct UploadView : View {
                             .font(.system(size: 20))
                             .fontWeight(.bold)
                             .padding(.leading, 20)
+
                         if self.selectedImage != nil {
-                            Image(uiImage: selectedImage!)
+                           
+                                Image(uiImage: selectedImage!)
                                 .resizable()
-                                .frame(width: 350, height: 250, alignment: .center)
-                                .padding(.leading, 20)
-                                .onTapGesture {
-                                    self.isPickerShowing = true
-                                }
-                        } else {
-                            Image(systemName: "photo")
-                                .resizable()
-                                .frame(width: 350, height: 250, alignment: .center)
-                                .padding(.leading, 20)
-                                .onTapGesture {
-                                    self.isPickerShowing = true
-                                }
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 150, height: 150)
+                                .clipShape(Circle())
+                                    .onTapGesture {
+                                        self.isPickerShowing = true
+                                    
+                                    }
+                            } else {
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 100, height: 100,alignment: .center)
+                                    .clipShape(Circle())
+                                    .onTapGesture {
+                                        self.isPickerShowing = true
+                                    }
                         }
-                        Text("Title")
-                            .font(.system(size: 20))
-                            .fontWeight(.bold)
-                            .padding(.leading, 20)
-                        Capsule()
-                        /* #f5f5f5 */
-                            .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
-                            .frame(width: 380, height: 50)
-                            .padding(0)
-                            .overlay(
-                                HStack {
-                                    TextField("Title", text: $title)
-                                        .offset(x: 40, y: 0)
-                                }
-                            )
-                            .padding(6)
-                            .autocapitalization(.none)
+                        Text("Cover Image")
+                            .font(.system(size: 15))
+                            .padding(10)
+                            .frame(width: 200, height: 50, alignment: .center)
                         
-                        Text("Description")
+                        Text("Information")
                             .font(.system(size: 20))
-                            .fontWeight(.bold)
-                            .padding(.leading, 20)
+                            .fontWeight(.regular)
+                            .frame(width: 300, height: 50, alignment: .leading)
+                            .padding(5)
                         
                         Capsule()
                         /* #f5f5f5 */
                             .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
-                            .frame(width: 380, height: 150, alignment: .center)
-                            .padding(0)
+                            .frame(width: UIScreen.main.bounds.width-30, height: 50)
+                       
                             .overlay(
                                 HStack {
-                                    TextField("Description", text: self.$textBindingManager.text)
-                                        .offset(x: 40, y: 0)
+                                    TextField("Enter your Podcasts' Title", text: $title)
+                                        .offset(x: 30, y: 0)
                                 }
                             )
                             .padding(6)
                             .autocapitalization(.none)
-                        
-                    case 1:
-                        // MARK: Back button
-                        Button {
-                            self.state -= 1
-                        } label: {
-                            Image(systemName: "arrowshape.backward")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 50, height: 50)
-                                .background(Color("MainButton"))
-                        }
-                        .padding(.leading, 20)
-                        
+
+                        Capsule()
+                        /* #f5f5f5 */
+                            .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
+                            .frame(width: UIScreen.main.bounds.width-30, height: 50, alignment: .center)
+                            .padding(0)
+                            .overlay(
+                                HStack {
+                                    TextField("Describe your Podcast in one sentence", text: self.$textBindingManager.text)
+                                        .offset(x: 30, y: 0)
+                                }
+                            )
+                            .padding(10)
+                            .autocapitalization(.none)
+
                         Text("Recording your cast")
                             .font(.system(size: 20))
-                            .fontWeight(.bold)
-                            .padding(.leading, 20)
-                        
+                            .fontWeight(.regular)
+                            .frame(width: 300, height: 50, alignment: .leading)
+                            .padding(5)
+                    
+                    if self.isFinishedRecord == false {
+                    
                         VStack(alignment: .center) {
                             Button(action: {
                                 self.uploadControl.recordAudio()
                             }, label: {
                                 ZStack {
-                                    Circle()
-                                        .frame(width: 150, height: 150)
-                                        .foregroundColor(Color("MainButton"))
+                                    Rectangle()
+                                        .frame(width: UIScreen.main.bounds.width-80, height: 50)
+                                        .foregroundColor(.white)
+                                        .border(Color("MainButton"))
+                                        
                                     if self.uploadControl.record {
-                                        Circle()
-                                            .stroke(Color.black)
-                                            .frame(width: 160, height: 160)
+                                        Rectangle()
+                                            .stroke(Color("MainButton"))
+                                            .foregroundColor(Color("MainButton"))
+                                            .frame(width: UIScreen.main.bounds.width-80, height: 50)
                                     }
-                                    Image(systemName: "play")
+                                    Image(systemName: self.uploadControl.record ?  "pause.fill" : "play.fill")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(width: 40, height: 40, alignment: .center)
-                                        .foregroundColor(Color.black)
-                                        .padding()
+                                        .frame(width: 30, height: 30, alignment:.trailing)
+                                        .foregroundColor(.black)
+                                       
                                 }
                             })
                             .disabled(self.isFinishedRecord)
@@ -139,31 +146,36 @@ struct UploadView : View {
                                 }
                             }
                             
-                            if self.isFinishedRecord {
-                                withAnimation(.spring()) {
-                                    RecordingPlayerBtn(soundName: self.uploadControl.recorder?.url.relativeString ?? "", isDeleted: self.$isFinishedRecord)
-                                }
-                            }
+                            Spacer()
+                            
                         }
                         .frame(width: UIScreen.main.bounds.width)
-                        
-                    default:
-                        EmptyView()
                     }
+                    
+                    else {
+                        withAnimation(.spring()) {
+                            RecordingPlayerBtn(soundName: self.uploadControl.recorder?.url.relativeString ?? "", isDeleted: self.$isFinishedRecord)
+                        }
+                    }
+                    
+                    
+                    Spacer()
+                    
                     Button {
-                        self.handleUpload(value: self.state)
+                        self.handleUpload()
                     } label: {
                         HStack {
                             Spacer()
-                            Text(state != 1 ? "Next": "Cast away")
+                            Text( "Cast away")
                                 .foregroundColor(.white)
                                 .padding(.vertical, 10)
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.system(size: 18, weight: .bold))
                             Spacer()
                         }.background(Color("MainButton"))
                     }
-                    .padding(.leading, 20)
-                    .frame(width: 380, height: 50)
+                    .padding(.top, 100)
+                    .frame(width: 200, height: 50)
+                    
                 }
             }
             .navigationBarHidden(true)
@@ -181,20 +193,15 @@ struct UploadView : View {
         }
     }
     
-    func handleUpload(value: Int) {
-        switch value {
-        case 0:
+    //MARK: HandleUpload fuction
+    func handleUpload() {
             if title == "" {
                 self.alertMessage = "Please insert title!"
                 self.alertState = true
             } else if selectedImage == nil {
                 self.alertMessage = "Please upload image!"
                 self.alertState = true
-            } else {
-                self.state += 1
-            }
-        case 1:
-            if self.uploadControl.recorder == nil {
+            } else if self.uploadControl.recorder == nil {
                 self.alertMessage = "Please upload record!"
                 self.alertState.toggle()
             } else {
@@ -209,11 +216,13 @@ struct UploadView : View {
                 }
                 self.state = 0
             }
-        default:
-            self.state = 0
+        
         }
-    }
 }
+
+
+        
+        
 
 struct UploadView_Previews: PreviewProvider {
     static var previews: some View {

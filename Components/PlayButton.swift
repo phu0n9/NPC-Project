@@ -52,28 +52,8 @@ struct PlayButton: View {
         }
         .padding()
             
-//            //MARK: add list btn
-//            Button(action: {
-//                isDownload += 1
-//                print("downdload-button clicked")
-//            }, label: {
-//                if isAddedToMyList % 2 == 0 {
-//                    Image(systemName: "square.arrow.down")
-//                        .renderingMode(.template)
-//                        .foregroundColor(.orange)
-//                        .frame(width:20, height: 20, alignment: .leading)
-//                        .padding()
-//
-//                } else {
-//                    Image(systemName: "square.arrow.down.fill")
-//                        .renderingMode(.template)
-//                        .foregroundColor(.orange)
-//                        .frame(width:20, height: 20, alignment: .leading)
-//                        .padding()
-//                }
-//            })
-    
 }
+    
 
 struct PlayButton_Previews: PreviewProvider {
     static var previews: some View {
