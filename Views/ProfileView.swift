@@ -33,39 +33,43 @@ struct ProfileView: View {
                         if selectedImage != nil {
                             Image(uiImage: selectedImage!)
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(Circle())
-                                .frame(width: 200, height: 200, alignment: .center)
-                                .padding()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 150, height: 150)
+                                .clipShape(Rectangle())
+                                .cornerRadius(20)
                                 .onTapGesture {
                                     self.isPickerShowing = true
                                 }
+                                .padding()
                         } else {
                             if self.userViewModel.user.profilePic == "" {
                                 Image(systemName: "person.circle.fill")
                                     .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .clipShape(Circle())
-                                    .frame(width: 200, height: 200, alignment: .center)
-                                    .padding()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 150, height: 150)
+                                    .clipShape(Rectangle())
+                                    .cornerRadius(20)
                                     .onTapGesture {
                                         self.isPickerShowing = true
                                     }
+                                    .padding()
                             } else {
                                 AsyncImage(url: URL(string: self.userViewModel.user.profilePic)) { image in
                                     image
                                         .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .clipShape(Circle())
-                                        .frame(width: 200, height: 200, alignment: .center)
-                                        .padding()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 150, height: 150)
+                                        .clipShape(Rectangle())
+                                        .cornerRadius(20)
                                         .onTapGesture {
                                             self.isPickerShowing = true
                                         }
                                 } placeholder: {
                                     ProgressView()
                                 }
+                                .padding()
                             }
+                            
                         }
                         
                         DisableTextComponent(title: Binding.constant("Username"), textValue: Binding.constant(self.userViewModel.user.userName), imageName: Binding.constant("person"))
@@ -79,15 +83,23 @@ struct ProfileView: View {
                         } label: {
                             HStack {
                                 Spacer()
+                                Image(systemName: "arrow.clockwise.circle.fill")
+                                    .renderingMode(.template)
+                                    .foregroundColor(.white)
+                                    .font(.system(size:30,
+                                                  weight: .regular,
+                                                  design: .default))
                                 Text("Update")
                                     .foregroundColor(.white)
                                     .padding(.vertical, 10)
                                     .font(.system(size: 22, weight: .bold))
+                                    .cornerRadius(20)
                                 Spacer()
                             }.background(Color(red: 1, green: 0.4902, blue: 0.3216))
                         }
                         .padding(0)
                         .frame(width: 280, height: 50)
+                        .cornerRadius(50)
                         
                         Button {
                             signOutUser()
@@ -95,15 +107,22 @@ struct ProfileView: View {
                             HStack {
                                 Spacer()
                                 Image(systemName: "leaf.fill")
+                                    .renderingMode(.template)
+                                    .foregroundColor(.white)
+                                    .font(.system(size:30,
+                                                  weight: .regular,
+                                                  design: .default))
                                 Text("Log out")
                                     .foregroundColor(.white)
                                     .padding(.vertical, 10)
                                     .font(.system(size: 22, weight: .bold))
+                                    
                                 Spacer()
                             }.background(.black)
                         }
                         .padding(0)
                         .frame(width: 280, height: 50)
+                        .cornerRadius(50)
                     }
                 }
                 .navigationBarHidden(true)

@@ -16,13 +16,13 @@ struct DisableTextComponent: View {
         Capsule()
         /* #f5f5f5 */
             .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
-            .frame(width: 380, height: 50)
+            .frame(width: 320, height: 40)
             .padding(0)
             .overlay(
                 HStack {
                     Image(systemName: imageName)
                         .resizable()
-                        .frame(width: 20, height: 20, alignment: .trailing)
+                        .frame(width: 25, height: 20, alignment: .trailing)
                         .offset(x: 20, y: 0)
                     TextField(title, text: $textValue)
                         .keyboardType(.emailAddress)

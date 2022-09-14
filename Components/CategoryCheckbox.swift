@@ -18,8 +18,8 @@ struct CategoryCheckbox: View {
                 VStack(alignment: .leading, spacing: 5) {
                     ForEach(self.$fetchCategoryList, id: \.id) { $category in
                         Toggle(category.categories, isOn: $category.checked).toggleStyle(CheckBoxToggleStyle())
-                            .font(.system(size: 20, weight: .semibold))
-                            .padding()
+                            .font(.system(size: 16, weight: .medium))
+                            .padding(10)
                             .disabled(isFull == true && category.checked == false)
                     }
                     .onAppear {
@@ -48,10 +48,10 @@ struct CategoryCheckbox: View {
             .frame(width: UIScreen.main.bounds.width - 70, height: 350, alignment: .center)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
-                    .fill(Color.orange.opacity(0.05))
+                    .fill(Color("MainButton").opacity(0.1))
                     .allowsHitTesting(false)
                     .frame(width: UIScreen.main.bounds.width - 70, height: 350)
-                    .addBorder(Color.orange, width: 2, cornerRadius: 5)
+                    .addBorder(Color("MainButton"), width: 2, cornerRadius: 5)
             )
             .padding()
         }

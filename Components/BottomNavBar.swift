@@ -98,7 +98,7 @@ struct BottomNavBar: View {
                             .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
                         }
                         else if number == 4{
-                            Image(systemName: "person")
+                            Image(systemName: "person.fill")
                             .renderingMode(.template)
                             .font(.system(size:25,
                                           weight: .regular,
