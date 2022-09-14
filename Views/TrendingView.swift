@@ -25,11 +25,12 @@ struct TrendingView: View {
 
             HStack(alignment: .firstTextBaseline) {
                 Text("Podcast for you")
-                    .fontWeight(.bold)
+                    .fontWeight(.regular)
                     .frame(alignment: .topTrailing)
                     .padding(5)
+                    .font(.system(size: 24))
                 Spacer()
-            }
+            }.padding(10)
 
             ScrollView(.horizontal) {
 
@@ -43,19 +44,20 @@ struct TrendingView: View {
             }
             
             Divider()
-            Divider()
+
             
             ScrollView {
                 LazyVStack {
                     HStack(alignment: .firstTextBaseline) {
                     
-                        Text("Your Episode")
-                            .fontWeight(.bold)
+                        Text("Your Episodes")
+                            .fontWeight(.regular)
+                            .font(.system(size: 24))
                             .frame(alignment: .topTrailing)
                             .padding(5)
                         Spacer()
                          
-                    }
+                    }.padding(10)
                     ForEach(self.$podcastViewModel.paginatedEpisodes, id: \.id) { $episode in
                         
                         ZStack {

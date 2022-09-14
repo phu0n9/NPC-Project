@@ -21,7 +21,7 @@ struct EpisodeComponent: View {
                     podcastImage
                         .resizable()
                         .font(.title)
-                        .frame(width: 56, height: 56)
+                        .frame(width: 70, height: 70)
                         .clipShape(Circle())
                         .foregroundColor(.orange)
                         .cornerRadius(20)

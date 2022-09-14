@@ -29,7 +29,7 @@ struct UploadView : View {
                 
                 VStack(spacing:0) {
                     
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .center) {
                         
                         Text("Cover Image")
                             .font(.system(size: 20))

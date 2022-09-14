@@ -34,13 +34,13 @@ struct ViewComponent<Destination:View>: View {
                             .frame(width: 20, height: 20, alignment: .leading)
                     }
                     
-                    Button {
-                        print("loggout clicked")
-                    } label: {
-                        Image(systemName: "arrow.left.square")
-                            .resizable()
-                            .frame(width: 20, height: 20, alignment: .leading)
-                    }
+//                    Button {
+//                        print("loggout clicked")
+//                    } label: {
+//                        Image(systemName: "arrow.left.square")
+//                            .resizable()
+//                            .frame(width: 20, height: 20, alignment: .leading)
+//                    }
                 }
             }
         }

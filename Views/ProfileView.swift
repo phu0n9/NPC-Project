@@ -82,7 +82,7 @@ struct ProfileView: View {
                                 Text("Update")
                                     .foregroundColor(.white)
                                     .padding(.vertical, 10)
-                                    .font(.system(size: 18, weight: .bold))
+                                    .font(.system(size: 22, weight: .bold))
                                 Spacer()
                             }.background(Color(red: 1, green: 0.4902, blue: 0.3216))
                         }
@@ -94,12 +94,13 @@ struct ProfileView: View {
                         } label: {
                             HStack {
                                 Spacer()
+                                Image(systemName: "leaf.fill")
                                 Text("Log out")
                                     .foregroundColor(.white)
                                     .padding(.vertical, 10)
-                                    .font(.system(size: 18, weight: .bold))
+                                    .font(.system(size: 22, weight: .bold))
                                 Spacer()
-                            }.background(.red)
+                            }.background(.black)
                         }
                         .padding(0)
                         .frame(width: 280, height: 50)
