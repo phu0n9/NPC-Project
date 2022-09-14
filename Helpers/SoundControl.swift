@@ -10,7 +10,7 @@ import AVFoundation
 
 class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
-    var audioPlayer: AVPlayer!
+    @Published var audioPlayer: AVPlayer!
     @Published var isActive: Bool = true
     
     

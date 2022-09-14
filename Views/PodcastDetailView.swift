@@ -1,65 +1,75 @@
 //
-//  TrendingView.swift
+//  PodcastDetailView.swift
 //  NPC
 //
-//  Created by Le Nguyen on 02/09/2022.
+//  Created by Nguyen Huynh Phuong Anh on 13/09/2022.
 //
 
 import SwiftUI
-import UIKit
 import PopupView
 
-struct TrendingView: View {
-    
-
+struct PodcastDetailView: View {
+    var podcast: Podcasts
+    @State var time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
     @ObservedObject var podcastViewModel = PodcastViewModel()
     @ObservedObject var userSettings = UserSettings()
-    @State var time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
-    @EnvironmentObject var routerView: RouterView
     @State private var isTapped: Bool = false
     @State private var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
     @State private var upload = Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, likes: [], comments: [])
-    
+    @State var isExpanded : Bool = false
+
     var body: some View {
-        
         ScrollView {
-
-            NavigationLink("", destination: LoginView(), isActive: self.$logoutSuccess)
-                .isDetailLink(false)
-            HStack(alignment: .firstTextBaseline){
-                Text("Podcast for you")
-                    .fontWeight(.bold)
-                    .frame(alignment: .topTrailing)
-                    .padding(5)
-                Spacer()
-                 
-            }
-
-            ScrollView(.horizontal) {
-
-                HStack(spacing: 10) {
-          
-                    ForEach(self.podcastViewModel.podcasts, id: \.id) { podcast in
-                        PodcastComponent(podcast: podcast)
+            VStack {
+                HStack {
+                    AsyncImage(url: URL(string: self.podcast.image)) { podcastImage in
+                        podcastImage
+                            .resizable()
+                            .font(.title)
+                            .frame(width: 90, height: 90, alignment: .leading)
+                            .foregroundColor(.orange)
+                            .cornerRadius(20)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    VStack {
+                        Text(self.podcast.title)
+                            .font(.title3)
+                            .frame(maxWidth: 100, alignment: .leading)
+                        Text(self.podcast.author)
+                            .font(.title3)
+                            .frame(maxWidth: 100, alignment: .leading)
+                        Image(systemName: "globe")
+                            .renderingMode(.template)
+                            .frame(width:20, height: 20, alignment: .leading)
+                            .padding()
                     }
                 }
-                .padding()
-            }
-            
-            Divider()
-            Divider()
-            
-            ScrollView {
+                Text(self.podcast.description)
+                    .lineLimit(isExpanded ? nil : 3)
+                    .overlay(
+                        GeometryReader { proxy in
+                            Button(action: {
+                                isExpanded.toggle()
+                            }, label: {
+                                Text(isExpanded ? "Less" : "More")
+                                    .font(.caption).bold()
+                                    .padding(.leading, 8.0)
+                                    .padding(.top, 4.0)
+                                    .background(Color.white)
+                            })
+                            .frame(width: proxy.size.width, height: abs(proxy.size.height), alignment: .bottomTrailing)
+                        }
+                    )
+                
+                Divider()
+                Divider()
+                
+                Text("Episodes")
+                    .font(.title3)
+                    .frame(maxWidth: 100, alignment: .leading)
+                
                 LazyVStack {
-                    HStack(alignment: .firstTextBaseline){
-                    
-                        Text("Your Episode")
-                            .fontWeight(.bold)
-                            .frame(alignment: .topTrailing)
-                            .padding(5)
-                        Spacer()
-                         
-                    }
                     ForEach(self.$podcastViewModel.paginatedEpisodes, id: \.id) { $episode in
                         
                         ZStack {
@@ -89,6 +99,7 @@ struct TrendingView: View {
                         }
                     }
                 }
+                
             }
         }
         .popup(isPresented: self.$isTapped, type: .toast, position: .bottom, closeOnTap: false, backgroundColor: .black.opacity(0.4)) {
@@ -97,16 +108,14 @@ struct TrendingView: View {
         .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height - 200)
         .onAppear {
             DispatchQueue.main.async {
-                self.podcastViewModel.fetchPodcasts(categories: self.userSettings.userCategories)
+                self.podcastViewModel.fetchPodcastById(podcastId: self.podcast.uuid, episodeId: "")
             }
         }
     }
 }
 
-
-
-struct TrendingView_Previews: PreviewProvider {
+struct PodcastDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        TrendingView()
+        PodcastDetailView(podcast: Podcasts(uuid: "", author: "", description: "", image: "", itunes_id: 23, language: "", title: "", website: "", categories: ["Technology", "Arts"], episodes: []))
     }
 }

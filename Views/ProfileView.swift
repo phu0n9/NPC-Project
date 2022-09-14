@@ -15,7 +15,7 @@ struct ProfileView: View {
     @State var isFull = true
     @State var alert = false
     @State var updateStatus = ""
-    @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var routerView: RouterView
 
     var body: some View {
         NavigationView {
@@ -137,11 +137,12 @@ struct ProfileView: View {
         do {
             try FirebaseManager.shared.auth.signOut()
             print("Successfully sign out")
+            self.userViewModel.resetUserDefault()
+            withAnimation {
+                routerView.currentPage = .login
+            }
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
-        }
-        withAnimation {
-            viewRouter.currentPage = .login
         }
     }
 }

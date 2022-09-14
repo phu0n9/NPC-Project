@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoadingRows: View {
+struct LoadingEpisodeRows: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .top, spacing: 20) {
@@ -57,6 +57,6 @@ struct LoadingRows: View {
 
 struct LoadingRows_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingRows()
+        LoadingEpisodeRows()
     }
 }

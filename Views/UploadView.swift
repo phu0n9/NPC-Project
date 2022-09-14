@@ -22,15 +22,26 @@ struct UploadView : View {
     @State var alertMessage = ""
     @State var alertState = false
     @State var isFinishedRecord = false
-    
+    @EnvironmentObject var routerView: RouterView
+
     var body: some View {
         NavigationView {
             ScrollView {
+
                 VStack(spacing:0) {
-                    NavigationLink("", destination: CastingView(), isActive: self.$uploadControl.isUploaded)
+                    NavigationLink("", destination: CastingView(currentTab: 0), isActive: self.$uploadControl.isUploaded)
 //                    switch state {
 //                    case 0:
 //
+
+                VStack(alignment: .leading) {
+                    switch state {
+                    case 0:
+                        Text("Cover Image")
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                            .padding(.leading, 20)
+
                         if self.selectedImage != nil {
                            
                                 Image(uiImage: selectedImage!)
@@ -184,7 +195,6 @@ struct UploadView : View {
     
     //MARK: HandleUpload fuction
     func handleUpload() {
-
             if title == "" {
                 self.alertMessage = "Please insert title!"
                 self.alertState = true
@@ -201,13 +211,18 @@ struct UploadView : View {
                 format.dateStyle = .short
                 let time = format.string(from: mytime)
                 self.uploadControl.uploadCastImage(title: title, description: self.textBindingManager.text, pub_date: time, selectedImage: selectedImage)
+                withAnimation {
+                    routerView.currentPage = .castingUser
+                }
                 self.state = 0
             }
         
         }
-    }
+}
 
 
+        
+        
 
 struct UploadView_Previews: PreviewProvider {
     static var previews: some View {

@@ -44,7 +44,7 @@ struct BottomNavBar: View {
                 case 0:
                     ViewComponent(destination: TrendingView(), viewTitle: "Trending")
                 case 1:
-                    ViewComponent(destination: CastingView(), viewTitle: "Casting")
+                    ViewComponent(destination: CastingView(currentTab: 0), viewTitle: "Casting")
                 case 2:
                     ViewComponent(destination: UploadView(), viewTitle: "Uploading")
                 case 3:

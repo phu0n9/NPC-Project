@@ -113,6 +113,8 @@ class PodcastViewModel: ObservableObject {
             }
             
             self.podcast = self.getPodcastByQuerySnapShot(queryDocumentSnapshot: document, episodeId: episodeId)
+            self.episodes = self.podcast.episodes
+            self.paginateEpisodes()
         })
     }
     

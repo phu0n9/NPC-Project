@@ -25,12 +25,11 @@ struct LoginView: View {
     @StateObject var controller = Controller()
     
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var routerView: RouterView
     
     var body: some View {
         NavigationView {
             ScrollView {
-                NavigationLink("", destination: BottomNavBar(), isActive: self.$loginSuccess)
-                    .isDetailLink(false)
                 NavigationLink("", destination: SignUpView(email: $controller.email, password: $password, userName: $username), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
                     .isDetailLink(false)
                 VStack(spacing: 16) {
@@ -155,8 +154,16 @@ struct LoginView: View {
             .navigationTitle(isLoginMode ? "Log In" : "Create Account")
             .background(Color(.init(white: 0, alpha: 0.005))
                 .ignoresSafeArea())
-        }.environment(\.rootPresentationMode, self.$isActive)
-            .navigationBarHidden(true)
+        }
+        .environment(\.rootPresentationMode, self.$isActive)
+        .navigationBarHidden(true)
+        .onChange(of: self.loginSuccess) { value in
+            if value {
+                withAnimation {
+                    self.routerView.currentPage = .bottomNavBar
+                }
+            }
+        }
     }
     
     private func handleAction() {

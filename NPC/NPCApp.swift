@@ -21,12 +21,12 @@ struct NPCApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @StateObject var viewRouter = ViewRouter()
+    @StateObject var routerView = RouterView()
     
     var body: some Scene {
         WindowGroup {
             // WelcomeView()
-            RootView().environmentObject(viewRouter)
+            RootView().environmentObject(routerView)
         }
     }
 }

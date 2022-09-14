@@ -25,7 +25,7 @@ struct ActivityViewItem: View {
                             // reaching end of the list then load new data
                             if self.userViewModel.userActivityList.last?.id == item.id && self.userViewModel.fetchingMore {
                                 GeometryReader { bounds in
-                                    LoadingRows()
+                                    LoadingEpisodeRows()
                                         .onAppear {
                                             self.time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
                                         }

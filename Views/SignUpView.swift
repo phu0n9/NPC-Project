@@ -21,10 +21,10 @@ struct SignUpView: View {
     @State private var isSecured: Bool = true
     @State private var isFull : Bool = false
     @State private var categoryList = [String]()
-    
+    @EnvironmentObject var routerView: RouterView
+
     var body: some View {
             VStack(spacing: 16) {
-                NavigationLink("", destination: BottomNavBar(), isActive: $loginSuccess).isDetailLink(false)
                 PrefTopComponent()
                 if self.podcastViewModel.categories.isEmpty {
                     Section {
@@ -64,6 +64,11 @@ struct SignUpView: View {
         .alert(isPresented: self.$alert, content: {
             Alert(title: Text("Error"), message: Text(self.loginStatusMessage))
         })
+        .onChange(of: self.loginSuccess) { value in
+            withAnimation {
+                self.routerView.currentPage = .bottomNavBar
+            }
+        }
     }
     
     // MARK: Migrate SignUp Function
