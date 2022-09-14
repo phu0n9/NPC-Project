@@ -12,10 +12,9 @@ struct StreamingView: View {
     
     @ObservedObject var podcastViewModel = PodcastViewModel()
     @StateObject var userViewModel = UserViewModel()
-    @ObservedObject var uploadViewModel = UploadViewModel()
     @ObservedObject var userSettings = UserSettings()
-    @Binding var episode: Episodes
     @ObservedObject var soundControl = SoundControl()
+    @Binding var episode: Episodes
     @Binding var upload: Uploads
     
     //   @State var width : CGFloat = UIScreen.main.bounds.height < 750 ? 130 : 230
@@ -138,21 +137,20 @@ struct StreamingView: View {
                 
             }.padding()
         }
+        .background(Color(UIColor.systemBackground))
         .onAppear {
             DispatchQueue.main.async {
                 if state == 0 {
                     self.podcastViewModel.fetchPodcastById(podcastId: self.episode.podcast_uuid, episodeId: self.episode.episode_uuid)
                     self.userViewModel.addWatchList(watchItem: self.episode)
-                } else {
-                    print("fetching uploads")
                 }
             }
         }
     }
 }
 
-struct StreamingView_Previews: PreviewProvider {
-    static var previews: some View {
-        StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, likes: [], comments: [])), state: 0)
-    }
-}
+// struct StreamingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, likes: [], comments: [])), state: 0)
+//    }
+// }

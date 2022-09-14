@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct TrendingView: View {
     @ObservedObject var podcastViewModel = PodcastViewModel()
@@ -40,7 +41,7 @@ struct TrendingView: View {
                             // reaching end of the list then load new data
                             if self.podcastViewModel.paginatedEpisodes.last?.id == episode.id && self.podcastViewModel.isFetchingMore {
                                 GeometryReader { bounds in
-                                    LoadingRows()
+                                    LoadingEpisodeRows()
                                         .onAppear {
                                             self.time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
                                         }
@@ -65,7 +66,7 @@ struct TrendingView: View {
                 }
             }
         }
-        .sheet(isPresented: self.$isTapped) {
+        .popup(isPresented: self.$isTapped, type: .toast, position: .bottom, closeOnTap: false, backgroundColor: .black.opacity(0.4)) {
             StreamingView(episode: self.$episode, upload: self.$upload, state: 0)
         }
         .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height - 200)
