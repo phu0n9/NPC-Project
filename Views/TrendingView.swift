@@ -11,7 +11,6 @@ import PopupView
 
 struct TrendingView: View {
     
-
     @ObservedObject var podcastViewModel = PodcastViewModel()
     @ObservedObject var userSettings = UserSettings()
     @State var time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
@@ -24,13 +23,12 @@ struct TrendingView: View {
         
         ScrollView {
 
-            HStack(alignment: .firstTextBaseline){
+            HStack(alignment: .firstTextBaseline) {
                 Text("Podcast for you")
                     .fontWeight(.bold)
                     .frame(alignment: .topTrailing)
                     .padding(5)
                 Spacer()
-                 
             }
 
             ScrollView(.horizontal) {
@@ -49,7 +47,7 @@ struct TrendingView: View {
             
             ScrollView {
                 LazyVStack {
-                    HStack(alignment: .firstTextBaseline){
+                    HStack(alignment: .firstTextBaseline) {
                     
                         Text("Your Episode")
                             .fontWeight(.bold)
@@ -100,8 +98,6 @@ struct TrendingView: View {
         }
     }
 }
-
-
 
 struct TrendingView_Previews: PreviewProvider {
     static var previews: some View {

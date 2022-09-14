@@ -27,6 +27,8 @@
 		4E26039628D05D3A00DC739B /* PodcastDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26039528D05D3A00DC739B /* PodcastDetailView.swift */; };
 		4E26039828D07F4800DC739B /* MiniPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26039728D07F4800DC739B /* MiniPlayer.swift */; };
 		4E26039A28D0F23D00DC739B /* CommunityStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26039928D0F23D00DC739B /* CommunityStreamView.swift */; };
+		4E2603A028D1D35900DC739B /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26039F28D1D35900DC739B /* CommentView.swift */; };
+		4E2603A228D1D37D00DC739B /* CommentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2603A128D1D37D00DC739B /* CommentItem.swift */; };
 		4E6D455128BF282E005B7DF0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454E28BF282E005B7DF0 /* Users.swift */; };
 		4E6D455228BF282E005B7DF0 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454F28BF282E005B7DF0 /* Categories.swift */; };
 		4E6D455328BF282E005B7DF0 /* Podcasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D455028BF282E005B7DF0 /* Podcasts.swift */; };
@@ -94,6 +96,8 @@
 		4E26039528D05D3A00DC739B /* PodcastDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailView.swift; sourceTree = "<group>"; };
 		4E26039728D07F4800DC739B /* MiniPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayer.swift; sourceTree = "<group>"; };
 		4E26039928D0F23D00DC739B /* CommunityStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityStreamView.swift; sourceTree = "<group>"; };
+		4E26039F28D1D35900DC739B /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		4E2603A128D1D37D00DC739B /* CommentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentItem.swift; sourceTree = "<group>"; };
 		4E6D454E28BF282E005B7DF0 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		4E6D454F28BF282E005B7DF0 /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		4E6D455028BF282E005B7DF0 /* Podcasts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Podcasts.swift; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 				4E26038828CEFDDD00DC739B /* ActivityViewItem.swift */,
 				4E26038A28CF014B00DC739B /* EmptyListView.swift */,
 				4E26039728D07F4800DC739B /* MiniPlayer.swift */,
+				4E2603A128D1D37D00DC739B /* CommentItem.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 				4E26039328D0498600DC739B /* UserCastingView.swift */,
 				4E26039528D05D3A00DC739B /* PodcastDetailView.swift */,
 				4E26039928D0F23D00DC739B /* CommunityStreamView.swift */,
+				4E26039F28D1D35900DC739B /* CommentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -459,6 +465,7 @@
 				A4FBD12A28C795AE00F6E3EB /* ButtonStyle.swift in Sources */,
 				4E26038928CEFDDD00DC739B /* ActivityViewItem.swift in Sources */,
 				A497D80728C1C08100D8A5CA /* CastingView.swift in Sources */,
+				4E2603A028D1D35900DC739B /* CommentView.swift in Sources */,
 				4E98FDD428C56653006D2566 /* SoundControl.swift in Sources */,
 				A498E01628CF029F00098FBB /* RootView.swift in Sources */,
 				4E6D456828BF2D3E005B7DF0 /* UserViewModel.swift in Sources */,
@@ -487,6 +494,7 @@
 				BB99BBCF28CDA2D200D80BF6 /* ToastPopUp.swift in Sources */,
 				4E6D456C28BF4F8E005B7DF0 /* ImagePicker.swift in Sources */,
 				BB99BBCD28CDA10F00D80BF6 /* StreamingView.swift in Sources */,
+				4E2603A228D1D37D00DC739B /* CommentItem.swift in Sources */,
 				4E98FDDE28CB3725006D2566 /* CategoryCheckbox.swift in Sources */,
 				09D6F4E528C0FDD900D056C2 /* LoginView.swift in Sources */,
 				4E26039A28D0F23D00DC739B /* CommunityStreamView.swift in Sources */,

@@ -16,6 +16,7 @@ struct StreamingView: View {
     @ObservedObject var soundControl = SoundControl()
     @Binding var episode: Episodes
     @Binding var upload: Uploads
+    @State var isCommentTapped: Bool = false
     
     //   @State var width : CGFloat = UIScreen.main.bounds.height < 750 ? 130 : 230
     var width : CGFloat = 200
@@ -51,7 +52,6 @@ struct StreamingView: View {
                         .stroke(Color(.orange), lineWidth: 4)
                         .frame(width: width+45, height: height+45)
                     
-                    
                     Circle()
                         .fill(Color("MainButton"))
                         .frame(width: 25, height: 25)
@@ -75,7 +75,7 @@ struct StreamingView: View {
                         .frame(width: 50, height: 50, alignment: .center)
                 })
             }
-//            Spacer()
+            Spacer()
             
             HStack {
                 Image(systemName: "person")
@@ -109,8 +109,11 @@ struct StreamingView: View {
                             Image(systemName: "message")
                                 .resizable()
                                 .frame(width: 20, height: 20)
+                                .onTapGesture {
+                                    self.isCommentTapped = true
+                                }
                             
-                            Text("comments(INT)")
+                            Text("comments(\(self.upload.comments.count))")
                                 .font(.caption2)
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
@@ -128,7 +131,7 @@ struct StreamingView: View {
                                 }
                             }
                         if state == 1 {
-                            Text("likes(INT)")
+                            Text("likes(\(self.upload.numOfLikes))")
                                 .font(.caption2)
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
@@ -138,7 +141,6 @@ struct StreamingView: View {
                 .padding()
             }.padding()
         }
-        .frame(height: UIScreen.main.bounds.height)
         .background(Color(UIColor.systemBackground))
         .onAppear {
             DispatchQueue.main.async {
@@ -147,6 +149,9 @@ struct StreamingView: View {
                     self.userViewModel.addWatchList(watchItem: self.episode)
                 }
             }
+        }
+        .sheet(isPresented: self.$isCommentTapped) {
+            CommentView(uploadID: self.$upload.uuid)
         }
     }
 }
