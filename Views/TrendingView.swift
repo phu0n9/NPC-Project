@@ -24,8 +24,6 @@ struct TrendingView: View {
         
         ScrollView {
 
-            NavigationLink("", destination: LoginView(), isActive: self.$logoutSuccess)
-                .isDetailLink(false)
             HStack(alignment: .firstTextBaseline){
                 Text("Podcast for you")
                     .fontWeight(.bold)
