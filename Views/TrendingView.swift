@@ -75,6 +75,15 @@ struct TrendingView: View {
             }
         }
     }
+    
+    private func allowShowNotification(){
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){success,_ in
+            guard success else {
+                return
+            }
+            print("Succesfully Allow Notification")
+        }
+    }
 }
 
 struct TrendingView_Previews: PreviewProvider {

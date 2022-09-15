@@ -11,6 +11,8 @@ import UserNotifications
 struct ContentView: View {
 //    @ObservedObject var userViewModel = UserViewModel()
 //    @ObservedObject var userSettings = UserSettings()
+    @State var isOn: Bool = false
+    let notificationManager: NotificationManager = NotificationManager.shared
     
     var body: some View {
         VStack{
@@ -21,11 +23,13 @@ struct ContentView: View {
                 }
                 print ("All Sets")
             }
-        }
+        }.padding()
+
+            
         Button("Schedule notification"){
             let content = UNMutableNotificationContent()
-            content.title = "Feed the cat"
-            content.subtitle = "It looks hungry"
+            content.title = "You have succesfully login"
+            content.subtitle = "Navigate to your profile page to complete profile"
             content.sound = UNNotificationSound.default
 
             // show this notification five seconds from now
@@ -36,7 +40,28 @@ struct ContentView: View {
 
             // add our notification request
             UNUserNotificationCenter.current().add(request)
+            print ("Trigger notification")
         }
+            
+            Toggle(isOn: $isOn, label: {
+                        Text("Notifications?")
+                    })
+
+                    /// change!
+                    .onChange(of: isOn, perform: { toggleIsOn in
+                        if toggleIsOn {
+                            var dateComponents = DateComponents()
+                            dateComponents.hour = 8
+                                                dateComponents.minute = 5
+                            self.notificationManager.scheduleTriggerNotification(title: "Morning Time", body: "Wake Up And Be Productive!", categoryIdentifier: "reminder", dateComponents: dateComponents, repeats: true)
+                            print("schedule notification")
+                        } else {
+                            print("don't schedule notification")
+                        }
+                    }
+                    )
+            
+    
 //        Text("Hello, world!")
 //            .padding()
 //            .onAppear {
@@ -50,7 +75,7 @@ struct ContentView: View {
     }
     
     // Test
-    private func allowShowNotification(){
+    func allowShowNotification(){
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){success,_ in
             guard success else {
                 return
@@ -59,7 +84,7 @@ struct ContentView: View {
         }
     }
     
-    private func showNotificationWhenLogin(){
+    func showNotificationWhenLogin(){
         let content = UNMutableNotificationContent()
         content.title = "Welcome back"
         content.subtitle = "Hello User"
@@ -70,7 +95,9 @@ struct ContentView: View {
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request)
+        print ("Request sent")
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

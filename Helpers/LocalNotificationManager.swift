@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class LocalNotificationManager: ObservableObject {
-    var notifications = [Notification]()
+    @Published var notifications = [Notification]()
     
     // Ask user for noti permission
     init() {
