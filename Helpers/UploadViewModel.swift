@@ -24,6 +24,7 @@ class UploadViewModel: ObservableObject {
     private var db = Firestore.firestore()
     private var userSettings = UserSettings()
     private var userViewModel = UserViewModel()
+    private var notificationManager = NotificationManager()
     
     // MARK: create uploads
     func addUploads() {
@@ -84,7 +85,8 @@ class UploadViewModel: ObservableObject {
             }
             
             self.likedList = likeObjList.map {(value) -> Likes in
-                return Likes(author: value["author"] as! String, userID: value["userID"] as! String, isLiked: value["isLiked"] as! Bool)
+                self.like = Likes(author: value["author"] as! String, userID: value["userID"] as! String, isLiked: value["isLiked"] as! Bool)
+                return self.like
             }
         })
     }
@@ -239,6 +241,10 @@ class UploadViewModel: ObservableObject {
             
             let commentObjItem = document[0].get("commentList") as? [[String:Any]]
             
+            if comment.userID != self.userSettings.uuid {
+                self.notificationManager.sendMessageToDevice(userToken: self.userSettings.token)
+            }
+            
             guard var commentObjList = commentObjItem else {
                 document[0].reference.updateData(["commentList" : [commentObj]])
                 return
@@ -284,7 +290,9 @@ class UploadViewModel: ObservableObject {
             }
             
             let likeObj = document[0].get("likedList") as? [[String:Any]]
-            let likeItem = ["author": self.userSettings.username, "userID": self.userSettings.uuid, "isLiked": true] as [String : Any]
+            self.like.isLiked.toggle()
+
+            let likeItem = ["author": self.userSettings.username, "userID": self.userSettings.uuid, "isLiked": self.like.isLiked] as [String : Any]
             let numOfLikes = document[0].get("numOfLikes") as! Int
             
             guard var likeObjList = likeObj else {
@@ -297,6 +305,7 @@ class UploadViewModel: ObservableObject {
             let isNotExisting = likeObjList.filter { $0["userID"] as! String != self.userSettings.uuid}
             
             if isExisting.isEmpty {
+                self.like.isLiked.toggle()
                 likeObjList.append(likeItem)
                 document[0].reference.updateData(["likedList" : likeObjList, "numOfLikes": numOfLikes + 1])
             } else {

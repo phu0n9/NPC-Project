@@ -129,7 +129,7 @@ struct StreamingView: View {
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
                         }
-                        Image(systemName: "heart")
+                        Image(systemName: self.uploadViewModel.like.isLiked ? "heart.fill" : "heart")
                             .resizable()
                             .frame(width: 20, height: 20)
                             .foregroundColor(.orange)

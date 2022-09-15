@@ -129,20 +129,18 @@ class UserViewModel : ObservableObject {
     
     // MARK: add user
     func addUser() {
-        let token = UUID().uuidString
         db.collection(Settings.usersCollection).document(self.user.uuid).setData([
             "uuid": self.user.uuid,
             "userName": self.user.userName,
             "email": self.user.email,
             "profilePic": "",
             "categoryList": self.user.favoriteTopics,
-            "token": token
+            "token": self.userSettings.token
         ]) { error in
             if let err = error {
                 print("Error adding document: \(err)")
             } else {
                 print("Document added")
-                self.userSettings.token = token
                 self.userSettings.username = self.user.userName
                 self.userSettings.userCategories = self.user.favoriteTopics
             }
@@ -161,9 +159,7 @@ class UserViewModel : ObservableObject {
                 print("No data")
                 return
             }
-            let token = UUID().uuidString
-            document.reference.updateData(["token": token])
-            self.userSettings.token = token
+            document.reference.updateData(["token": self.userSettings.token])
             self.userSettings.username = document.get("userName") as! String
             self.userSettings.userCategories = document.get("categoryList") as! [String]
             self.userSettings.userImage = document.get("profilePic") as! String
