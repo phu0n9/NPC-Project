@@ -29,49 +29,57 @@ struct ProfileView: View {
                     .navigationBarHidden(true)
             } else {
                 ScrollView {
+        
                     VStack(spacing: 16) {
-                        
-                        if selectedImage != nil {
-                            Image(uiImage: selectedImage!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 150, height: 150)
-                                .clipShape(Rectangle())
-                                .cornerRadius(20)
-                                .onTapGesture {
-                                    self.isPickerShowing = true
-                                }
-                                .padding()
-                        } else {
-                            if self.userViewModel.user.profilePic == "" {
-                                Image(systemName: "person.circle.fill")
+                        ZStack{
+                            if selectedImage != nil {
+                                Image(uiImage: selectedImage!)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .frame(width: 150, height: 150)
-                                    .clipShape(Rectangle())
-                                    .cornerRadius(20)
+                                    .frame(width: 120, height: 120)
+                                    .clipShape(Circle())
                                     .onTapGesture {
                                         self.isPickerShowing = true
                                     }
-                                    .padding()
+                                    .padding(.top,10)
                             } else {
-                                AsyncImage(url: URL(string: self.userViewModel.user.profilePic)) { image in
-                                    image
+                                if self.userViewModel.user.profilePic == "" {
+                                    Image(systemName: "person.circle.fill")
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(width: 150, height: 150)
-                                        .clipShape(Rectangle())
-                                        .cornerRadius(20)
+                                        .frame(width: 120, height: 120)
+                                        .clipShape(Circle())
                                         .onTapGesture {
                                             self.isPickerShowing = true
                                         }
-                                } placeholder: {
-                                    ProgressView()
+                                        .padding(.top,10)
+                                } else {
+                                    AsyncImage(url: URL(string: self.userViewModel.user.profilePic)) { image in
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 120, height: 120)
+                                            .clipShape(Circle())
+                                            .onTapGesture {
+                                                self.isPickerShowing = true
+                                            }
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
+                                    .padding(.top,10)
                                 }
-                                .padding()
+                                
                             }
                             
+                            Image(systemName: "plus.circle.fill")
+                                .renderingMode(.template)
+                                .font(.system(size:25,
+                                              weight: .regular,
+                                              design: .default))
+                                .foregroundColor(Color("MainButton"))
+                                .offset(x: 30, y: 50)
                         }
+    
                         
 //                        DisableTextComponent(title: Binding.constant("Username"), textValue: Binding.constant(self.userViewModel.user.userName), imageName: Binding.constant("person"))
 //                        
@@ -81,61 +89,84 @@ struct ProfileView: View {
 //
 //                        DisableTextComponent(title: Binding.constant("Email"), textValue: Binding.constant(self.userViewModel.user.email))
 //
+                        HStack{
+                            Text(self.userViewModel.user.userName)
+                                .padding(5)
+                                .foregroundColor(.gray)
+                                .font(.system(size:16))
+                            Text("|")
+                                .padding(5)
+                                .foregroundColor(.gray)
+                                .font(.system(size:16))
+                            Text(self.userViewModel.user.email)
+                                .padding(5)
+                                .foregroundColor(.gray)
+                                .font(.system(size:16))
+                        }
 
-                        Text(self.userViewModel.user.userName)
-                            .padding()
-                        Text(self.userViewModel.user.email)
-                            .padding()
+                        
+                        Text("Preference Podcast Topic")
+                            .foregroundColor(.black)
+                            .font(.system(size:19))
+                            .padding(5)
+                            .frame(width: 350, height: 40, alignment: .leading)
 
                         CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: self.$isFull, categoryList: self.$categoryList)
+                            .padding(0)
                             .onAppear {
                                 self.categoryList = self.userViewModel.user.favoriteTopics
-                            }
-                        Button {
-                            self.handleUpdate()
-                        } label: {
-                            HStack {
-                                Spacer()
-                                Image(systemName: "arrow.clockwise.circle.fill")
-                                    .renderingMode(.template)
-                                    .foregroundColor(.white)
-                                    .font(.system(size:30,
-                                                  weight: .regular,
-                                                  design: .default))
-                                Text("Update")
-                                    .foregroundColor(.white)
-                                    .padding(.vertical, 10)
-                                    .font(.system(size: 22, weight: .bold))
-                                    .cornerRadius(20)
-                                Spacer()
-                            }.background(Color(red: 1, green: 0.4902, blue: 0.3216))
-                        }
-                        .padding(0)
-                        .frame(width: 280, height: 50)
-                        .cornerRadius(50)
+                            }.padding(0)
                         
-                        Button {
-                            signOutUser()
-                        } label: {
-                            HStack {
-                                Spacer()
-                                Image(systemName: "leaf.fill")
-                                    .renderingMode(.template)
-                                    .foregroundColor(.white)
-                                    .font(.system(size:30,
-                                                  weight: .regular,
-                                                  design: .default))
-                                Text("Log out")
-                                    .foregroundColor(.white)
-                                    .padding(.vertical, 10)
-                                    .font(.system(size: 22, weight: .bold))
-                                    
-                                Spacer()
-                            }.background(.black)
+                        
+                        HStack{
+                            
+                            Button {
+                                self.handleUpdate()
+                            } label: {
+                                HStack {
+                                    Spacer()
+//                                    Image(systemName: "arrow.clockwise.circle.fill")
+//                                        .renderingMode(.template)
+//                                        .foregroundColor(.white)
+//                                        .font(.system(size:16,
+//                                                      weight: .regular,
+//                                                      design: .default))
+                                    Text("Update")
+                                        .foregroundColor(.white)
+                                        .padding(.vertical, 10)
+                                        .font(.system(size: 16, weight: .bold))
+                                        .cornerRadius(20)
+                                    Spacer()
+                                }.background(Color(red: 1, green: 0.4902, blue: 0.3216))
+                            }
+                            .padding()
+                            .frame(width: 140, height: 50)
+                            .cornerRadius(20)
+                            
+                            Button {
+                                signOutUser()
+                            } label: {
+                                HStack {
+                                    Spacer()
+//                                    Image(systemName: "leaf.fill")
+//                                        .renderingMode(.template)
+//                                        .foregroundColor(.white)
+//                                        .font(.system(size:16,
+//                                                      weight: .regular,
+//                                                      design: .default))
+                                    Text("Log out")
+                                        .foregroundColor(.white)
+                                        .padding(.vertical, 10)
+                                        .font(.system(size: 16, weight: .bold))
+                                        
+                                    Spacer()
+                                }.background(.black)
+                            }
+                            .padding()
+                            .frame(width: 140, height: 50)
+                            .cornerRadius(20)
                         }
-                        .padding(0)
-                        .frame(width: 280, height: 50)
-                        .cornerRadius(50)
+
                     }
                 }
                 .navigationBarHidden(true)

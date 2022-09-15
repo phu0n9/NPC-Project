@@ -53,8 +53,8 @@ struct CategoryCheckbox: View {
                     .frame(width: UIScreen.main.bounds.width - 70, height: 350)
                     .addBorder(Color("MainButton"), width: 2, cornerRadius: 5)
             )
-            .padding()
         }
+        .padding(3)
     }
 }
 
