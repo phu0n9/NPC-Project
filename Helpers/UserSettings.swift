@@ -31,9 +31,9 @@ class UserSettings: ObservableObject {
         }
     }
     
-    @Published var selectedLanguages: String {
+    @Published var userImage : String {
         didSet {
-            UserDefaults.standard.set(selectedLanguages, forKey: Settings.language)
+            UserDefaults.standard.set(userImage, forKey: Settings.userImage)
         }
     }
     
@@ -42,6 +42,6 @@ class UserSettings: ObservableObject {
         self.uuid = UserDefaults.standard.string(forKey: Settings.uuid) ?? ""
         self.username = UserDefaults.standard.string(forKey: Settings.userName) ?? ""
         self.userCategories = UserDefaults.standard.array(forKey: Settings.userCategories) as? [String] ?? ["Music", "Arts"]
-        self.selectedLanguages = UserDefaults.standard.string(forKey: Settings.language) ?? "en"
+        self.userImage = UserDefaults.standard.string(forKey: Settings.userImage) ?? ""
     }
 }

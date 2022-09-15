@@ -32,6 +32,7 @@ class UploadControl : ObservableObject {
         do {
             if self.record {
                 // Already Started Recording means stopping and saving...
+               
                 self.recorder.stop()
                 self.record.toggle()
                 return
@@ -130,7 +131,7 @@ class UploadControl : ObservableObject {
                         }
                         guard let downloadURL = url else { return }
                         let audio_length = NSInteger(self.recorder.currentTime) % 60
-                        self.uploadViewModel.upload = Uploads(title: title, description: description, audioPath: downloadURL.absoluteString, author: self.userSettings.username, pub_date: pub_date, image: image, userID: self.userSettings.uuid, numOfLikes: 0, audio_length: audio_length, likes: [], comments: [])
+                        self.uploadViewModel.upload = Uploads(title: title, description: description, audioPath: downloadURL.absoluteString, author: self.userSettings.username, pub_date: pub_date, image: image, userID: self.userSettings.uuid, numOfLikes: 0, audio_length: audio_length, userImage: self.userSettings.userImage, likes: [], comments: [])
                         self.uploadViewModel.addUploads()
                         self.isUploaded = true
                     }

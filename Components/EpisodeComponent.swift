@@ -21,10 +21,10 @@ struct EpisodeComponent: View {
                     podcastImage
                         .resizable()
                         .font(.title)
-                        .frame(width: 56, height: 56)
-                        .clipShape(Circle())
+                        .frame(width: 40, height: 40)
+                        .clipShape(Rectangle())
                         .foregroundColor(.orange)
-                        .cornerRadius(20)
+                        .cornerRadius(10)
                         .padding(0)
                 } placeholder: {
                     ProgressView()
@@ -34,24 +34,26 @@ struct EpisodeComponent: View {
                     HStack {
                         // MARK: title
                         Text(self.episode.title)
-                            .font(.subheadline).bold()
+                            .font(.system(size: 14))
+                            .lineLimit(1)
                     }
                     // MARK: publish date
                     Text(self.episode.pub_date)
-                        .font(.caption)
+                        .font(.system(size: 10))
                 }
-            }.padding()
+            }.padding(0)
             
             // MARK: description
             Text(self.episode.description)
-                .lineLimit(isExpanded ? nil : 3)
+                .font(.system(size: 13))
+                .lineLimit(isExpanded ? nil : 1)
                 .overlay(
                     GeometryReader { proxy in
                         Button(action: {
                             isExpanded.toggle()
                         }, label: {
                             Text(isExpanded ? "Less" : "More")
-                                .font(.caption).bold()
+                                .font(.system(size: 12))
                                 .padding(.leading, 8.0)
                                 .padding(.top, 4.0)
                                 .background(Color.white)

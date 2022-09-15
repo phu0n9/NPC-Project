@@ -10,10 +10,15 @@ import SwiftUI
 struct ViewComponent<Destination:View>: View {
     var destination: Destination
     var viewTitle: String
+    
+   var navStyle = UIImageView(image: UIImage(named: "logo"))
+    
     var body: some View {
+    
         NavigationView {
-            VStack {
+            HStack {
                 destination
+                    
             }
             .navigationTitle(self.viewTitle)
             .toolbar {
@@ -33,16 +38,11 @@ struct ViewComponent<Destination:View>: View {
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .leading)
                     }
-                    
-                    Button {
-                        print("loggout clicked")
-                    } label: {
-                        Image(systemName: "arrow.left.square")
-                            .resizable()
-                            .frame(width: 20, height: 20, alignment: .leading)
-                    }
                 }
             }
+            .accessibilityIdentifier(/*@START_MENU_TOKEN@*/"Identifier"/*@END_MENU_TOKEN@*/)
+            
+            
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarHidden(true)

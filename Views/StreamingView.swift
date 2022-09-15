@@ -7,24 +7,24 @@
 
 import SwiftUI
 import AVKit
+import PopupView
 
 struct StreamingView: View {
     
     @ObservedObject var podcastViewModel = PodcastViewModel()
     @StateObject var userViewModel = UserViewModel()
-    @ObservedObject var uploadViewModel = UploadViewModel()
     @ObservedObject var userSettings = UserSettings()
-    @Binding var episode: Episodes
     @ObservedObject var soundControl = SoundControl()
+    @StateObject var uploadViewModel = UploadViewModel()
+    @Binding var episode: Episodes
     @Binding var upload: Uploads
+    @State var isCommentTapped: Bool = false
     
-    //   @State var width : CGFloat = UIScreen.main.bounds.height < 750 ? 130 : 230
     var width : CGFloat = 200
     var height : CGFloat = 200
     // MARK: 0 is episode view, 1 is casting view
     var state: Int
-    //    var isplaying:Bool = false;
-    //
+    
     var body: some View {
         VStack {
             Spacer(minLength: 0)
@@ -78,12 +78,23 @@ struct StreamingView: View {
             Spacer()
             
             HStack {
-                
-                Image(systemName: "person")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 45, height: 45)
-                    .clipShape(Circle())
+                if state == 1 && self.upload.userImage == "" {
+                    Image(systemName: "person")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 45, height: 45)
+                        .clipShape(Circle())
+                } else {
+                    AsyncImage(url: URL(string: self.state == 0 ? self.episode.image : self.upload.userImage)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 45, height: 45)
+                            .clipShape(Circle())
+                    } placeholder: {
+                        ProgressView()
+                    }
+                }
                 
                 VStack {
                     Text(self.state == 0 ? self.episode.title : self.upload.title)
@@ -97,8 +108,8 @@ struct StreamingView: View {
                         .font(.caption2)
                         .foregroundColor(.gray)
                         .lineLimit(1)
-                    
-                }.padding()
+                }
+                .padding()
                 
                 Spacer()
                 
@@ -109,50 +120,58 @@ struct StreamingView: View {
                             Image(systemName: "message")
                                 .resizable()
                                 .frame(width: 20, height: 20)
+                                .onTapGesture {
+                                    self.isCommentTapped = true
+                                }
                             
-                            Text("comments(INT)")
+                            Text("\(self.uploadViewModel.commentList.count) comments")
                                 .font(.caption2)
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
                         }
-                        Image(systemName: "heart")
+                        Image(systemName: self.uploadViewModel.like.isLiked ? "heart.fill" : "heart")
                             .resizable()
                             .frame(width: 20, height: 20)
+                            .foregroundColor(.orange)
                             .onTapGesture {
-                                if state == 0 {
-                                    DispatchQueue.main.async {
+                                DispatchQueue.main.async {
+                                    if state == 0 {
                                         self.userViewModel.addFavorite(favorite: episode)
+                                    } else {
+                                        self.uploadViewModel.updateLikes(uploadID: self.upload.uuid)
                                     }
-                                } else {
-                                    print("Users like this upload")
                                 }
                             }
                         if state == 1 {
-                            Text("likes(INT)")
+                            Text("\(self.upload.numOfLikes) likes")
                                 .font(.caption2)
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
                         }
                     }
-                }.padding()
-                
+                }
+                .padding()
             }.padding()
         }
+        .background(Color(UIColor.systemBackground))
         .onAppear {
             DispatchQueue.main.async {
                 if state == 0 {
                     self.podcastViewModel.fetchPodcastById(podcastId: self.episode.podcast_uuid, episodeId: self.episode.episode_uuid)
                     self.userViewModel.addWatchList(watchItem: self.episode)
                 } else {
-                    print("fetching uploads")
+                    self.uploadViewModel.fetchCommentsByUploadID(uploadID: self.upload.uuid)
                 }
             }
+        }
+        .sheet(isPresented: self.$isCommentTapped) {
+            CommentView(upload: self.upload)
         }
     }
 }
 
 struct StreamingView_Previews: PreviewProvider {
     static var previews: some View {
-        StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, likes: [], comments: [])), state: 0)
+        StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])), state: 0)
     }
 }

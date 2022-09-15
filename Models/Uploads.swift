@@ -19,6 +19,7 @@ struct Uploads : Identifiable {
     var userID : String
     var numOfLikes: Int
     var audio_length: Int
+    var userImage: String
     var likes: [Likes]
     var comments: [Comments]
 }
@@ -27,11 +28,14 @@ struct Likes : Identifiable {
     var id: String = UUID().uuidString
     var author: String
     var userID: String
+    var isLiked: Bool
 }
 
 struct Comments: Identifiable {
     var id: String = UUID().uuidString
+    var uuid: String
     var author: String
     var userID: String
     var content: String
+    var image : String
 }

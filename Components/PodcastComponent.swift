@@ -25,11 +25,11 @@ struct PodcastComponent: View {
             }
             HStack(alignment: .firstTextBaseline, spacing: 10) {
                 Text(self.podcast.title)
-                    .font(.title3)
+                    .font(.caption)
                     .frame(maxWidth: 100, alignment: .leading)
             }.padding(0)
             Text(self.podcast.author)
-                .font(.caption)
+                .font(.caption2)
                 .foregroundColor(.gray)
                 .frame(maxWidth: 100, alignment: .leading)
         }

@@ -12,42 +12,83 @@ import UIKit
 
 class UploadViewModel: ObservableObject {
     @Published var uploads = [Uploads]()
-    @Published var upload = Uploads(uuid: "", title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, likes: [], comments: [])
+    @Published var upload = Uploads(uuid: "", title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])
     @Published var lastDocumentSnapshot: DocumentSnapshot!
     @Published var fetchingMore = false
     
+    @Published var comment = Comments(uuid: "", author: "", userID: "", content: "", image: "")
+    @Published var like = Likes(author: "", userID: "", isLiked: false)
+    @Published var likedList = [Likes]()
+    @Published var commentList = [Comments]()
+    
     private var db = Firestore.firestore()
     private var userSettings = UserSettings()
-    private var likedObj = [Likes]()
-    private var commentObj = [Comments]()
     private var userViewModel = UserViewModel()
+    private var notificationManager = NotificationManager()
     
     // MARK: create uploads
     func addUploads() {
-        db.collection(Settings.usersCollection).document(self.userSettings.uuid).getDocument(completion: { (querySnapShot, error) in
+        db.collection(Settings.usersCollection).document(self.userSettings.uuid).getDocument(completion: { (_, error) in
             if let err = error {
                 print("Error getting documents: \(err)")
             }
             
-            let uploadObj = ["uuid": self.upload.uuid, "title": self.upload.title, "description": self.upload.description, "audioPath": self.upload.audioPath, "author": self.upload.author, "pub_date": self.upload.pub_date, "image": self.upload.image, "userID": self.upload.userID, "numOfLikes": self.upload.numOfLikes, "likes": [], "comments": [], "audio_length": self.upload.audio_length] as [String : Any]
-        
-            self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.uploadsCollection).addDocument(data: uploadObj)
+            let uploadObj = ["uuid": self.upload.uuid, "title": self.upload.title, "description": self.upload.description, "audioPath": self.upload.audioPath, "author": self.upload.author, "pub_date": self.upload.pub_date, "image": self.upload.image, "userID": self.upload.userID, "numOfLikes": self.upload.numOfLikes, "audio_length": self.upload.audio_length, "userImage": self.userSettings.userImage, "commentList": [], "likedList": []] as [String : Any]
+            
+            self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.uploadsCollection).document(self.upload.uuid).setData(uploadObj)
         })
     }
     
-    // MARK: initialize firestore object to Swift Object
-    func getCommentAndLikeList(likedList: [[String : Any]]?, commentList: [[String : Any]]?) {
-        if let likes = likedList {
-            self.likedObj = likes.map {(value) -> Likes in
-                return Likes(author: value["author"] as! String, userID: value["userID"] as! String)
+    // MARK: fetch comments by uploadID
+    func fetchCommentsByUploadID(uploadID: String) {
+        db.collectionGroup(Settings.uploadsCollection).whereField("uuid", isEqualTo: uploadID).addSnapshotListener {(querySnapShot, error) in
+            if let err = error {
+                print(err.localizedDescription)
             }
-        }
-        
-        if let comments = commentList {
-            self.commentObj = comments.map {(value) -> Comments in
-                return Comments(author: value["author"] as! String, userID: value["userID"] as! String, content: value["content"] as! String)
+            
+            guard let uploadObj = querySnapShot?.documents else {
+                print("No upload")
+                return
             }
+            
+            let commentObj = uploadObj[0].get("commentList") as? [[String:Any]]
+            guard let commentObjList = commentObj else {
+                self.commentList = []
+                print("No comment")
+                return
+            }
+            
+            self.commentList = commentObjList.map {(value) -> Comments in
+                return Comments(uuid: value["uuid"] as! String, author: value["author"] as! String, userID: value["userID"] as! String, content: value["content"] as! String, image: value["image"] as! String)
+            }
+            
         }
+    }
+    
+    // MARK: fetch likes by uploadID
+    func fetchLikesByUploadID(uploadID: String) {
+        db.collectionGroup(Settings.uploadsCollection).whereField("uuid", isEqualTo: uploadID).getDocuments(completion: { (querySnapShot, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            
+            guard let uploadObj = querySnapShot?.documents else {
+                print("No upload")
+                return
+            }
+            
+            let likeObj = uploadObj[0].get("likedList") as? [[String:Any]]
+            guard let likeObjList = likeObj else {
+                self.likedList = []
+                print("No likes")
+                return
+            }
+            
+            self.likedList = likeObjList.map {(value) -> Likes in
+                self.like = Likes(author: value["author"] as! String, userID: value["userID"] as! String, isLiked: value["isLiked"] as! Bool)
+                return self.like
+            }
+        })
     }
     
     // MARK: fetch uploads with pagination
@@ -57,10 +98,10 @@ class UploadViewModel: ObservableObject {
         var query: Query!
         
         if uploads.isEmpty {
-            query = db.collectionGroup(Settings.uploadsCollection).order(by: "numOfLikes", descending: true).limit(to: 5)
+            query = db.collectionGroup(Settings.uploadsCollection).order(by: "numOfLikes", descending: true).limit(to: 2)
             print("First 5 uploads loaded")
         } else {
-            query = db.collectionGroup(Settings.uploadsCollection).order(by: "numOfLikes", descending: true).start(afterDocument: lastDocumentSnapshot).limit(to: 5)
+            query = db.collectionGroup(Settings.uploadsCollection).order(by: "numOfLikes", descending: true).start(afterDocument: lastDocumentSnapshot).limit(to: 2)
             print("Next 5 uploads loaded")
         }
         
@@ -79,12 +120,14 @@ class UploadViewModel: ObservableObject {
                 return
             } else {
                 for value in snapshot!.documents {
-                    let likedList = value["likedList"] as? [[String: Any]]
-                    let commentList = value["commentList"] as? [[String: Any]]
+                    let uploadID = value.get("uuid") as! String
+                    DispatchQueue.main.async {
+                        self.fetchCommentsByUploadID(uploadID: uploadID)
+                        self.fetchLikesByUploadID(uploadID: uploadID)
+                    }
                     
-                    self.getCommentAndLikeList(likedList: likedList, commentList: commentList)
-                    
-                    let newUploads = Uploads(uuid: value.get("uuid") as! String, title: value.get("title") as! String, description: value.get("description") as! String, audioPath: value.get("audio") as! String, author: value.get("author") as! String, pub_date: value.get("pub_date") as! String, image: value.get("image") as! String, userID: value.get("user_id") as! String, numOfLikes: value.get("numOfLikes") as! Int, audio_length: value.get("audio_length") as! Int, likes: self.likedObj, comments: self.commentObj)
+                    let newUploads = Uploads(uuid: uploadID, title: value.get("title") as! String, description: value.get("description") as! String, audioPath: value.get("audioPath") as! String, author: value.get("author") as! String, pub_date: value.get("pub_date") as! String, image: value.get("image") as! String, userID: value.get("userID") as! String, numOfLikes: value.get("numOfLikes") as! Int, audio_length: value.get("audio_length") as! Int, userImage: value.get("userImage") as! String, likes: self.likedList, comments: self.commentList)
+                    self.upload = newUploads
                     self.uploads.append(newUploads)
                 }
                 
@@ -108,12 +151,10 @@ class UploadViewModel: ObservableObject {
                 print("No upload data")
                 return
             }
-            let likedList = document.get("likedList") as? [[String : Any]]
-            let commentList = document.get("commentList") as? [[String : Any]]
+            self.fetchCommentsByUploadID(uploadID: uploadID)
+            self.fetchLikesByUploadID(uploadID: uploadID)
             
-            self.getCommentAndLikeList(likedList: likedList, commentList: commentList)
-            
-            self.upload = Uploads(uuid: uploadID, title: document.get("title") as! String, description: document.get("description") as! String, audioPath: document.get("audio") as! String, author: document.get("author") as! String, pub_date: document.get("pub_date") as! String, image: document.get("image") as! String, userID: document.get("user_id") as! String, numOfLikes: document.get("numOfLikes") as! Int, audio_length: document.get("audio_length") as! Int, likes: self.likedObj, comments: self.commentObj)
+            self.upload = Uploads(uuid: uploadID, title: document.get("title") as! String, description: document.get("description") as! String, audioPath: document.get("audio") as! String, author: document.get("author") as! String, pub_date: document.get("pub_date") as! String, image: document.get("image") as! String, userID: document.get("user_id") as! String, numOfLikes: document.get("numOfLikes") as! Int, audio_length: document.get("audio_length") as! Int, userImage: document.get("userImage") as! String, likes: self.likedList, comments: self.commentList)
         })
     }
     
@@ -135,7 +176,7 @@ class UploadViewModel: ObservableObject {
                 if let err = error {
                     print(err.localizedDescription)
                 } else {
-//                    data.reference.updateData(["title": title, "image": imagePath, "description": description])
+                    //                    data.reference.updateData(["title": title, "image": imagePath, "description": description])
                 }
             }
         })
@@ -143,21 +184,21 @@ class UploadViewModel: ObservableObject {
     
     // MARK: delete upload by ID
     func deleteUplodads(uploadID: String, imagePath: String) {
-        db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.uploadsCollection).document(uploadID).delete() { error in
+        db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.uploadsCollection).document(uploadID).delete { error in
             if let err = error {
                 print("Error removing document: \(err)")
             } else {
                 print("Document successfully removed!")
                 
                 let storageRef = Storage.storage().reference().child(imagePath)
-
+                
                 // Delete the image file
                 storageRef.delete { errorObj in
-                  if let errStr = errorObj {
-                      print(errStr.localizedDescription)
-                  } else {
-                      print("Upload deleted")
-                  }
+                    if let errStr = errorObj {
+                        print(errStr.localizedDescription)
+                    } else {
+                        print("Upload deleted")
+                    }
                 }
             }
         }
@@ -176,33 +217,101 @@ class UploadViewModel: ObservableObject {
             }
             
             self.uploads = documents.map {(value) -> Uploads in
-                let likedList = value.get("likedList") as? [[String : Any]]
-                let commentList = value.get("commentList") as? [[String : Any]]
+                let uploadID = value.get("uuid") as! String
+                self.fetchCommentsByUploadID(uploadID: uploadID)
+                self.fetchLikesByUploadID(uploadID: uploadID)
                 
-                self.getCommentAndLikeList(likedList: likedList, commentList: commentList)
-                return Uploads(uuid: value.get("uuid") as! String, title: value.get("title") as! String, description: value.get("description") as! String, audioPath: value.get("audio") as! String, author: value.get("author") as! String, pub_date: value.get("pub_date") as! String, image: value.get("image") as! String, userID: value.get("user_id") as! String, numOfLikes: value.get("numOfLikes") as! Int, audio_length: value.get("audio_length") as! Int, likes: self.likedObj, comments: self.commentObj)
+                return Uploads(uuid: uploadID, title: value.get("title") as! String, description: value.get("description") as! String, audioPath: value.get("audio") as! String, author: value.get("author") as! String, pub_date: value.get("pub_date") as! String, image: value.get("image") as! String, userID: value.get("user_id") as! String, numOfLikes: value.get("numOfLikes") as! Int, audio_length: value.get("audio_length") as! Int, userImage: value.get("userImage") as! String, likes: self.likedList, comments: self.commentList)
             }
         })
     }
     
-    func fetchCommentsByUpload() {
+    // MARK: Add comments by upload ID
+    func addComments(uploadID: String, comment: Comments) {
+        let commentObj = ["author": comment.author, "userID": comment.userID, "content": comment.content, "image": self.userSettings.userImage, "uuid": comment.uuid]
+        db.collectionGroup(Settings.uploadsCollection).whereField("uuid", isEqualTo: uploadID).getDocuments(completion: {(querySnapShot, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            
+            guard let document = querySnapShot?.documents else {
+                print("No upload with ID: \(uploadID)")
+                return
+            }
+            
+            let commentObjItem = document[0].get("commentList") as? [[String:Any]]
+            
+            if comment.userID != self.userSettings.uuid {
+                self.notificationManager.sendMessageToDevice(userToken: self.userSettings.token)
+            }
+            
+            guard var commentObjList = commentObjItem else {
+                document[0].reference.updateData(["commentList" : [commentObj]])
+                return
+            }
+            
+            commentObjList.append(commentObj)
+            document[0].reference.updateData(["commentList" : commentObjList])
+        })
         
     }
     
-    func addComments() {
-        
+    // MARK: Delete Comments by userID
+    func deleteComments(uploadID: String, commentID: String) {
+        db.collectionGroup(Settings.uploadsCollection).whereField("uuid", isEqualTo: uploadID).getDocuments(completion: {(querySnapShot, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            
+            guard let document = querySnapShot?.documents else {
+                print("No upload with ID: \(uploadID)")
+                return
+            }
+            
+            let commentObjItem = document[0].get("commentList") as? [[String:Any]]
+            
+            if let commentObjList = commentObjItem {
+                let filterList = commentObjList.filter { $0["uuid"] as! String != commentID }
+                document[0].reference.updateData(["commentList" : filterList])
+            }
+        })
     }
     
-    func editComments() {
-        
-    }
-    
-    func deleteComments() {
-        
-    }
-    
-    func updateLikes() {
-        
+    // MARK: Update likes by uploadID
+    func updateLikes(uploadID: String) {
+        db.collectionGroup(Settings.uploadsCollection).whereField("uuid", isEqualTo: uploadID).getDocuments(completion: {(querySnapShot, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            
+            guard let document = querySnapShot?.documents else {
+                print("No upload with ID: \(uploadID) in liking uploads")
+                return
+            }
+            
+            let likeObj = document[0].get("likedList") as? [[String:Any]]
+            self.like.isLiked.toggle()
+
+            let likeItem = ["author": self.userSettings.username, "userID": self.userSettings.uuid, "isLiked": self.like.isLiked] as [String : Any]
+            let numOfLikes = document[0].get("numOfLikes") as! Int
+            
+            guard var likeObjList = likeObj else {
+                print("No like list")
+                document[0].reference.updateData(["likedList" : [likeItem]])
+                return
+            }
+            
+            let isExisting = likeObjList.filter { $0["userID"] as! String == self.userSettings.uuid}
+            let isNotExisting = likeObjList.filter { $0["userID"] as! String != self.userSettings.uuid}
+            
+            if isExisting.isEmpty {
+                self.like.isLiked.toggle()
+                likeObjList.append(likeItem)
+                document[0].reference.updateData(["likedList" : likeObjList, "numOfLikes": numOfLikes + 1])
+            } else {
+                document[0].reference.updateData(["likedList" : isNotExisting, "numOfLikes": numOfLikes - 1])
+            }
+        })
     }
     
 }

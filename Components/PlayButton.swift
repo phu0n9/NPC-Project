@@ -23,10 +23,10 @@ struct PlayButton: View {
                 Button(action: {
                     self.soundControl.playSound(soundName: soundName, isPreview: true)
                 }, label: {
-                    Image(self.soundControl.isActive ? "play-circle-icon" : "pause-circle-icon")
+                    Image(systemName: self.soundControl.isActive ?  "play.fill" : "pause.fill")
                         .renderingMode(.template)
                         .foregroundColor(.orange)
-                        .frame(width:15, height: 6, alignment: .leading)
+                        .frame(width:13, height: 6, alignment: .leading)
                         .padding(5)
                     Text(String(self.length))
                         .font(.caption)
@@ -35,9 +35,9 @@ struct PlayButton: View {
                 })
             }
             .overlay(
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 5)
                     .stroke(Color(red: 1, green: 0.4902, blue: 0.3216), lineWidth: 1))
-            
+                    
             // MARK: heart icon
             Button(action: {
                 self.episode.isLiked.toggle()
@@ -46,34 +46,28 @@ struct PlayButton: View {
                 Image(systemName: self.episode.isLiked ? "heart.fill" : "heart")
                     .renderingMode(.template)
                     .foregroundColor(.orange)
-                    .frame(width:20, height: 20, alignment: .leading)
-                    .padding()
-            })
+                    .frame(width:20, height: 30, alignment: .leading)
+                    .padding(5)
+            }).padding(5)
+        
+            // MARK: Download
+            Button(action: {
+
+            }, label: {
+                Image(systemName: self.episode.isLiked ? "arrow.down.square.fill" : "arrow.down.square")
+                    .renderingMode(.template)
+                    .foregroundColor(.orange)
+                    .frame(width:20, height: 30, alignment: .leading)
+                    .padding(5)
+            }).padding(0)
+        
+        
+        
         }
-        .padding()
+        .padding(0)
             
-//            //MARK: add list btn
-//            Button(action: {
-//                isDownload += 1
-//                print("downdload-button clicked")
-//            }, label: {
-//                if isAddedToMyList % 2 == 0 {
-//                    Image(systemName: "square.arrow.down")
-//                        .renderingMode(.template)
-//                        .foregroundColor(.orange)
-//                        .frame(width:20, height: 20, alignment: .leading)
-//                        .padding()
-//
-//                } else {
-//                    Image(systemName: "square.arrow.down.fill")
-//                        .renderingMode(.template)
-//                        .foregroundColor(.orange)
-//                        .frame(width:20, height: 20, alignment: .leading)
-//                        .padding()
-//                }
-//            })
-    
 }
+    
 
 struct PlayButton_Previews: PreviewProvider {
     static var previews: some View {
