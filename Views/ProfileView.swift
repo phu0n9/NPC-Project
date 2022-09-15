@@ -13,12 +13,12 @@ struct ProfileView: View {
     @State var selectedImage: UIImage?
     @State var isSubmit = false
     @State var isFull = true
-    //
     @State var alert = false
     @State var updateStatus = ""
     @EnvironmentObject var routerView: RouterView
     @State var categoryList = [String]()
-    
+
+
     var body: some View {
         NavigationView {
             if self.userViewModel.user.favoriteTopics.count != 3 {
@@ -73,15 +73,24 @@ struct ProfileView: View {
                             
                         }
                         
-                        DisableTextComponent(title: Binding.constant("Username"), textValue: Binding.constant(self.userViewModel.user.userName), imageName: Binding.constant("person"))
-                        
-                        DisableTextComponent(title: Binding.constant("Email"), textValue: Binding.constant(self.userViewModel.user.email), imageName: Binding.constant("envelope"))
-                        
+//                        DisableTextComponent(title: Binding.constant("Username"), textValue: Binding.constant(self.userViewModel.user.userName), imageName: Binding.constant("person"))
+//                        
+//                        DisableTextComponent(title: Binding.constant("Email"), textValue: Binding.constant(self.userViewModel.user.email), imageName: Binding.constant("envelope"))
+                      
+//                        DisableTextComponent(title: Binding.constant("Username"), textValue: Binding.constant(self.userViewModel.user.userName))
+//
+//                        DisableTextComponent(title: Binding.constant("Email"), textValue: Binding.constant(self.userViewModel.user.email))
+//
+
+                        Text(self.userViewModel.user.userName)
+                            .padding()
+                        Text(self.userViewModel.user.email)
+                            .padding()
+
                         CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: self.$isFull, categoryList: self.$categoryList)
                             .onAppear {
                                 self.categoryList = self.userViewModel.user.favoriteTopics
                             }
-                        
                         Button {
                             self.handleUpdate()
                         } label: {
