@@ -28,7 +28,7 @@ struct BottomNavBar: View {
     let icons = [
         "podcasts-icon",
         "play.fill",
-        "todo",
+        "leaf.fill",
         "music.note.list",
         "person"
     ]
@@ -65,15 +65,13 @@ struct BottomNavBar: View {
                         self.selectedIndex = number
                     }, label: {
                         if number == 2 {
-                            Image(icons[number])
+     
+                            Image(systemName: "leaf.fill")
                                 .renderingMode(.template)
-                                .font(.system(size:40,
+                                .font(.system(size:25,
                                               weight: .regular,
                                               design: .default))
-                                .foregroundColor(.white)
-                                .frame(width: 45, height: 45)
-                                .background(Color.orange)
-                                .cornerRadius(30)
+                                .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
                         }
                         else if number == 0 {
                             Image(icons[number])
@@ -81,7 +79,7 @@ struct BottomNavBar: View {
                             .font(.system(size:25,
                                           weight: .regular,
                                           design: .default))
-                            .foregroundColor(selectedIndex == number ? .orange : Color(UIColor.black))
+                            .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
                         }
                         else if number == 1 {
                             Image(systemName: "play.fill")
@@ -89,7 +87,7 @@ struct BottomNavBar: View {
                             .font(.system(size:25,
                                           weight: .regular,
                                           design: .default))
-                            .foregroundColor(selectedIndex == number ? .orange : Color(UIColor.black))
+                            .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
                         }
                         else if number == 3{
                             Image(systemName: "music.note.list")
@@ -97,15 +95,15 @@ struct BottomNavBar: View {
                             .font(.system(size:25,
                                           weight: .regular,
                                           design: .default))
-                            .foregroundColor(selectedIndex == number ? .orange : Color(UIColor.black))
+                            .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
                         }
                         else if number == 4{
-                            Image(systemName: "person")
+                            Image(systemName: "person.fill")
                             .renderingMode(.template)
                             .font(.system(size:25,
                                           weight: .regular,
                                           design: .default))
-                            .foregroundColor(selectedIndex == number ? .orange : Color(UIColor.black))
+                            .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
                         }
                         else {
                             Image(icons[number])
@@ -113,7 +111,7 @@ struct BottomNavBar: View {
                                 .font(.system(size:25,
                                               weight: .regular,
                                               design: .default))
-                                .foregroundColor(selectedIndex == number ? .orange : Color(UIColor.black))
+                                .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
                         }
                     })
                     

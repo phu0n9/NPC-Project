@@ -32,6 +32,7 @@ class UploadControl : ObservableObject {
         do {
             if self.record {
                 // Already Started Recording means stopping and saving...
+               
                 self.recorder.stop()
                 self.record.toggle()
                 return
