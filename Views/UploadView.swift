@@ -42,34 +42,13 @@ struct UploadView : View {
                 VStack(spacing:0) {
                     
                     VStack(alignment: .center) {
-                        
-
-                        if self.selectedImage != nil {
-                            
-                            Image(uiImage: selectedImage!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 150, height: 150)
-                                .clipShape(Rectangle())
-                                .cornerRadius(20)
-                                .onTapGesture {
-                                    self.isPickerShowing = true
-                                }
-                        } else {
-                            Image(systemName: "photo")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 100, height: 100, alignment: .center)
-                                .clipShape(Rectangle())
-                                .cornerRadius(20)
-                                .onTapGesture {
-                                    self.isPickerShowing = true
-                                }
-                        }
-                        Text("Cover Image")
-                            .font(.system(size: 15))
+    
+                        Text("Record your podcast")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .multilineTextAlignment(.leading)
                             .padding(10)
-                            .frame(width: 200, height: 50, alignment: .center)
+                            .frame(width: 350, height: 50, alignment: .leading)
 
                         Capsule()
                         /* #f5f5f5 */
@@ -99,6 +78,33 @@ struct UploadView : View {
                             .padding(10)
                             .autocapitalization(.none)
                         
+                        Text("Cover Image")
+                            .font(.system(size: 15))
+                            .padding(10)
+                            .frame(width: 200, height: 50, alignment: .center)
+                        
+                        if self.selectedImage != nil {
+                            
+                            Image(uiImage: selectedImage!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 150, height: 150)
+                                .clipShape(Rectangle())
+                                .cornerRadius(20)
+                                .onTapGesture {
+                                    self.isPickerShowing = true
+                                }
+                        } else {
+                            Image(systemName: "photo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 100, height: 100, alignment: .center)
+                                .clipShape(Rectangle())
+                                .cornerRadius(20)
+                                .onTapGesture {
+                                    self.isPickerShowing = true
+                                }
+                        }
 
                         if self.isFinishedRecord == false {
                             
@@ -128,8 +134,43 @@ struct UploadView : View {
                                             self.startTimer()
                                               self.uploadControl.recordAudio()
                                           }){
-                                            Image(systemName: "play.fill")
-                                              
+//                                            Image(systemName: "play.fill")
+                                              Button(action: {
+                                                  self.uploadControl.recordAudio()
+                                              }, label: {
+                                                  ZStack {
+                                                      
+                                                      Circle()
+                                                          .frame(width:50, height: 100)
+                                                          .foregroundColor(Color("MainButton"))
+                                                          .border(Color("MainButton"))
+                                                      
+                                                      if self.uploadControl.record {
+                                                          Circle()
+                                                              .stroke(Color("MainButton"))
+                                                              .frame(width:50, height: 50)
+                                                              .foregroundColor(Color("MainButton"))
+                                                      }
+                                                      
+                                                      Image(systemName: self.uploadControl.record ?  "pause.fill" : "play.fill")
+                                                          .resizable()
+                                                          .aspectRatio(contentMode: .fit)
+                                                          .frame(width: 10, height: 10, alignment:.trailing)
+                                                          .foregroundColor(.white)
+                                                      
+                                                  }
+                                              })
+                                              .disabled(self.isFinishedRecord)
+                                              .onAppear {
+                                                  self.uploadControl.requestRecording()
+                                              }
+                                              .onChange(of: self.uploadControl.record) { value in
+                                                  if !value {
+                                                      if self.uploadControl.recorder?.url != nil {
+                                                          self.isFinishedRecord = true
+                                                      }
+                                                  }
+                                              }
                                           }
                                           
                                         }
@@ -148,42 +189,7 @@ struct UploadView : View {
                                     
                                 
                                 
-                                Button(action: {
-                                    self.uploadControl.recordAudio()
-                                }, label: {
-                                    ZStack {
-                                        
-                                        Circle()
-                                            .frame(width:100, height: 100)
-                                            .foregroundColor(Color("MainButton"))
-                                            .border(Color("MainButton"))
-                                        
-                                        if self.uploadControl.record {
-                                            Circle()
-                                                .stroke(Color("MainButton"))
-                                                .frame(width:100, height: 100)
-                                                .foregroundColor(Color("MainButton"))
-                                        }
-                                        
-                                        Image(systemName: self.uploadControl.record ?  "pause.fill" : "play.fill")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 30, height: 30, alignment:.trailing)
-                                            .foregroundColor(.white)
-                                        
-                                    }
-                                })
-                                .disabled(self.isFinishedRecord)
-                                .onAppear {
-                                    self.uploadControl.requestRecording()
-                                }
-                                .onChange(of: self.uploadControl.record) { value in
-                                    if !value {
-                                        if self.uploadControl.recorder?.url != nil {
-                                            self.isFinishedRecord = true
-                                        }
-                                    }
-                                }
+
                                 
                                 
                                 

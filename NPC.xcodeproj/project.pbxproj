@@ -75,6 +75,8 @@
 		A4F8235628C30F47007856F2 /* PodcastComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8235528C30F47007856F2 /* PodcastComponent.swift */; };
 		A4FBD12828C781CF00F6E3EB /* CheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FBD12728C781CE00F6E3EB /* CheckboxToggleStyle.swift */; };
 		A4FBD12A28C795AE00F6E3EB /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */; };
+		BB66E62B28D321BD000E0BDC /* TimerForCastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66E62A28D321BD000E0BDC /* TimerForCastingView.swift */; };
+		BB66E62D28D331F6000E0BDC /* MiddleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */; };
 		BB99BBCD28CDA10F00D80BF6 /* StreamingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB99BBCC28CDA10F00D80BF6 /* StreamingView.swift */; };
 		BB99BBCF28CDA2D200D80BF6 /* ToastPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB99BBCE28CDA2D200D80BF6 /* ToastPopUp.swift */; };
 		BB99BBD728CDAA4300D80BF6 /* SimpleToast in Frameworks */ = {isa = PBXBuildFile; productRef = BB99BBD628CDAA4300D80BF6 /* SimpleToast */; };
@@ -149,6 +151,8 @@
 		A4F8235528C30F47007856F2 /* PodcastComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastComponent.swift; sourceTree = "<group>"; };
 		A4FBD12728C781CE00F6E3EB /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
 		A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
+		BB66E62A28D321BD000E0BDC /* TimerForCastingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerForCastingView.swift; sourceTree = "<group>"; };
+		BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleComponent.swift; sourceTree = "<group>"; };
 		BB99BBCC28CDA10F00D80BF6 /* StreamingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingView.swift; sourceTree = "<group>"; };
 		BB99BBCE28CDA2D200D80BF6 /* ToastPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastPopUp.swift; sourceTree = "<group>"; };
 		BB99BBD828CDDB7900D80BF6 /* StreamingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingPage.swift; sourceTree = "<group>"; };
@@ -260,6 +264,7 @@
 				4E26038A28CF014B00DC739B /* EmptyListView.swift */,
 				4E26039728D07F4800DC739B /* MiniPlayer.swift */,
 				4E2603A128D1D37D00DC739B /* CommentItem.swift */,
+				BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -276,6 +281,7 @@
 				4E98FDD928C87C54006D2566 /* UploadViewModel.swift */,
 				4E26037E28CE315D00DC739B /* TextBindingManager.swift */,
 				A4A4F91928D17B93000C2248 /* LocalNotificationManager.swift */,
+				BB66E62A28D321BD000E0BDC /* TimerForCastingView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -482,6 +488,7 @@
 				A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */,
 				A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */,
 				4E6D455728BF2842005B7DF0 /* PodcastViewModel.swift in Sources */,
+				BB66E62B28D321BD000E0BDC /* TimerForCastingView.swift in Sources */,
 				BB99BBD928CDDB7900D80BF6 /* StreamingPage.swift in Sources */,
 				4E26036E28CCFEB000DC739B /* DisableTextComponent.swift in Sources */,
 				4E26039428D0498600DC739B /* UserCastingView.swift in Sources */,
@@ -496,6 +503,7 @@
 				BB99BBCD28CDA10F00D80BF6 /* StreamingView.swift in Sources */,
 				4E2603A228D1D37D00DC739B /* CommentItem.swift in Sources */,
 				4E98FDDE28CB3725006D2566 /* CategoryCheckbox.swift in Sources */,
+				BB66E62D28D331F6000E0BDC /* MiddleComponent.swift in Sources */,
 				09D6F4E528C0FDD900D056C2 /* LoginView.swift in Sources */,
 				4E26039A28D0F23D00DC739B /* CommunityStreamView.swift in Sources */,
 				4E26039628D05D3A00DC739B /* PodcastDetailView.swift in Sources */,

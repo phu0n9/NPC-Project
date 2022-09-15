@@ -26,9 +26,11 @@ struct TrendingView: View {
             HStack(alignment: .firstTextBaseline) {
                 Text("Podcast for you")
                     .fontWeight(.regular)
+                    .foregroundColor(Color("MainButton"))
                     .frame(alignment: .topTrailing)
                     .padding(5)
                     .font(.system(size: 20))
+                
                 Spacer()
             }.padding(5)
 
@@ -38,11 +40,34 @@ struct TrendingView: View {
                         PodcastComponent(podcast: podcast)
                     }
                 }
-               
             }
             
             Divider()
+            
+            //MARK: MIDDLE ELEMENTS
+            ScrollView {
+                HStack(alignment: .firstTextBaseline) {
+                    Text("Recommendations")
+                        .fontWeight(.regular)
+                        .foregroundColor(Color("MainButton"))
+                        .frame(alignment: .topTrailing)
+                        .padding(5)
+                        .font(.system(size: 20))
+                    Spacer()
+                }.padding(5)
 
+                ScrollView(.horizontal) {
+                    HStack(spacing: 10) {
+                        ForEach(self.podcastViewModel.podcasts, id: \.id) { podcast in
+                            MiddleComponent(podcast: podcast)
+                        }
+                    }
+                   
+                }
+            }
+            
+            
+            Divider()
             
             ScrollView {
                 LazyVStack {
@@ -50,6 +75,7 @@ struct TrendingView: View {
                     
                         Text("Your Episodes")
                             .fontWeight(.regular)
+                            .foregroundColor(Color("MainButton"))
                             .frame(alignment: .topTrailing)
                             .padding(5)
                             .font(.system(size: 20))
