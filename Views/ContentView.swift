@@ -12,7 +12,7 @@ struct ContentView: View {
 //    @ObservedObject var userViewModel = UserViewModel()
 //    @ObservedObject var userSettings = UserSettings()
     @State var isOn: Bool = false
-    let notificationManager: NotificationManager = NotificationManager.shared
+//    let notificationManager: NotificationManager = NotificationManager.shared
     
     var body: some View {
         VStack{
@@ -43,23 +43,23 @@ struct ContentView: View {
             print ("Trigger notification")
         }
             
-            Toggle(isOn: $isOn, label: {
-                        Text("Notifications?")
-                    })
-
-                    /// change!
-                    .onChange(of: isOn, perform: { toggleIsOn in
-                        if toggleIsOn {
-                            var dateComponents = DateComponents()
-                            dateComponents.hour = 8
-                                                dateComponents.minute = 5
-                            self.notificationManager.scheduleTriggerNotification(title: "Morning Time", body: "Wake Up And Be Productive!", categoryIdentifier: "reminder", dateComponents: dateComponents, repeats: true)
-                            print("schedule notification")
-                        } else {
-                            print("don't schedule notification")
-                        }
-                    }
-                    )
+//            Toggle(isOn: $isOn, label: {
+//                        Text("Notifications?")
+//                    })
+//
+//                    /// change!
+//                    .onChange(of: isOn, perform: { toggleIsOn in
+//                        if toggleIsOn {
+//                            var dateComponents = DateComponents()
+//                            dateComponents.hour = 8
+//                                                dateComponents.minute = 5
+//                            self.notificationManager.scheduleTriggerNotification(title: "Morning Time", body: "Wake Up And Be Productive!", categoryIdentifier: "reminder", dateComponents: dateComponents, repeats: true)
+//                            print("schedule notification")
+//                        } else {
+//                            print("don't schedule notification")
+//                        }
+//                    }
+//                    )
             
     
 //        Text("Hello, world!")

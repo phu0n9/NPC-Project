@@ -24,7 +24,7 @@ class UploadViewModel: ObservableObject {
     private var db = Firestore.firestore()
     private var userSettings = UserSettings()
     private var userViewModel = UserViewModel()
-    private var notificationManager = NotificationManager()
+    // private var notificationManager = NotificationManager()
     
     // MARK: create uploads
     func addUploads() {
@@ -241,9 +241,9 @@ class UploadViewModel: ObservableObject {
             
             let commentObjItem = document[0].get("commentList") as? [[String:Any]]
             
-            if comment.userID != self.userSettings.uuid {
-                self.notificationManager.sendMessageToDevice(userToken: self.userSettings.token)
-            }
+//            if comment.userID != self.userSettings.uuid {
+//                self.notificationManager.sendMessageToDevice(userToken: self.userSettings.token)
+//            }
             
             guard var commentObjList = commentObjItem else {
                 document[0].reference.updateData(["commentList" : [commentObj]])
