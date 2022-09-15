@@ -34,6 +34,7 @@ class UserViewModel : ObservableObject {
     // MARK: uploading photo with selected image
     func uploadPhoto(selectedImage: UIImage?, categoryList: [String]) {
         guard selectedImage != nil else {
+            self.updateUser(selectedImage: "", categoryList: categoryList)
             return
         }
         let storageRef = Storage.storage().reference()
@@ -51,7 +52,6 @@ class UserViewModel : ObservableObject {
         metadataLocal.contentType = "image/jpeg"
         
         _ = fileRef.putData(imageData!, metadata: metadataLocal) { metadata, error in
-            
             if error == nil && metadata != nil {
                 fileRef.downloadURL { (url, error) in
                     if let err = error {
@@ -60,10 +60,29 @@ class UserViewModel : ObservableObject {
                     guard let downloadURL = url else { return }
                     
                     self.updateUser(selectedImage: downloadURL.absoluteString, categoryList: categoryList)
-
+                    self.updateUserUploadPhoto(selectedImage: downloadURL.absoluteString)
+                    self.userSettings.userCategories = categoryList
                 }
             }
         }
+    }
+    
+    // MARK: change upload user image when user changes their image
+    func updateUserUploadPhoto(selectedImage: String) {
+        db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.uploadsCollection).getDocuments(completion: { (querySnapShot, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            
+            guard let documents = querySnapShot?.documents else {
+                print("No upload found")
+                return
+            }
+            
+            for item in documents {
+                item.reference.updateData(["userImage": selectedImage])
+            }
+        })
     }
     
     // MARK: update user profile picture and categories
@@ -147,6 +166,7 @@ class UserViewModel : ObservableObject {
             self.userSettings.token = token
             self.userSettings.username = document.get("userName") as! String
             self.userSettings.userCategories = document.get("categoryList") as! [String]
+            self.userSettings.userImage = document.get("profilePic") as! String
         })
     }
     
@@ -227,9 +247,9 @@ class UserViewModel : ObservableObject {
                 return
             }
             
-            let isExisted = data.filter { $0.get("episode_uuid") as! String == favorite.episode_uuid }
+            let isExisting = data.filter { $0.get("episode_uuid") as! String == favorite.episode_uuid }
             
-            if isExisted.isEmpty {
+            if isExisting.isEmpty {
                 print("object \(favorite.episode_uuid)")
                 print("not equal")
                 self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.favoriteListCollection).document(favorite.episode_uuid).setData(favoriteObj)
@@ -317,5 +337,6 @@ class UserViewModel : ObservableObject {
         self.userSettings.token = ""
         self.userSettings.username = ""
         self.userSettings.userCategories = ["Art", "Music", "Technology"]
+        self.userSettings.userImage = ""
     }
 }

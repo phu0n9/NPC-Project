@@ -16,7 +16,8 @@ struct ProfileView: View {
     @State var alert = false
     @State var updateStatus = ""
     @EnvironmentObject var routerView: RouterView
-
+    @State var categoryList = [String]()
+    
     var body: some View {
         NavigationView {
             if self.userViewModel.user.favoriteTopics.count != 3 {
@@ -71,7 +72,10 @@ struct ProfileView: View {
                         
                         DisableTextComponent(title: Binding.constant("Email"), textValue: Binding.constant(self.userViewModel.user.email), imageName: Binding.constant("envelope"))
                         
-                        CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: self.$isFull, categoryList: self.$userViewModel.user.favoriteTopics)
+                        CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: self.$isFull, categoryList: self.$categoryList)
+                            .onAppear {
+                                self.categoryList = self.userViewModel.user.favoriteTopics
+                            }
                         
                         Button {
                             self.handleUpdate()
@@ -125,9 +129,9 @@ struct ProfileView: View {
         self.alert = true
         if self.userViewModel.user.favoriteTopics.count == 3 {
             DispatchQueue.main.async {
-                self.userViewModel.uploadPhoto(selectedImage: selectedImage, categoryList: self.userViewModel.user.favoriteTopics)
-                self.updateStatus = "Update successfully"
+                self.userViewModel.uploadPhoto(selectedImage: selectedImage, categoryList: self.categoryList)
             }
+            self.updateStatus = "Update successfully"
         } else {
             self.updateStatus = "Update error"
         }

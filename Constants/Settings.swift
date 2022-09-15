@@ -16,6 +16,8 @@ struct Settings {
     static let uploadsCollection = "uploads"
     static let watchListCollection = "watchedLists"
     static let favoriteListCollection = "favoriteLists"
+    static let commentListCollection = "commentList"
+    static let likeListCollection = "likeList"
     
     // MARK: User Defaults
     static let userToken = "token"
@@ -23,5 +25,5 @@ struct Settings {
     static let userName = "userName"
     static let userCategories = "userCategories"
     static let download = "download"
-    static let language = "AppleLanguages"
+    static let userImage = "userImage"
 }
