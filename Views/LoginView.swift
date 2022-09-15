@@ -44,9 +44,7 @@ struct LoginView: View {
                     }.pickerStyle(SegmentedPickerStyle())
                     
                     Button {
-                        withAnimation {
-                            self.notificationManager.sendNotification(title: "Hurray!", subtitle: nil, body: "If you see this text, launching the local notification worked!", launchIn: 5)
-                        }
+                        
                     } label: {
                         Image("transition")
                             .font(.system(size: 64))
@@ -138,10 +136,15 @@ struct LoginView: View {
                     }
                     
                     Button {
-                        
+                        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){success,_ in
+                            guard success else {
+                                return
+                            }
+                            print ("All Sets")
+                        }
                         self.btnClicked.toggle()
                         handleAction()
-                    
+                        
                     } label: {
                         HStack {
                             Spacer()
