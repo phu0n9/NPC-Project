@@ -77,6 +77,7 @@
 		A4FBD12A28C795AE00F6E3EB /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */; };
 		BB66E62B28D321BD000E0BDC /* TimerForCastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66E62A28D321BD000E0BDC /* TimerForCastingView.swift */; };
 		BB66E62D28D331F6000E0BDC /* MiddleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */; };
+		BB66E62F28D33E71000E0BDC /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66E62E28D33E71000E0BDC /* PopUpWindow.swift */; };
 		BB99BBCD28CDA10F00D80BF6 /* StreamingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB99BBCC28CDA10F00D80BF6 /* StreamingView.swift */; };
 		BB99BBCF28CDA2D200D80BF6 /* ToastPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB99BBCE28CDA2D200D80BF6 /* ToastPopUp.swift */; };
 		BB99BBD728CDAA4300D80BF6 /* SimpleToast in Frameworks */ = {isa = PBXBuildFile; productRef = BB99BBD628CDAA4300D80BF6 /* SimpleToast */; };
@@ -153,6 +154,7 @@
 		A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		BB66E62A28D321BD000E0BDC /* TimerForCastingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerForCastingView.swift; sourceTree = "<group>"; };
 		BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleComponent.swift; sourceTree = "<group>"; };
+		BB66E62E28D33E71000E0BDC /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
 		BB99BBCC28CDA10F00D80BF6 /* StreamingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingView.swift; sourceTree = "<group>"; };
 		BB99BBCE28CDA2D200D80BF6 /* ToastPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastPopUp.swift; sourceTree = "<group>"; };
 		BB99BBD828CDDB7900D80BF6 /* StreamingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingPage.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				4E26039728D07F4800DC739B /* MiniPlayer.swift */,
 				4E2603A128D1D37D00DC739B /* CommentItem.swift */,
 				BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */,
+				BB66E62E28D33E71000E0BDC /* PopUpWindow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				BB99BBD928CDDB7900D80BF6 /* StreamingPage.swift in Sources */,
 				4E26036E28CCFEB000DC739B /* DisableTextComponent.swift in Sources */,
 				4E26039428D0498600DC739B /* UserCastingView.swift in Sources */,
+				BB66E62F28D33E71000E0BDC /* PopUpWindow.swift in Sources */,
 				A491745E28C5D99700443F0D /* SignUpView.swift in Sources */,
 				4E6D455928BF285D005B7DF0 /* ContentView.swift in Sources */,
 				A4A4F91A28D17B93000C2248 /* LocalNotificationManager.swift in Sources */,
