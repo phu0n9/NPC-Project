@@ -41,8 +41,10 @@ struct TrendingView: View {
                     .fontWeight(.regular)
                     .foregroundColor(Color("MainButton"))
                     .frame(alignment: .topTrailing)
-                    .padding(5)
+                    .padding(5.0)
                     .font(.system(size: 20))
+                    
+                    
                 
                 Spacer()
             }.padding(5)
@@ -57,6 +59,7 @@ struct TrendingView: View {
             
             Divider()
             
+
             //  MARK: MIDDLE ELEMENTS
             ScrollView {
                 HStack(alignment: .firstTextBaseline) {
@@ -77,7 +80,7 @@ struct TrendingView: View {
                     }
                    
                 }
-            }
+            
             
             Divider()
             

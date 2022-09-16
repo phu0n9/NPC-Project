@@ -21,31 +21,29 @@ struct ViewComponent<Destination:View>: View {
                     
             }
             .navigationTitle(self.viewTitle)
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button {
-                        print("search clicked")
-                    } label: {
-                        Image(systemName: "waveform.and.magnifyingglass")
-                            .resizable()
-                            .frame(width: 20, height: 20, alignment: .leading)
-                    }
-                     
-                    Button {
-                        print("notification clicked")
-                    } label: {
-                        Image(systemName: "bell")
-                            .resizable()
-                            .frame(width: 20, height: 20, alignment: .leading)
-                    }
-                }
-            }
-            .accessibilityIdentifier(/*@START_MENU_TOKEN@*/"Identifier"/*@END_MENU_TOKEN@*/)
-            
+//            .toolbar {
+//                ToolbarItemGroup(placement: .navigationBarTrailing) {
+//                    Button {
+//                        print("search clicked")
+//                    } label: {
+//                        Image(systemName: "waveform.and.magnifyingglass")
+//                            .resizable()
+//                            .frame(width: 20, height: 20, alignment: .leading)
+//                    }
+//
+//                    Button {
+//                        print("notification clicked")
+//                    } label: {
+//                        Image(systemName: "bell")
+//                            .resizable()
+//                            .frame(width: 20, height: 20, alignment: .leading)
+//                    }
+//                }
+//            }
+//            .accessibilityIdentifier(/*@START_MENU_TOKEN@*/"Identifier"/*@END_MENU_TOKEN@*/)
+
             
         }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .navigationBarHidden(true)
     }
 }
 
