@@ -137,11 +137,12 @@ struct LoginView: View {
                             .background(Color.white)
                     }
                     
+                    // MARK: Login here
                     Button {
                         
                         self.btnClicked.toggle()
                         handleAction()
-                    
+                        showNotificationWhenLogin()
                     } label: {
                         HStack {
                             Spacer()
@@ -212,8 +213,8 @@ struct LoginView: View {
     
     private func showNotificationWhenLogin(){
         let content = UNMutableNotificationContent()
-        content.title = "NPC App has new updates for you"
-        content.subtitle = "Welcome back \(username)"
+        content.title = "Welcome back"
+        content.subtitle = "We have new updates for you"
         content.sound = UNNotificationSound.default
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)

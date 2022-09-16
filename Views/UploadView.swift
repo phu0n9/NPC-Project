@@ -233,7 +233,7 @@ struct UploadView : View {
                 self.alertMessage = "Please upload image!"
                 self.alertState = true
             } else {
-                self.state += 1
+                self.state += 1   
             }
         case 1:
             if self.uploadControl.recorder == nil {
@@ -252,7 +252,7 @@ struct UploadView : View {
             self.state = 0
         }
     }
-    
+
   
     
 }

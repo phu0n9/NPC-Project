@@ -22,39 +22,40 @@ struct SignUpView: View {
     @State private var isFull : Bool = false
     @State private var categoryList = [String]()
     @EnvironmentObject var routerView: RouterView
-
+    
     var body: some View {
-            VStack(spacing: 16) {
-                PrefTopComponent()
-                if self.podcastViewModel.categories.isEmpty {
-                    Section {
-                        ProgressView("Loading...")
-                            .scaleEffect(2)
-                            .font(.body)
-                            .padding()
-                    }
-                } else {
-                    ZStack {
-                        VStack {
-                            CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: $isFull, categoryList: self.$categoryList)
-                            Button {
-                                handleSignUpAction()
-                            } label: {
-                                HStack {
-                                    Spacer()
-                                    Text("Sign Up")
-                                        .font(.system(size: 26, weight: .semibold))
-                                        .fontWeight(.regular)
-                                        .foregroundColor(.white)
-                                        .multilineTextAlignment(.center)
-                                        .offset(x: -130)
-                                }.padding(6.0).background(Color(red: 1, green: 0.4902, blue: 0.3216))}
-                            .frame(width: 350, height:50)
-                            .clipShape(Capsule())
-                        }
+        VStack(spacing: 16) {
+            PrefTopComponent()
+            if self.podcastViewModel.categories.isEmpty {
+                Section {
+                    ProgressView("Loading...")
+                        .scaleEffect(2)
+                        .font(.body)
+                        .padding()
+                }
+            } else {
+                ZStack {
+                    VStack {
+                        CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: $isFull, categoryList: self.$categoryList)
+                        Button {
+                            handleSignUpAction()
+                            showNotificationWhenSignUp()
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text("Sign Up")
+                                    .font(.system(size: 26, weight: .semibold))
+                                    .fontWeight(.regular)
+                                    .foregroundColor(.white)
+                                    .multilineTextAlignment(.center)
+                                    .offset(x: -130)
+                            }.padding(6.0).background(Color(red: 1, green: 0.4902, blue: 0.3216))}
+                        .frame(width: 350, height:50)
+                        .clipShape(Capsule())
                     }
                 }
             }
+        }
         .navigationBarHidden(true)
         .onAppear {
             DispatchQueue.main.async {
@@ -94,6 +95,19 @@ struct SignUpView: View {
             self.userViewModel.userSettings.uuid = result?.user.uid ?? ""
             self.loginSuccess = true
         }
+    }
+    
+    private func showNotificationWhenSignUp() {
+        let content = UNMutableNotificationContent()
+        content.title = "Welcome to NPC"
+        content.subtitle = "Update your profile picture"
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
     }
 }
 

@@ -14,51 +14,30 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
-        
-        // Configure notification local
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){success,_ in
-            guard success else {
-                return
-            }
-            print("Succesfully Allow Notification")
-        }
-        
-//        // Push Notification (Server), MessagingDelegate, UNUserNotificationCenterDelegate
-//        Messaging.messaging().delegate = self
-//        UNUserNotificationCenter.current().delegate = self
-//
-//        // Request authorization
-//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){success,_ in
-//            guard success else {
-//                return
-//            }
-//            print ("Success in APNS registry")
-//        }
-//        application.registerForRemoteNotifications()
+        UNUserNotificationCenter.current().delegate = self
         return true
     }
-    
-//    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-//        messaging.token { token, _ in
-//            guard let token = token else {
-//                return
-//            }
-//            print("Token: \(token)")
-//        }
-//    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // Here we actually handle the notification
+        print("Notification received with identifier \(notification.request.identifier)")
+        // So we call the completionHandler telling that the notification should display a banner and play the notification sound - this will happen while the app is in foreground
+        completionHandler([.alert, .banner, .sound])
+    }
 }
 
 @main
 struct NPCApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
     @StateObject var routerView = RouterView()
     
     var body: some Scene {
         WindowGroup {
             // WelcomeView()
-            // ContentView()
+            //ContentView()
             RootView().environmentObject(routerView)
         }
     }
