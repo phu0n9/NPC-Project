@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import PopupView
+import SimpleToast
 
 struct TrendingView: View {
     
@@ -18,6 +19,18 @@ struct TrendingView: View {
     @State private var isTapped: Bool = false
     @State private var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
     @State private var upload = Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])
+    
+    // PopupView
+    @State private var showToast = false
+    @State private var value = 0
+    
+    private let toastOptions = SimpleToastOptions(
+        alignment: .top,
+        hideAfter: 2,
+        backdrop: .black.opacity(0.2),
+        animation: .default,
+        modifierType: .slide
+    )
     
     var body: some View {
         
@@ -44,7 +57,7 @@ struct TrendingView: View {
             
             Divider()
             
-            //MARK: MIDDLE ELEMENTS
+            //  MARK: MIDDLE ELEMENTS
             ScrollView {
                 HStack(alignment: .firstTextBaseline) {
                     Text("Recommendations")
@@ -65,7 +78,6 @@ struct TrendingView: View {
                    
                 }
             }
-            
             
             Divider()
             

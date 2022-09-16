@@ -277,12 +277,12 @@ struct UploadView : View {
               self.seconds = 0
               if self.minutes == 59 {
                 self.minutes = 0
-                self.hours = self.hours + 1
+                self.hours += 1
               } else {
-                self.minutes = self.minutes + 1
+                self.minutes += 1
               }
             } else {
-              self.seconds = self.seconds + 1
+              self.seconds += 1
             }
           }
         }
