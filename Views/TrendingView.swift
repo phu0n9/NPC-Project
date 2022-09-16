@@ -61,7 +61,7 @@ struct TrendingView: View {
             
 
             //  MARK: MIDDLE ELEMENTS
-            ScrollView {
+        
                 HStack(alignment: .firstTextBaseline) {
                     Text("Recommendations")
                         .fontWeight(.regular)
