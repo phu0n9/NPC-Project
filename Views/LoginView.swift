@@ -109,7 +109,7 @@ struct LoginView: View {
                                     .frame(width: 20, height: 30, alignment: .trailing)
                                     .offset(x: 25, y: 0)
                                 // TODO: ADD "eye.slash.fill" : "eye.fill" when show/ hide password
-                                SecureField("Password", text: $password)
+                                SecureField("Password", text: $controller.password)
                                     .offset(x: 60, y: 0)
                             }
                         )

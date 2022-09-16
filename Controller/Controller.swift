@@ -10,6 +10,8 @@ import SwiftUI
 class Controller: ObservableObject {
     
     @Published var email = ""
+    @Published var password = ""
+    @Published var confirmPassword = ""
     @Published private(set) var validationMessage: String?
     
     var inputValid: Bool {
@@ -39,6 +41,25 @@ class Controller: ObservableObject {
                 return nil
             }
         // you publish the error message for the view to react to
+            .assign(to: &$validationMessage)
+        
+        // Password validation
+        $password
+            .dropFirst()
+            .debounce(for: 0.6, scheduler: RunLoop.main)
+            .removeDuplicates()
+            .map { input in
+                guard !input.isEmpty else {
+                    return "Password cannot be left empty"
+                }
+                guard input.isValidPassword else {
+                    return "Password is not valid"
+                }
+//                guard inputelse {
+//                        return "Password do not match"
+//                    }
+                return nil
+            }
             .assign(to: &$validationMessage)
     }
 }
