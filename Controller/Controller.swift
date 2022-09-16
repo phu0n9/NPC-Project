@@ -55,6 +55,9 @@ class Controller: ObservableObject {
                 guard input.isValidPassword else {
                     return "Password is not valid"
                 }
+//                guard inputelse {
+//                        return "Password do not match"
+//                    }
                 return nil
             }
             .assign(to: &$validationMessage)
