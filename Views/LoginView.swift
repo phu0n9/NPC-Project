@@ -33,7 +33,7 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                NavigationLink("", destination: SignUpView(email: $controller.email, password: $password, userName: $username), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
+                NavigationLink("", destination: SignUpView(email: $controller.email, password: $controller.password, userName: $username), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
                     .isDetailLink(false)
                 VStack(spacing: 16) {
                     Picker(selection: $isLoginMode, label: Text("Picker here")) {
@@ -181,7 +181,7 @@ struct LoginView: View {
     }
     
     private func loginUser() {
-        FirebaseManager.shared.auth.signIn(withEmail: controller.email, password: password) { result, err in
+        FirebaseManager.shared.auth.signIn(withEmail: controller.email, password: controller.password) { result, err in
             if let err = err {
                 print("Failed to login user:", err)
                 self.alert = true
