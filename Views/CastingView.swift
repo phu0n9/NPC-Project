@@ -10,6 +10,7 @@ import SwiftUI
 struct CastingView: View {
     @State var currentTab: Int
     @State var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
+   
     let titleTab = [0: "Community", 1: "Your Cast"]
     
     var body: some View {

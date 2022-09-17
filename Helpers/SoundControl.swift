@@ -48,10 +48,7 @@ class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
         
         if angle <= 288 {
             let progress = angle / 288
-            let time = TimeInterval(progress) * Double(self.audioPlayer.currentItem?.duration.seconds ?? Double(self.audio_length))
-            
-            self.audioPlayer.seek(to: CMTime(seconds: time, preferredTimescale: 1))
-            self.audioPlayer.play()
+
             withAnimation(Animation.linear(duration: 0.1)) {
                 self.angle =  Double(angle)
             }
