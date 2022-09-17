@@ -10,6 +10,7 @@ import AVFoundation
 import AVKit
 import SwiftUI
 
+import SwiftUI
 
 class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
@@ -18,13 +19,12 @@ class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
     @Published var isActive: Bool = true
     @Published var angle : Double = 0
     @Published var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
+    @Published var audio_length = 0
 
-
-    
     // MARK: only play preview of 10 seconds
-    func playSound(soundName: String, isPreview: Bool) {
+    func playSound(soundName: String, isLocalFile: Bool) {
         self.isActive.toggle()
-        let url = URL.init(string: soundName)
+        let url = isLocalFile ? URL(fileURLWithPath: soundName) : URL.init(string: soundName)
         guard url != nil else {
             return
         }
@@ -34,24 +34,8 @@ class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
             self.audioPlayer.pause()
         } else {
             self.audioPlayer.play()
-            
-            if isPreview {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 7.0) {
-                    self.audioPlayer.volume = 2.0
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 9.0) {
-                    self.audioPlayer.volume = 1.0
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
-                    self.audioPlayer.pause()
-                    self.isActive.toggle()
-                }
-                
-            }
         }
     }
-    
-    
     
     func onChanged(value: DragGesture.Value) {
         
@@ -64,9 +48,10 @@ class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
         
         if angle <= 288 {
             let progress = angle / 288
-            let time = TimeInterval(progress) * Double(episode.audio_length)
-//            audioPlayer.currentItem?.currentTime() = time
-//            audioPlayer.play()
+            let time = TimeInterval(progress) * Double(self.audioPlayer.currentItem?.duration.seconds ?? Double(audio_length))
+            
+            self.audioPlayer.seek(to: CMTime(seconds: time, preferredTimescale: 1))
+            self.audioPlayer.play()
             withAnimation(Animation.linear(duration: 0.1)) {
                 self.angle =  Double(angle)
             }

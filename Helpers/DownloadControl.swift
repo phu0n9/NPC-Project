@@ -166,17 +166,37 @@ class DownloadControl: ObservableObject {
         return ""
     }
     
+    func duration(for resource: String) -> Double {
+        let asset = AVURLAsset(url: URL(fileURLWithPath: resource))
+        return Double(CMTimeGetSeconds(asset.duration))
+    }
+    
     // MARK: fetch all downloads
     func fetchAllDownloads() {
         do {
             self.downloads.removeAll()
+            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+            let documentsDirectory = paths[0]
+            let docURL = URL(string: documentsDirectory)!
+            
+            let dataPath = docURL.appendingPathComponent("episodes")
+            guard FileManager.default.fileExists(atPath: dataPath.path) else {
+                do {
+                    try FileManager.default.createDirectory(atPath: dataPath.path, withIntermediateDirectories: true, attributes: nil)
+                    return
+                } catch {
+                    print(error.localizedDescription)
+                }
+                return
+            }
+            
             let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             let path = documentURL.appendingPathComponent("episodes").absoluteURL
             let directoryContents = try FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil, options: [])
             for file in directoryContents where !file.relativePath.contains("DS_Store") {
                 let currentItem = self.getLocalFileName(fileName: file.relativePath)
                 //                let directoryPath = self.getDirectoryPath(fileName: file.relativePath)
-                let download = Downloads(audio: file.relativePath, title: currentItem, isProcessing: false)
+                let download = Downloads(audio: file.relativePath, title: currentItem, isProcessing: false, audio_length: self.duration(for: file.relativePath))
                 self.downloads.append(download)
                 print(file)
             }

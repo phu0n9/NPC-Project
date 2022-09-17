@@ -180,6 +180,4 @@ class PodcastViewModel: ObservableObject {
             self.getPodcastByQuerySnapShot(documents: documents, isRandom: true)
         })
     }
-    
-
 }

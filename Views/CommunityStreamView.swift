@@ -12,6 +12,7 @@ struct CommunityStreamView: View {
     @StateObject var uploadViewModel = UploadViewModel()
     @State var time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
     @State private var currentUpload = ""
+    @State var download = Downloads(audio: "", title: "", isProcessing: false, audio_length: 0)
     
     @ViewBuilder
     var body: some View {
@@ -19,7 +20,7 @@ struct CommunityStreamView: View {
             let size = proxy.size
             TabView(selection: self.$currentUpload) {
                 ForEach(self.$uploadViewModel.uploads, id: \.id) { $value in
-                    StreamingView(episode: self.$episode, upload: $value, state: 1)
+                    StreamingView(episode: self.$episode, upload: $value, download: self.$download, state: 1)
                         .frame(width: size.width)
                         .padding()
                         .rotationEffect(.init(degrees: -90))

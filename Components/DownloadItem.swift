@@ -10,6 +10,9 @@ import SwiftUI
 struct DownloadItem: View {
     @Binding var download: Downloads
     @ObservedObject var downloadControl = DownloadControl()
+    @ObservedObject var soundControl = SoundControl()
+    @Binding var isTapped: Bool
+    @Binding var selectedDownload: Downloads
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -36,6 +39,27 @@ struct DownloadItem: View {
                 }
             }.padding(0)
             
+            ZStack {
+                Button(action: {
+                    withAnimation(.default) {
+                        self.isTapped.toggle()
+                    }
+                }, label: {
+                    Image(systemName: self.soundControl.isActive ?  "play.fill" : "pause.fill")
+                        .renderingMode(.template)
+                        .foregroundColor(.orange)
+                        .frame(width:13, height: 6, alignment: .leading)
+                        .padding(5)
+                    Text("Play me")
+                        .font(.caption)
+                        .foregroundColor(.black)
+                        .padding(9)
+                })
+            }
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color(red: 1, green: 0.4902, blue: 0.3216), lineWidth: 1))
+            
             // MARK: Download
             Button(action: {
                 DispatchQueue.main.async {
@@ -55,6 +79,11 @@ struct DownloadItem: View {
         .onAppear {
             DispatchQueue.main.async {
                 self.downloadControl.checkFileExists(fileLocalName: self.download.title)
+            }
+        }
+        .onChange(of: self.isTapped) { value in
+            if value {
+                self.selectedDownload = download
             }
         }
     }

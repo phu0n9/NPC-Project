@@ -19,11 +19,13 @@ struct StreamingView: View {
     @StateObject var uploadViewModel = UploadViewModel()
     @Binding var episode: Episodes
     @Binding var upload: Uploads
+    @Binding var download: Downloads
     @State var isCommentTapped: Bool = false
+    @State var timer = Timer.publish(every: 1, on: .current, in: .default).autoconnect()
     
     var width : CGFloat = 200
     var height : CGFloat = 200
-    // MARK: 0 is episode view, 1 is casting view
+    // MARK: 0 is episode view, 1 is casting view, 2 is download view
     var state: Int
     
     var body: some View {
@@ -37,15 +39,23 @@ struct StreamingView: View {
             Spacer(minLength: 0)
             
             ZStack {
-                // MARK: podcast image
-                AsyncImage(url: URL(string: self.state == 0 ? self.episode.image : self.upload.image)) { image in
-                    image
+                if state != 2 {
+                    // MARK: podcast image
+                    AsyncImage(url: URL(string: self.state == 0 ? self.episode.image : self.upload.image)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: width, height: height)
+                            .clipShape(Circle())
+                    } placeholder: {
+                        ProgressView()
+                    }
+                } else {
+                    Image(systemName: "music.note")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: width, height: height)
                         .clipShape(Circle())
-                } placeholder: {
-                    ProgressView()
                 }
                 
                 ZStack {
@@ -56,8 +66,8 @@ struct StreamingView: View {
                     
                     // MARK: add tenery operator based on state below theses circles
                     Circle()
-                        .trim(from: 0, to: CGFloat((soundControlModel.angle)/360))
-                        .stroke(Color("MainButton"), lineWidth: 4)
+                        .trim(from: 0, to: CGFloat((self.soundControl.angle)/360))
+                        .stroke(Color(.orange), lineWidth: 4)
                         .frame(width: width+45, height: height+45)
                     
                     Circle()
@@ -66,6 +76,7 @@ struct StreamingView: View {
                         .offset(x: (width + 45) / 2)
                         .rotationEffect(.init(degrees: soundControlModel.angle))
                         .gesture(DragGesture().onChanged(soundControlModel.onChanged(value:)))
+
                 }
                 .rotationEffect(.init(degrees: 126))
             
@@ -75,7 +86,11 @@ struct StreamingView: View {
             HStack(spacing:50) {
                 
                 Button(action: {
-                    soundControl.playSound(soundName: self.state == 0 ? self.episode.audio : self.upload.audioPath, isPreview: false)
+                    if state != 2 {
+                        soundControl.playSound(soundName: self.state == 0 ? self.episode.audio : self.upload.audioPath, isLocalFile: false)
+                    } else {
+                        soundControl.playSound(soundName: self.download.audio, isLocalFile: true)
+                    }
                 }, label: {
                     Image(systemName: self.soundControl.isActive ?  "play.fill" : "pause.fill")
                         .resizable()
@@ -93,6 +108,12 @@ struct StreamingView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 45, height: 45)
                         .clipShape(Circle())
+                } else if state == 2 {
+                    Image(systemName: "music.note")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 45, height: 45)
+                        .clipShape(Circle())
                 } else {
                     AsyncImage(url: URL(string: self.state == 0 ? self.episode.image : self.upload.userImage)) { image in
                         image
@@ -106,17 +127,27 @@ struct StreamingView: View {
                 }
                 
                 VStack {
-                    Text(self.state == 0 ? self.episode.title : self.upload.title)
-                        .font(.caption)
-                        .fontWeight(.heavy)
-                        .foregroundColor(.black)
-                        .lineLimit(1)
-                        .frame(alignment: .trailing)
+                    if state != 2 {
+                        Text(self.state == 0 ? self.episode.title : self.upload.title)
+                            .font(.caption)
+                            .fontWeight(.heavy)
+                            .foregroundColor(.black)
+                            .lineLimit(1)
+                            .frame(alignment: .trailing)
+                        
+                        Text(self.state == 0 ? self.podcastViewModel.podcast.author : self.upload.author)
+                            .font(.caption2)
+                            .foregroundColor(.gray)
+                            .lineLimit(1)
+                    } else {
+                        Text(self.download.title)
+                            .font(.caption)
+                            .fontWeight(.heavy)
+                            .foregroundColor(.black)
+                            .lineLimit(1)
+                            .frame(alignment: .trailing)
+                    }
                     
-                    Text(self.state == 0 ? self.podcastViewModel.podcast.author : self.upload.author)
-                        .font(.caption2)
-                        .foregroundColor(.gray)
-                        .lineLimit(1)
                 }
                 .padding()
                 
@@ -138,19 +169,7 @@ struct StreamingView: View {
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
                         }
-                        Image(systemName: "heart")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(Color("MainButton"))
-                            .onTapGesture {
-                                DispatchQueue.main.async {
-                                    if state == 0 {
-                                        self.userViewModel.addFavorite(favorite: episode)
-                                    } else {
-                                        self.uploadViewModel.updateLikes(uploadID: self.upload.uuid)
-                                    }
-                                }
-                            }
+
                         if state == 1 {
                             Text("\(self.upload.numOfLikes) likes")
                                 .font(.caption2)
@@ -167,21 +186,40 @@ struct StreamingView: View {
             DispatchQueue.main.async {
                 if state == 0 {
                     self.podcastViewModel.fetchPodcastById(podcastId: self.episode.podcast_uuid, episodeId: self.episode.episode_uuid)
-                    self.userViewModel.addWatchList(watchItem: self.episode)
-                } else {
+//                    self.userViewModel.addWatchList(watchItem: self.episode)
+                    soundControl.playSound(soundName: self.state == 0 ? self.episode.audio : self.upload.audioPath, isLocalFile: false)
+                    self.soundControl.audio_length = self.episode.audio_length
+                } else if state == 1 {
                     self.uploadViewModel.fetchCommentsByUploadID(uploadID: self.upload.uuid)
+                    soundControl.playSound(soundName: self.state == 0 ? self.episode.audio : self.upload.audioPath, isLocalFile: false)
+                    self.soundControl.audio_length = self.upload.audio_length
+                } else {
+                    soundControl.playSound(soundName: self.download.audio, isLocalFile: true)
+                    self.soundControl.audio_length = Int(self.download.audio_length)
                 }
             }
         }
         .sheet(isPresented: self.$isCommentTapped) {
             CommentView(upload: self.upload)
         }
+        .onReceive(timer) { _ in
+            self.updateTimer()
+        }
+    }
+    
+    func updateTimer() {
+        let currentTime = self.soundControl.audioPlayer.currentTime().seconds
+        let total = (self.soundControl.audioPlayer.currentItem?.duration.seconds)!
+        let progress = currentTime / total
+        withAnimation(.linear(duration: 0.1)) {
+            self.soundControl.angle = Double(progress) * 288
+        }
     }
 }
 
 struct StreamingView_Previews: PreviewProvider {
     static var previews: some View {
-        StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])), state: 0)
+        StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])), download: Binding.constant(Downloads(audio: "", title: "", isProcessing: false, audio_length: 0)), state: 0)
     }
 }
 

@@ -26,7 +26,8 @@ class UploadControl : ObservableObject {
     @Published var seconds: Int8 = 00
     @Published var timerIsPaused: Bool = true
     @Published var timer: Timer?
-
+    @Published var audio_length : Int = 0
+    
     // Fetch Audios...
     var localPath = ""
     private var userViewModel = UserViewModel()
@@ -35,32 +36,33 @@ class UploadControl : ObservableObject {
     
     // MARK: TIMER FUNCTIONS
     func restartTimer() {
-      hours = 0
-      minutes = 0
-      seconds = 0
+        hours = 0
+        minutes = 0
+        seconds = 0
     }
-
+    
     func startTimer() {
-      timerIsPaused = false
-      timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-        if self.seconds == 59 {
-          self.seconds = 0
-          if self.minutes == 59 {
-            self.minutes = 0
-            self.hours += 1
-          } else {
-            self.minutes += 1
-          }
-        } else {
-          self.seconds += 1
+        timerIsPaused = false
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if self.seconds == 59 {
+                self.seconds = 0
+                if self.minutes == 59 {
+                    self.minutes = 0
+                    self.hours += 1
+                } else {
+                    self.minutes += 1
+                }
+            } else {
+                self.seconds += 1
+            }
         }
-      }
     }
-
+    
     func stopTimer() {
-      timerIsPaused = true
-      timer?.invalidate()
-      timer = nil
+        timerIsPaused = true
+        timer?.invalidate()
+        timer = nil
+        self.audio_length = Int(self.seconds + self.minutes * 60 + self.hours * 60 * 60)
     }
     
     func recordAudio () {
@@ -70,7 +72,7 @@ class UploadControl : ObservableObject {
         do {
             if self.record {
                 // Already Started Recording means stopping and saving...
-               
+                
                 self.recorder.stop()
                 self.record.toggle()
                 self.stopTimer()
@@ -121,7 +123,7 @@ class UploadControl : ObservableObject {
         }
     }
     
-    func uploadCastImage(title: String, description: String, pub_date: String, selectedImage: UIImage?) {
+    func uploadCastImage(title: String, description: String, pub_date: String, selectedImage: UIImage?, audio_length: Int) {
         guard selectedImage != nil else {
             return
         }
@@ -147,13 +149,13 @@ class UploadControl : ObservableObject {
                         print(err.localizedDescription)
                     }
                     guard let downloadURL = url else { return }
-                    self.uploadCast(title: title, description: description, pub_date: pub_date, image: downloadURL.absoluteString)
+                    self.uploadCast(title: title, description: description, pub_date: pub_date, image: downloadURL.absoluteString, audio_length: audio_length)
                 }
             }
         }
     }
     
-    func uploadCast(title: String, description: String, pub_date: String, image: String) {
+    func uploadCast(title: String, description: String, pub_date: String, image: String, audio_length: Int) {
         let storageRef = Storage.storage().reference()
         let globalPath = "recordings/\(localPath)"
         let fileRef = storageRef.child(globalPath)
@@ -170,7 +172,6 @@ class UploadControl : ObservableObject {
                             print(err.localizedDescription)
                         }
                         guard let downloadURL = url else { return }
-                        let audio_length = NSInteger(self.recorder.currentTime) % 60
                         self.uploadViewModel.upload = Uploads(title: title, description: description, audioPath: downloadURL.absoluteString, author: self.userSettings.username, pub_date: pub_date, image: image, userID: self.userSettings.uuid, numOfLikes: 0, audio_length: audio_length, userImage: self.userSettings.userImage, likes: [], comments: [])
                         self.uploadViewModel.addUploads()
                         self.isUploaded = true

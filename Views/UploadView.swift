@@ -128,9 +128,7 @@ struct UploadView : View {
                         HStack {
                             // MARK: Recording, timer btn
                             Button(action: {
-                                
                                 self.uploadControl.recordAudio()
-                                
                             }, label: {
                                 ZStack {
                                     Circle()
@@ -240,7 +238,7 @@ struct UploadView : View {
                 format.timeStyle = .short
                 format.dateStyle = .short
                 let time = format.string(from: mytime)
-                self.uploadControl.uploadCastImage(title: title, description: self.textBindingManager.text, pub_date: time, selectedImage: selectedImage)
+                self.uploadControl.uploadCastImage(title: title, description: self.textBindingManager.text, pub_date: time, selectedImage: selectedImage, audio_length: self.uploadControl.audio_length)
                 self.state = 0
             }
         default:

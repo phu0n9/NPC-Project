@@ -18,7 +18,7 @@ struct RecordingPlayerBtn: View {
             HStack(alignment:.firstTextBaseline, spacing: 0) {
 
                     Button(action : {
-                        self.soundControl.playSound(soundName: self.soundName, isPreview: false)
+                        self.soundControl.playSound(soundName: self.soundName, isLocalFile: false)
                     },
                            label: {
                         Image(systemName: self.soundControl.isActive ? "play.fill" : "pause.fill")
