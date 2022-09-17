@@ -11,5 +11,4 @@ struct Downloads: Identifiable {
     var audio: String
     var title: String
     var isProcessing: Bool
-    var audio_length: Double
 }

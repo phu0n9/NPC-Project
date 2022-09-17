@@ -12,7 +12,7 @@ struct CommunityStreamView: View {
     @StateObject var uploadViewModel = UploadViewModel()
     @State var time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
     @State private var currentUpload = ""
-    @State var download = Downloads(audio: "", title: "", isProcessing: false, audio_length: 0)
+    @State var download = Downloads(audio: "", title: "", isProcessing: false)
     
     @ViewBuilder
     var body: some View {

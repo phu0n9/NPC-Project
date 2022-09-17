@@ -12,7 +12,6 @@ import PopupView
 struct StreamingView: View {
     
     @ObservedObject var podcastViewModel = PodcastViewModel()
-    @ObservedObject var soundControlModel = SoundControl()
     @StateObject var userViewModel = UserViewModel()
     @ObservedObject var userSettings = UserSettings()
     @ObservedObject var soundControl = SoundControl()
@@ -22,6 +21,7 @@ struct StreamingView: View {
     @Binding var download: Downloads
     @State var isCommentTapped: Bool = false
     @State var timer = Timer.publish(every: 1, on: .current, in: .default).autoconnect()
+    @State var angle : Double = 0
     
     var width : CGFloat = 200
     var height : CGFloat = 200
@@ -63,9 +63,9 @@ struct StreamingView: View {
                         .trim(from: 0, to:0.8)
                         .stroke(Color.black.opacity(0.06), lineWidth: 4)
                         .frame(width: width+45, height: height+45)
-
+                    
                     Circle()
-                        .trim(from: 0, to: CGFloat((self.soundControl.angle)/360))
+                        .trim(from: 0, to: CGFloat((self.angle)/360))
                         .stroke(Color(.orange), lineWidth: 4)
                         .frame(width: width+45, height: height+45)
                     
@@ -73,12 +73,29 @@ struct StreamingView: View {
                         .fill(Color("MainButton"))
                         .frame(width: 25, height: 25)
                         .offset(x: (width + 45) / 2)
-                        .rotationEffect(.init(degrees: soundControlModel.angle))
-                        .gesture(DragGesture().onChanged(soundControlModel.onChanged(value:)))
-
+                        .rotationEffect(.init(degrees: self.angle))
+                        .gesture(DragGesture().onChanged(self.onChanged(value:)))
+                    
                 }
                 .rotationEffect(.init(degrees: 126))
-            
+                
+                
+                HStack {
+                    // MARK: current time
+                    if let player = self.soundControl.audioPlayer {
+                        Text(self.soundControl.getCurrentTime(value: player.currentTime().seconds))
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color.black)
+                            .offset(x: UIScreen.main.bounds.height < 750 ? -65 : -85, y: (width + 60) / 2)
+                        if let totalTime = player.currentItem?.duration.seconds, !totalTime.isNaN {
+                            Text(self.soundControl.getCurrentTime(value: totalTime))
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.black)
+                                .offset(x: UIScreen.main.bounds.height < 750 ? 65 : 85, y: (width + 60) / 2)
+                        }
+                    }
+                }
+                                
             }.padding(30)
             
             // MARK: PLAY BTN
@@ -168,7 +185,7 @@ struct StreamingView: View {
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
                         }
-
+                        
                         if state == 1 {
                             Text("\(self.upload.numOfLikes) likes")
                                 .font(.caption2)
@@ -185,42 +202,59 @@ struct StreamingView: View {
             DispatchQueue.main.async {
                 if state == 0 {
                     self.podcastViewModel.fetchPodcastById(podcastId: self.episode.podcast_uuid, episodeId: self.episode.episode_uuid)
-//                    self.userViewModel.addWatchList(watchItem: self.episode)
+                    //                    self.userViewModel.addWatchList(watchItem: self.episode)
                     soundControl.playSound(soundName: self.state == 0 ? self.episode.audio : self.upload.audioPath, isLocalFile: false)
-                    self.soundControl.audio_length = self.episode.audio_length
                 } else if state == 1 {
                     self.uploadViewModel.fetchCommentsByUploadID(uploadID: self.upload.uuid)
                     soundControl.playSound(soundName: self.state == 0 ? self.episode.audio : self.upload.audioPath, isLocalFile: false)
-                    self.soundControl.audio_length = self.upload.audio_length
                 } else {
                     soundControl.playSound(soundName: self.download.audio, isLocalFile: true)
-                    self.soundControl.audio_length = Int(self.download.audio_length)
                 }
             }
         }
         .sheet(isPresented: self.$isCommentTapped) {
             CommentView(upload: self.upload)
         }
-        .onReceive(timer) { _ in
+        .onReceive(timer) { (_) in
             self.updateTimer()
         }
     }
     
     func updateTimer() {
-        let currentTime = self.soundControl.audioPlayer.currentTime().seconds
-        let total = (self.soundControl.audioPlayer.currentItem?.duration.seconds)!
-        let progress = currentTime / total
-        withAnimation(.linear(duration: 0.1)) {
-            self.soundControl.angle = Double(progress) * 288
-
+        if let player = self.soundControl.audioPlayer {
+            let currentTime = player.currentTime().seconds
+            let total = player.currentItem?.duration.seconds
+            print("currentTime \(currentTime)")
+            print("total \(total)")
+            if let totalTime = total, !totalTime.isNaN {
+                let progress = currentTime / totalTime
+                withAnimation(.linear(duration: 0.1)) {
+                    self.angle = Double(progress) * 288
+                }
+            }
         }
     }
-
+    
+    func onChanged(value: DragGesture.Value) {
+        let vector = CGVector(dx: value.location.x, dy: value.location.y)
+        let radians = atan2(vector.dy - 12.5, vector.dx - 12.5)
+        let tempAngle = radians * 180 / .pi
+        let angle = tempAngle < 0 ? 360 + tempAngle : tempAngle
+        if angle <= 288 {
+            let progress = angle / 288
+            if let player = self.soundControl.audioPlayer {
+                player.pause()
+                let time = TimeInterval(progress) * Double(Float((player.currentItem?.duration.seconds)!))
+                player.seek(to: CMTime(seconds: time, preferredTimescale: 1))
+                player.play()
+            }
+        }
+    }
 }
 
 struct StreamingView_Previews: PreviewProvider {
     static var previews: some View {
-        StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])), download: Binding.constant(Downloads(audio: "", title: "", isProcessing: false, audio_length: 0)), state: 0)
+        StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])), download: Binding.constant(Downloads(audio: "", title: "", isProcessing: false)), state: 0)
     }
 }
 
