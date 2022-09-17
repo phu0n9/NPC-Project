@@ -23,6 +23,7 @@ class UserViewModel : ObservableObject {
     @Published var fetchingMore = false
     @Published var lastDocumentSnapshot: DocumentSnapshot!
     @Published var isItemExisting = false
+    @Published var showToast = false
     
     private var db = Firestore.firestore()
         
@@ -313,6 +314,7 @@ class UserViewModel : ObservableObject {
             
             guard let documents = snapshot?.documents else {
                 print("No data")
+                
                 return
             }
 

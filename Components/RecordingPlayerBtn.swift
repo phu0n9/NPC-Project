@@ -32,6 +32,7 @@ struct RecordingPlayerBtn: View {
                     
                     Button(action: {
                             self.isDeleted.toggle()
+                            
                         }, label: {
                             Spacer()
                             Text("Delete")

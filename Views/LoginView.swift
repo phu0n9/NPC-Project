@@ -109,7 +109,7 @@ struct LoginView: View {
                                     .frame(width: 20, height: 30, alignment: .trailing)
                                     .offset(x: 25, y: 0)
                                 // TODO: ADD "eye.slash.fill" : "eye.fill" when show/ hide password
-                                SecureField("Password", text: $password)
+                                SecureField("Password", text: $controller.password)
                                     .offset(x: 60, y: 0)
                             }
                         )
@@ -137,11 +137,12 @@ struct LoginView: View {
                             .background(Color.white)
                     }
                     
+                    // MARK: Login here
                     Button {
                         
                         self.btnClicked.toggle()
                         handleAction()
-                    
+                        showNotificationWhenLogin()
                     } label: {
                         HStack {
                             Spacer()
@@ -212,8 +213,8 @@ struct LoginView: View {
     
     private func showNotificationWhenLogin(){
         let content = UNMutableNotificationContent()
-        content.title = "NPC App has new updates for you"
-        content.subtitle = "Welcome back \(username)"
+        content.title = "Welcome back"
+        content.subtitle = "We have new updates for you"
         content.sound = UNNotificationSound.default
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)

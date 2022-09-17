@@ -29,6 +29,18 @@ struct TrendingView: View {
         modifierType: .slide
     )
     
+    // PopupView
+    @State private var showToast = false
+    @State private var value = 0
+    
+    private let toastOptions = SimpleToastOptions(
+        alignment: .top,
+        hideAfter: 2,
+        backdrop: .black.opacity(0.2),
+        animation: .default,
+        modifierType: .slide
+    )
+    
     var body: some View {
         
         ScrollView {
@@ -38,8 +50,10 @@ struct TrendingView: View {
                     .fontWeight(.regular)
                     .foregroundColor(Color("MainButton"))
                     .frame(alignment: .topTrailing)
-                    .padding(5)
+                    .padding(5.0)
                     .font(.system(size: 20))
+                    
+                    
                 
                 Spacer()
             }
@@ -54,8 +68,8 @@ struct TrendingView: View {
             }
             
             Divider()
-            //MARK: MIDDLE ELEMENTS
-            ScrollView {
+            
+            //  MARK: MIDDLE ELEMENTS        
                 HStack(alignment: .firstTextBaseline) {
                     Text("Recommendations")
                         .fontWeight(.regular)
@@ -73,7 +87,6 @@ struct TrendingView: View {
                         }
                     }
                 }
-            }
             
             Divider()
             

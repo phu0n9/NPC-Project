@@ -81,6 +81,9 @@
 		A4FBD12A28C795AE00F6E3EB /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */; };
 		BB66E62B28D321BD000E0BDC /* TimerForCastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66E62A28D321BD000E0BDC /* TimerForCastingView.swift */; };
 		BB66E62D28D331F6000E0BDC /* MiddleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */; };
+		BB66E62F28D33E71000E0BDC /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66E62E28D33E71000E0BDC /* PopUpWindow.swift */; };
+		BB72931028D47D4D00FF2B1D /* UserUploadComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB72930F28D47D4D00FF2B1D /* UserUploadComponent.swift */; };
+		BB72931228D47EC200FF2B1D /* UserUploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB72931128D47EC200FF2B1D /* UserUploadButton.swift */; };
 		BB99BBCD28CDA10F00D80BF6 /* StreamingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB99BBCC28CDA10F00D80BF6 /* StreamingView.swift */; };
 		BB99BBCF28CDA2D200D80BF6 /* ToastPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB99BBCE28CDA2D200D80BF6 /* ToastPopUp.swift */; };
 		BB99BBD728CDAA4300D80BF6 /* SimpleToast in Frameworks */ = {isa = PBXBuildFile; productRef = BB99BBD628CDAA4300D80BF6 /* SimpleToast */; };
@@ -161,6 +164,9 @@
 		A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		BB66E62A28D321BD000E0BDC /* TimerForCastingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerForCastingView.swift; sourceTree = "<group>"; };
 		BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleComponent.swift; sourceTree = "<group>"; };
+		BB66E62E28D33E71000E0BDC /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
+		BB72930F28D47D4D00FF2B1D /* UserUploadComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUploadComponent.swift; sourceTree = "<group>"; };
+		BB72931128D47EC200FF2B1D /* UserUploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUploadButton.swift; sourceTree = "<group>"; };
 		BB99BBCC28CDA10F00D80BF6 /* StreamingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingView.swift; sourceTree = "<group>"; };
 		BB99BBCE28CDA2D200D80BF6 /* ToastPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastPopUp.swift; sourceTree = "<group>"; };
 		BB99BBD828CDDB7900D80BF6 /* StreamingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingPage.swift; sourceTree = "<group>"; };
@@ -275,6 +281,9 @@
 				4E2603A128D1D37D00DC739B /* CommentItem.swift */,
 				BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */,
 				4E5C3E6428D466350078E62C /* DownloadItem.swift */,
+				BB66E62E28D33E71000E0BDC /* PopUpWindow.swift */,
+				BB72930F28D47D4D00FF2B1D /* UserUploadComponent.swift */,
+				BB72931128D47EC200FF2B1D /* UserUploadButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -476,6 +485,7 @@
 				4E26038328CE639D00DC739B /* RecordingPlayerBtn.swift in Sources */,
 				4E6D458028C11AB5005B7DF0 /* WelcomeView.swift in Sources */,
 				A4CEE8EE28C8A28400054E14 /* EnviromentExtension.swift in Sources */,
+				BB72931028D47D4D00FF2B1D /* UserUploadComponent.swift in Sources */,
 				4E26038B28CF014B00DC739B /* EmptyListView.swift in Sources */,
 				4EEF6B6D28BD273B00610B54 /* NPCApp.swift in Sources */,
 				A477165D28CC63D000BCA3F8 /* ValidateEmail+Password.swift in Sources */,
@@ -493,6 +503,7 @@
 				4E26039828D07F4800DC739B /* MiniPlayer.swift in Sources */,
 				A4FBD12828C781CF00F6E3EB /* CheckboxToggleStyle.swift in Sources */,
 				4E5C3E6728D467530078E62C /* Downloads.swift in Sources */,
+				BB72931228D47EC200FF2B1D /* UserUploadButton.swift in Sources */,
 				A497D80528C1A84900D8A5CA /* TrendingView.swift in Sources */,
 				A457B44228C2019F007AE794 /* TransitionView.swift in Sources */,
 				A497D80B28C1C0C300D8A5CA /* ActivityView.swift in Sources */,
@@ -508,6 +519,7 @@
 				BB99BBD928CDDB7900D80BF6 /* StreamingPage.swift in Sources */,
 				4E26036E28CCFEB000DC739B /* DisableTextComponent.swift in Sources */,
 				4E26039428D0498600DC739B /* UserCastingView.swift in Sources */,
+				BB66E62F28D33E71000E0BDC /* PopUpWindow.swift in Sources */,
 				A491745E28C5D99700443F0D /* SignUpView.swift in Sources */,
 				4E6D455928BF285D005B7DF0 /* ContentView.swift in Sources */,
 				A4A4F91A28D17B93000C2248 /* LocalNotificationManager.swift in Sources */,

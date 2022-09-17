@@ -20,11 +20,16 @@ struct PlayButton: View {
     
     var soundName: String
     
+    @State private var showPopUp: Bool = false
+    
     var body: some View {
         HStack {
-            VStack(spacing:10) {
+            ZStack {
                 Button(action: {
                     self.soundControl.playSound(soundName: soundName, isPreview: true)
+                    withAnimation(.default) {
+                        showPopUp.toggle()
+                    }
                 }, label: {
                     Image(systemName: self.soundControl.isActive ?  "play.fill" : "pause.fill")
                         .renderingMode(.template)
