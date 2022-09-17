@@ -18,9 +18,14 @@ class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
 
     @Published var isActive: Bool = true
     @Published var angle : Double = 0
+<<<<<<< HEAD
     @Published var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
     @Published var audio_length = 0
 
+=======
+    @Published var audio_length = 0
+    
+>>>>>>> 64997ca (feat: sheet view)
     // MARK: only play preview of 10 seconds
     func playSound(soundName: String, isLocalFile: Bool) {
         self.isActive.toggle()
@@ -48,7 +53,7 @@ class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
         
         if angle <= 288 {
             let progress = angle / 288
-            let time = TimeInterval(progress) * Double(self.audioPlayer.currentItem?.duration.seconds ?? Double(audio_length))
+            let time = TimeInterval(progress) * Double(self.audioPlayer.currentItem?.duration.seconds ?? Double(self.audio_length))
             
             self.audioPlayer.seek(to: CMTime(seconds: time, preferredTimescale: 1))
             self.audioPlayer.play()
@@ -56,5 +61,9 @@ class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
                 self.angle =  Double(angle)
             }
         }
+<<<<<<< HEAD
     }
+=======
+    }    
+>>>>>>> 64997ca (feat: sheet view)
 }

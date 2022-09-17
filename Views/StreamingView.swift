@@ -63,8 +63,11 @@ struct StreamingView: View {
                         .trim(from: 0, to:0.8)
                         .stroke(Color.black.opacity(0.06), lineWidth: 4)
                         .frame(width: width+45, height: height+45)
+<<<<<<< HEAD
                     
                     // MARK: add tenery operator based on state below theses circles
+=======
+>>>>>>> 64997ca (feat: sheet view)
                     Circle()
                         .trim(from: 0, to: CGFloat((self.soundControl.angle)/360))
                         .stroke(Color(.orange), lineWidth: 4)
@@ -74,9 +77,14 @@ struct StreamingView: View {
                         .fill(Color("MainButton"))
                         .frame(width: 25, height: 25)
                         .offset(x: (width + 45) / 2)
+<<<<<<< HEAD
                         .rotationEffect(.init(degrees: soundControlModel.angle))
                         .gesture(DragGesture().onChanged(soundControlModel.onChanged(value:)))
 
+=======
+                        .rotationEffect(.init(degrees: self.soundControl.angle))
+//                        .gesture(DragGesture().onChanged(self.soundControl.onChanged(value:)))
+>>>>>>> 64997ca (feat: sheet view)
                 }
                 .rotationEffect(.init(degrees: 126))
             
@@ -204,6 +212,7 @@ struct StreamingView: View {
         }
         .onReceive(timer) { _ in
             self.updateTimer()
+<<<<<<< HEAD
         }
     }
     
@@ -213,8 +222,20 @@ struct StreamingView: View {
         let progress = currentTime / total
         withAnimation(.linear(duration: 0.1)) {
             self.soundControl.angle = Double(progress) * 288
+=======
+>>>>>>> 64997ca (feat: sheet view)
         }
     }
+    
+    func updateTimer() {
+        let currentTime = self.soundControl.audioPlayer.currentTime().seconds
+        let total = (self.soundControl.audioPlayer.currentItem?.duration.seconds)!
+        let progress = currentTime / total
+//        withAnimation(Animation.linear(duration: 0.1)) {
+//            self.soundControl.angle = Double(progress) * 28
+//        }
+    }
+
 }
 
 struct StreamingView_Previews: PreviewProvider {
