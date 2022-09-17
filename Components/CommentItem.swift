@@ -15,38 +15,46 @@ struct CommentItem: View {
     
     var body: some View {
         HStack {
+            
             if self.comment.image == "" {
                 Image(systemName: "person")
                     .resizable()
                     .font(.title)
-                    .frame(width: 30, height: 30, alignment: .leading)
-                    .foregroundColor(.orange)
+                    .frame(width: 40, height: 40, alignment: .leading)
+                    .foregroundColor(Color("MainButton"))
                     .cornerRadius(20)
+                    .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color(.gray).opacity(0.5), lineWidth: 1)
+                                   
+                    )
+                
             } else {
                 AsyncImage(url: URL(string: self.comment.image)) { commentImage in
                     commentImage
                         .resizable()
                         .font(.title)
                         .frame(width: 30, height: 30, alignment: .leading)
-                        .foregroundColor(.orange)
+                        .foregroundColor(Color("MainButton"))
                         .cornerRadius(20)
                 } placeholder: {
                     ProgressView()
                 }
-                .padding()
+                .padding(10)
             }
             
             VStack(alignment: .leading) {
                 HStack(alignment: .firstTextBaseline, spacing: 10) {
                     Text(self.comment.author)
-                        .font(.title3)
-                        .frame(maxWidth: 100, alignment: .leading)
-                }
+                        .font(.system(size:15))
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: 200, alignment: .leading)
+                }.padding(1)
                 
                 Text(self.comment.content)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .frame(maxWidth: 100, alignment: .leading)
+                    .font(.system(size:18))
+                    .frame(maxWidth: 250, alignment: .leading)
+                    .padding(1)
                 
                 if self.userSettings.uuid == self.comment.userID {
                     Button(action: {
@@ -60,7 +68,7 @@ struct CommentItem: View {
                 }
             }
             .frame(width: 300)
-        }
+        }.padding(10)
     }
 }
 

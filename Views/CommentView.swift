@@ -15,8 +15,8 @@ struct CommentView: View {
     
     var body: some View {
         VStack {
-            Text("\(self.uploadViewModel.commentList.count) people comment on this.")
-                .font(Font.title3.weight(.light))
+            Text("\(self.uploadViewModel.commentList.count) comment")
+                .font(Font.title2.weight(.semibold))
                 .padding()
             ScrollView {
                 ForEach(self.$uploadViewModel.commentList, id: \.id) { $value in
