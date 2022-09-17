@@ -13,16 +13,16 @@ struct ContentView: View {
 //    @ObservedObject var userSettings = UserSettings()
     
     var body: some View {
-        VStack{
-        Button("Allow notification"){
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){success,_ in
+        VStack {
+        Button("Allow notification") {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {success, _ in
                 guard success else {
                     return
                 }
-                print ("All Sets")
+                print("All Sets")
             }
         }
-        Button("Schedule notification"){
+        Button("Schedule notification") {
             let content = UNMutableNotificationContent()
             content.title = "Feed the cat"
             content.subtitle = "It looks hungry"
@@ -50,16 +50,16 @@ struct ContentView: View {
     }
     
     // Test
-    private func allowShowNotification(){
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){success,_ in
+    private func allowShowNotification() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {success, _ in
             guard success else {
                 return
             }
-            print ("All Sets")
+            print("All Sets")
         }
     }
     
-    private func showNotificationWhenLogin(){
+    private func showNotificationWhenLogin() {
         let content = UNMutableNotificationContent()
         content.title = "Welcome back"
         content.subtitle = "Hello User"

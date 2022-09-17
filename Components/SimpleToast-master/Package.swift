@@ -9,7 +9,7 @@ let package = Package(
     products: [
         .library(
             name: "SimpleToast",
-            targets: ["SimpleToast"]),
+            targets: ["SimpleToast"])
     ],
     dependencies: [],
     targets: [        
@@ -18,6 +18,6 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "SimpleToastTests",
-            dependencies: ["SimpleToast"]),
+            dependencies: ["SimpleToast"])
     ]
 )

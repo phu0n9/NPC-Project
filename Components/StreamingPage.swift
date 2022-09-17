@@ -20,9 +20,6 @@ struct StreamingPage: View {
         .halfSheet(showsheet: $showSheet) {
             ZStack {
                 Color.white
-                    
-        //Mark:: From streamingView.swift
-                
 //                StreamingView()
             }.ignoresSafeArea()
         } onEnd: {
@@ -38,10 +35,10 @@ struct StreamingPage_Previews: PreviewProvider {
 }
 
 extension View {
-    func halfSheet<SheetView: View>(showsheet: Binding<Bool>,@ViewBuilder sheetView: @escaping ()->SheetView,onEnd: @escaping ()->())->some View{
+    func halfSheet<SheetView: View>(showsheet: Binding<Bool>,@ViewBuilder sheetView: @escaping ()->SheetView,onEnd: @escaping () -> Void )->some View {
         return self
             .background(
-                HalfSheetHelper(sheetView: sheetView(),showSheet: showsheet,onEnd: onEnd)
+                HalfSheetHelper(sheetView: sheetView(), showSheet: showsheet, onEnd: onEnd)
             )
     }
 }
@@ -50,7 +47,7 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
     
     var sheetView: SheetView
     @Binding var showSheet: Bool
-    var onEnd: ()-> ()
+    var onEnd: () -> Void
     
     let controller = UIViewController()
     
@@ -74,7 +71,7 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
             
 //            sheetController.presentationController?.delegate = context.coordinator
             
-            uiViewController.present(sheetController, animated: true){
+            uiViewController.present(sheetController, animated: true) {
                 
                 DispatchQueue.main.async {
                     self.showSheet.toggle()
@@ -88,7 +85,7 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
 //        }
     }
     
-    class Coorninator: NSObject,UISheetPresentationControllerDelegate{
+    class Coorninator: NSObject, UISheetPresentationControllerDelegate {
         
         var parent: HalfSheetHelper
         
@@ -103,12 +100,12 @@ struct HalfSheetHelper<SheetView: View>: UIViewControllerRepresentable {
     }
 }
 
-class CustomHostingController<Content: View>: UIHostingController<Content>{
+class CustomHostingController<Content: View>: UIHostingController<Content> {
     
     override func viewDidLoad() {
         
         view.backgroundColor = .clear
-        if let presentationController = presentationController as? UISheetPresentationController{
+        if let presentationController = presentationController as? UISheetPresentationController {
           
             presentationController.detents = [
 //                .medium(),

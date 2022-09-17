@@ -65,7 +65,7 @@ struct SignUpView: View {
         .alert(isPresented: self.$alert, content: {
             Alert(title: Text("Error"), message: Text(self.loginStatusMessage))
         })
-        .onChange(of: self.loginSuccess) { value in
+        .onChange(of: self.loginSuccess) { _ in
             withAnimation {
                 self.routerView.currentPage = .bottomNavBar
             }

@@ -46,7 +46,4 @@ class LocalNotificationManager: ObservableObject {
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
-    
 }
-
-

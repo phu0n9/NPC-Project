@@ -63,8 +63,8 @@ struct DownloadItem: View {
     }
 }
 
-//struct DownloadItem_Previews: PreviewProvider {
+// struct DownloadItem_Previews: PreviewProvider {
 //    static var previews: some View {
 //        DownloadItem(download: .constant(Downloads(audio: "", title: "", image: "", isProcessing: false)))
 //    }
-//}
+// }

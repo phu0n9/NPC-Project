@@ -35,4 +35,3 @@ struct Episodes: Identifiable, Codable {
     var isLiked: Bool
     var isExpanding: Bool = false
 }
-

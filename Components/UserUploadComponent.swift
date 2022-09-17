@@ -9,10 +9,8 @@ import SwiftUI
 
 struct UserUploadComponent: View {
     var body: some View {
-        
-        VStack{
-
-                HStack{
+        VStack {
+                HStack {
                     Image(systemName: "leaf.fill")
                         .resizable()
                         .font(.title)
@@ -21,9 +19,8 @@ struct UserUploadComponent: View {
                         .foregroundColor(.orange)
                         .cornerRadius(10)
                         .padding(5)
-            
-        
-                    VStack{
+
+                    VStack {
                         // MARK: title
                         Text("title")
                             .font(.system(size: 14))
@@ -38,12 +35,11 @@ struct UserUploadComponent: View {
                     
                 }.padding(10)
             
-               HStack{
+               HStack {
                    UserUploadButton()
                }.padding(0)
         }.padding()
         
-
     }
 }
 

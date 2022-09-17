@@ -182,24 +182,22 @@ class PodcastViewModel: ObservableObject {
         })
     }
     
-    func onChanged(value: DragGesture.Value){
+    func onChanged(value: DragGesture.Value) {
         
-        let vector = CGVector(dx: value.location.x,dy: value.location.y)
+        let vector = CGVector(dx: value.location.x, dy: value.location.y)
         
         let radians = atan2(vector.dy - 12.5, vector.dx - 12.5)
         let tempAngle = radians * 180 / .pi
         
         let angle = tempAngle < 0 ? 360 + tempAngle : tempAngle
         
-        if angle <= 288{
+        if angle <= 288 {
             let progress = angle / 288
-            let time = TimeInterval(progress) * Double(episode.audio_length)
-            
-            
-            withAnimation(Animation.linear(duration: 0.1)){self.angle =  Double(angle)}
-            
-        }
-        
-    }
+            _ = TimeInterval(progress) * Double(episode.audio_length)
     
+            withAnimation(Animation.linear(duration: 0.1)) {
+                self.angle =  Double(angle)
+            }
+        }
+    }
 }

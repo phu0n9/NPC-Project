@@ -5,7 +5,6 @@
 //  Created by Sang Yeob Han  on 14/09/2022.
 //
 
-
 import SwiftUI
 
 struct SpeakerArc: Shape {

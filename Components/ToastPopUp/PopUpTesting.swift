@@ -7,19 +7,13 @@
 
 import SwiftUI
 
-
 struct PopUpTesting: View {
 
     var body: some View {
         ZStack {
-
             showToast(message: "Updating...", seconds: 1.0)
         }
-
-
     }
-    
-
 }
 
 struct PopUpTesting_Previews: PreviewProvider {
@@ -29,10 +23,9 @@ struct PopUpTesting_Previews: PreviewProvider {
     }
 }
 
+extension UIViewController {
 
-extension UIViewController{
-
-func showToast(message : String, seconds: Double){
+func showToast(message : String, seconds: Double) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.view.backgroundColor = .black
         alert.view.alpha = 0.5

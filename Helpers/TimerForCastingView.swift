@@ -14,7 +14,7 @@ class TimerForCasting : ObservableObject {
     @Published var timerIsPaused: Bool = true
     @Published var timer: Timer?
     
-    func restartTimer(){
+    func restartTimer() {
         hours = 0
         minutes = 0
         seconds = 0
