@@ -33,14 +33,6 @@ struct TrendingView: View {
     @State private var showToast = false
     @State private var value = 0
     
-    private let toastOptions = SimpleToastOptions(
-        alignment: .top,
-        hideAfter: 2,
-        backdrop: .black.opacity(0.2),
-        animation: .default,
-        modifierType: .slide
-    )
-    
     var body: some View {
         
         ScrollView {
@@ -52,9 +44,7 @@ struct TrendingView: View {
                     .frame(alignment: .topTrailing)
                     .padding(5.0)
                     .font(.system(size: 20))
-                    
-                    
-                
+          
                 Spacer()
             }
             .padding(5)

@@ -13,13 +13,13 @@ struct DisableTextComponent: View {
 //    @Binding var imageName : String
     
     var body: some View {
-        VStack(alignment: .center){
+        VStack(alignment: .center) {
             Capsule()
             /* #f5f5f5 */
     //            .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
                 .foregroundColor(.white)
     //            .frame(width: 320, height: 40)
-                .frame(width: 200, height: 40,alignment: .center)
+                .frame(width: 200, height: 40, alignment: .center)
                 .padding(0)
                 .overlay(
                     HStack {

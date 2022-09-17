@@ -14,18 +14,17 @@ struct RecordingPlayerBtn: View {
     
     var body: some View {
     
-        VStack{
-            
-            HStack(alignment:.firstTextBaseline, spacing: 0){
+        VStack {
+            HStack(alignment:.firstTextBaseline, spacing: 0) {
 
-                
-                    Button(action :{
+                    Button(action : {
                         self.soundControl.playSound(soundName: self.soundName, isPreview: false)
-                    },label: {
+                    },
+                           label: {
                         Image(systemName: self.soundControl.isActive ? "play.fill" : "pause.fill")
                             .renderingMode(.template)
                             .foregroundColor(.black)
-                            .frame( width:290,alignment: .bottomTrailing)
+                            .frame( width:290, alignment: .bottomTrailing)
                             .padding(4)
                         
                     })

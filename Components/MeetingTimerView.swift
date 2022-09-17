@@ -4,9 +4,6 @@
 //
 //  Created by Sang Yeob Han  on 14/09/2022.
 //
-
-
-
 import SwiftUI
 
 struct MeetingTimerView: View {
@@ -29,7 +26,7 @@ struct MeetingTimerView: View {
                 .accessibilityElement(children: .combine)
                 .foregroundStyle(theme.accentColor)
             }
-            .overlay  {
+            .overlay {
                 ForEach(speakers) { speaker in
                     if speaker.isCompleted, let index = speakers.firstIndex(where: { $0.id == speaker.id }) {
                         

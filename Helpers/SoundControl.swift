@@ -12,8 +12,7 @@ class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     @Published var audioPlayer: AVPlayer!
     @Published var isActive: Bool = true
-    
-    
+ 
     // MARK: only play preview of 10 seconds
     func playSound(soundName: String, isPreview: Bool) {
         self.isActive.toggle()

@@ -18,7 +18,6 @@ struct ProfileView: View {
     @EnvironmentObject var routerView: RouterView
     @State var categoryList = [String]()
 
-
     var body: some View {
         NavigationView {
             if self.userViewModel.user.favoriteTopics.count != 3 {
@@ -31,7 +30,7 @@ struct ProfileView: View {
                 ScrollView {
         
                     VStack(spacing: 16) {
-                        ZStack{
+                        ZStack {
                             if selectedImage != nil {
                                 Image(uiImage: selectedImage!)
                                     .resizable()
@@ -41,7 +40,7 @@ struct ProfileView: View {
                                     .onTapGesture {
                                         self.isPickerShowing = true
                                     }
-                                    .padding(.top,10)
+                                    .padding(.top, 10)
                             } else {
                                 if self.userViewModel.user.profilePic == "" {
                                     Image(systemName: "person.circle.fill")
@@ -52,7 +51,7 @@ struct ProfileView: View {
                                         .onTapGesture {
                                             self.isPickerShowing = true
                                         }
-                                        .padding(.top,10)
+                                        .padding(.top, 10)
                                 } else {
                                     AsyncImage(url: URL(string: self.userViewModel.user.profilePic)) { image in
                                         image
@@ -66,7 +65,7 @@ struct ProfileView: View {
                                     } placeholder: {
                                         ProgressView()
                                     }
-                                    .padding(.top,10)
+                                    .padding(.top, 10)
                                 }
                                 
                             }
@@ -79,8 +78,7 @@ struct ProfileView: View {
                                 .foregroundColor(Color("MainButton"))
                                 .offset(x: 30, y: 50)
                         }
-    
-                        
+              
 //                        DisableTextComponent(title: Binding.constant("Username"), textValue: Binding.constant(self.userViewModel.user.userName), imageName: Binding.constant("person"))
 //                        
 //                        DisableTextComponent(title: Binding.constant("Email"), textValue: Binding.constant(self.userViewModel.user.email), imageName: Binding.constant("envelope"))
@@ -89,7 +87,7 @@ struct ProfileView: View {
 //
 //                        DisableTextComponent(title: Binding.constant("Email"), textValue: Binding.constant(self.userViewModel.user.email))
 //
-                        HStack{
+                        HStack {
                             Text(self.userViewModel.user.userName)
                                 .padding(5)
                                 .foregroundColor(.gray)
@@ -104,7 +102,6 @@ struct ProfileView: View {
                                 .font(.system(size:16))
                         }
 
-                        
                         Text("Preference Podcast Topic")
                             .foregroundColor(.black)
                             .font(.system(size:19))
@@ -117,9 +114,7 @@ struct ProfileView: View {
                                 self.categoryList = self.userViewModel.user.favoriteTopics
                             }.padding(0)
                         
-                        
-                        HStack{
-                            
+                        HStack {
                             Button {
                                 self.handleUpdate()
                             } label: {

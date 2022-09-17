@@ -21,9 +21,8 @@ struct PodcastDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                HStack{
-                
-                    
+                HStack {
+
                     VStack {
                         Text(self.podcast.title)
                             .font(.title3)
@@ -54,7 +53,6 @@ struct PodcastDetailView: View {
                 Text(self.podcast.description)
                     .lineLimit(isExpanded ? nil : 4)
                     .padding()
-
 
                 Divider()
 
@@ -109,11 +107,11 @@ struct PodcastDetailView: View {
     }
 }
 
-//struct PodcastDetailView_Previews: PreviewProvider {
+// struct PodcastDetailView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        PodcastDetailView(podcast: Podcasts(uuid: "", author: "", description: "", image: "", itunes_id: 23, language: "", title: "", website: "", categories: ["Technology", "Arts"], episodes: []))
 //    }
-//}
+// }
 
 struct PodcastDetailView_Previews: PreviewProvider {
     static var previews: some View {

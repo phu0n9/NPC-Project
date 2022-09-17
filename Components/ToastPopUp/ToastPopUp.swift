@@ -37,7 +37,7 @@ struct ToastPopUp: View {
                     value += 1
                 }) {
                     
-                    HStack{
+                    HStack {
                         Text(self.message)
                     }
                     .padding(20)

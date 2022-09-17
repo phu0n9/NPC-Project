@@ -42,7 +42,6 @@ struct ViewComponent<Destination:View>: View {
 //            }
 //            .accessibilityIdentifier(/*@START_MENU_TOKEN@*/"Identifier"/*@END_MENU_TOKEN@*/)
 
-            
         }
     }
 }

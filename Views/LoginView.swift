@@ -200,10 +200,12 @@ struct LoginView: View {
         }
     }
     
-    private func createNewAccount(){}
+    private func createNewAccount() {
+        
+    }
     
-    private func allowShowNotification(){
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){success,_ in
+    private func allowShowNotification() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {success, _ in
             guard success else {
                 return
             }
@@ -211,7 +213,7 @@ struct LoginView: View {
         }
     }
     
-    private func showNotificationWhenLogin(){
+    private func showNotificationWhenLogin() {
         let content = UNMutableNotificationContent()
         content.title = "Welcome back"
         content.subtitle = "We have new updates for you"

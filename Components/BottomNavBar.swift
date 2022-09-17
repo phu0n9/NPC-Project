@@ -64,55 +64,57 @@ struct BottomNavBar: View {
                     Button(action: {
                         self.selectedIndex = number
                     }, label: {
-                        if number == 2 {
-     
-                            Image(systemName: "leaf.fill")
-                                .renderingMode(.template)
-                                .font(.system(size:25,
-                                              weight: .regular,
-                                              design: .default))
-                                .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
-                        }
-                        else if number == 0 {
-                            Image(icons[number])
-                            .renderingMode(.template)
-                            .font(.system(size:25,
-                                          weight: .regular,
-                                          design: .default))
-                            .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
-                        }
-                        else if number == 1 {
-                            Image(systemName: "play.fill")
-                            .renderingMode(.template)
-                            .font(.system(size:25,
-                                          weight: .regular,
-                                          design: .default))
-                            .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
-                        }
-                        else if number == 3{
-                            Image(systemName: "music.note.list")
-                            .renderingMode(.template)
-                            .font(.system(size:25,
-                                          weight: .regular,
-                                          design: .default))
-                            .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
-                        }
-                        else if number == 4{
-                            Image(systemName: "person.fill")
-                            .renderingMode(.template)
-                            .font(.system(size:25,
-                                          weight: .regular,
-                                          design: .default))
-                            .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
-                        }
-                        else {
-                            Image(icons[number])
-                                .renderingMode(.template)
-                                .font(.system(size:25,
-                                              weight: .regular,
-                                              design: .default))
-                                .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
-                        }
+                        Image(icons[number])
+                        .renderingMode(.template)
+                        .font(.system(size:25,
+                                      weight: .regular,
+                                      design: .default))
+                        .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
+                        
+//                        if number == 2 {
+//
+//                            Image(systemName: "leaf.fill")
+//                                .renderingMode(.template)
+//                                .font(.system(size:25,
+//                                              weight: .regular,
+//                                              design: .default))
+//                                .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
+//                        }
+//                        else if number == 0 {
+//
+//                        }
+//                        else if number == 1 {
+//                            Image(systemName: "play.fill")
+//                            .renderingMode(.template)
+//                            .font(.system(size:25,
+//                                          weight: .regular,
+//                                          design: .default))
+//                            .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
+//                        }
+//                        else if number == 3{
+//                            Image(systemName: "music.note.list")
+//                            .renderingMode(.template)
+//                            .font(.system(size:25,
+//                                          weight: .regular,
+//                                          design: .default))
+//                            .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
+//                        }
+//                        else if number == 4{
+//                            Image(systemName: "person.fill")
+//                            .renderingMode(.template)
+//                            .font(.system(size:25,
+//                                          weight: .regular,
+//                                          design: .default))
+//                            .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
+//                        }
+//                        else {
+//                            Image(icons[number])
+//                                .renderingMode(.template)
+//                                .font(.system(size:25,
+//                                              weight: .regular,
+//                                              design: .default))
+//                                .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
+//                        }
                     })
                     
                     Spacer()
