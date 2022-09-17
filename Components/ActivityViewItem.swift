@@ -48,7 +48,9 @@ struct ActivityViewItem: View {
         }
         .onAppear {
             DispatchQueue.main.async {
-                self.userViewModel.fetchUserActivityList(listName: currentTabCollection)
+                if self.currentTabTitle != "Download List" {
+                    self.userViewModel.fetchUserActivityList(listName: currentTabCollection)
+                }
             }
         }
     }

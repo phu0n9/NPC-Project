@@ -19,6 +19,15 @@ struct TrendingView: View {
     @State private var isTapped: Bool = false
     @State private var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
     @State private var upload = Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])
+    @StateObject var userViewModel = UserViewModel()
+    
+    private let toastOptions = SimpleToastOptions(
+        alignment: .top,
+        hideAfter: 2,
+        backdrop: .black.opacity(0.2),
+        animation: .default,
+        modifierType: .slide
+    )
     
     // PopupView
     @State private var showToast = false
@@ -47,7 +56,8 @@ struct TrendingView: View {
                     
                 
                 Spacer()
-            }.padding(5)
+            }
+            .padding(5)
 
             ScrollView(.horizontal) {
                 HStack(spacing: 10) {
@@ -59,9 +69,7 @@ struct TrendingView: View {
             
             Divider()
             
-
-            //  MARK: MIDDLE ELEMENTS
-        
+            //  MARK: MIDDLE ELEMENTS        
                 HStack(alignment: .firstTextBaseline) {
                     Text("Recommendations")
                         .fontWeight(.regular)
@@ -74,13 +82,11 @@ struct TrendingView: View {
 
                 ScrollView(.horizontal) {
                     HStack(spacing: 10) {
-                        ForEach(self.podcastViewModel.podcasts, id: \.id) { podcast in
+                        ForEach(self.podcastViewModel.randomPodcasts, id: \.id) { podcast in
                             MiddleComponent(podcast: podcast)
                         }
                     }
-                   
                 }
-            
             
             Divider()
             
@@ -128,15 +134,17 @@ struct TrendingView: View {
                 }
             }
         }
-        .popup(isPresented: self.$isTapped, type: .toast, position: .bottom, closeOnTap: false, backgroundColor: .black.opacity(0.4)) {
+        .sheet(isPresented: self.$isTapped) {
             StreamingView(episode: self.$episode, upload: self.$upload, state: 0)
         }
         .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height - 200)
         .onAppear {
             DispatchQueue.main.async {
-                self.podcastViewModel.fetchPodcasts(categories: self.userSettings.userCategories)
+                self.podcastViewModel.fetchPodcasts(categories: self.userSettings.userCategories, isRandom: false)
+                self.podcastViewModel.fetchPodcasts(categories: [], isRandom: true)
             }
         }
+        
     }
 }
 

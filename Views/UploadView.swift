@@ -208,6 +208,7 @@ struct UploadView : View {
             .frame(alignment: .leading)
             .padding()
         }
+
         .alert(isPresented: self.$uploadControl.alert, content: {
             Alert(title: Text("Error"), message: Text("Please enable microphone access"))
         })
@@ -252,9 +253,6 @@ struct UploadView : View {
             self.state = 0
         }
     }
-
-  
-    
 }
 
 

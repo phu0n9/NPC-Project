@@ -17,7 +17,7 @@ struct ActivityView: View {
             TabBarView(currentTab: self.$currentTab, state: 0)
             TabView(selection: self.$currentTab) {
                 ActivityViewItem(selectedTab: currentTab, currentTabCollection: Binding.constant(tabOptions[currentTab] ?? Settings.favoriteListCollection), currentTabTitle: Binding.constant(titleTab[currentTab] ?? "Favorite List")).tag(0)
-                ActivityViewItem(selectedTab: currentTab, currentTabCollection: Binding.constant(tabOptions[currentTab] ?? Settings.favoriteListCollection), currentTabTitle: Binding.constant(titleTab[currentTab] ?? "Favorite List")).tag(1)
+                DownloadView().tag(1)
                 ActivityViewItem(selectedTab: currentTab, currentTabCollection: Binding.constant(tabOptions[currentTab] ?? Settings.favoriteListCollection), currentTabTitle: Binding.constant(titleTab[currentTab] ?? "Favorite List")).tag(2)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))

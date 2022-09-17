@@ -29,6 +29,10 @@
 		4E26039A28D0F23D00DC739B /* CommunityStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26039928D0F23D00DC739B /* CommunityStreamView.swift */; };
 		4E2603A028D1D35900DC739B /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26039F28D1D35900DC739B /* CommentView.swift */; };
 		4E2603A228D1D37D00DC739B /* CommentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2603A128D1D37D00DC739B /* CommentItem.swift */; };
+		4E2603A628D43E9700DC739B /* DownloadControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2603A528D43E9700DC739B /* DownloadControl.swift */; };
+		4E5C3E6528D466350078E62C /* DownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C3E6428D466350078E62C /* DownloadItem.swift */; };
+		4E5C3E6728D467530078E62C /* Downloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C3E6628D467530078E62C /* Downloads.swift */; };
+		4E5C3E6928D46D8E0078E62C /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5C3E6828D46D8E0078E62C /* DownloadView.swift */; };
 		4E6D455128BF282E005B7DF0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454E28BF282E005B7DF0 /* Users.swift */; };
 		4E6D455228BF282E005B7DF0 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D454F28BF282E005B7DF0 /* Categories.swift */; };
 		4E6D455328BF282E005B7DF0 /* Podcasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D455028BF282E005B7DF0 /* Podcasts.swift */; };
@@ -103,6 +107,10 @@
 		4E26039928D0F23D00DC739B /* CommunityStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityStreamView.swift; sourceTree = "<group>"; };
 		4E26039F28D1D35900DC739B /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		4E2603A128D1D37D00DC739B /* CommentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentItem.swift; sourceTree = "<group>"; };
+		4E2603A528D43E9700DC739B /* DownloadControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadControl.swift; sourceTree = "<group>"; };
+		4E5C3E6428D466350078E62C /* DownloadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadItem.swift; sourceTree = "<group>"; };
+		4E5C3E6628D467530078E62C /* Downloads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloads.swift; sourceTree = "<group>"; };
+		4E5C3E6828D46D8E0078E62C /* DownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
 		4E6D454E28BF282E005B7DF0 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		4E6D454F28BF282E005B7DF0 /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		4E6D455028BF282E005B7DF0 /* Podcasts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Podcasts.swift; sourceTree = "<group>"; };
@@ -235,6 +243,7 @@
 				4E6D455028BF282E005B7DF0 /* Podcasts.swift */,
 				4E6D454E28BF282E005B7DF0 /* Users.swift */,
 				4E6D458428C16707005B7DF0 /* Uploads.swift */,
+				4E5C3E6628D467530078E62C /* Downloads.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -271,6 +280,7 @@
 				4E26039728D07F4800DC739B /* MiniPlayer.swift */,
 				4E2603A128D1D37D00DC739B /* CommentItem.swift */,
 				BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */,
+				4E5C3E6428D466350078E62C /* DownloadItem.swift */,
 				BB66E62E28D33E71000E0BDC /* PopUpWindow.swift */,
 				BB72930F28D47D4D00FF2B1D /* UserUploadComponent.swift */,
 				BB72931128D47EC200FF2B1D /* UserUploadButton.swift */,
@@ -291,6 +301,7 @@
 				4E26037E28CE315D00DC739B /* TextBindingManager.swift */,
 				A4A4F91928D17B93000C2248 /* LocalNotificationManager.swift */,
 				BB66E62A28D321BD000E0BDC /* TimerForCastingView.swift */,
+				4E2603A528D43E9700DC739B /* DownloadControl.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -323,6 +334,7 @@
 				4E26039528D05D3A00DC739B /* PodcastDetailView.swift */,
 				4E26039928D0F23D00DC739B /* CommunityStreamView.swift */,
 				4E26039F28D1D35900DC739B /* CommentView.swift */,
+				4E5C3E6828D46D8E0078E62C /* DownloadView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -482,6 +494,7 @@
 				4E26038928CEFDDD00DC739B /* ActivityViewItem.swift in Sources */,
 				A497D80728C1C08100D8A5CA /* CastingView.swift in Sources */,
 				4E2603A028D1D35900DC739B /* CommentView.swift in Sources */,
+				4E2603A628D43E9700DC739B /* DownloadControl.swift in Sources */,
 				4E98FDD428C56653006D2566 /* SoundControl.swift in Sources */,
 				A498E01628CF029F00098FBB /* RootView.swift in Sources */,
 				4E6D456828BF2D3E005B7DF0 /* UserViewModel.swift in Sources */,
@@ -489,14 +502,17 @@
 				BBCF9EFC28BF148D006BCA16 /* TopNavBar.swift in Sources */,
 				4E26039828D07F4800DC739B /* MiniPlayer.swift in Sources */,
 				A4FBD12828C781CF00F6E3EB /* CheckboxToggleStyle.swift in Sources */,
+				4E5C3E6728D467530078E62C /* Downloads.swift in Sources */,
 				BB72931228D47EC200FF2B1D /* UserUploadButton.swift in Sources */,
 				A497D80528C1A84900D8A5CA /* TrendingView.swift in Sources */,
 				A457B44228C2019F007AE794 /* TransitionView.swift in Sources */,
 				A497D80B28C1C0C300D8A5CA /* ActivityView.swift in Sources */,
 				4E6D45A428C21FC3005B7DF0 /* ProfileView.swift in Sources */,
 				A477165728CC53BC00BCA3F8 /* AddBorder.swift in Sources */,
+				4E5C3E6528D466350078E62C /* DownloadItem.swift in Sources */,
 				4E26038528CEFD3200DC739B /* TabBarView.swift in Sources */,
 				A48BDAB128C1E81A0094FE8A /* ButtonComponent.swift in Sources */,
+				4E5C3E6928D46D8E0078E62C /* DownloadView.swift in Sources */,
 				A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */,
 				4E6D455728BF2842005B7DF0 /* PodcastViewModel.swift in Sources */,
 				BB66E62B28D321BD000E0BDC /* TimerForCastingView.swift in Sources */,
@@ -676,6 +692,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NPC/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "NPC wants to access your microphone";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -704,6 +721,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NPC/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "NPC wants to access your microphone";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

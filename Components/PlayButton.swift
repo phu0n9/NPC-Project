@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SimpleToast
 
 struct PlayButton: View {
     
@@ -15,6 +14,10 @@ struct PlayButton: View {
     @ObservedObject private var userViewModel = UserViewModel()
     @Binding var length:Int
     @Binding var episode : Episodes
+    @StateObject var downloadControl = DownloadControl()
+    @State var playerLocalName = ""
+    @State var imageLocalName = ""
+    
     var soundName: String
     
     @State private var showPopUp: Bool = false
@@ -43,41 +46,52 @@ struct PlayButton: View {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(Color(red: 1, green: 0.4902, blue: 0.3216), lineWidth: 1))
             
-            PopUpWindow(title: "Error", message: "Test", buttonText: "OK", show: $showPopUp)
-        }
-        // MARK: heart icon
-        Button(action: {
-            self.episode.isLiked.toggle()
-            self.userViewModel.addFavorite(favorite: episode)
-        }, label: {
-            Image(systemName: self.episode.isLiked ? "heart.fill" : "heart")
-                .renderingMode(.template)
-                .foregroundColor(.orange)
-                .frame(width:20, height: 30, alignment: .leading)
-                .padding(5)
-        }).padding(5)
-        
-        // MARK: Download
-        Button(action: {
+            // MARK: heart icon
+            Button(action: {
+                self.episode.isLiked.toggle()
+                self.userViewModel.addFavorite(favorite: episode)
+            }, label: {
+                Image(systemName: self.episode.isLiked ? "heart.fill" : "heart")
+                    .renderingMode(.template)
+                    .foregroundColor(.orange)
+                    .frame(width:20, height: 30, alignment: .leading)
+                    .padding(5)
+            }).padding(5)
             
-        }, label: {
-            Image(systemName: self.episode.isLiked ? "arrow.down.square.fill" : "arrow.down.square")
-                .renderingMode(.template)
-                .foregroundColor(.orange)
-                .frame(width:20, height: 30, alignment: .leading)
-                .padding(5)
-        }).padding(0)
-        
-        
-        
+            // MARK: Download
+            Button(action: {
+                if !self.downloadControl.isDownloading {
+                    DispatchQueue.main.async {
+                        self.downloadControl.downloadFile(urlString: self.episode.audio, fileLocalName: self.episode.title+".mp3")
+                    }
+                }
+            }, label: {
+                if self.downloadControl.isDownloading {
+                    ProgressView()
+                        .frame(width:20, height: 30, alignment: .leading)
+                        .padding(5)
+                } else {
+                    Image(systemName: "arrow.down.square")
+                        .renderingMode(.template)
+                        .foregroundColor(.orange)
+                        .frame(width:20, height: 30, alignment: .leading)
+                        .padding(5)
+                }
+            })
+            .padding(0)
+            
+        }
+        .padding(0)
+        .onAppear {
+            DispatchQueue.main.async {
+                self.downloadControl.checkFileExists(fileLocalName: self.playerLocalName)
+            }
+        }
     }
-
     
-}
-
-
-struct PlayButton_Previews: PreviewProvider {
-    static var previews: some View {
-        PlayButton(length:Binding.constant(0), episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), soundName: "sound link")
+    struct PlayButton_Previews: PreviewProvider {
+        static var previews: some View {
+            PlayButton(length:Binding.constant(0), episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), soundName: "sound link")
+        }
     }
 }
