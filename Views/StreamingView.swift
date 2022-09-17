@@ -63,11 +63,7 @@ struct StreamingView: View {
                         .trim(from: 0, to:0.8)
                         .stroke(Color.black.opacity(0.06), lineWidth: 4)
                         .frame(width: width+45, height: height+45)
-<<<<<<< HEAD
-                    
-                    // MARK: add tenery operator based on state below theses circles
-=======
->>>>>>> 64997ca (feat: sheet view)
+
                     Circle()
                         .trim(from: 0, to: CGFloat((self.soundControl.angle)/360))
                         .stroke(Color(.orange), lineWidth: 4)
@@ -77,14 +73,9 @@ struct StreamingView: View {
                         .fill(Color("MainButton"))
                         .frame(width: 25, height: 25)
                         .offset(x: (width + 45) / 2)
-<<<<<<< HEAD
                         .rotationEffect(.init(degrees: soundControlModel.angle))
                         .gesture(DragGesture().onChanged(soundControlModel.onChanged(value:)))
 
-=======
-                        .rotationEffect(.init(degrees: self.soundControl.angle))
-//                        .gesture(DragGesture().onChanged(self.soundControl.onChanged(value:)))
->>>>>>> 64997ca (feat: sheet view)
                 }
                 .rotationEffect(.init(degrees: 126))
             
@@ -212,7 +203,6 @@ struct StreamingView: View {
         }
         .onReceive(timer) { _ in
             self.updateTimer()
-<<<<<<< HEAD
         }
     }
     
@@ -222,18 +212,8 @@ struct StreamingView: View {
         let progress = currentTime / total
         withAnimation(.linear(duration: 0.1)) {
             self.soundControl.angle = Double(progress) * 288
-=======
->>>>>>> 64997ca (feat: sheet view)
+
         }
-    }
-    
-    func updateTimer() {
-        let currentTime = self.soundControl.audioPlayer.currentTime().seconds
-        let total = (self.soundControl.audioPlayer.currentItem?.duration.seconds)!
-        let progress = currentTime / total
-//        withAnimation(Animation.linear(duration: 0.1)) {
-//            self.soundControl.angle = Double(progress) * 28
-//        }
     }
 
 }
@@ -243,7 +223,6 @@ struct StreamingView_Previews: PreviewProvider {
         StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])), download: Binding.constant(Downloads(audio: "", title: "", isProcessing: false, audio_length: 0)), state: 0)
     }
 }
-
 
 //    static var previews: some View {
 //        StreamingView(episode: Binding.constant(Episodes(audio: "http://feedproxy.google.com/~r/wskbcast/~5/Bfv7vOn-sMI/Ep88AWatchedGoatNeverBurns.mp3", audio_length: 4638, description: "This week Kyle has us going from the adorable Gävle Goat to barber pole! Sky dives into figural biscuit-making and kids games as Tim hunts down one of the most iconic Bugs Bunny cartoons.Photos & Videos we talk about:7:00 - Hobby horse12:55 - Guy who showed up to the wrong party Subscribe in iTunesListen on Stitcher Radio", episode_uuid: "6bf59a32de804ede9101f7ba75d12677", podcast_uuid: "0c28802a7e814a55ada3ba54847258bc", pub_date: "2017-12-07 13:59:00+00", title: "Ep88: A Watched Goat Never Burns", image: "http://is5.mzstatic.com/image/thumb/Music71/v4/f8/a3/3e/f8a33e4e-bd23-ca5d-1aa2-bdb0e6b0f74b/source/600x600bb.jpg", user_id: "BbxvolHkIRdRCoGOJ1jfuE9RHoe2", isLiked: false)), upload: Binding.constant(Uploads(title: "Nguyễn Lê", description: "ss", audioPath: "https://firebasestorage.googleapis.com:443/v0/b/npc-project-742bd.appspot.com/o/recordings%2FE7B45BC1-3660-4BAC-AA7E-5FDCACF83B99?alt=media&token=49828066-fa93-424c-98f7-fc7086d5c3b8", author: "Lenguyen", pub_date: "9/16/22, 12:46 AM", image: "https://firebasestorage.googleapis.com:443/v0/b/npc-project-742bd.appspot.com/o/recording_images%2F03125B60-4A7C-4B40-AC95-719DBE4C4D42.jpg?alt=media&token=adb2f507-0fc0-4e28-9f27-fcf2267ea6df", userID: "BbxvolHkIRdRCoGOJ1jfuE9RHoe2", numOfLikes: 0, audio_length: 0, userImage: "https://firebasestorage.googleapis.com:443/v0/b/npc-project-742bd.appspot.com/o/images%2FE867F8D3-88CF-428D-BC3D-E6BCDD6D87F8.jpg?alt=media&token=aace0e1e-9e3d-4958-a4a9-733cf0a202bb", likes: [], comments: [])), state: 0)

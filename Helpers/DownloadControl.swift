@@ -166,17 +166,16 @@ class DownloadControl: ObservableObject {
         return ""
     }
     
-<<<<<<< HEAD
     func duration(for resource: String) -> Double {
         let asset = AVURLAsset(url: URL(fileURLWithPath: resource))
         return Double(CMTimeGetSeconds(asset.duration))
-=======
+    }
+    
     func getDuration(pathString: String) -> Double {
         let asset = AVURLAsset(url: URL(fileURLWithPath: pathString) as URL, options: nil)
         let audioDuration = asset.duration
         let audioDurationSeconds = CMTimeGetSeconds(audioDuration)
         return Double(audioDurationSeconds)
->>>>>>> 64997ca (feat: sheet view)
     }
     
     // MARK: fetch all downloads
@@ -204,11 +203,8 @@ class DownloadControl: ObservableObject {
             for file in directoryContents where !file.relativePath.contains("DS_Store") {
                 let currentItem = self.getLocalFileName(fileName: file.relativePath)
                 //                let directoryPath = self.getDirectoryPath(fileName: file.relativePath)
-<<<<<<< HEAD
-                let download = Downloads(audio: file.relativePath, title: currentItem, isProcessing: false, audio_length: self.duration(for: file.relativePath))
-=======
+//                let download = Downloads(audio: file.relativePath, title: currentItem, isProcessing: false, audio_length: self.duration(for: file.relativePath))
                 let download = Downloads(audio: file.relativePath, title: currentItem, isProcessing: false, audio_length: self.getDuration(pathString: file.relativePath))
->>>>>>> 64997ca (feat: sheet view)
                 self.downloads.append(download)
                 print(file)
             }
