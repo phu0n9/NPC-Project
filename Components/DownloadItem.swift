@@ -57,9 +57,6 @@ struct DownloadItem: View {
                 self.downloadControl.checkFileExists(fileLocalName: self.download.title)
             }
         }
-        .onTapGesture {
-            print(self.download.audio)
-        }
     }
 }
 

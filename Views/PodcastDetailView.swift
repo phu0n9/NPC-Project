@@ -107,12 +107,6 @@ struct PodcastDetailView: View {
     }
 }
 
-// struct PodcastDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PodcastDetailView(podcast: Podcasts(uuid: "", author: "", description: "", image: "", itunes_id: 23, language: "", title: "", website: "", categories: ["Technology", "Arts"], episodes: []))
-//    }
-// }
-
 struct PodcastDetailView_Previews: PreviewProvider {
     static var previews: some View {
         PodcastDetailView(podcast: Podcasts(uuid: "0c28802a7e814a55ada3ba54847258bc", author: "Sky", description: "Every episode Tim, Kyle and Sky play the Wiki game and attempt to get from one specific Wikipedia article to another only through the links within the articles.", image: "http://is5.mzstatic.com/image/thumb/Music71/v4/f8/a3/3e/f8a33e4e-bd23-ca5d-1aa2-bdb0e6b0f74b/source/600x600bb.jpg", itunes_id: 23, language: "English", title: "We Should Know Better", website: "http://wskbcast.blogspot.com/", categories: ["Technology", "Arts"], episodes: []))
