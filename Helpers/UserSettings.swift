@@ -7,6 +7,7 @@
 
 import Foundation
 class UserSettings: ObservableObject {
+    
     @Published var token: String {
         didSet {
             UserDefaults.standard.set(token, forKey: Settings.userToken)
