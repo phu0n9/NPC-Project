@@ -61,7 +61,7 @@ struct CommentItem: View {
                         self.uploadViewModel.deleteComments(uploadID: self.uploadID, commentID: self.comment.uuid)
                     }, label: {
                         Text("Delete")
-                            .font(.body)
+                            .font(.caption)
                             .frame(maxWidth: 100, alignment: .leading)
                             .foregroundColor(Color.red)
                     })

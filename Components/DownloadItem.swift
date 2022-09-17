@@ -60,19 +60,6 @@ struct DownloadItem: View {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(Color(red: 1, green: 0.4902, blue: 0.3216), lineWidth: 1))
             
-            // MARK: Download
-            Button(action: {
-                DispatchQueue.main.async {
-                    self.downloadControl.deleteFile(fileLocalName: self.download.title)
-                }
-            }, label: {
-                Image(systemName: "arrow.down.square")
-                    .renderingMode(.template)
-                    .foregroundColor(.orange)
-                    .frame(width:20, height: 30, alignment: .leading)
-                    .padding(5)
-            })
-            .padding(0)
             Divider()
         }
         .padding()
