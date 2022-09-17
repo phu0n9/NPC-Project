@@ -13,6 +13,7 @@ import AVKit
 
 class PodcastViewModel: ObservableObject {
     @Published var podcasts = [Podcasts]()
+    @Published var randomPodcasts = [Podcasts]()
     @Published var categories = [Categories]()
     @Published var episodes = [Episodes]()
     @Published var paginatedEpisodes = [Episodes]()
@@ -23,25 +24,45 @@ class PodcastViewModel: ObservableObject {
     private var db = Firestore.firestore()
     private var userSettings = UserSettings()
     @Published var isFetchingMore = false
+    private var isDoneDownloading = false
     
     // MARK: fetching podcasts API with x documents with categories
-    func fetchPodcasts(categories: [String]) {
-        db.collection(Settings.podcastsCollection).limit(to: 10).whereField("categories", arrayContainsAny: categories).getDocuments(completion: {querySnapShot, error in
-            if let err = error {
-                print("Error getting documents: \(err)")
-            }
-            
-            guard let documents = querySnapShot?.documents else {
-                print("No data")
-                return
-            }
-
-            self.getPodcastByQuerySnapShot(documents: documents)
-        })
+    func fetchPodcasts(categories: [String], isRandom: Bool) {
+        if !isRandom {
+            db.collection(Settings.podcastsCollection).limit(to: 10).whereField("categories", arrayContainsAny: categories).getDocuments(completion: {querySnapShot, error in
+                if let err = error {
+                    print("Error getting documents: \(err)")
+                }
+                
+                guard let documents = querySnapShot?.documents else {
+                    print("No data")
+                    return
+                }
+                
+                self.getPodcastByQuerySnapShot(documents: documents, isRandom: isRandom)
+            })
+        } else {
+            let randomStr = String(Int.random(in: 0..<10))
+            db.collection(Settings.podcastsCollection).limit(to: 10)
+                .order(by: "uuid")
+                .start(at: [randomStr])
+                .getDocuments(completion: {querySnapShot, error in
+                    if let err = error {
+                        print("Error getting documents: \(err)")
+                    }
+                    
+                    guard let documents = querySnapShot?.documents else {
+                        print("No data")
+                        return
+                    }
+                    
+                    self.getPodcastByQuerySnapShot(documents: documents, isRandom: isRandom)
+                })
+        }
     }
-        
+    
     // MARK: get podcast by query snap shot document
-    func getPodcastByQuerySnapShot(queryDocumentSnapshot: DocumentSnapshot, episodeId: String) -> Podcasts {
+    func getPodcastByQuerySnapShot(queryDocumentSnapshot: DocumentSnapshot, episodeId: String, isRandom: Bool) -> Podcasts {
         let author = queryDocumentSnapshot.get("author") as! String
         let categories = queryDocumentSnapshot.get("categories") as! [String]
         let description = queryDocumentSnapshot.get("description") as! String
@@ -59,19 +80,28 @@ class PodcastViewModel: ObservableObject {
             if episodeObjId == episodeId {
                 self.episode = episode
             }
-            self.episodes.append(episode)
+            if !isRandom {
+                self.episodes.append(episode)
+            }
             return episode
         }
-
+        
         return Podcasts(uuid: uuid, author: author, description: description, image: image, itunes_id: itunes_id, language: language, title: title, website: website, categories: categories, episodes: episodeObj)
     }
     
     // MARK: assign podcasts
-    func getPodcastByQuerySnapShot(documents: [DocumentSnapshot]) {
-        self.podcasts = documents.map {(queryDocumentSnapshot) -> Podcasts in
-            return getPodcastByQuerySnapShot(queryDocumentSnapshot: queryDocumentSnapshot, episodeId: "")
+    func getPodcastByQuerySnapShot(documents: [DocumentSnapshot], isRandom: Bool) {
+        if !isRandom {
+            self.podcasts = documents.map {(queryDocumentSnapshot) -> Podcasts in
+                return getPodcastByQuerySnapShot(queryDocumentSnapshot: queryDocumentSnapshot, episodeId: "", isRandom: isRandom)
+            }
+            self.paginateEpisodes()
+        } else {
+            self.randomPodcasts = documents.map {(queryDocumentSnapshot) -> Podcasts in
+                return getPodcastByQuerySnapShot(queryDocumentSnapshot: queryDocumentSnapshot, episodeId: "", isRandom: isRandom)
+            }
+            //            self.paginateEpisodes()
         }
-        self.paginateEpisodes()
     }
     
     // MARK: append pagination episodes
@@ -112,7 +142,7 @@ class PodcastViewModel: ObservableObject {
                 return
             }
             
-            self.podcast = self.getPodcastByQuerySnapShot(queryDocumentSnapshot: document, episodeId: episodeId)
+            self.podcast = self.getPodcastByQuerySnapShot(queryDocumentSnapshot: document, episodeId: episodeId, isRandom: false)
             self.episodes = self.podcast.episodes
             self.paginateEpisodes()
         })
@@ -133,6 +163,8 @@ class PodcastViewModel: ObservableObject {
                 let categories = documentSnapShot.get("categories") as! String
                 return Categories(categories: categories)
             }
+            
+            self.isDoneDownloading = true
         })
     }
     
@@ -146,12 +178,10 @@ class PodcastViewModel: ObservableObject {
                 print("No data")
                 return
             }
-            self.getPodcastByQuerySnapShot(documents: documents)
+            self.getPodcastByQuerySnapShot(documents: documents, isRandom: true)
         })
     }
     
-
-
     func onChanged(value: DragGesture.Value){
         
         let vector = CGVector(dx: value.location.x,dy: value.location.y)
@@ -165,7 +195,7 @@ class PodcastViewModel: ObservableObject {
             let progress = angle / 288
             let time = TimeInterval(progress) * Double(episode.audio_length)
             
- 
+            
             withAnimation(Animation.linear(duration: 0.1)){self.angle =  Double(angle)}
             
         }

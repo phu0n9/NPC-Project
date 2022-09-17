@@ -24,7 +24,7 @@ struct RootView: View {
         case .activity:
             ActivityView()
         case .castingUser:
-            CastingView(currentTab: 1)
+            ViewComponent(destination: CastingView(currentTab: 1), viewTitle: "Casting")
         case .castingCommunity:
             CastingView(currentTab: 0)
         case .bottomNavBar:

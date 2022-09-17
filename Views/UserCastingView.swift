@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct UserCastingView: View {
+    
     var body: some View {
-        Text("User Upload View")
+        Text("hi")
     }
 }
 

@@ -186,13 +186,6 @@ struct UploadView : View {
                                         
                                       }
                                     }
-                                    
-                                
-                                
-
-                                
-                                
-                                
                                 
                                 Spacer()
                                 
@@ -258,13 +251,12 @@ struct UploadView : View {
             let time = format.string(from: mytime)
             self.uploadControl.uploadCastImage(title: title, description: self.textBindingManager.text, pub_date: time, selectedImage: selectedImage)
             withAnimation {
-                routerView.currentPage = .bottomNavBar
+                routerView.currentPage = .castingUser
             }
         }
     }
     
-    
-    func restartTimer(){
+    func restartTimer() {
       hours = 0
       minutes = 0
       seconds = 0
@@ -277,12 +269,12 @@ struct UploadView : View {
               self.seconds = 0
               if self.minutes == 59 {
                 self.minutes = 0
-                self.hours = self.hours + 1
+                self.hours += 1
               } else {
-                self.minutes = self.minutes + 1
+                self.minutes += 1
               }
             } else {
-              self.seconds = self.seconds + 1
+              self.seconds += 1
             }
           }
         }

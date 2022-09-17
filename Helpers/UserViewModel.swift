@@ -22,7 +22,8 @@ class UserViewModel : ObservableObject {
     @Published var isUserCurrentlyLoggedOut = false
     @Published var fetchingMore = false
     @Published var lastDocumentSnapshot: DocumentSnapshot!
-
+    @Published var isItemExisting = false
+    
     private var db = Firestore.firestore()
         
     init() {
@@ -252,10 +253,12 @@ class UserViewModel : ObservableObject {
             if isExisting.isEmpty {
                 print("object \(favorite.episode_uuid)")
                 print("not equal")
+                self.isItemExisting = false
                 self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.favoriteListCollection).document(favorite.episode_uuid).setData(favoriteObj)
                 return
             } else {
                 print("equal")
+                self.isItemExisting = true
                 self.db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(Settings.favoriteListCollection).document(favorite.episode_uuid).delete()
                 return
             }
