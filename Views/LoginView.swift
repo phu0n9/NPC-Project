@@ -142,7 +142,6 @@ struct LoginView: View {
                         
                         self.btnClicked.toggle()
                         handleAction()
-                        showNotificationWhenLogin()
                     } label: {
                         HStack {
                             Spacer()
@@ -178,8 +177,6 @@ struct LoginView: View {
     private func handleAction() {
         if isLoginMode {
             loginUser()
-        } else {
-            createNewAccount()
         }
     }
     
@@ -197,12 +194,11 @@ struct LoginView: View {
             self.loginStatusMessage = "Successfully logged in as user: \(result?.user.uid ?? "")"
             self.userViewModel.userLogin(userID: result?.user.uid ?? "")
             self.loginSuccess = true
+            showNotificationWhenLogin()
         }
     }
     
-    private func createNewAccount() {
-        
-    }
+
     
     private func allowShowNotification() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {success, _ in

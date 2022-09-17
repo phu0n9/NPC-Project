@@ -83,9 +83,8 @@ struct PodcastDetailView: View {
                                 .frame(height: 300)
                             } else {
                                 // return original data
-                                EpisodeComponent(episode: $episode, isExpanded: $episode.isExpanding)
+                                EpisodeComponent(episode: $episode, isExpanded: $episode.isExpanding, isTapped: Binding.constant(isTapped))
                                     .onTapGesture {
-                                        self.isTapped = true
                                         self.episode = episode
                                     }
                             }
@@ -95,7 +94,7 @@ struct PodcastDetailView: View {
                 
             }
         }
-        .popup(isPresented: self.$isTapped, type: .toast, position: .bottom, closeOnTap: false, backgroundColor: .black.opacity(0.4)) {
+        .sheet(isPresented: self.$isTapped) {
             StreamingView(episode: self.$episode, upload: self.$upload, state: 0)
         }
         .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height - 200)

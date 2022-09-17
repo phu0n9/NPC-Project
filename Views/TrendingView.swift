@@ -113,10 +113,16 @@ struct TrendingView: View {
                                 .frame(height: 300)
                             } else {
                                 // return original data
-                                EpisodeComponent(episode: $episode, isExpanded: $episode.isExpanding)
+                                EpisodeComponent(episode: $episode, isExpanded: $episode.isExpanding, isTapped: self.$isTapped)
                                     .onTapGesture {
                                         self.isTapped = true
                                         self.episode = episode
+                                    }
+                                    .onChange(of: self.isTapped) { value in
+                                        if value {
+                                            self.episode = episode
+                                            print(self.episode)
+                                        }
                                     }
                             }
                         }

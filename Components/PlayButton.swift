@@ -9,10 +9,10 @@ import SwiftUI
 
 struct PlayButton: View {
     
-    @State private var isDownload = 0
+    @State var isDownload = 0
     @ObservedObject var soundControl = SoundControl()
-    @ObservedObject private var userViewModel = UserViewModel()
-    @Binding var length:Int
+    @ObservedObject var userViewModel = UserViewModel()
+    @Binding var length : Int
     @Binding var episode : Episodes
     @StateObject var downloadControl = DownloadControl()
     @State var playerLocalName = ""
@@ -20,15 +20,14 @@ struct PlayButton: View {
     
     var soundName: String
     
-    @State private var showPopUp: Bool = false
+    @Binding var isTapped: Bool
     
     var body: some View {
         HStack {
             ZStack {
                 Button(action: {
-                    self.soundControl.playSound(soundName: soundName, isPreview: true)
                     withAnimation(.default) {
-                        showPopUp.toggle()
+                        self.isTapped.toggle()
                     }
                 }, label: {
                     Image(systemName: self.soundControl.isActive ?  "play.fill" : "pause.fill")
@@ -91,7 +90,7 @@ struct PlayButton: View {
     
     struct PlayButton_Previews: PreviewProvider {
         static var previews: some View {
-            PlayButton(length:Binding.constant(0), episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), soundName: "sound link")
+            PlayButton(length:Binding.constant(0), episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), soundName: "sound link", isTapped: Binding.constant(false))
         }
     }
 }

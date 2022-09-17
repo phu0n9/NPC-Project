@@ -10,6 +10,7 @@ import SwiftUI
 struct EpisodeComponent: View {
     @Binding var episode: Episodes
     @Binding var isExpanded: Bool
+    @Binding var isTapped: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -63,7 +64,7 @@ struct EpisodeComponent: View {
                 )
             
             HStack(alignment: .top, spacing: 0) {
-                PlayButton(length: Binding.constant(self.episode.audio_length), episode: $episode, soundName: self.episode.audio)
+                PlayButton(length: Binding.constant(self.episode.audio_length), episode: $episode, soundName: self.episode.audio, isTapped: $isTapped)
             }
             Divider()
         }
@@ -73,6 +74,6 @@ struct EpisodeComponent: View {
 
 struct EpisodeComponent_Previews: PreviewProvider {
     static var previews: some View {
-        EpisodeComponent(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), isExpanded: Binding.constant(false))
+        EpisodeComponent(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), isExpanded: Binding.constant(false), isTapped: Binding.constant(false))
     }
 }

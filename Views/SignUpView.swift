@@ -39,7 +39,6 @@ struct SignUpView: View {
                         CategoryCheckbox(fetchCategoryList: self.$podcastViewModel.categories, isFull: $isFull, categoryList: self.$categoryList)
                         Button {
                             handleSignUpAction()
-                            showNotificationWhenSignUp()
                         } label: {
                             HStack {
                                 Spacer()
@@ -56,7 +55,6 @@ struct SignUpView: View {
                 }
             }
         }
-        .navigationBarHidden(true)
         .onAppear {
             DispatchQueue.main.async {
                 self.podcastViewModel.fetchCategories()
@@ -94,6 +92,7 @@ struct SignUpView: View {
             self.userViewModel.addUser()
             self.userViewModel.userSettings.uuid = result?.user.uid ?? ""
             self.loginSuccess = true
+            showNotificationWhenSignUp()
         }
     }
     

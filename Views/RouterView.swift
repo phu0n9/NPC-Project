@@ -9,7 +9,7 @@ import SwiftUI
 
 class RouterView: ObservableObject {
     // By default it direct the user to the user welcome page
-    @Published var currentPage: Page = .welcome
+    @Published var currentPage: Page = .bottomNavBar
 }
 
 enum Page {
