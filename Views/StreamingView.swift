@@ -79,7 +79,6 @@ struct StreamingView: View {
                 }
                 .rotationEffect(.init(degrees: 126))
                 
-                
                 HStack {
                     // MARK: current time
                     if let player = self.soundControl.audioPlayer {
@@ -95,7 +94,7 @@ struct StreamingView: View {
                         }
                     }
                 }
-                                
+                
             }.padding(30)
             
             // MARK: PLAY BTN
@@ -184,9 +183,21 @@ struct StreamingView: View {
                                 .font(.caption2)
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
-                        }
-                        
-                        if state == 1 {
+                            
+                            Image(systemName: "heart")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.orange)
+                                .onTapGesture {
+                                    DispatchQueue.main.async {
+                                        if state == 0 {
+                                            self.userViewModel.addFavorite(favorite: episode)
+                                        } else {
+                                            self.uploadViewModel.updateLikes(uploadID: self.upload.uuid)
+                                        }
+                                    }
+                                }
+                            
                             Text("\(self.upload.numOfLikes) likes")
                                 .font(.caption2)
                                 .foregroundColor(.gray)
@@ -203,10 +214,10 @@ struct StreamingView: View {
                 if state == 0 {
                     self.podcastViewModel.fetchPodcastById(podcastId: self.episode.podcast_uuid, episodeId: self.episode.episode_uuid)
                     self.userViewModel.addWatchList(watchItem: self.episode)
-                    soundControl.playSound(soundName: self.state == 0 ? self.episode.audio : self.upload.audioPath, isLocalFile: false)
+                    soundControl.playSound(soundName: self.episode.audio, isLocalFile: false)
                 } else if state == 1 {
                     self.uploadViewModel.fetchCommentsByUploadID(uploadID: self.upload.uuid)
-                    soundControl.playSound(soundName: self.state == 0 ? self.episode.audio : self.upload.audioPath, isLocalFile: false)
+                    soundControl.playSound(soundName: self.upload.audioPath, isLocalFile: false)
                 } else {
                     soundControl.playSound(soundName: self.download.audio, isLocalFile: true)
                 }
@@ -224,8 +235,6 @@ struct StreamingView: View {
         if let player = self.soundControl.audioPlayer {
             let currentTime = player.currentTime().seconds
             let total = player.currentItem?.duration.seconds
-            print("currentTime \(currentTime)")
-            print("total \(total)")
             if let totalTime = total, !totalTime.isNaN {
                 let progress = currentTime / totalTime
                 withAnimation(.linear(duration: 0.1)) {

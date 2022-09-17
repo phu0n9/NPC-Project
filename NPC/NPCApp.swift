@@ -36,9 +36,7 @@ struct NPCApp: App {
     
     var body: some Scene {
         WindowGroup {
-//            StreamingView(episode: self.$episode, upload: self.$upload, download: self.$download, state: 0)
             RootView().environmentObject(routerView)
-            //BottomNavBar()
         }
     }
 }
