@@ -202,7 +202,7 @@ struct StreamingView: View {
             DispatchQueue.main.async {
                 if state == 0 {
                     self.podcastViewModel.fetchPodcastById(podcastId: self.episode.podcast_uuid, episodeId: self.episode.episode_uuid)
-                    //                    self.userViewModel.addWatchList(watchItem: self.episode)
+                    self.userViewModel.addWatchList(watchItem: self.episode)
                     soundControl.playSound(soundName: self.state == 0 ? self.episode.audio : self.upload.audioPath, isLocalFile: false)
                 } else if state == 1 {
                     self.uploadViewModel.fetchCommentsByUploadID(uploadID: self.upload.uuid)

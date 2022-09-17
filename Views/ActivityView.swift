@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActivityView: View {
-    @State var currentTab: Int = 1
+    @State var currentTab: Int = 0
     let tabOptions = [0: Settings.favoriteListCollection, 1: Settings.download, 2: Settings.watchListCollection]
     let titleTab = [0: "Favorite List", 1: "Download List", 2: "History List"]
 
