@@ -214,12 +214,16 @@ class UploadViewModel: ObservableObject {
                 return
             }
             
+            guard !documents.isEmpty else {
+                return
+            }
+            
             self.uploads = documents.map {(value) -> Uploads in
                 let uploadID = value.get("uuid") as! String
                 self.fetchCommentsByUploadID(uploadID: uploadID)
                 self.fetchLikesByUploadID(uploadID: uploadID)
                 
-                return Uploads(uuid: uploadID, title: value.get("title") as! String, description: value.get("description") as! String, audioPath: value.get("audio") as! String, author: value.get("author") as! String, pub_date: value.get("pub_date") as! String, image: value.get("image") as! String, userID: value.get("user_id") as! String, numOfLikes: value.get("numOfLikes") as! Int, audio_length: value.get("audio_length") as! Int, userImage: value.get("userImage") as! String, likes: self.likedList, comments: self.commentList)
+                return Uploads(uuid: uploadID, title: value.get("title") as! String, description: value.get("description") as! String, audioPath: value.get("audioPath") as! String, author: value.get("author") as! String, pub_date: value.get("pub_date") as! String, image: value.get("image") as! String, userID: value.get("userID") as! String, numOfLikes: value.get("numOfLikes") as! Int, audio_length: value.get("audio_length") as! Int, userImage: value.get("userImage") as! String, likes: self.likedList, comments: self.commentList)
             }
         })
     }

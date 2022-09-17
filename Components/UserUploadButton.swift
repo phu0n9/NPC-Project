@@ -15,9 +15,8 @@ struct UserUploadButton: View {
     @State var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
    
     @State var isCommentTapped: Bool = false
-    @Binding var length : Int
     @Binding var isTapped: Bool
-    @Binding var upload :Uploads
+    @Binding var upload : Uploads
     
     var body: some View {
         
@@ -34,7 +33,7 @@ struct UserUploadButton: View {
                         .foregroundColor(.orange)
                         .frame(width:13, height: 6, alignment: .leading)
                         .padding(5)
-                    Text(String(self.length))
+                    Text(String(self.upload.audio_length))
                         .font(.caption)
                         .foregroundColor(.black)
                         .padding(9)
@@ -70,20 +69,21 @@ struct UserUploadButton: View {
                     .frame(width:20, height: 30, alignment: .leading)
                     .padding(5)
             })
-            .onAppear{}.sheet(isPresented: self.$isCommentTapped) {
-                CommentView(upload: self.upload)
-            }
             
             Text("\(self.uploadViewModel.commentList.count)")
                 .font(.system(size:10))
             
-        }.padding(5)
+        }
+        .padding(5)
+        .sheet(isPresented: self.$isCommentTapped) {
+            CommentView(upload: self.upload)
+        }
     }
 }
 
 struct UserUploadButton_Previews: PreviewProvider {
     static var previews: some View {
-        UserUploadButton(length:Binding.constant(0), isTapped: Binding.constant(false), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])))
+        UserUploadButton(isTapped: Binding.constant(false), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])))
 
     }
 }
