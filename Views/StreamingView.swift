@@ -21,7 +21,6 @@ struct StreamingView: View {
     @Binding var download: Downloads
     @State var isCommentTapped: Bool = false
     @State var timer = Timer.publish(every: 1, on: .current, in: .default).autoconnect()
-    @State var angle : Double = 0
     
     var width : CGFloat = 200
     var height : CGFloat = 200
@@ -65,7 +64,7 @@ struct StreamingView: View {
                         .frame(width: width+45, height: height+45)
                     
                     Circle()
-                        .trim(from: 0, to: CGFloat((self.angle)/360))
+                        .trim(from: 0, to: CGFloat((self.soundControl.angle)/360))
                         .stroke(Color(.orange), lineWidth: 4)
                         .frame(width: width+45, height: height+45)
                     
@@ -73,8 +72,8 @@ struct StreamingView: View {
                         .fill(Color("MainButton"))
                         .frame(width: 25, height: 25)
                         .offset(x: (width + 45) / 2)
-                        .rotationEffect(.init(degrees: self.angle))
-                        .gesture(DragGesture().onChanged(self.onChanged(value:)))
+                        .rotationEffect(.init(degrees: self.soundControl.angle))
+                        .gesture(DragGesture().onChanged(self.soundControl.onChanged(value:)))
                     
                 }
                 .rotationEffect(.init(degrees: 126))
@@ -228,36 +227,7 @@ struct StreamingView: View {
             CommentView(upload: self.upload)
         }
         .onReceive(timer) { (_) in
-            self.updateTimer()
-        }
-    }
-    
-    func updateTimer() {
-        if let player = self.soundControl.audioPlayer {
-            let currentTime = player.currentTime().seconds
-            let total = player.currentItem?.duration.seconds
-            if let totalTime = total, !totalTime.isNaN {
-                let progress = currentTime / totalTime
-                withAnimation(.linear(duration: 0.1)) {
-                    self.angle = Double(progress) * 288
-                }
-            }
-        }
-    }
-    
-    func onChanged(value: DragGesture.Value) {
-        let vector = CGVector(dx: value.location.x, dy: value.location.y)
-        let radians = atan2(vector.dy - 12.5, vector.dx - 12.5)
-        let tempAngle = radians * 180 / .pi
-        let angle = tempAngle < 0 ? 360 + tempAngle : tempAngle
-        if angle <= 288 {
-            let progress = angle / 288
-            if let player = self.soundControl.audioPlayer {
-                player.pause()
-                let time = TimeInterval(progress) * Double(Float((player.currentItem?.duration.seconds)!))
-                player.seek(to: CMTime(seconds: time, preferredTimescale: 1))
-                player.play()
-            }
+            self.soundControl.updateTimer()
         }
     }
 }
@@ -266,4 +236,3 @@ struct StreamingView_Previews: PreviewProvider {
         StreamingView(episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])), download: Binding.constant(Downloads(audio: "", title: "", isProcessing: false)), state: 0)
     }
 }
-

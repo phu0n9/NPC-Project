@@ -23,7 +23,7 @@ struct LoginView: View {
     @State private var btnClicked = false
     @State private var isActive : Bool = false
     
-    @StateObject var controller = Controller()
+    @StateObject var userValidationControl = UserValidationControl()
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var routerView: RouterView
@@ -33,7 +33,7 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                NavigationLink("", destination: SignUpView(email: $controller.email, password: $controller.password, userName: $username), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
+                NavigationLink("", destination: SignUpView(email: $userValidationControl.email, password: $userValidationControl.password, userName: $username), isActive: Binding.constant(self.btnClicked && self.isLoginMode == false))
                     .isDetailLink(false)
                 VStack(spacing: 16) {
                     Picker(selection: $isLoginMode, label: Text("Picker here")) {
@@ -85,10 +85,10 @@ struct LoginView: View {
                                     .resizable()
                                     .frame(width: 36, height: 24, alignment: .trailing)
                                     .offset(x: 20, y: 0)
-                                TextField("Email", text: $controller.email)
+                                TextField("Email", text: $userValidationControl.email)
                                     .keyboardType(.emailAddress)
-                                    .offset(x: 40, y: 0).foregroundColor(controller.inputValid ? .primary : .black)
-                                controller.validationMessage.map { message in
+                                    .offset(x: 40, y: 0).foregroundColor(userValidationControl.inputValid ? .primary : .black)
+                                userValidationControl.validationMessage.map { message in
                                     Text(message)
                                         .foregroundColor(.red)
                                 }
@@ -108,8 +108,7 @@ struct LoginView: View {
                                     .resizable()
                                     .frame(width: 20, height: 30, alignment: .trailing)
                                     .offset(x: 25, y: 0)
-                                // TODO: ADD "eye.slash.fill" : "eye.fill" when show/ hide password
-                                SecureField("Password", text: $controller.password)
+                                SecureField("Password", text: $userValidationControl.password)
                                     .offset(x: 60, y: 0)
                             }
                         )
@@ -181,24 +180,20 @@ struct LoginView: View {
     }
     
     private func loginUser() {
-        FirebaseManager.shared.auth.signIn(withEmail: controller.email, password: controller.password) { result, err in
+        FirebaseManager.shared.auth.signIn(withEmail: userValidationControl.email, password: userValidationControl.password) { result, err in
             if let err = err {
                 print("Failed to login user:", err)
                 self.alert = true
                 self.loginStatusMessage = "Failed to login user: \(err)"
                 return
             }
-            
             print("Successfully logged in as user: \(result?.user.uid ?? "")")
-            
             self.loginStatusMessage = "Successfully logged in as user: \(result?.user.uid ?? "")"
             self.userViewModel.userLogin(userID: result?.user.uid ?? "")
             self.loginSuccess = true
             showNotificationWhenLogin()
         }
     }
-    
-
     
     private func allowShowNotification() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {success, _ in

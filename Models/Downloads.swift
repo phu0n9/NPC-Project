@@ -11,4 +11,5 @@ struct Downloads: Identifiable {
     var audio: String
     var title: String
     var isProcessing: Bool
+    var isTapped: Bool = false
 }

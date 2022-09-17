@@ -43,10 +43,15 @@ struct ActivityViewItem: View {
                                 .frame(height: 300)
                             } else {
                                 // return original data
-                                EpisodeComponent(episode: $item, isExpanded: $item.isExpanding, isTapped: self.$isTapped)
+                                EpisodeComponent(episode: $item, isExpanded: $item.isExpanding)
                                     .onTapGesture {
-                                        self.isTapped = true
-                                        self.episode = item
+                                        item.isTapped.toggle()
+                                    }
+                                    .onChange(of: item.isTapped) { value in
+                                        if value {
+                                            self.episode = item
+                                            self.isTapped.toggle()
+                                        }
                                     }
                             }
                         }

@@ -32,14 +32,10 @@ struct PodcastDetailView: View {
                         Text(self.podcast.author)
                             .font(.caption)
                             .frame(maxWidth: 400, alignment: .leading)
-//                        Image(systemName: "globe")
-//                            .renderingMode(.template)
-//                            .frame(width:20, height: 20, alignment: .leading)
 
                     }.padding()
                     
                     AsyncImage(url: URL(string: self.podcast.image)) { podcastImage in
-                        
                         podcastImage
                             .resizable()
                             .font(.title)
@@ -84,9 +80,15 @@ struct PodcastDetailView: View {
                                 .frame(height: 300)
                             } else {
                                 // return original data
-                                EpisodeComponent(episode: $episode, isExpanded: $episode.isExpanding, isTapped: Binding.constant(isTapped))
+                                EpisodeComponent(episode: $episode, isExpanded: $episode.isExpanding)
                                     .onTapGesture {
-                                        self.episode = episode
+                                        episode.isTapped.toggle()
+                                    }
+                                    .onChange(of: episode.isTapped) { value in
+                                        if value {
+                                            self.episode = episode
+                                            self.isTapped.toggle()
+                                        }
                                     }
                             }
                         }

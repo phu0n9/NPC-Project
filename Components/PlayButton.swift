@@ -19,15 +19,13 @@ struct PlayButton: View {
     @State var imageLocalName = ""
     
     var soundName: String
-    
-    @Binding var isTapped: Bool
-    
+        
     var body: some View {
         HStack {
             ZStack {
                 Button(action: {
                     withAnimation(.default) {
-                        self.isTapped.toggle()
+                        self.episode.isTapped.toggle()
                     }
                 }, label: {
                     Image(systemName: self.soundControl.isActive ?  "play.fill" : "pause.fill")
@@ -87,10 +85,10 @@ struct PlayButton: View {
             }
         }
     }
-    
-    struct PlayButton_Previews: PreviewProvider {
-        static var previews: some View {
-            PlayButton(length:Binding.constant(0), episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), soundName: "sound link", isTapped: Binding.constant(false))
-        }
+}
+
+struct PlayButton_Previews: PreviewProvider {
+    static var previews: some View {
+        PlayButton(length:Binding.constant(0), episode: Binding.constant(Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)), soundName: "sound link")
     }
 }

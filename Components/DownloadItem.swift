@@ -12,7 +12,6 @@ struct DownloadItem: View {
     @ObservedObject var downloadControl = DownloadControl()
     @ObservedObject var soundControl = SoundControl()
     @Binding var isTapped: Bool
-    @Binding var selectedDownload: Downloads
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -42,7 +41,7 @@ struct DownloadItem: View {
             ZStack {
                 Button(action: {
                     withAnimation(.default) {
-                        self.isTapped.toggle()
+                        self.download.isTapped.toggle()
                     }
                 }, label: {
                     Image(systemName: self.soundControl.isActive ?  "play.fill" : "pause.fill")
@@ -66,11 +65,6 @@ struct DownloadItem: View {
         .onAppear {
             DispatchQueue.main.async {
                 self.downloadControl.checkFileExists(fileLocalName: self.download.title)
-            }
-        }
-        .onChange(of: self.isTapped) { value in
-            if value {
-                self.selectedDownload = download
             }
         }
     }

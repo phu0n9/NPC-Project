@@ -17,7 +17,6 @@ struct UserUploadComponent: View {
         VStack {
             HStack(spacing:30) {
                 // MARK: upload image
-                
                 AsyncImage(url: URL(string: self.upload.image)) { uploadImage in
                     uploadImage
                         .resizable()
@@ -31,7 +30,7 @@ struct UserUploadComponent: View {
                     ProgressView()
                 }
                 
-                VStack (alignment: .leading){
+                VStack(alignment: .leading) {
                     // MARK: title
                     Text(self.upload.title)
                         .font(.system(size: 17))

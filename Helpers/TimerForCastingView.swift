@@ -37,7 +37,7 @@ class TimerForCasting : ObservableObject {
         }
     }
     
-    func stopTimer(){
+    func stopTimer() {
         timerIsPaused = true
         timer?.invalidate()
         timer = nil

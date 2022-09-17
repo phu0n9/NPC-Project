@@ -34,4 +34,5 @@ struct Episodes: Identifiable, Codable {
     var user_id : String
     var isLiked: Bool
     var isExpanding: Bool = false
+    var isTapped: Bool = false
 }

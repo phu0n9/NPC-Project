@@ -59,10 +59,7 @@ struct UserUploadButton: View {
                         
             Text(String(self.upload.numOfLikes))
                 .font(.system(size:10))
-       
-            
 
-            
             Button(action: {
                 self.isCommentTapped = true
             }, label: {
@@ -81,7 +78,6 @@ struct UserUploadButton: View {
         .sheet(isPresented: self.$isCommentTapped) {
             CommentView(upload: self.upload)
         }
-        
         
     }
 }
