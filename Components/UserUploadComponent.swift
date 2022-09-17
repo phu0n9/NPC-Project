@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct UserUploadComponent: View {
+    
+    @ObservedObject var uploadViewModel = UploadViewModel()
+    @ObservedObject var uploadControl = UploadControl()
+    @Binding var upload :Uploads
+    
     var body: some View {
         VStack {
                 HStack {
-                    Image(systemName: "leaf.fill")
+                    Image(self.upload.image)
                         .resizable()
                         .font(.title)
                         .frame(width: 50, height: 50)
@@ -22,29 +27,31 @@ struct UserUploadComponent: View {
 
                     VStack {
                         // MARK: title
-                        Text("title")
+                        Text(self.upload.title)
                             .font(.system(size: 14))
                             .lineLimit(1)
 
                     // MARK: publish date
-                    Text("uplodade date")
+                        Text(self.upload.pub_date)
                         .font(.system(size: 10))
                         .foregroundColor(.gray)
                     }.padding()
                     Spacer()
                     
-                }.padding(10)
+                }.padding(0)
             
                HStack {
-                   UserUploadButton()
+                   UserUploadButton(length:Binding.constant(0), isTapped: Binding.constant(false), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])))
                }.padding(0)
-        }.padding()
+            Divider()
+            
+        }.padding(0)
         
     }
 }
 
 struct UserUploadComponent_Previews: PreviewProvider {
     static var previews: some View {
-        UserUploadComponent()
+        UserUploadComponent(upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])))
     }
 }
