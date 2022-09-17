@@ -43,8 +43,9 @@ struct UserUploadButton: View {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(Color(red: 1, green: 0.4902, blue: 0.3216), lineWidth: 1)
             )
-            .padding()
+            .padding(5)
             
+         
             // MARK: heart icon
             Button(action: {
 
@@ -53,12 +54,14 @@ struct UserUploadButton: View {
                     .renderingMode(.template)
                     .foregroundColor(.orange)
                     .frame(width:20, height: 30, alignment: .leading)
-                    .padding(5)
-            }).padding(5)
+                
+            })
                         
             Text(String(self.upload.numOfLikes))
                 .font(.system(size:10))
-                .padding(0)
+       
+            
+
             
             Button(action: {
                 self.isCommentTapped = true
@@ -67,17 +70,19 @@ struct UserUploadButton: View {
                     .renderingMode(.template)
                     .foregroundColor(.orange)
                     .frame(width:20, height: 30, alignment: .leading)
-                    .padding(5)
+                    
             })
             
             Text("\(self.uploadViewModel.commentList.count)")
                 .font(.system(size:10))
-            
+                
         }
-        .padding(5)
+        .padding(2)
         .sheet(isPresented: self.$isCommentTapped) {
             CommentView(upload: self.upload)
         }
+        
+        
     }
 }
 
