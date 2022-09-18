@@ -22,6 +22,7 @@ struct Uploads : Identifiable {
     var userImage: String
     var likes: [Likes]
     var comments: [Comments]
+    var isTapped: Bool = false
 }
 
 struct Likes : Identifiable {

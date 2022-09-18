@@ -29,7 +29,6 @@ struct StreamingView: View {
     
     var body: some View {
         VStack {
-            
             Capsule()
                 .fill(Color.secondary)
                 .frame(width: 50, height: 3)
@@ -179,7 +178,7 @@ struct StreamingView: View {
                                     self.isCommentTapped = true
                                 }
                             
-                            Text("\(self.uploadViewModel.commentList.count) comments")
+                            Text("\(self.upload.comments.count) comments")
                                 .font(.caption2)
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
@@ -211,15 +210,17 @@ struct StreamingView: View {
         .background(Color(UIColor.systemBackground))
         .onAppear {
             DispatchQueue.main.async {
-                if state == 0 {
+                switch state {
+                case 0:
                     self.podcastViewModel.fetchPodcastById(podcastId: self.episode.podcast_uuid, episodeId: self.episode.episode_uuid)
                     self.userViewModel.addWatchList(watchItem: self.episode)
-                    soundControl.playSound(soundName: self.episode.audio, isLocalFile: false)
-                } else if state == 1 {
-                    self.uploadViewModel.fetchCommentsByUploadID(uploadID: self.upload.uuid)
-                    soundControl.playSound(soundName: self.upload.audioPath, isLocalFile: false)
-                } else {
-                    soundControl.playSound(soundName: self.download.audio, isLocalFile: true)
+                    self.soundControl.playSound(soundName: self.episode.audio, isLocalFile: false)
+                case 1:
+                    self.soundControl.playSound(soundName: self.upload.audioPath, isLocalFile: false)
+                case 2:
+                    self.soundControl.playSound(soundName: self.download.audio, isLocalFile: true)
+                default:
+                    print("Do nothing")
                 }
             }
         }

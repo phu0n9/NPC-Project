@@ -49,7 +49,7 @@ struct UserUploadComponent: View {
             }.padding(5)
             
             HStack {
-                UserUploadButton(isTapped: Binding.constant(false), upload: self.$upload)
+                UserUploadButton(upload: self.$upload)
                     .padding(.leading)
                     .frame(width: 400, height: 50, alignment: .leading)
             }

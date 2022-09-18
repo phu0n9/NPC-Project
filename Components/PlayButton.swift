@@ -33,7 +33,7 @@ struct PlayButton: View {
                         .foregroundColor(.orange)
                         .frame(width:13, height: 6, alignment: .leading)
                         .padding(5)
-                    Text(String(self.length))
+                    Text("\(self.length)s")
                         .font(.caption)
                         .foregroundColor(.black)
                         .padding(9)

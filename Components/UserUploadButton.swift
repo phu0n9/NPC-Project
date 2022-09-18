@@ -12,10 +12,7 @@ struct UserUploadButton: View {
     @ObservedObject var uploadViewModel = UploadViewModel()
     @ObservedObject var userSettings = UserSettings()
     @ObservedObject var soundControl = SoundControl()
-    @State var episode = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
-   
     @State var isCommentTapped: Bool = false
-    @Binding var isTapped: Bool
     @Binding var upload : Uploads
     
     var body: some View {
@@ -24,7 +21,7 @@ struct UserUploadButton: View {
             ZStack {
                 Button(action: {
                     withAnimation(.default) {
-                        self.isTapped.toggle()
+                        self.upload.isTapped.toggle()
                         self.soundControl.playSound(soundName: self.upload.audioPath, isLocalFile: false)
                     }
                 }, label: {
@@ -33,7 +30,7 @@ struct UserUploadButton: View {
                         .foregroundColor(.orange)
                         .frame(width:13, height: 6, alignment: .leading)
                         .padding(5)
-                    Text(String(self.upload.audio_length))
+                    Text("\(self.upload.audio_length)s")
                         .font(.caption)
                         .foregroundColor(.black)
                         .padding(9)
@@ -45,7 +42,6 @@ struct UserUploadButton: View {
             )
             .padding(5)
             
-         
             // MARK: heart icon
             Button(action: {
 
@@ -70,21 +66,19 @@ struct UserUploadButton: View {
                     
             })
             
-            Text("\(self.uploadViewModel.commentList.count)")
+            Text("\(self.upload.comments.count)")
                 .font(.system(size:10))
-                
         }
         .padding(2)
         .sheet(isPresented: self.$isCommentTapped) {
             CommentView(upload: self.upload)
         }
-        
     }
 }
 
 struct UserUploadButton_Previews: PreviewProvider {
     static var previews: some View {
-        UserUploadButton(isTapped: Binding.constant(false), upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])))
+        UserUploadButton(upload: Binding.constant(Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])))
 
     }
 }

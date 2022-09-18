@@ -142,7 +142,6 @@ class UploadControl : ObservableObject {
         metadataLocal.contentType = "image/jpeg"
         
         _ = fileRef.putData(imageData!, metadata: metadataLocal) { metadata, error in
-            
             if error == nil && metadata != nil {
                 fileRef.downloadURL { (url, error) in
                     if let err = error {
@@ -161,12 +160,12 @@ class UploadControl : ObservableObject {
         let fileRef = storageRef.child(globalPath)
         do {
             let metadataLocal = StorageMetadata()
-            metadataLocal.contentType = "audio/m4a"
+            metadataLocal.contentType = "audio/mp3"
             let audioData = try Data(contentsOf: self.recorder.url)
             _ = fileRef.putData(audioData, metadata: metadataLocal) { metadata, error in
                 
                 if error == nil && metadata != nil {
-                    
+                    self.isUploaded.toggle()
                     fileRef.downloadURL { (url, error) in
                         if let err = error {
                             print(err.localizedDescription)
@@ -174,7 +173,7 @@ class UploadControl : ObservableObject {
                         guard let downloadURL = url else { return }
                         self.uploadViewModel.upload = Uploads(title: title, description: description, audioPath: downloadURL.absoluteString, author: self.userSettings.username, pub_date: pub_date, image: image, userID: self.userSettings.uuid, numOfLikes: 0, audio_length: audio_length, userImage: self.userSettings.userImage, likes: [], comments: [])
                         self.uploadViewModel.addUploads()
-                        self.isUploaded = true
+                        self.isUploaded.toggle()
                     }
                 }
             }

@@ -6,7 +6,7 @@ struct UploadView : View {
     @ObservedObject var textBindingManager = TextBindingManager(limit: 100)
     @State var isSubmit = false
     @StateObject var uploadControl = UploadControl()
-    @ObservedObject var userSettings = UserSettings()
+    @StateObject var userSettings = UserSettings()
     @State var state = 0
     @State var selectedImage: UIImage?
     @State var isPickerShowing = false
@@ -14,197 +14,211 @@ struct UploadView : View {
     @State var alertMessage = ""
     @State var alertState = false
     @State var isFinishedRecord = false
- 
+    @State var isSubmitted = false
+    @State var isSuccessfullyUploaded = false
+    
     var body: some View {
-        NavigationView {
-            ScrollView {
-                
-                VStack(alignment: .center, spacing: 10) {
-                    
-                    switch state {
-                    case 0:
-                        Text("Record your podcast")
-                            .font(.title2)
-                            .fontWeight(.regular)
-                            .multilineTextAlignment(.leading)
-                            .padding(10)
-                            .frame(width: 350, height: 50, alignment: .leading)
-                        if self.selectedImage != nil {
-                            Image(uiImage: selectedImage!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 150, height: 150)
-                                .clipShape(Rectangle())
-                                .cornerRadius(20)
-                                .onTapGesture {
-                                    self.isPickerShowing = true
+        ZStack {
+            if isSubmitted {
+                ProgressView("Uploading...")
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                            self.resetInput()
+                            self.state = 0
+                            self.isSubmitted.toggle()
+                            print("state \(self.uploadControl.isUploaded)")
+                            self.isSuccessfullyUploaded.toggle()
+                        }
+                    }
+            } else {
+                ScrollView {
+                    VStack(alignment: .center, spacing: 10) {
+                        switch state {
+                        case 0:
+                            Text("Record your podcast")
+                                .font(.title2)
+                                .fontWeight(.regular)
+                                .multilineTextAlignment(.leading)
+                                .padding(10)
+                                .frame(width: 350, height: 50, alignment: .leading)
+                            if self.selectedImage != nil {
+                                ZStack {
+                                    Image(uiImage: selectedImage!)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 150, height: 150)
+                                        .clipShape(Rectangle())
+                                        .cornerRadius(20)
+                                    
                                     Image(systemName: "plus.circle.fill")
                                         .renderingMode(.template)
                                         .font(.system(size:25,
                                                       weight: .regular,
                                                       design: .default))
-                                        .foregroundColor(Color("MainButton"))
-                                        .offset(x: 46, y: -26)
                                 }
-                        } else {
-                            Image(systemName: "photo")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 100, height: 100, alignment: .center)
-                                .clipShape(Rectangle())
-                                .cornerRadius(20)
-                            Image(systemName: "plus.circle.fill")
-                                .renderingMode(.template)
-                                .font(.system(size:25,
-                                              weight: .regular,
-                                              design: .default))
-                                .foregroundColor(Color("MainButton"))
-                                .offset(x: 46, y: -26)
-                            
                                 .onTapGesture {
                                     self.isPickerShowing = true
                                 }
-                        }
-                        
-                        Capsule()
-                        /* #f5f5f5 */
-                            .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
-                            .frame(width: UIScreen.main.bounds.width-30, height: 40)
-                        
-                            .overlay(
-                                HStack {
-                                    TextField("Enter your Podcasts' Title", text: $title)
-                                        .offset(x: 30, y: 0)
-                                }
-                            )
-                            .padding(6)
-                            .autocapitalization(.none)
-
-                        Capsule()
-                        /* #f5f5f5 */
-                            .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
-                            .frame(width: UIScreen.main.bounds.width-30, height: 40, alignment: .center)
-                            .padding(0)
-                            .overlay(
-                                HStack {
-                                    TextField("Describe your Podcast in one sentence", text: self.$textBindingManager.text)
-                                        .offset(x: 30, y: 0)
-                                }
-                            )
-                            .padding(10)
-                            .autocapitalization(.none)
-                        
-                    case 1:
-                        
-                        // MARK: Back button
-                        Button {
-                            
-                            self.state -= 1
-                            
-                        } label: {
-                            
-                            Image(systemName: "arrow.backward")
-                                .resizable()
-                                .renderingMode(.template)
-                                .foregroundColor(Color(.black))
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 350, height: 15, alignment: .leading)
-                                .font(.system(size:10,
-                                              weight: .regular,
-                                              design: .default))
-                        }
-                        
-                        Text("Recording your cast")
-                            .font(.title2)
-                            .padding(.leading, 20)
-                            .frame(width: 350, height: 30, alignment: .leading)
-                        
-                        Text(String(format: "%02d : %02d : %02d", self.uploadControl.hours, self.uploadControl.minutes, self.uploadControl.seconds))
-                            .font(.system(size: 36))
-                            .bold()
-                        
-                        Spacer()
-
-                        HStack {
-                            // MARK: Recording, timer btn
-                            Button(action: {
-                                self.uploadControl.recordAudio()
-                            }, label: {
-                                ZStack {
-                                    Circle()
-                                        .frame(width: 70, height: 70)
-                                        .foregroundColor(Color("MainButton"))
-                                    
-                                    Image(systemName: self.uploadControl.timerIsPaused ? "play.fill" : "pause.fill")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 20, height: 20, alignment: .center)
-                                        .foregroundColor(Color.black)
-                                        .padding()
-                                }
-                            })
-                            
-                            .disabled(self.isFinishedRecord)
-                            .onAppear {
-                                self.uploadControl.requestRecording()
+                                
+                            } else {
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 100, height: 100, alignment: .center)
+                                    .clipShape(Rectangle())
+                                    .cornerRadius(20)
+                                Image(systemName: "plus.circle.fill")
+                                    .renderingMode(.template)
+                                    .font(.system(size:25,
+                                                  weight: .regular,
+                                                  design: .default))
+                                    .foregroundColor(Color("MainButton"))
+                                    .offset(x: 46, y: -26)
+                                
+                                    .onTapGesture {
+                                        self.isPickerShowing = true
+                                    }
                             }
                             
-                            .onChange(of: self.uploadControl.record) { value in
-                                print(value)
-                                if !value {
-                                    if self.uploadControl.recorder?.url != nil {
-                                        self.isFinishedRecord = true
+                            Capsule()
+                            /* #f5f5f5 */
+                                .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
+                                .frame(width: UIScreen.main.bounds.width-30, height: 40)
+                            
+                                .overlay(
+                                    HStack {
+                                        TextField("Enter your Podcasts' Title", text: $title)
+                                            .offset(x: 30, y: 0)
+                                    }
+                                )
+                                .padding(6)
+                                .autocapitalization(.none)
+                            
+                            Capsule()
+                            /* #f5f5f5 */
+                                .foregroundColor(Color(red: 0.9608, green: 0.9608, blue: 0.9608))
+                                .frame(width: UIScreen.main.bounds.width-30, height: 40, alignment: .center)
+                                .padding(0)
+                                .overlay(
+                                    HStack {
+                                        TextField("Describe your Podcast in one sentence", text: self.$textBindingManager.text)
+                                            .offset(x: 30, y: 0)
+                                    }
+                                )
+                                .padding(10)
+                                .autocapitalization(.none)
+                            
+                        case 1:
+                            
+                            // MARK: Back button
+                            Button {
+                                
+                                self.state -= 1
+                                
+                            } label: {
+                                
+                                Image(systemName: "arrow.backward")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .foregroundColor(Color(.black))
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 350, height: 15, alignment: .leading)
+                                    .font(.system(size:10,
+                                                  weight: .regular,
+                                                  design: .default))
+                            }
+                            
+                            Text("Recording your cast")
+                                .font(.title2)
+                                .padding(.leading, 20)
+                                .frame(width: 350, height: 30, alignment: .leading)
+                            
+                            Text(String(format: "%02d : %02d : %02d", self.uploadControl.hours, self.uploadControl.minutes, self.uploadControl.seconds))
+                                .font(.system(size: 36))
+                                .bold()
+                            
+                            Spacer()
+                            
+                            HStack {
+                                // MARK: Recording, timer btn
+                                Button(action: {
+                                    self.uploadControl.recordAudio()
+                                }, label: {
+                                    ZStack {
+                                        Circle()
+                                            .frame(width: 70, height: 70)
+                                            .foregroundColor(Color("MainButton"))
                                         
+                                        Image(systemName: self.uploadControl.timerIsPaused ? "play.fill" : "pause.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 20, height: 20, alignment: .center)
+                                            .foregroundColor(Color.black)
+                                            .padding()
+                                    }
+                                })
+                                
+                                .disabled(self.isFinishedRecord)
+                                .onAppear {
+                                    self.uploadControl.requestRecording()
+                                }
+                                
+                                .onChange(of: self.uploadControl.record) { value in
+                                    print(value)
+                                    if !value {
+                                        if self.uploadControl.recorder?.url != nil {
+                                            self.isFinishedRecord = true
+                                        }
                                     }
                                 }
+                                
+                            }
+                            .frame(width: UIScreen.main.bounds.width)
+                            
+                            if self.isFinishedRecord {
+                                withAnimation(.spring()) {
+                                    RecordingPlayerBtn(soundName: self.uploadControl.recorder?.url.relativeString ?? "", isDeleted: self.$isFinishedRecord)
+                                }
                             }
                             
+                        default:
+                            EmptyView()
                         }
-                        .frame(width: UIScreen.main.bounds.width)
                         
-                        if self.isFinishedRecord {
-                            withAnimation(.spring()) {
-                                RecordingPlayerBtn(soundName: self.uploadControl.recorder?.url.relativeString ?? "", isDeleted: self.$isFinishedRecord)
-                            }
+                        Spacer()
+                        
+                        Button {
+                            self.handleUpload(value: self.state)
+                        } label: {
+                            
+                            HStack {
+                                Spacer()
+                                
+                                Text(state != 1 ? "Next": "Cast away")
+                                    .foregroundColor(.white)
+                                    .padding(10)
+                                    .font(.system(size: 18, weight: .semibold))
+                                Spacer()
+                            }.background(Color("MainButton"))
                         }
-
-                    default:
-                        EmptyView()
+                        .padding(20)
+                        .frame(width: 240, height: 50)
+                        .cornerRadius(20)
                     }
-                    
-                    Spacer()
-                    
-                    Button {
-                        self.handleUpload(value: self.state)
-                    } label: {
-                        
-                        HStack {
-                            
-                            Spacer()
-                            
-                            Text(state != 1 ? "Next": "Cast away")
-                                .foregroundColor(.white)
-                                .padding(10)
-                                .font(.system(size: 18, weight: .semibold))
-                            Spacer()
-                        }.background(Color("MainButton"))
-                    }
-                    .padding(20)
-                    .frame(width: 240, height: 50)
-                    .cornerRadius(20)
-                    
                 }
+                .navigationBarHidden(true)
+                .frame(alignment: .leading)
+                .padding()
             }
-            .navigationBarHidden(true)
-            .frame(alignment: .leading)
-            .padding()
         }
-        
         .alert(isPresented: self.$uploadControl.alert, content: {
             Alert(title: Text("Error"), message: Text("Please enable microphone access"))
         })
         .alert(isPresented: self.$alertState, content: {
             Alert(title: Text("Error"), message: Text(self.alertMessage))
+        })
+        .alert(isPresented: self.$isSuccessfullyUploaded, content: {
+            Alert(title: Text("Status"), message: Text("You have successfully uploaded. Please see it in your cast."))
         })
         .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
             ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
@@ -239,11 +253,18 @@ struct UploadView : View {
                 format.dateStyle = .short
                 let time = format.string(from: mytime)
                 self.uploadControl.uploadCastImage(title: title, description: self.textBindingManager.text, pub_date: time, selectedImage: selectedImage, audio_length: self.uploadControl.audio_length)
-                self.state = 0
+                self.isSubmitted.toggle()
             }
         default:
             self.state = 0
         }
+    }
+    
+    func resetInput() {
+        self.selectedImage = nil
+        self.uploadControl.recorder = nil
+        self.title = ""
+        self.textBindingManager.text = ""
     }
 }
 

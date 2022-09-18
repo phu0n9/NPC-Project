@@ -10,6 +10,7 @@ import SwiftUI
 struct BottomNavBar: View {
     
     @State var selectedIndex = 0
+    @StateObject var userSettings = UserSettings()
     
     // Styling topnavbar
     init() {
@@ -24,7 +25,7 @@ struct BottomNavBar: View {
         UINavigationBar.appearance().scrollEdgeAppearance = navbarApperance
         UINavigationBar.appearance().tintColor = UIColor.systemBackground
     }
-
+    
     let icons = [
         "podcasts-icon",
         "play.fill",
@@ -32,57 +33,58 @@ struct BottomNavBar: View {
         "music.note.list",
         "person"
     ]
-
+    
     var body: some View {
-        
-        VStack {
- 
-            // MARK: contents
-            ZStack {
+        ZStack {
+            VStack {
                 
-                switch selectedIndex {
-                case 0:
-                    ViewComponent(destination: TrendingView(), viewTitle: "Trending")
-                case 1:
-                    ViewComponent(destination: CastingView(currentTab: 0), viewTitle: "Casting")
-                case 2:
-                    ViewComponent(destination: UploadView(), viewTitle: "Uploading")
-                case 3:
-                    ViewComponent(destination: ActivityView(), viewTitle: "Activity")
-                case 4:
-                    ViewComponent(destination: ProfileView(), viewTitle: "Profile")
-                default:
-                    ViewComponent(destination: TrendingView(), viewTitle: "Trending")
-                }
-            }
-            
-            Divider()
-            
-            HStack {
-                ForEach(0..<5, id: \.self) { number in
-                    Spacer()
-                    Button(action: {
-                        self.selectedIndex = number
-                    }, label: {
-                        if number == 0 {
-                            Image(icons[number])
-                            .renderingMode(.template)
-                            .font(.system(size:25,
-                                          weight: .regular,
-                                          design: .default))
-                            .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
-                        }
-                         
-                        Image(systemName: icons[number])
-                        .renderingMode(.template)
-                        .font(.system(size:25,
-                                      weight: .regular,
-                                      design: .default))
-                        .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
-                        
-                    })
+                // MARK: contents
+                ZStack {
                     
-                    Spacer()
+                    switch selectedIndex {
+                    case 0:
+                        ViewComponent(destination: TrendingView(), viewTitle: "Trending")
+                    case 1:
+                        ViewComponent(destination: CastingView(currentTab: 0), viewTitle: "Casting")
+                    case 2:
+                        ViewComponent(destination: UploadView(), viewTitle: "Uploading")
+                    case 3:
+                        ViewComponent(destination: ActivityView(), viewTitle: "Activity")
+                    case 4:
+                        ViewComponent(destination: ProfileView(), viewTitle: "Profile")
+                    default:
+                        ViewComponent(destination: TrendingView(), viewTitle: "Trending")
+                    }
+                }
+                
+                Divider()
+                
+                HStack {
+                    ForEach(0..<5, id: \.self) { number in
+                        Spacer()
+                        Button(action: {
+                            self.selectedIndex = number
+                        }, label: {
+                            if number == 0 {
+                                Image(icons[number])
+                                    .renderingMode(.template)
+                                    .font(.system(size:25,
+                                                  weight: .regular,
+                                                  design: .default))
+                                    .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
+                            }
+                            
+                            Image(systemName: icons[number])
+                                .renderingMode(.template)
+                                .font(.system(size:25,
+                                              weight: .regular,
+                                              design: .default))
+                                .foregroundColor(selectedIndex == number ? Color("MainButton") : Color(UIColor.gray))
+                            
+                        })
+                        
+                        Spacer()
+                    }
                 }
             }
         }
