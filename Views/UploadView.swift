@@ -1,5 +1,22 @@
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 3
+  Authors:
+    Nguyen Huynh Anh Phuong - s3695662
+    Le Nguyen - s3777242
+    Han Sangyeob - s3821179
+    Nguyen Anh Minh - s3911237
+  Created  date: 29/08/2022
+  Last modified: 18/09/2022
+  Acknowledgments: StackOverflow, Youtube, and Mr. Tom Huynh’s slides
+*/
+
 import SwiftUI
 import AVKit
+
+// MARK: upload view for uploading user podcast
 struct UploadView : View {
     
     @State var title = ""
@@ -20,13 +37,12 @@ struct UploadView : View {
     var body: some View {
         ZStack {
             if isSubmitted {
-                ProgressView("Uploading...")
+                TransitionView()
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                             self.resetInput()
                             self.state = 0
                             self.isSubmitted.toggle()
-                            print("state \(self.uploadControl.isUploaded)")
                             self.isSuccessfullyUploaded.toggle()
                         }
                     }
@@ -164,7 +180,6 @@ struct UploadView : View {
                                 }
                                 
                                 .onChange(of: self.uploadControl.record) { value in
-                                    print(value)
                                     if !value {
                                         if self.uploadControl.recorder?.url != nil {
                                             self.isFinishedRecord = true

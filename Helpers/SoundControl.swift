@@ -1,15 +1,21 @@
-//
-//  SoundControl.swift
-//  NPC
-//
-//  Created by Nguyen Huynh Phuong Anh on 05/09/2022.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 3
+  Authors:
+    Nguyen Huynh Anh Phuong - s3695662
+    Le Nguyen - s3777242
+    Han Sangyeob - s3821179
+    Nguyen Anh Minh - s3911237
+  Created  date: 29/08/2022
+  Last modified: 18/09/2022
+  Acknowledgments: StackOverflow, Youtube, and Mr. Tom Huynh’s slides
+*/
 
 import Foundation
 import AVFoundation
 import AVKit
-import SwiftUI
-
 import SwiftUI
 
 class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
@@ -56,6 +62,7 @@ class SoundControl: NSObject, ObservableObject, AVAudioPlayerDelegate {
         }
     }
     
+    // MARK: on drag gesture changes
     func onChanged(value: DragGesture.Value) {
         let vector = CGVector(dx: value.location.x, dy: value.location.y)
         let radians = atan2(vector.dy - 12.5, vector.dx - 12.5)

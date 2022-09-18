@@ -1,11 +1,21 @@
-//
-//  ProfileView.swift
-//  NPC
-//
-//  Created by Nguyen Huynh Phuong Anh on 31/08/2022.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 3
+  Authors:
+    Nguyen Huynh Anh Phuong - s3695662
+    Le Nguyen - s3777242
+    Han Sangyeob - s3821179
+    Nguyen Anh Minh - s3911237
+  Created  date: 29/08/2022
+  Last modified: 18/09/2022
+  Acknowledgments: StackOverflow, Youtube, and Mr. Tom Huynh’s slides
+*/
+
 import SwiftUI
 
+// MARK: show user's profile and update
 struct ProfileView: View {
     @StateObject var userViewModel = UserViewModel()
     @StateObject var podcastViewModel = PodcastViewModel()
@@ -78,15 +88,6 @@ struct ProfileView: View {
                                 .foregroundColor(Color("MainButton"))
                                 .offset(x: 30, y: 50)
                         }
-              
-//                        DisableTextComponent(title: Binding.constant("Username"), textValue: Binding.constant(self.userViewModel.user.userName), imageName: Binding.constant("person"))
-//                        
-//                        DisableTextComponent(title: Binding.constant("Email"), textValue: Binding.constant(self.userViewModel.user.email), imageName: Binding.constant("envelope"))
-                      
-//                        DisableTextComponent(title: Binding.constant("Username"), textValue: Binding.constant(self.userViewModel.user.userName))
-//
-//                        DisableTextComponent(title: Binding.constant("Email"), textValue: Binding.constant(self.userViewModel.user.email))
-//
                         HStack {
                             Text(self.userViewModel.user.userName)
                                 .padding(5)
@@ -120,12 +121,6 @@ struct ProfileView: View {
                             } label: {
                                 HStack {
                                     Spacer()
-//                                    Image(systemName: "arrow.clockwise.circle.fill")
-//                                        .renderingMode(.template)
-//                                        .foregroundColor(.white)
-//                                        .font(.system(size:16,
-//                                                      weight: .regular,
-//                                                      design: .default))
                                     Text("Update")
                                         .foregroundColor(.white)
                                         .padding(.vertical, 10)
@@ -143,12 +138,6 @@ struct ProfileView: View {
                             } label: {
                                 HStack {
                                     Spacer()
-//                                    Image(systemName: "leaf.fill")
-//                                        .renderingMode(.template)
-//                                        .foregroundColor(.white)
-//                                        .font(.system(size:16,
-//                                                      weight: .regular,
-//                                                      design: .default))
                                     Text("Log out")
                                         .foregroundColor(.white)
                                         .padding(.vertical, 10)

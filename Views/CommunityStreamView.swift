@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: show community stream view on swiping up and down
 struct CommunityStreamView: View {
     @State var episode: Episodes = Episodes(audio: "", audio_length: 0, description: "", episode_uuid: "", podcast_uuid: "", pub_date: "", title: "", image: "", user_id: "", isLiked: false)
     @StateObject var uploadViewModel = UploadViewModel()

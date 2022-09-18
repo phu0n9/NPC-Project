@@ -1,9 +1,17 @@
-//
-//  SoundControl.swift
-//  NPC
-//
-//  Created by Nguyen Huynh Phuong Anh on 30/08/2022.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 3
+  Authors:
+    Nguyen Huynh Anh Phuong - s3695662
+    Le Nguyen - s3777242
+    Han Sangyeob - s3821179
+    Nguyen Anh Minh - s3911237
+  Created  date: 29/08/2022
+  Last modified: 18/09/2022
+  Acknowledgments: StackOverflow, Youtube, and Mr. Tom Huynh’s slides
+*/
 
 import Foundation
 import AVKit
@@ -41,6 +49,7 @@ class UploadControl : ObservableObject {
         seconds = 0
     }
     
+    // MARK: start timer
     func startTimer() {
         timerIsPaused = false
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
@@ -58,6 +67,7 @@ class UploadControl : ObservableObject {
         }
     }
     
+    // MARK: stop timer
     func stopTimer() {
         timerIsPaused = true
         timer?.invalidate()
@@ -65,6 +75,7 @@ class UploadControl : ObservableObject {
         self.audio_length = Int(self.seconds + self.minutes * 60 + self.hours * 60 * 60)
     }
     
+    // MARK: record audio
     func recordAudio () {
         // Now going to record audio...
         // Intialization...
@@ -103,6 +114,7 @@ class UploadControl : ObservableObject {
         }
     }
     
+    // MARK: request user recording permission
     func requestRecording() {
         do {
             // Intializing...
@@ -123,6 +135,7 @@ class UploadControl : ObservableObject {
         }
     }
     
+    // MARK: upload user casting image
     func uploadCastImage(title: String, description: String, pub_date: String, selectedImage: UIImage?, audio_length: Int) {
         guard selectedImage != nil else {
             return
@@ -154,6 +167,7 @@ class UploadControl : ObservableObject {
         }
     }
     
+    // MARK: upload cast from local folder to firebase storage
     func uploadCast(title: String, description: String, pub_date: String, image: String, audio_length: Int) {
         let storageRef = Storage.storage().reference()
         let globalPath = "recordings/\(localPath)"

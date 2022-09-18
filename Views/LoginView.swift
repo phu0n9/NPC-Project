@@ -1,13 +1,22 @@
-//
-//  LoginView.swift
-//  NPC
-//
-//  Created by Nguyen Le on 9/1/22.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 3
+  Authors:
+    Nguyen Huynh Anh Phuong - s3695662
+    Le Nguyen - s3777242
+    Han Sangyeob - s3821179
+    Nguyen Anh Minh - s3911237
+  Created  date: 29/08/2022
+  Last modified: 18/09/2022
+  Acknowledgments: StackOverflow, Youtube, and Mr. Tom Huynh’s slides
+*/
 
 import SwiftUI
 import UserNotifications
 
+// MARK: handle user when log in
 struct LoginView: View {
     
     @State var isLoginMode = false
@@ -28,7 +37,8 @@ struct LoginView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var routerView: RouterView
     
-    @ObservedObject var notificationManager = LocalNotificationManager() // Notification
+    // Notification
+    @ObservedObject var notificationManager = LocalNotificationManager()
     
     var body: some View {
         NavigationView {
@@ -138,9 +148,8 @@ struct LoginView: View {
                     
                     // MARK: Login here
                     Button {
-                        
                         self.btnClicked.toggle()
-                        handleAction()
+                        self.loginUser()
                     } label: {
                         HStack {
                             Spacer()
@@ -173,28 +182,26 @@ struct LoginView: View {
         }
     }
     
-    private func handleAction() {
-        if isLoginMode {
-            loginUser()
-        }
-    }
-    
+    // MARK: handle user login
     private func loginUser() {
-        FirebaseManager.shared.auth.signIn(withEmail: userValidationControl.email, password: userValidationControl.password) { result, err in
-            if let err = err {
-                print("Failed to login user:", err)
-                self.alert = true
-                self.loginStatusMessage = "Failed to login user: \(err)"
-                return
+        if isLoginMode {
+            FirebaseManager.shared.auth.signIn(withEmail: userValidationControl.email, password: userValidationControl.password) { result, err in
+                if let err = err {
+                    print("Failed to login user:", err)
+                    self.alert = true
+                    self.loginStatusMessage = "Failed to login user: \(err)"
+                    return
+                }
+                print("Successfully logged in as user: \(result?.user.uid ?? "")")
+                self.loginStatusMessage = "Successfully logged in as user: \(result?.user.uid ?? "")"
+                self.userViewModel.userLogin(userID: result?.user.uid ?? "")
+                self.loginSuccess = true
+                showNotificationWhenLogin()
             }
-            print("Successfully logged in as user: \(result?.user.uid ?? "")")
-            self.loginStatusMessage = "Successfully logged in as user: \(result?.user.uid ?? "")"
-            self.userViewModel.userLogin(userID: result?.user.uid ?? "")
-            self.loginSuccess = true
-            showNotificationWhenLogin()
         }
     }
     
+    // MARK: check if notification is allowed
     private func allowShowNotification() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {success, _ in
             guard success else {
@@ -204,6 +211,7 @@ struct LoginView: View {
         }
     }
     
+    // MARK: show notification when logged in
     private func showNotificationWhenLogin() {
         let content = UNMutableNotificationContent()
         content.title = "Welcome back"
@@ -213,7 +221,6 @@ struct LoginView: View {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        
         UNUserNotificationCenter.current().add(request)
     }
 }

@@ -38,7 +38,6 @@
 		4E6D455328BF282E005B7DF0 /* Podcasts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D455028BF282E005B7DF0 /* Podcasts.swift */; };
 		4E6D455528BF2838005B7DF0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D455428BF2838005B7DF0 /* Settings.swift */; };
 		4E6D455728BF2842005B7DF0 /* PodcastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D455628BF2842005B7DF0 /* PodcastViewModel.swift */; };
-		4E6D455928BF285D005B7DF0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D455828BF285D005B7DF0 /* ContentView.swift */; };
 		4E6D456828BF2D3E005B7DF0 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D456728BF2D3E005B7DF0 /* UserViewModel.swift */; };
 		4E6D456C28BF4F8E005B7DF0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D456B28BF4F8E005B7DF0 /* ImagePicker.swift */; };
 		4E6D457E28C1195D005B7DF0 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D457D28C1195D005B7DF0 /* UserSettings.swift */; };
@@ -78,7 +77,6 @@
 		A4F8235628C30F47007856F2 /* PodcastComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8235528C30F47007856F2 /* PodcastComponent.swift */; };
 		A4FBD12828C781CF00F6E3EB /* CheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FBD12728C781CE00F6E3EB /* CheckboxToggleStyle.swift */; };
 		A4FBD12A28C795AE00F6E3EB /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */; };
-		BB66E62B28D321BD000E0BDC /* TimerControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66E62A28D321BD000E0BDC /* TimerControl.swift */; };
 		BB66E62D28D331F6000E0BDC /* MiddleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */; };
 		BB72931028D47D4D00FF2B1D /* UserUploadComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB72930F28D47D4D00FF2B1D /* UserUploadComponent.swift */; };
 		BB72931228D47EC200FF2B1D /* UserUploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB72931128D47EC200FF2B1D /* UserUploadButton.swift */; };
@@ -111,7 +109,6 @@
 		4E6D455028BF282E005B7DF0 /* Podcasts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Podcasts.swift; sourceTree = "<group>"; };
 		4E6D455428BF2838005B7DF0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		4E6D455628BF2842005B7DF0 /* PodcastViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastViewModel.swift; sourceTree = "<group>"; };
-		4E6D455828BF285D005B7DF0 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4E6D456728BF2D3E005B7DF0 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		4E6D456B28BF4F8E005B7DF0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4E6D457D28C1195D005B7DF0 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
@@ -156,7 +153,6 @@
 		A4F8235528C30F47007856F2 /* PodcastComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastComponent.swift; sourceTree = "<group>"; };
 		A4FBD12728C781CE00F6E3EB /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
 		A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
-		BB66E62A28D321BD000E0BDC /* TimerControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerControl.swift; sourceTree = "<group>"; };
 		BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleComponent.swift; sourceTree = "<group>"; };
 		BB72930F28D47D4D00FF2B1D /* UserUploadComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUploadComponent.swift; sourceTree = "<group>"; };
 		BB72931128D47EC200FF2B1D /* UserUploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUploadButton.swift; sourceTree = "<group>"; };
@@ -301,7 +297,6 @@
 				4E98FDD928C87C54006D2566 /* UploadViewModel.swift */,
 				4E26037E28CE315D00DC739B /* TextBindingManager.swift */,
 				A4A4F91928D17B93000C2248 /* LocalNotificationManager.swift */,
-				BB66E62A28D321BD000E0BDC /* TimerControl.swift */,
 				4E2603A528D43E9700DC739B /* DownloadControl.swift */,
 			);
 			path = Helpers;
@@ -318,7 +313,6 @@
 		4EEF6B9228BD2D8D00610B54 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4E6D455828BF285D005B7DF0 /* ContentView.swift */,
 				A497D80428C1A84900D8A5CA /* TrendingView.swift */,
 				A497D80628C1C08100D8A5CA /* CastingView.swift */,
 				A497D80A28C1C0C300D8A5CA /* ActivityView.swift */,
@@ -498,11 +492,9 @@
 				4E5C3E6928D46D8E0078E62C /* DownloadView.swift in Sources */,
 				A457B43C28C1F44E007AE794 /* FieldComponent.swift in Sources */,
 				4E6D455728BF2842005B7DF0 /* PodcastViewModel.swift in Sources */,
-				BB66E62B28D321BD000E0BDC /* TimerControl.swift in Sources */,
 				4E26036E28CCFEB000DC739B /* DisableTextComponent.swift in Sources */,
 				4E26039428D0498600DC739B /* UserCastingView.swift in Sources */,
 				A491745E28C5D99700443F0D /* SignUpView.swift in Sources */,
-				4E6D455928BF285D005B7DF0 /* ContentView.swift in Sources */,
 				A4A4F91A28D17B93000C2248 /* LocalNotificationManager.swift in Sources */,
 				4E6D455528BF2838005B7DF0 /* Settings.swift in Sources */,
 				4E26038728CEFD7800DC739B /* TabBarItem.swift in Sources */,
