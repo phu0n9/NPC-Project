@@ -22,7 +22,6 @@
 		4E26038728CEFD7800DC739B /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038628CEFD7800DC739B /* TabBarItem.swift */; };
 		4E26038928CEFDDD00DC739B /* ActivityViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038828CEFDDD00DC739B /* ActivityViewItem.swift */; };
 		4E26038B28CF014B00DC739B /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26038A28CF014B00DC739B /* EmptyListView.swift */; };
-		4E26038E28CF284900DC739B /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 4E26038D28CF284900DC739B /* PopupView */; };
 		4E26039428D0498600DC739B /* UserCastingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26039328D0498600DC739B /* UserCastingView.swift */; };
 		4E26039628D05D3A00DC739B /* PodcastDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26039528D05D3A00DC739B /* PodcastDetailView.swift */; };
 		4E26039A28D0F23D00DC739B /* CommunityStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E26039928D0F23D00DC739B /* CommunityStreamView.swift */; };
@@ -81,7 +80,6 @@
 		BB72931028D47D4D00FF2B1D /* UserUploadComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB72930F28D47D4D00FF2B1D /* UserUploadComponent.swift */; };
 		BB72931228D47EC200FF2B1D /* UserUploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB72931128D47EC200FF2B1D /* UserUploadButton.swift */; };
 		BB99BBCD28CDA10F00D80BF6 /* StreamingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB99BBCC28CDA10F00D80BF6 /* StreamingView.swift */; };
-		BB99BBD728CDAA4300D80BF6 /* SimpleToast in Frameworks */ = {isa = PBXBuildFile; productRef = BB99BBD628CDAA4300D80BF6 /* SimpleToast */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -164,13 +162,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E26038E28CF284900DC739B /* PopupView in Frameworks */,
 				4E26037B28CD970200DC739B /* FirebaseMessaging in Frameworks */,
 				4E26037928CD970200DC739B /* FirebaseFirestoreSwift in Frameworks */,
 				4E26037328CD970200DC739B /* FirebaseAnalytics in Frameworks */,
 				4E26037728CD970200DC739B /* FirebaseFirestore in Frameworks */,
 				4E26037D28CD970200DC739B /* FirebaseStorage in Frameworks */,
-				BB99BBD728CDAA4300D80BF6 /* SimpleToast in Frameworks */,
 				4E26037528CD970200DC739B /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,8 +362,6 @@
 				4E26037828CD970200DC739B /* FirebaseFirestoreSwift */,
 				4E26037A28CD970200DC739B /* FirebaseMessaging */,
 				4E26037C28CD970200DC739B /* FirebaseStorage */,
-				BB99BBD628CDAA4300D80BF6 /* SimpleToast */,
-				4E26038D28CF284900DC739B /* PopupView */,
 			);
 			productName = NPC;
 			productReference = 4EEF6B6928BD273B00610B54 /* NPC.app */;
@@ -401,8 +395,6 @@
 			mainGroup = 4EEF6B6028BD273B00610B54;
 			packageReferences = (
 				4E26037128CD970100DC739B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				BB99BBD528CDAA4300D80BF6 /* XCRemoteSwiftPackageReference "SimpleToast" */,
-				4E26038C28CF284900DC739B /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = 4EEF6B6A28BD273B00610B54 /* Products */;
 			projectDirPath = "";
@@ -740,22 +732,6 @@
 				kind = branch;
 			};
 		};
-		4E26038C28CF284900DC739B /* XCRemoteSwiftPackageReference "PopupView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/exyte/PopupView.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		BB99BBD528CDAA4300D80BF6 /* XCRemoteSwiftPackageReference "SimpleToast" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sanzaru/SimpleToast";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.6.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -788,16 +764,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4E26037128CD970100DC739B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
-		};
-		4E26038D28CF284900DC739B /* PopupView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4E26038C28CF284900DC739B /* XCRemoteSwiftPackageReference "PopupView" */;
-			productName = PopupView;
-		};
-		BB99BBD628CDAA4300D80BF6 /* SimpleToast */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BB99BBD528CDAA4300D80BF6 /* XCRemoteSwiftPackageReference "SimpleToast" */;
-			productName = SimpleToast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

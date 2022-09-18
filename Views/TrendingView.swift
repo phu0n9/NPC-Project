@@ -16,7 +16,6 @@
 import SwiftUI
 import UIKit
 import PopupView
-import SimpleToast
 
 struct TrendingView: View {
     
@@ -29,14 +28,6 @@ struct TrendingView: View {
     @State private var upload = Uploads(title: "", description: "", audioPath: "", author: "", pub_date: "", image: "", userID: "", numOfLikes: 0, audio_length: 0, userImage: "", likes: [], comments: [])
     @State var download = Downloads(audio: "", title: "", isProcessing: false)
     @StateObject var userViewModel = UserViewModel()
-    
-    private let toastOptions = SimpleToastOptions(
-        alignment: .top,
-        hideAfter: 2,
-        backdrop: .black.opacity(0.2),
-        animation: .default,
-        modifierType: .slide
-    )
     
     // PopupView
     @State private var showToast = false
