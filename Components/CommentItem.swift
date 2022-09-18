@@ -12,6 +12,7 @@ struct CommentItem: View {
     var uploadID : String
     @ObservedObject private var userSettings = UserSettings()
     @StateObject var uploadViewModel = UploadViewModel()
+    @Binding var isDeleted: Bool
     
     var body: some View {
         HStack {
@@ -59,6 +60,7 @@ struct CommentItem: View {
                 if self.userSettings.uuid == self.comment.userID {
                     Button(action: {
                         self.uploadViewModel.deleteComments(uploadID: self.uploadID, commentID: self.comment.uuid)
+                        self.isDeleted.toggle()
                     }, label: {
                         Text("Delete")
                             .font(.caption)
@@ -74,6 +76,6 @@ struct CommentItem: View {
 
 struct CommentItem_Previews: PreviewProvider {
     static var previews: some View {
-        CommentItem(comment: .constant(Comments(uuid: "", author: "Phuong", userID: "", content: "this is comment", image: "")), uploadID: "")
+        CommentItem(comment: .constant(Comments(uuid: "", author: "Phuong", userID: "", content: "this is comment", image: "")), uploadID: "", isDeleted: .constant(false))
     }
 }

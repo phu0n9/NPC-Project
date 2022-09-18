@@ -27,20 +27,22 @@ struct ActivityViewItem: View {
                     ForEach(self.$userViewModel.userActivityList, id: \.id) { $item in
                         ZStack {
                             // reaching end of the list then load new data
-                            if self.userViewModel.userActivityList.last?.id == item.id && self.userViewModel.fetchingMore {
+                            if self.userViewModel.userActivityList.last?.id == item.id {
                                 GeometryReader { bounds in
                                     LoadingEpisodeRows()
                                         .onAppear {
                                             self.time = Timer.publish(every: 0.1, on: .main, in: .tracking).autoconnect()
                                         }
                                         .onReceive(self.time) { (_) in
-                                            if bounds.frame(in: .global).maxY < UIScreen.main.bounds.height - 80 {
+                                            if bounds.frame(in: .global).maxY < UIScreen.main.bounds.height {
                                                 self.userViewModel.fetchUserActivityList(listName: self.currentTabCollection)
                                                 self.time.upstream.connect().cancel()
                                             }
+                                            print("height \(bounds.frame(in: .global).maxY)")
+                                            print("screen height \(UIScreen.main.bounds.height)")
                                         }
                                 }
-                                .frame(height: 300)
+                                .frame(height: 100)
                             } else {
                                 // return original data
                                 EpisodeComponent(episode: $item, isExpanded: $item.isExpanding)

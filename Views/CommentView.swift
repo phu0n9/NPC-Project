@@ -13,14 +13,20 @@ struct CommentView: View {
     @ObservedObject var userSettings = UserSettings()
     @ObservedObject var uploadViewModel = UploadViewModel()
     @State var isSubmit = false
+    @State var isDeleted = false
     
     var body: some View {
         ZStack {
-            if self.isSubmit {
+            if self.isSubmit || self.isDeleted {
                 ProgressView()
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                            self.isSubmit.toggle()
+                            if self.isSubmit {
+                                self.isSubmit.toggle()
+                            }
+                            if self.isDeleted {
+                                self.isDeleted.toggle()
+                            }
                         }
                     }
             } else {
@@ -30,7 +36,7 @@ struct CommentView: View {
                         .padding()
                     ScrollView {
                         ForEach(self.$uploadViewModel.commentList, id: \.id) { $value in
-                            CommentItem(comment: $value, uploadID: self.upload.uuid)
+                            CommentItem(comment: $value, uploadID: self.upload.uuid, isDeleted: self.$isDeleted)
                         }
                     }
                     Spacer()

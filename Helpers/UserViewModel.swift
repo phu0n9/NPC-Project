@@ -297,13 +297,14 @@ class UserViewModel : ObservableObject {
     
     // MARK: fetch user activity list
     func fetchUserActivityList(listName: String) {
+        self.fetchingMore = true
         var query: Query!
         
         if self.userActivityList.isEmpty {
-            query = db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(listName).limit(to: 5)
+            query = db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(listName).limit(to: 2)
             print("First 5 items loaded")
         } else {
-            query = db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(listName).start(afterDocument: lastDocumentSnapshot).limit(to: 5)
+            query = db.collection(Settings.usersCollection).document(self.userSettings.uuid).collection(listName).start(afterDocument: lastDocumentSnapshot).limit(to: 2)
             print("Next 5 items loaded")
         }
         
@@ -314,7 +315,6 @@ class UserViewModel : ObservableObject {
             
             guard let documents = snapshot?.documents else {
                 print("No data")
-                
                 return
             }
 

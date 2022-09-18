@@ -99,7 +99,6 @@ class PodcastViewModel: ObservableObject {
             self.randomPodcasts = documents.map {(queryDocumentSnapshot) -> Podcasts in
                 return getPodcastByQuerySnapShot(queryDocumentSnapshot: queryDocumentSnapshot, episodeId: "", isRandom: isRandom)
             }
-            //            self.paginateEpisodes()
         }
     }
     

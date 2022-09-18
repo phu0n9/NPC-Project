@@ -117,7 +117,7 @@ class UploadViewModel: ObservableObject {
                 self.fetchingMore = false
                 return
             } else {
-                for value in snapshot!.documents {
+                for value in documents {
                     let uploadID = value.get("uuid") as! String
                     DispatchQueue.main.async {
                         self.fetchCommentsByUploadID(uploadID: uploadID)
