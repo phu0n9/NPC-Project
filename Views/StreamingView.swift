@@ -225,6 +225,7 @@ struct StreamingView: View {
                     self.userViewModel.addWatchList(watchItem: self.episode)
                     self.soundControl.playSound(soundName: self.episode.audio, isLocalFile: false)
                 case 1:
+                    self.soundControl.isActive.toggle()
                     self.soundControl.playSound(soundName: self.upload.audioPath, isLocalFile: false)
                 case 2:
                     self.soundControl.playSound(soundName: self.download.audio, isLocalFile: true)
