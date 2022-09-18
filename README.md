@@ -2,7 +2,7 @@
 
 ## Group contribution:
 
-This project is made by a team of 4 memners:
+This project is made by a team of 4 members:
 
 * Nguyen Huynh Anh Phuong
 * Sang yeob, Han
