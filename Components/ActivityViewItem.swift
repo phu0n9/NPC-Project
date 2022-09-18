@@ -58,7 +58,7 @@ struct ActivityViewItem: View {
                                                     }
                                                 }
                                         }
-                                        .frame(height: 150)
+                                        .frame(height: 300)
                                     } else {
                                         // return original data
                                         EpisodeComponent(episode: $item, isExpanded: $item.isExpanding)
