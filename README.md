@@ -19,15 +19,15 @@ https://github.com/firebase/firebase-ios-sdk.git
 Add the following dependencies:
 
 ```
-Firebase Analytis </br>
-Firebase Auth </br>
-Firebase Firestore </br>
-Firebase Firestore Swift </br>
-Firebase Messaging </br>
-Firebase Storage </br>
+Firebase Analytis 
+Firebase Auth 
+Firebase Firestore 
+Firebase Firestore Swift
+Firebase Messaging 
+Firebase Storage 
 ```
 
-## Project design;
+## Project design:
 
 Figma link:
 
