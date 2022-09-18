@@ -214,7 +214,11 @@ struct StreamingView: View {
                 if state == 0 {
                     self.podcastViewModel.fetchPodcastById(podcastId: self.episode.podcast_uuid, episodeId: self.episode.episode_uuid)
                     self.userViewModel.addWatchList(watchItem: self.episode)
+<<<<<<< HEAD
                     soundControl.playSound(soundName: self.episode.audio, isLocalFile: false)
+=======
+                    soundControl.playSound(soundName: self.state == 0 ? self.episode.audio : self.upload.audioPath, isLocalFile: false)
+>>>>>>> e410013 (fix: bugs)
                 } else if state == 1 {
                     self.uploadViewModel.fetchCommentsByUploadID(uploadID: self.upload.uuid)
                     soundControl.playSound(soundName: self.upload.audioPath, isLocalFile: false)
