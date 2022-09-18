@@ -192,6 +192,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		4E6CED3C28D6E2130082D0A4 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A4AFBB8F28C1128200B87BC9 /* BottomNavBar.swift */,
+				4E26036D28CCFEB000DC739B /* DisableTextComponent.swift */,
+				A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */,
+				4E6D456B28BF4F8E005B7DF0 /* ImagePicker.swift */,
+				A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */,
+				A457B43B28C1F44E007AE794 /* FieldComponent.swift */,
+				A4FBD12728C781CE00F6E3EB /* CheckboxToggleStyle.swift */,
+				4E26038A28CF014B00DC739B /* EmptyListView.swift */,
+				4E98FDDB28C930CD006D2566 /* LoadingEpisodeRows.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		4EEF6B6028BD273B00610B54 = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +217,7 @@
 				4EEF6B9128BD2D7800610B54 /* Constants */,
 				4EEF6B9028BD2D6E00610B54 /* Helpers */,
 				4E6CED3B28D631680082D0A4 /* Extensions */,
+				4E6CED3C28D6E2130082D0A4 /* Common */,
 				4EEF6B8F28BD2D6300610B54 /* Components */,
 				4EEF6B8E28BD2D5900610B54 /* Models */,
 				4EEF6B6B28BD273B00610B54 /* NPC */,
@@ -251,26 +268,17 @@
 		4EEF6B8F28BD2D6300610B54 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				4E6D456B28BF4F8E005B7DF0 /* ImagePicker.swift */,
-				A4AFBB8F28C1128200B87BC9 /* BottomNavBar.swift */,
 				A497D80E28C1C1F800D8A5CA /* EpisodeComponent.swift */,
-				A48BDAB028C1E8190094FE8A /* ButtonComponent.swift */,
-				A457B43B28C1F44E007AE794 /* FieldComponent.swift */,
 				A4F8235328C2FA50007856F2 /* PlayButton.swift */,
 				A4F8235528C30F47007856F2 /* PodcastComponent.swift */,
 				4E98FDD728C5C18D006D2566 /* ViewComponent.swift */,
-				A4FBD12728C781CE00F6E3EB /* CheckboxToggleStyle.swift */,
-				A4FBD12928C795AE00F6E3EB /* ButtonStyle.swift */,
-				4E98FDDB28C930CD006D2566 /* LoadingEpisodeRows.swift */,
 				A477165828CC608F00BCA3F8 /* PrefTopComponent.swift */,
 				A477165A28CC611200BCA3F8 /* PrefCategoryComponent.swift */,
 				4E98FDDD28CB3725006D2566 /* CategoryCheckbox.swift */,
-				4E26036D28CCFEB000DC739B /* DisableTextComponent.swift */,
 				4E26038228CE639D00DC739B /* RecordingPlayerBtn.swift */,
 				4E26038428CEFD3200DC739B /* TabBarView.swift */,
 				4E26038628CEFD7800DC739B /* TabBarItem.swift */,
 				4E26038828CEFDDD00DC739B /* ActivityViewItem.swift */,
-				4E26038A28CF014B00DC739B /* EmptyListView.swift */,
 				4E2603A128D1D37D00DC739B /* CommentItem.swift */,
 				BB66E62C28D331F6000E0BDC /* MiddleComponent.swift */,
 				4E5C3E6428D466350078E62C /* DownloadItem.swift */,

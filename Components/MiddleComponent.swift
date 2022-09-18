@@ -31,10 +31,6 @@ struct MiddleComponent: View {
                         .font(.headline)
                         .frame(maxWidth: 200, alignment: .leading)
                 }.padding(0)
-//                Text(self.podcast.author)
-//                    .font(.caption2)
-//                    .foregroundColor(.gray)
-//                    .frame(maxWidth: 100, alignment: .leading)
             }
             .onTapGesture {
                 self.isTapped.toggle()
