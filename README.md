@@ -118,8 +118,8 @@ NPC is an app for podcast listeners who can listen to broadcast station and user
   </tr>
   <tr>
     <td><img src="https://github.com/phu0n9/NPC-Project/blob/master/Screenshots/streaming-view-1.png?raw=true" width="200"></td>
-    <td><img src="https://github.com/phu0n9/NPC-Project/blob/master/Screenshots/streaming-view-1.png?raw=true" width="200"></td>
-    <td><img src="https://github.com/phu0n9/NPC-Project/blob/master/Screenshots/streaming-view-1.png?raw=true" width="200"></td>
+    <td><img src="https://github.com/phu0n9/NPC-Project/blob/master/Screenshots/streaming-view-2.png?raw=true" width="200"></td>
+    <td><img src="https://github.com/phu0n9/NPC-Project/blob/master/Screenshots/streaming-view-3.png?raw=true" width="200"></td>
   </tr>
 </table>
 
